@@ -131,6 +131,38 @@ $('#textLabClear')?.addEventListener('click',()=>{textLab.value='';updateTextLab
 $('#textLabCopy')?.addEventListener('click',async()=>{if(!textLab.value.trim()){ $('#textLabStatus').textContent='اول متن وارد کنید.';return}try{await navigator.clipboard.writeText(textLab.value);$('#textLabStatus').textContent='متن کاپی شد.'}catch(e){$('#textLabStatus').textContent='کاپی خودکار ممکن نشد؛ متن را دستی انتخاب کنید.'}});
 
 
+// Offline arithmetic practice: all questions are generated and checked in the browser.
+(()=>{
+ const question=$('#mathQuestion'),form=$('#mathAnswerForm'),answer=$('#mathAnswer'),feedback=$('#mathFeedback'),scoreEl=$('#mathScore');
+ if(!question||!form||!answer)return;
+ let expected=null,score=0,answered=false;
+ const digits={easy:10,medium:30,hard:100};
+ function makeQuestion(){
+  const max=digits[$('#mathLevel').value]||10,choice=$('#mathOperation').value;
+  const ops=choice==='mix'?['add','sub','mul','div']:[choice];
+  const op=ops[Math.floor(Math.random()*ops.length)];
+  let a=1+Math.floor(Math.random()*max),b=1+Math.floor(Math.random()*max),symbol='+';
+  if(op==='sub'){if(b>a)[a,b]=[b,a];expected=a-b;symbol='−'}
+  else if(op==='mul'){expected=a*b;symbol='×'}
+  else if(op==='div'){expected=a; b=1+Math.floor(Math.random()*Math.min(max,12));a=b*(1+Math.floor(Math.random()*Math.min(max,12)));expected=a/b;symbol='÷'}
+  else{expected=a+b;symbol='+'}
+  if(op==='add')expected=a+b;
+  question.textContent=a+' '+symbol+' '+b+' = ؟';
+  answer.value='';answer.focus();feedback.textContent='سؤال تازه آماده است. پاسخ خود را وارد کنید.';answered=false;
+ }
+ form.addEventListener('submit',e=>{
+  e.preventDefault();if(answered||answer.value.trim()==='')return;
+  const value=Number(answer.value);
+  if(Number.isFinite(value)&&Math.abs(value-expected)<1e-9){score++;scoreEl.textContent=score.toLocaleString();feedback.textContent='آفرین! پاسخ درست است. 🌟'}
+  else feedback.textContent='هنوز درست نیست. پاسخ درست: '+expected.toLocaleString()+'؛ دوباره تمرین کن.';
+  answered=true;
+ });
+ $('#mathNewQuestion')?.addEventListener('click',makeQuestion);
+ $('#mathLevel')?.addEventListener('change',makeQuestion);
+ $('#mathOperation')?.addEventListener('change',makeQuestion);
+ makeQuestion();
+})();
+ 
 // Trilingual vocabulary trainer with locally stored mastery states.
 const vocabEntries=[
  {en:'Hello',fa:'سلام',ps:'سلام',pron:'heh-LOH'},
