@@ -629,3 +629,27 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .agri-references li{margin:9px 0}
 .agri-references a{color:var(--accent,#269caa)}
 @media(max-width:560px){.agri-controls,.agri-calc-fields{grid-template-columns:1fr}.agri-controls input,.agri-controls select{grid-row:auto}.agri-course-grid{grid-template-columns:1fr}}
+
+
+/* Engineering and technology learning center */
+.engineering-notice,.engineering-calculator,.engineering-references{padding:18px;border:1px solid var(--border);border-radius:15px;background:var(--surface);margin:16px 0}
+.engineering-notice p,.engineering-calculator p{color:var(--muted);line-height:1.85;margin:8px 0}
+.engineering-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;align-items:center;margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.engineering-controls label{font-weight:650}
+.engineering-controls input,.engineering-controls select,.engineering-calc-fields input{width:100%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.engineering-controls input,.engineering-controls select{grid-row:2}
+.engineering-course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:13px;margin:18px 0}
+.engineering-course-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:17px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.engineering-course-card h3{margin:2px 0;line-height:1.65}
+.engineering-course-card p{line-height:1.85;margin:0;color:var(--muted)}
+.engineering-level{font-size:.78rem;color:var(--accent,#269caa);font-weight:700}
+.engineering-course-card details{width:100%;margin-top:6px;padding-top:10px;border-top:1px solid var(--border)}
+.engineering-course-card summary{cursor:pointer;font-weight:700}
+.engineering-course-card details p{margin:9px 0}
+.engineering-calc-fields{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+.engineering-calculator button{padding:11px 17px;border:0;border-radius:10px;background:var(--accent,#269caa);color:white;font-weight:700;cursor:pointer}
+.engineering-calculator small{display:block;color:var(--muted);line-height:1.7;margin-top:10px}
+.engineering-references li{margin:9px 0}
+.engineering-references a{color:var(--accent,#269caa)}
+@media(max-width:650px){.engineering-calc-fields{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.engineering-controls{grid-template-columns:1fr}.engineering-controls input,.engineering-controls select{grid-row:auto}.engineering-course-grid,.engineering-calc-fields{grid-template-columns:1fr}}
