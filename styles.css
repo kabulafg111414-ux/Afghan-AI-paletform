@@ -527,3 +527,21 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .language-topic{font-size:.78rem;color:var(--accent,#269caa);font-weight:700}
 .language-speak{margin-top:7px}
 @media(max-width:560px){.language-controls{grid-template-columns:1fr}.language-controls input,.language-controls select{grid-row:auto}.language-phrase-grid{grid-template-columns:1fr}}
+
+
+/* Digital skills and coding center */
+.digital-intro,.digital-practice{padding:18px;border:1px solid var(--border);border-radius:15px;background:var(--surface);margin:16px 0}
+.digital-intro p,.digital-practice p{color:var(--muted);line-height:1.85}
+.digital-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;align-items:center;margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.digital-controls label{font-weight:650}
+.digital-controls input,.digital-controls select{grid-row:2;width:100%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.digital-course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:13px;margin:18px 0}
+.digital-course-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:17px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.digital-course-card h3{margin:2px 0;line-height:1.65}
+.digital-course-card p{line-height:1.85;margin:0;color:var(--muted)}
+.digital-level{font-size:.78rem;color:var(--accent,#269caa);font-weight:700}
+.digital-course-card details{width:100%;margin-top:6px;padding-top:10px;border-top:1px solid var(--border)}
+.digital-course-card summary{cursor:pointer;font-weight:700}
+.digital-course-card details p{margin:9px 0}
+.digital-practice pre{overflow:auto;padding:13px;border-radius:10px;background:rgba(110,130,150,.12);direction:ltr;text-align:left}
+@media(max-width:560px){.digital-controls{grid-template-columns:1fr}.digital-controls input,.digital-controls select{grid-row:auto}.digital-course-grid{grid-template-columns:1fr}}
