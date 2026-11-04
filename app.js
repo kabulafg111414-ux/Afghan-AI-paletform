@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','health','business','law','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -140,7 +140,35 @@ function renderLawCenter(){
 $('#lawSearch')?.addEventListener('input',renderLawCenter);
 $('#lawCategory')?.addEventListener('change',renderLawCenter);
 
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+
+const agricultureCourses=[
+{cat:'crops',title:'زراعت و محصولات افغانستان',level:'مقدماتی',desc:'آشنایی با گندم، برنج، جو، زعفران و محصولات مهم.',lesson:'انتخاب محصول به آب‌وهوا، ارتفاع، خاک، دسترسی به آب و بازار بستگی دارد. تناوب کشت و استفاده از تخم باکیفیت می‌تواند به حفظ حاصل‌خیزی خاک و کاهش برخی آفات کمک کند. برای انتخاب رقم و تقویم کشت، معلومات زراعتی ولایت خود را بررسی کنید.',task:'سه محصول مهم منطقهٔ خود را نام ببرید و نیازهای آب و بازار آن‌ها را مقایسه کنید.'},
+{cat:'irrigation',title:'مدیریت آب و آبیاری',level:'مقدماتی',desc:'آشنایی با آبیاری مؤثر، زهکشی و حفاظت منابع آب.',lesson:'آبیاری باید با نیاز گیاه، مرحلهٔ رشد، نوع خاک و شرایط هوا هماهنگ باشد. آبیاری بیش از حد می‌تواند سبب هدررفت آب، شست‌وشوی مواد غذایی و آسیب ریشه شود. آبیاری قطره‌ای در برخی شرایط مصرف آب را کاهش می‌دهد، اما طراحی و نگهداری درست لازم دارد.',task:'روش آبیاری فعلی یک باغ یا مزرعه را مشاهده کنید و دو راه کاهش ضایعات آب بنویسید.'},
+{cat:'irrigation',title:'شناخت خاک و حاصل‌خیزی',level:'مقدماتی',desc:'بافت خاک، مواد عضوی، فرسایش و آزمایش خاک.',lesson:'خاک از ذرات معدنی، مواد عضوی، آب و هوا تشکیل شده است. آزمایش خاک برای شناخت pH و مواد غذایی کمک می‌کند. افزودن کود باید بر اساس نیاز واقعی و راهنمایی زراعتی باشد؛ مصرف بی‌رویهٔ کود می‌تواند به خاک و آب آسیب بزند.',task:'سه نشانهٔ خاک سالم را نام ببرید و اهمیت آزمایش خاک را توضیح دهید.'},
+{cat:'horticulture',title:'باغداری و درختان میوه',level:'مقدماتی',desc:'اصول عمومی احداث باغ، هرس، گرده‌افشانی و مراقبت.',lesson:'در احداث باغ، اقلیم، ارتفاع، نوع خاک، کیفیت آب، فاصلهٔ درختان و دسترسی به بازار مهم است. هرس باید با شناخت نوع درخت و فصل مناسب انجام شود. نهال سالم و رقم سازگار با منطقه در موفقیت باغ نقش دارد.',task:'برای یک باغ فرضی، سه عامل مهم در انتخاب محل و نوع نهال را بنویسید.'},
+{cat:'livestock',title:'مالداری و تغذیهٔ حیوانات',level:'مقدماتی',desc:'نگهداری سالم، خوراک، آب پاک و مدیریت جایگاه.',lesson:'سلامت و تولید حیوانات به خوراک متوازن، آب پاک، تهویه، جایگاه خشک و مدیریت مناسب وابسته است. نیاز غذایی گاو، گوسفند، بز و مرغ متفاوت است و جیره باید با توجه به سن و هدف تولید تنظیم شود.',task:'چهار شرط مهم برای جایگاه سالم حیوانات را فهرست کنید.'},
+{cat:'veterinary',title:'صحت حیوانات و پیشگیری',level:'مقدماتی',desc:'بهداشت جایگاه، واکسیناسیون با نظر دامپزشک و تشخیص علایم هشدار.',lesson:'پیشگیری شامل پاکیزگی جایگاه، آب و خوراک سالم، قرنطین حیوان تازه‌وارد و برنامهٔ واکسیناسیون متناسب با منطقه است. بی‌اشتهایی، تب، دشواری تنفس یا گسترش ناگهانی بیماری نیازمند ارزیابی دامپزشک است. دارو و مقدار مصرف را خودسرانه تعیین نکنید.',task:'سه اقدام برای جلوگیری از گسترش بیماری میان حیوانات را نام ببرید.'},
+{cat:'forestry',title:'جنگلات و حفاظت محیط زیست',level:'مقدماتی',desc:'درخت‌کاری، جلوگیری از فرسایش و مدیریت پایدار منابع طبیعی.',lesson:'درختان در حفاظت خاک، تنظیم آب، فراهم‌کردن زیستگاه و کاهش اثر فرسایش نقش دارند. گونه‌های بومی و سازگار با اقلیم محل را انتخاب کنید و نهال‌ها را پس از غرس نیز مراقبت نمایید.',task:'یک راهکار محلی برای حفاظت از درختان و کاهش فرسایش خاک پیشنهاد کنید.'},
+{cat:'food',title:'صنایع غذایی و پس از برداشت',level:'مقدماتی',desc:'ذخیره‌سازی، خشک‌کردن، بسته‌بندی و کاهش ضایعات محصولات.',lesson:'پس از برداشت، پاک‌سازی، خشک‌کردن مناسب، بسته‌بندی و ذخیره در محیط پاک و خشک به کاهش ضایعات کمک می‌کند. رطوبت و آفات انباری می‌توانند کیفیت غله و محصولات را کاهش دهند. اصول ایمنی غذایی باید رعایت شود.',task:'برای نگهداری یک محصول محلی، سه اقدام جهت حفظ کیفیت پیشنهاد کنید.'}
+];
+function renderAgricultureCenter(){
+ const grid=$('#agriCourseGrid');if(!grid)return;
+ const q=($('#agriSearch')?.value||'').trim().toLocaleLowerCase();
+ const cat=$('#agriCategory')?.value||'all';
+ const items=agricultureCourses.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="agri-course-card"><span class="agri-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مطالعهٔ درس و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">درسی پیدا نشد؛ عبارت دیگری را جستجو کنید.</p>';
+}
+$('#agriSearch')?.addEventListener('input',renderAgricultureCenter);
+$('#agriCategory')?.addEventListener('change',renderAgricultureCenter);
+$('#agriCalcBtn')?.addEventListener('click',()=>{
+ const area=$('#agriArea')?.value,depth=$('#agriDepth')?.value,out=$('#agriCalcResult');
+ if(!out)return;
+ if(area===''||depth===''||Number(area)<0||Number(depth)<0){out.textContent='لطفاً مساحت و عمق معتبر و غیرمنفی وارد کنید.';return}
+ const litres=Number(area)*Number(depth);
+ out.textContent='حجم فرضی آب: '+litres.toLocaleString()+' لیتر ('+(litres/1000).toLocaleString()+' متر مکعب).';
+});
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='agriculture')renderAgricultureCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
