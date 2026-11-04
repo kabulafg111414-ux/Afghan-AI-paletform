@@ -174,6 +174,13 @@ if(planButton)planButton.addEventListener('click',()=>{
  ];
  const weekly='<h3>برنامهٔ هفتگی پیشنهادی</h3><div class="kankor-week-grid">'+week.map((d,i)=>'<div class="kankor-day"><strong>'+d[0]+'</strong><b>'+d[1]+'</b><span>'+d[2]+'</span><small>'+Math.max(.5,hours-(i===6?hours*.5:0)).toFixed(1)+' ساعت برنامهٔ روزانه</small></div>').join('')+'</div>';
  result.innerHTML='<h3>برنامهٔ نمونه برای '+safeGoal+'</h3><p>'+days+' روز تا امتحان · '+hours+' ساعت مطالعه در روز</p><ul>'+blocks.map(([name,share])=>'<li>'+name+': '+(hours*share).toFixed(1)+' ساعت در روز</li>').join('')+'</ul>'+weekly+'<p>پس از هر ۴۵ تا ۵۰ دقیقه مطالعه، ۵ تا ۱۰ دقیقه استراحت کن. جمعه را برای آزمون، بررسی اشتباهات و استراحت متوازن نگه دار. سهم مضامین را مطابق رشته و نصاب رسمی خودت تنظیم کن.</p>';
+ const tasks=[['task1','مطالعهٔ مضمون اصلی'],['task2','حل ۲۰ سوال تمرینی'],['task3','مرور یادداشت‌ها و نکته‌ها'],['task4','تمرین یک مضمون دشوار'],['task5','بررسی اشتباهات و برنامه‌ریزی فردا']];
+ let completed={};try{completed=JSON.parse(localStorage.getItem('afghanai-kankor-checklist')||'{}')||{}}catch(e){}
+ const checklist='<section class="kankor-checklist"><h3>چک‌لیست پیشرفت روزانه</h3><p>کارهای انجام‌شده را علامت بزن؛ پیشرفتت در همین دستگاه ذخیره می‌شود.</p><div class="kankor-check-items">'+tasks.map(([id,label])=>'<label class="kankor-check-item"><input type="checkbox" data-kankor-task="'+id+'" '+(completed[id]?'checked':'')+'><span>'+label+'</span></label>').join('')+'</div><div class="kankor-check-progress"><div><span>پیشرفت امروز</span><b id="kankorChecklistPercent">0٪</b></div><div class="kankor-check-track"><span id="kankorChecklistBar"></span></div></div></section>';
+ result.innerHTML+=checklist;
+ const paintChecklist=()=>{const done=tasks.filter(([id])=>completed[id]).length;const pct=Math.round(done/tasks.length*100);const label=result.querySelector('#kankorChecklistPercent');const bar=result.querySelector('#kankorChecklistBar');if(label)label.textContent=pct+'٪';if(bar)bar.style.width=pct+'%';};
+ result.querySelectorAll('[data-kankor-task]').forEach(input=>input.addEventListener('change',()=>{completed[input.dataset.kankorTask]=input.checked;localStorage.setItem('afghanai-kankor-checklist',JSON.stringify(completed));paintChecklist();}));
+ paintChecklist();
  localStorage.setItem('afghanai-kankor-plan',JSON.stringify({goal,days,hours}));
 });
 try{const savedPlan=JSON.parse(localStorage.getItem('afghanai-kankor-plan')||'null');if(savedPlan&&$('#kankorGoal')){$('#kankorGoal').value=savedPlan.goal;$('#kankorDays').value=savedPlan.days;$('#kankorHours').value=savedPlan.hours}}catch(e){}
