@@ -101,6 +101,19 @@ let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDe
 updateStats();renderProgress();startQuiz();
 
 
+// Kankor study planner: local-only sample schedule.
+const planButton=$('#makeKankorPlan');
+if(planButton)planButton.addEventListener('click',()=>{
+ const goal=$('#kankorGoal').value.trim()||'رشتهٔ انتخابی';
+ const days=Math.max(1,Math.min(365,Number($('#kankorDays').value)||60));
+ const hours=Math.max(1,Math.min(12,Number($('#kankorHours').value)||4));
+ const blocks=[['ریاضی و استدلال',0.25],['علوم (فزیک، کیمیا و بیولوژی)',0.35],['زبان و مهارت‌های عمومی',0.20],['مرور و حل سوالات',0.20]];
+ const result=$('#kankorPlanResult');
+ const safeGoal=goal.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ result.innerHTML='<h3>برنامهٔ نمونه برای '+safeGoal+'</h3><p>'+days+' روز تا امتحان · '+hours+' ساعت مطالعه در روز</p><ul>'+blocks.map(([name,share])=>'<li>'+name+': '+(hours*share).toFixed(1)+' ساعت در روز</li>').join('')+'</ul><p>هر روز ۲۰ تا ۳۰ دقیقه برای مرور اشتباهات اختصاص بده. در پایان هر هفته یک آزمون زمان‌دار اجرا کن. سهم مضامین را مطابق رشته و نصاب رسمی خودت تنظیم کن.</p>';
+ localStorage.setItem('afghanai-kankor-plan',JSON.stringify({goal,days,hours}));
+});
+try{const savedPlan=JSON.parse(localStorage.getItem('afghanai-kankor-plan')||'null');if(savedPlan&&$('#kankorGoal')){$('#kankorGoal').value=savedPlan.goal;$('#kankorDays').value=savedPlan.days;$('#kankorHours').value=savedPlan.hours}}catch(e){}
 // Learning toolkit: local-only notes, flashcards, focus timer and speech.
 let focusSeconds=25*60, focusInterval=null, flashcards=JSON.parse(localStorage.getItem('afghanai-flashcards')||'[]'), flashIndex=0, flashRevealed=false;
 const clock=$('#focusClock');
