@@ -678,3 +678,9 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 #labPage .tool-card input{width:100%;box-sizing:border-box;margin-bottom:8px}
 #labDensityResult{font-weight:750;color:var(--accent,#269caa);margin-top:14px}
 #labPage .disclaimer{margin-top:18px}
+
+/* Astronomy and space learning center */
+#spacePage .tool-card label{display:block;margin:12px 0 5px;font-weight:650}
+#spacePage .tool-card input,#spacePage .tool-card select{width:100%;box-sizing:border-box;margin-bottom:9px}
+#spaceWeightResult{font-weight:750;color:var(--accent,#269caa);margin-top:14px}
+#spacePage .disclaimer{margin-top:18px}
