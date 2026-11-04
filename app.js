@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','health','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','business','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -95,7 +95,33 @@ function renderHealthCenter(){
 $('#healthSearch')?.addEventListener('input',renderHealthCenter);
 $('#healthCategory')?.addEventListener('change',renderHealthCenter);
 
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+
+const businessCourses=[
+{cat:'economics',title:'مبانی علم اقتصاد',level:'مبتدی',desc:'نیازها، منابع محدود، عرضه، تقاضا و قیمت.',lesson:'اقتصاد چگونگی استفاده از منابع محدود برای پاسخ به نیازها را بررسی می‌کند. عرضه مقدار کالا یا خدمتی است که فروشندگان آماده ارائه‌اند و تقاضا مقدار مورد خواست خریداران در قیمت‌های مختلف است.',task:'یک نمونه از تغییر عرضه یا تقاضا در بازار محل زندگی خود بیان کنید.'},
+{cat:'accounting',title:'حسابداری و مدیریت مالی',level:'مبتدی',desc:'عواید، مصارف، دارایی، بدهی و ثبت معاملات.',lesson:'حسابداری اطلاعات مالی را ثبت و خلاصه می‌کند. سود ساده برابر عواید منهای مصارف است. دارایی منابع اقتصادی و بدهی تعهدات مالی کسب‌وکار است.',task:'برای یک دکان فرضی سه قلم عاید و سه قلم مصرف بنویسید.'},
+{cat:'banking',title:'مبانی بانکداری و سواد مالی',level:'مبتدی',desc:'حساب بانکی، پس‌انداز، پرداخت و آگاهی از خطرهای مالی.',lesson:'سواد مالی یعنی توانایی فهم بودجه، پس‌انداز، هزینه و خطر. پیش از استفاده از خدمات مالی، کارمزدها، شرایط قرارداد و اعتبار نهاد ارائه‌کننده را بررسی کنید.',task:'یک بودجهٔ ماهانه با عاید، مصارف ضروری و پس‌انداز طراحی کنید.'},
+{cat:'marketing',title:'بازاریابی دیجیتال',level:'مبتدی',desc:'شناخت مشتری، محتوای آنلاین و معرفی محصول.',lesson:'بازاریابی دیجیتال از کانال‌های آنلاین برای معرفی محصول و ارتباط با مشتری استفاده می‌کند. پیام روشن، شناخت مخاطب و سنجش نتایج کمپاین اهمیت دارد.',task:'برای یک محصول محلی، مشتری هدف و یک پیام تبلیغاتی کوتاه تعریف کنید.'},
+{cat:'management',title:'مدیریت تجارت',level:'مبتدی',desc:'هدف‌گذاری، برنامه‌ریزی، سازمان‌دهی و ارزیابی.',lesson:'مدیریت شامل تعیین هدف، برنامه‌ریزی، تقسیم مسئولیت‌ها و بررسی نتایج است. هدف روشن و قابل اندازه‌گیری به تیم کمک می‌کند پیشرفت را ارزیابی کند.',task:'برای یک کسب‌وکار کوچک سه هدف قابل سنجش برای ماه آینده بنویسید.'},
+{cat:'startup',title:'آغاز کسب‌وکار و ایجاد شرکت',level:'مقدماتی',desc:'ارزیابی ایده، شناخت مشتری و آشنایی با مراحل ثبت رسمی.',lesson:'پیش از آغاز، مشکل مشتری را شناسایی و تقاضا را بررسی کنید. ساختار حقوقی، جواز، مالیات و مقررات ثبت شرکت به کشور و نوع فعالیت وابسته است؛ معلومات را از مراجع رسمی دریافت کنید.',task:'یک ایدهٔ تجارتی و مشکلی را که برای مشتری حل می‌کند توضیح دهید.'},
+{cat:'planning',title:'تهیهٔ طرح تجارتی',level:'مقدماتی',desc:'محصول، بازار، رقبا، هزینه‌ها، فروش و خطرها.',lesson:'طرح تجارتی سندی برای توضیح ایده، مشتریان، بازار، عملیات و وضعیت مالی است. برآوردها باید واقع‌بینانه باشند و فرضیات با تحقیق بازار سنجیده شوند.',task:'برای یک ایده، خلاصهٔ یک‌صفحه‌ای شامل محصول، مشتری و هزینه‌های آغاز تهیه کنید.'}
+];
+function renderBusinessCenter(){
+ const grid=$('#businessCourseGrid');if(!grid)return;
+ const q=($('#businessSearch')?.value||'').trim().toLocaleLowerCase();
+ const cat=$('#businessCategory')?.value||'all';
+ const items=businessCourses.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="business-course-card"><span class="business-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مطالعهٔ درس و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">درسی پیدا نشد؛ عبارت دیگری را جستجو کنید.</p>';
+}
+$('#businessSearch')?.addEventListener('input',renderBusinessCenter);
+$('#businessCategory')?.addEventListener('change',renderBusinessCenter);
+$('#businessCalcBtn')?.addEventListener('click',()=>{
+ const revenue=Number($('#businessRevenue')?.value),costs=Number($('#businessCosts')?.value),out=$('#businessCalcResult');
+ if(!out)return;
+ if(!$('#businessRevenue')?.value||!$('#businessCosts')?.value||revenue<0||costs<0){out.textContent='لطفاً هر دو رقم معتبر و غیرمنفی را وارد کنید.';return}
+ const result=revenue-costs;out.textContent=result>0?'سود ساده: '+result.toLocaleString():result<0?'زیان ساده: '+Math.abs(result).toLocaleString():'عواید و مصارف برابر است؛ سود یا زیان صفر است.';
+});
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
