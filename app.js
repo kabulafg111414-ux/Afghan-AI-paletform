@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','engineering','historyculture','lab','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -533,3 +533,30 @@ $('#labDensityBtn')?.addEventListener('click',()=>{
  out.textContent='چگالی: '+(mass/volume).toFixed(3)+' گرام بر سانتی‌متر مکعب';
 });
 renderVirtualLab();
+
+
+const spaceLessons=[
+{cat:'solar',title:'منظومهٔ شمسی',level:'مقدماتی',desc:'خورشید، سیاره‌ها و اجرام کوچک منظومه.',lesson:'منظومهٔ شمسی شامل خورشید، هشت سیاره، قمرها، سیارک‌ها و دنباله‌دارها است. گرانش خورشید بیشتر اجرام این منظومه را در مدار نگه می‌دارد.',task:'نام هشت سیاره را به ترتیب فاصله از خورشید بنویسید.'},
+{cat:'solar',title:'زمین و ماه',level:'مقدماتی',desc:'حرکت مداری ماه، شب و روز و گرفت‌ها.',lesson:'ماه قمر طبیعی زمین است و نور آن بازتاب نور خورشید است. چرخش زمین سبب چرخهٔ شب و روز می‌شود؛ گرفت خورشید و ماه هنگامی رخ می‌دهد که اجرام در آرایش هندسی مناسبی قرار گیرند.',task:'تفاوت گردش ماه به دور زمین و چرخش ماه به دور محور خودش را توضیح دهید.'},
+{cat:'solar',title:'مریخ و جستجوی حیات',level:'متوسط',desc:'سطح مریخ، آب گذشته و مأموریت‌های رباتیک.',lesson:'مریخ سیاره‌ای سنگی با جو نازک و نشانه‌هایی از جریان آب در گذشتهٔ دور است. مریخ‌نوردها خاک، سنگ و محیط این سیاره را بررسی می‌کنند؛ تا امروز شواهد قطعی از حیات در آن تأیید نشده است.',task:'دو دلیل علمی برای مطالعهٔ مریخ نام ببرید.'},
+{cat:'stars',title:'ستارگان و چرخهٔ زندگی آن‌ها',level:'متوسط',desc:'زایش ستاره‌ها، همجوشی و پایان عمر ستارگان.',lesson:'ستارگان در ابرهای گازی و غباری شکل می‌گیرند. در بخش عمدهٔ عمر خود، انرژی را از همجوشی هسته‌ای تولید می‌کنند. سرنوشت نهایی آن‌ها به جرم اولیه‌شان بستگی دارد.',task:'چرا جرم اولیه در سرنوشت نهایی یک ستاره اهمیت دارد؟'},
+{cat:'stars',title:'کهکشان راه شیری',level:'مقدماتی',desc:'ساختار کهکشان خانهٔ منظومهٔ شمسی.',lesson:'راه شیری یک کهکشان مارپیچی میله‌ای است و منظومهٔ شمسی در یکی از بازوهای آن قرار دارد. کهکشان‌ها از ستارگان، گاز، غبار و مادهٔ تاریک تشکیل شده‌اند.',task:'کهکشان را تعریف کنید و دو جزء آن را نام ببرید.'},
+{cat:'physics',title:'سیاه‌چاله‌ها و گرانش',level:'پیشرفته',desc:'افق رویداد و خمیدگی فضا-زمان.',lesson:'سیاه‌چاله ناحیه‌ای از فضا-زمان است که گرانش آن چنان قوی است که پس از عبور از افق رویداد، حتی نور نیز نمی‌تواند بیرون بیاید. سیاه‌چاله‌ها مستقیماً با نور خود دیده نمی‌شوند؛ اثرشان بر مادهٔ اطراف قابل بررسی است.',task:'افق رویداد را با زبان خود توضیح دهید.'},
+{cat:'technology',title:'ماهواره‌ها و کاربردهای آن‌ها',level:'مقدماتی',desc:'ارتباطات، هواشناسی، ناوبری و سنجش از دور.',lesson:'ماهواره‌ها ابزارهایی هستند که در مدار اجرام آسمانی می‌گردند. ماهواره‌های مصنوعی برای مخابرات، پیش‌بینی هوا، نقشه‌برداری، ناوبری و پژوهش علمی استفاده می‌شوند.',task:'سه کاربرد ماهواره‌ها در زندگی روزمره را بنویسید.'},
+{cat:'technology',title:'تلسکوپ‌ها و رصد آسمان',level:'مقدماتی',desc:'تلسکوپ نوری، رادیویی و رصدخانه‌ها.',lesson:'تلسکوپ‌ها تابش اجرام آسمانی را گردآوری می‌کنند تا جزئیات بیشتری آشکار شود. برخی تلسکوپ‌ها نور مرئی و برخی امواج رادیویی یا طول موج‌های دیگر را بررسی می‌کنند.',task:'تفاوت اصلی تلسکوپ نوری و رادیویی چیست؟'}
+];
+function renderSpaceCenter(){
+ const grid=$('#spaceCourseGrid');if(!grid)return;
+ const q=($('#spaceSearch')?.value||'').trim().toLocaleLowerCase(),cat=$('#spaceCategory')?.value||'all';
+ const items=spaceLessons.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="historyculture-course-card"><span class="historyculture-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مطالعهٔ درس و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">موضوعی پیدا نشد.</p>';
+}
+$('#spaceSearch')?.addEventListener('input',renderSpaceCenter);
+$('#spaceCategory')?.addEventListener('change',renderSpaceCenter);
+$('#spaceWeightBtn')?.addEventListener('click',()=>{
+ const earth=Number($('#spaceEarthWeight')?.value),factor=Number($('#spacePlanet')?.value),out=$('#spaceWeightResult');
+ if(!out)return;
+ if(!Number.isFinite(earth)||earth<=0){out.textContent='لطفاً وزن معتبر بزرگ‌تر از صفر وارد کنید.';return;}
+ out.textContent='وزن تقریبی شما: '+(earth*factor).toFixed(1)+' کیلوگرام‌نیرو (نسبت به زمین)';
+});
+renderSpaceCenter();
