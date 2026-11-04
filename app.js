@@ -163,7 +163,17 @@ if(planButton)planButton.addEventListener('click',()=>{
  const blocks=[['ریاضی و استدلال',0.25],['علوم (فزیک، کیمیا و بیولوژی)',0.35],['زبان و مهارت‌های عمومی',0.20],['مرور و حل سوالات',0.20]];
  const result=$('#kankorPlanResult');
  const safeGoal=goal.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
- result.innerHTML='<h3>برنامهٔ نمونه برای '+safeGoal+'</h3><p>'+days+' روز تا امتحان · '+hours+' ساعت مطالعه در روز</p><ul>'+blocks.map(([name,share])=>'<li>'+name+': '+(hours*share).toFixed(1)+' ساعت در روز</li>').join('')+'</ul><p>هر روز ۲۰ تا ۳۰ دقیقه برای مرور اشتباهات اختصاص بده. در پایان هر هفته یک آزمون زمان‌دار اجرا کن. سهم مضامین را مطابق رشته و نصاب رسمی خودت تنظیم کن.</p>';
+ const week=[
+  ['شنبه','ریاضی و استدلال','حل تمرین و یادداشت نکته‌ها'],
+  ['یک‌شنبه','فزیک و کیمیا','مرور فرمول‌ها و حل مسئله'],
+  ['دوشنبه','بیولوژی و علوم طبیعی','مطالعهٔ مفاهیم و شکل‌ها'],
+  ['سه‌شنبه','دری و زبان انگلیسی','واژگان، دستور و درک مطلب'],
+  ['چهارشنبه','ریاضی و مضمون دشوارتر','تمرین هدفمند از اشتباهات'],
+  ['پنج‌شنبه','مرور همهٔ مضامین','فلش‌کارت و پرسش‌های کوتاه'],
+  ['جمعه','آزمون آزمایشی و استراحت','بررسی پاسخ‌ها و استراحت کافی']
+ ];
+ const weekly='<h3>برنامهٔ هفتگی پیشنهادی</h3><div class="kankor-week-grid">'+week.map((d,i)=>'<div class="kankor-day"><strong>'+d[0]+'</strong><b>'+d[1]+'</b><span>'+d[2]+'</span><small>'+Math.max(.5,hours-(i===6?hours*.5:0)).toFixed(1)+' ساعت برنامهٔ روزانه</small></div>').join('')+'</div>';
+ result.innerHTML='<h3>برنامهٔ نمونه برای '+safeGoal+'</h3><p>'+days+' روز تا امتحان · '+hours+' ساعت مطالعه در روز</p><ul>'+blocks.map(([name,share])=>'<li>'+name+': '+(hours*share).toFixed(1)+' ساعت در روز</li>').join('')+'</ul>'+weekly+'<p>پس از هر ۴۵ تا ۵۰ دقیقه مطالعه، ۵ تا ۱۰ دقیقه استراحت کن. جمعه را برای آزمون، بررسی اشتباهات و استراحت متوازن نگه دار. سهم مضامین را مطابق رشته و نصاب رسمی خودت تنظیم کن.</p>';
  localStorage.setItem('afghanai-kankor-plan',JSON.stringify({goal,days,hours}));
 });
 try{const savedPlan=JSON.parse(localStorage.getItem('afghanai-kankor-plan')||'null');if(savedPlan&&$('#kankorGoal')){$('#kankorGoal').value=savedPlan.goal;$('#kankorDays').value=savedPlan.days;$('#kankorHours').value=savedPlan.hours}}catch(e){}
