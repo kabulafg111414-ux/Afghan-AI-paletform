@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -560,3 +560,30 @@ $('#spaceWeightBtn')?.addEventListener('click',()=>{
  out.textContent='وزن تقریبی شما: '+(earth*factor).toFixed(1)+' کیلوگرام‌نیرو (نسبت به زمین)';
 });
 renderSpaceCenter();
+
+
+const aiRoboticsLessons=[
+{cat:'basics',title:'هوش مصنوعی چیست؟',level:'مقدماتی',desc:'تعریف AI، کاربردها و محدودیت‌ها.',lesson:'هوش مصنوعی شاخه‌ای از علوم کمپیوتر است که سامانه‌هایی برای انجام کارهایی مانند تشخیص الگو، پیش‌بینی، فهم زبان و تولید محتوا می‌سازد. خروجی AI ممکن است نادرست یا جانبدارانه باشد و باید بررسی شود.',task:'سه کاربرد مفید هوش مصنوعی در آموزش یا زراعت افغانستان را بنویسید.'},
+{cat:'ml',title:'یادگیری ماشین',level:'مقدماتی',desc:'یادگیری الگو از داده‌ها.',lesson:'در یادگیری ماشین، الگوریتم با نمونه‌های داده آموزش می‌بیند تا برای داده‌های تازه پیش‌بینی یا دسته‌بندی انجام دهد. کیفیت داده و ارزیابی مستقل برای جلوگیری از خطا اهمیت دارد.',task:'برای پیش‌بینی قیمت محصولات زراعتی، چه داده‌هایی می‌تواند مفید باشد؟'},
+{cat:'deep',title:'شبکه‌های عصبی مصنوعی',level:'متوسط',desc:'نورون‌ها، وزن‌ها، لایه‌ها و آموزش.',lesson:'شبکهٔ عصبی مصنوعی از واحدهای محاسباتی به‌هم‌پیوسته تشکیل می‌شود. وزن‌ها شدت ارتباط‌ها را مشخص می‌کنند و در جریان آموزش با استفاده از داده و معیار خطا تنظیم می‌شوند.',task:'نقش وزن‌ها و لایه‌ها را در یک شبکهٔ عصبی توضیح دهید.'},
+{cat:'robotics',title:'مبانی رباتیک',level:'مقدماتی',desc:'حسگر، محرک، کنترل‌کننده و بازخورد.',lesson:'یک ربات معمولاً از حسگرها برای دریافت اطلاعات محیط، کنترل‌کننده برای تصمیم‌گیری و محرک‌ها برای حرکت یا انجام عمل استفاده می‌کند. طراحی ایمن باید توقف اضطراری و محدودیت حرکت را در نظر بگیرد.',task:'برای یک ربات آبیاری گلخانه سه حسگر یا قطعهٔ ضروری پیشنهاد کنید.'},
+{cat:'vision',title:'بینایی کمپیوتر',level:'متوسط',desc:'تحلیل تصویر و تشخیص اشیا.',lesson:'بینایی کمپیوتر به سیستم‌ها کمک می‌کند از تصویر و ویدیو اطلاعات استخراج کنند؛ مانند شناسایی اشیا یا بررسی وضعیت گیاه. کیفیت تصویر، نور و تنوع داده بر دقت اثر می‌گذارند.',task:'یک کاربرد بینایی کمپیوتر برای تشخیص بیماری برگ گیاهان شرح دهید.'},
+{cat:'language',title:'پردازش زبان طبیعی',level:'متوسط',desc:'کار با متن و زبان انسانی.',lesson:'پردازش زبان طبیعی یا NLP روش‌هایی برای تحلیل و تولید زبان انسانی است؛ از جمله ترجمه، خلاصه‌سازی و دسته‌بندی متن. زبان‌های کم‌منبع به دادهٔ باکیفیت و ارزیابی بومی نیاز دارند.',task:'دو چالش ساخت ابزار زبان‌شناختی برای دری یا پشتو را نام ببرید.'},
+{cat:'ethics',title:'اخلاق، حریم خصوصی و ایمنی AI',level:'مقدماتی',desc:'سوگیری، شفافیت، امنیت و حفاظت داده.',lesson:'سامانه‌های AI باید با توجه به حریم خصوصی، رضایت، امنیت، عدالت و امکان بازبینی طراحی شوند. اطلاعات حساس را بدون ضرورت و مجوز در ابزارها وارد نکنید.',task:'برای استفادهٔ مسئولانه از AI در مکتب سه قاعده پیشنهاد کنید.'},
+{cat:'robotics',title:'پروژهٔ آموزشی ربات آبیاری',level:'پروژه',desc:'طرح مفهومی ربات برای صرفه‌جویی آب.',lesson:'در یک طرح آموزشی می‌توان حسگر رطوبت خاک را به کنترل‌کننده وصل کرد تا هنگام خشک‌شدن خاک، پمپ کم‌ولتاژ مناسب را فعال کند. ساخت واقعی نیازمند بررسی برق، عایق‌بندی، جریان آب و نظارت متخصص است.',task:'نمودار سادهٔ حسگر، کنترل‌کننده و پمپ را رسم و منطق روشن‌شدن پمپ را توضیح دهید.'}
+];
+function renderAIRoboticsCenter(){
+ const grid=$('#aiRoboticsCourseGrid');if(!grid)return;
+ const q=($('#aiRoboticsSearch')?.value||'').trim().toLocaleLowerCase(),cat=$('#aiRoboticsCategory')?.value||'all';
+ const items=aiRoboticsLessons.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="historyculture-course-card"><span class="historyculture-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مشاهدهٔ درس و پروژه</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">درسی پیدا نشد.</p>';
+}
+$('#aiRoboticsSearch')?.addEventListener('input',renderAIRoboticsCenter);
+$('#aiRoboticsCategory')?.addEventListener('change',renderAIRoboticsCenter);
+$('#aiNeuronRun')?.addEventListener('click',()=>{
+ const x1=Number($('#aiInputOne')?.value),w1=Number($('#aiWeightOne')?.value),x2=Number($('#aiInputTwo')?.value),w2=Number($('#aiWeightTwo')?.value),t=Number($('#aiThreshold')?.value),out=$('#aiNeuronResult');
+ if(!out)return;
+ if(![x1,w1,x2,w2,t].every(Number.isFinite)){out.textContent='لطفاً همهٔ مقادیر را درست وارد کنید.';return;}
+ const sum=x1*w1+x2*w2;out.textContent='مجموع وزن‌دار: '+sum.toFixed(2)+'؛ خروجی آستانه‌ای: '+(sum>=t?'۱ (فعال)':'۰ (غیرفعال)');
+});
+renderAIRoboticsCenter();
