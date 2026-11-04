@@ -332,6 +332,6 @@ body{background:radial-gradient(ellipse at 92% 0%,#e6f5ed 0,transparent 34%),var
 .vocab-card h3{font-size:1.8rem;margin:2px 0;color:#103e68}
 .vocab-card p{margin:0;line-height:1.7}
 .vocab-card span{font-size:.85rem;color:#5c7286}
-.vocab-tool .tool-actions{flex-wrap:wrap}
-.vocab-tool .tool-actions button{flex:1;min-width:100px}
+.vocabulary-tool .tool-actions{flex-wrap:wrap}
+.vocabulary-tool .tool-actions button{flex:1;min-width:100px}
 @media(max-width:520px){.vocab-toolbar{grid-template-columns:1fr}.vocab-card{min-height:155px;padding:16px}}
