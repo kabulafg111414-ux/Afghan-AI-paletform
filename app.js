@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','engineering','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -168,7 +168,35 @@ $('#agriCalcBtn')?.addEventListener('click',()=>{
  out.textContent='حجم فرضی آب: '+litres.toLocaleString()+' لیتر ('+(litres/1000).toLocaleString()+' متر مکعب).';
 });
 
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='agriculture')renderAgricultureCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+
+const engineeringCourses=[
+{cat:'civil',title:'مهندسی ساختمان و معماری',level:'مقدماتی',desc:'آشنایی با نقشه، مصالح، سازه و اصول طراحی.',lesson:'مهندسی ساختمان با طراحی و اجرای ایمن سازه‌ها سروکار دارد. انتخاب مصالح، شرایط خاک، بارهای وارد بر ساختمان و مقررات ساختمانی باید توسط متخصصان بررسی شود. نقشهٔ معماری، کاربری و چیدمان فضاها را نشان می‌دهد.',task:'تفاوت نقشهٔ معماری و نقشهٔ سازه را با یک مثال شرح دهید.'},
+{cat:'electrical',title:'مهندسی برق و الکترونیک',level:'مقدماتی',desc:'ولتاژ، جریان، مقاومت، مدار و قطعات الکترونیکی.',lesson:'ولتاژ اختلاف پتانسیل، جریان حرکت بار الکتریکی و مقاومت مخالفت در برابر جریان است. قانون اهم رابطهٔ این کمیت‌ها را در شرایط مشخص بیان می‌کند: V=IR. مدارهای واقعی باید با ولتاژ ایمن و تجهیزات مناسب در محیط آموزشی تمرین شوند.',task:'اگر مقاومت ۱۰ اهم و جریان ۲ آمپر باشد، با قانون اهم ولتاژ را محاسبه کنید.'},
+{cat:'computer',title:'مهندسی کمپیوتر و شبکه',level:'مقدماتی',desc:'سخت‌افزار، سیستم‌عامل، شبکه و انتقال داده.',lesson:'شبکهٔ کمپیوتر دستگاه‌ها را برای تبادل اطلاعات وصل می‌کند. روتر مسیر انتقال داده را میان شبکه‌ها مدیریت می‌کند و پروتکل‌ها قواعد ارتباط را تعیین می‌کنند. امنیت شبکه به به‌روزرسانی، رمزگذاری و مدیریت دسترسی وابسته است.',task:'تفاوت شبکهٔ محلی (LAN) و اینترنت را توضیح دهید.'},
+{cat:'energy',title:'انرژی خورشیدی و تجدیدپذیر',level:'مقدماتی',desc:'پنل خورشیدی، اینورتر، باتری و بهره‌وری انرژی.',lesson:'پنل فتوولتائیک نور خورشید را به برق مستقیم تبدیل می‌کند. اینورتر برق مستقیم را به برق متناوب تبدیل می‌کند. اندازهٔ سیستم به مصرف انرژی، تابش محل، تلفات و نیاز ذخیره‌سازی بستگی دارد.',task:'سه عامل مهم در تعیین ظرفیت یک سیستم خورشیدی را نام ببرید.'},
+{cat:'water',title:'مهندسی آب و محیط زیست',level:'مقدماتی',desc:'آب‌رسانی، تصفیه، فاضلاب و حفاظت محیط زیست.',lesson:'مهندسی آب با تأمین، انتقال، تصفیه و مدیریت منابع آب سروکار دارد. تصفیهٔ آب ممکن است شامل مراحل فیزیکی، شیمیایی و میکروبی باشد. کیفیت آب باید با آزمایش و معیارهای معتبر سنجیده شود.',task:'چرا پیش از انتخاب روش تصفیه باید کیفیت آب خام آزمایش شود؟'},
+{cat:'mechanical',title:'مهندسی مکانیک و صنایع',level:'مقدماتی',desc:'حرکت، نیرو، ماشین‌ها، تولید و نگهداری تجهیزات.',lesson:'مکانیک حرکت و نیرو را بررسی می‌کند. مهندسی صنایع بر بهبود سیستم‌های تولید، کیفیت، زمان و استفادهٔ مؤثر از منابع تمرکز دارد. نگهداری پیشگیرانه می‌تواند احتمال خرابی ناگهانی تجهیزات را کاهش دهد.',task:'دو نمونه از نگهداری پیشگیرانه در یک کارگاه را بنویسید.'},
+{cat:'gis',title:'نقشه‌برداری و سیستم اطلاعات جغرافیایی',level:'مقدماتی',desc:'مختصات، نقشه، داده‌های مکانی و تحلیل GIS.',lesson:'GIS برای جمع‌آوری، مدیریت و تحلیل داده‌های مکانی استفاده می‌شود. نقشه‌برداری موقعیت و اندازه‌گیری عوارض زمین را ثبت می‌کند. دقت مختصات، مقیاس و منبع داده در استفاده از نقشه اهمیت دارد.',task:'دو کاربرد GIS در مدیریت شهری یا زراعت را مثال بزنید.'},
+{cat:'innovation',title:'تکنالوژی و نوآوری',level:'مقدماتی',desc:'حل مسئله، نمونه‌سازی، رباتیک و طراحی محصول.',lesson:'نوآوری به ایجاد یا بهبود یک محصول، خدمت یا روش گفته می‌شود. فرایند طراحی معمولاً با شناخت نیاز، تولید ایده، ساخت نمونهٔ اولیه، آزمایش و بهبود ادامه می‌یابد.',task:'یک مشکل روزمره را انتخاب و یک راه‌حل تکنالوژیک ساده برای آن پیشنهاد کنید.'}
+];
+function renderEngineeringCenter(){
+ const grid=$('#engineeringCourseGrid');if(!grid)return;
+ const q=($('#engineeringSearch')?.value||'').trim().toLocaleLowerCase();
+ const cat=$('#engineeringCategory')?.value||'all';
+ const items=engineeringCourses.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="engineering-course-card"><span class="engineering-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مطالعهٔ درس و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">درسی پیدا نشد؛ عبارت دیگری را جستجو کنید.</p>';
+}
+$('#engineeringSearch')?.addEventListener('input',renderEngineeringCenter);
+$('#engineeringCategory')?.addEventListener('change',renderEngineeringCenter);
+$('#solarCalcBtn')?.addEventListener('click',()=>{
+ const use=$('#solarDailyUse')?.value,hours=$('#solarSunHours')?.value,loss=$('#solarLoss')?.value,out=$('#solarCalcResult');
+ if(!out)return;
+ if(use===''||hours===''||Number(use)<=0||Number(hours)<=0||Number(loss)<=0||Number(loss)>100){out.textContent='لطفاً مصرف و ساعات آفتاب مثبت و ضریب بازده بین ۱ تا ۱۰۰ وارد کنید.';return}
+ const capacity=Number(use)/(Number(hours)*(Number(loss)/100));
+ out.textContent='ظرفیت تقریبی پنل: '+capacity.toFixed(2)+' کیلووات ('+(capacity*1000).toFixed(0)+' وات). این مقدار فقط برآورد ابتدایی است.';
+});
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='agriculture')renderAgricultureCenter();if(name==='engineering')renderEngineeringCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
