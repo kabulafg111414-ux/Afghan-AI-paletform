@@ -485,3 +485,16 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .kankor-day span,.kankor-day small{color:var(--muted);line-height:1.7}
 .kankor-day small{padding-top:5px;border-top:1px solid var(--border)}
 @media(max-width:520px){.kankor-week-grid{grid-template-columns:1fr 1fr}.kankor-day{padding:11px}}
+
+
+/* Kankor daily study checklist */
+.kankor-checklist{margin-top:20px;padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--surface,rgba(120,140,170,.06))}
+.kankor-checklist h3{margin:0 0 7px}
+.kankor-checklist>p{color:var(--muted);line-height:1.8;margin:0 0 14px}
+.kankor-check-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px}
+.kankor-check-item{display:flex;align-items:center;gap:10px;padding:11px;border:1px solid var(--border);border-radius:11px;cursor:pointer;line-height:1.7}
+.kankor-check-item input{accent-color:var(--accent,#269caa);width:18px;height:18px;flex:0 0 auto}
+.kankor-check-progress{margin-top:16px}
+.kankor-check-progress>div:first-child{display:flex;justify-content:space-between;margin-bottom:8px;font-weight:600}
+.kankor-check-track{height:9px;border-radius:20px;background:var(--border);overflow:hidden}
+.kankor-check-track span{display:block;height:100%;width:0;background:var(--accent,#269caa);border-radius:inherit;transition:width .2s ease}
