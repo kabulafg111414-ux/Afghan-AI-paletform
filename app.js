@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -75,7 +75,27 @@ function renderDigitalCenter(){
 $('#digitalSearch')?.addEventListener('input',renderDigitalCenter);
 $('#digitalCategory')?.addEventListener('change',renderDigitalCenter);
 
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+
+const healthCourses=[
+{cat:'anatomy',title:'آناتومی انسان',level:'مقدماتی',desc:'آشنایی با ساختار بدن و دستگاه‌های اصلی.',lesson:'آناتومی علم مطالعهٔ ساختار بدن است. دستگاه اسکلتی از بدن حمایت می‌کند؛ دستگاه عضلانی در حرکت نقش دارد؛ و دستگاه عصبی پیام‌ها را هماهنگ می‌سازد.',task:'سه وظیفهٔ دستگاه اسکلتی را با زبان خود توضیح دهید.'},
+{cat:'physiology',title:'فیزیولوژی انسان',level:'مقدماتی',desc:'شناخت کارکرد قلب، تنفس، هضم و تنظیم بدن.',lesson:'فیزیولوژی عملکرد بدن را بررسی می‌کند. قلب خون را به گردش درمی‌آورد، شش‌ها تبادل گازها را انجام می‌دهند و دستگاه گوارش مواد غذایی را جذب می‌کند.',task:'تفاوت آناتومی و فیزیولوژی را در دو جمله بنویسید.'},
+{cat:'microbiology',title:'میکروبیولوژی',level:'مقدماتی',desc:'آشنایی با باکتری‌ها، ویروس‌ها، قارچ‌ها و پیشگیری از عفونت.',lesson:'میکروبیولوژی موجودات و عوامل میکروسکوپی را مطالعه می‌کند. شستن درست دست‌ها، واکسیناسیون و رعایت اصول بهداشت از راه‌های مهم پیشگیری از برخی عفونت‌ها هستند.',task:'سه راه پیشگیری از انتقال عفونت را فهرست کنید.'},
+{cat:'pharmacology',title:'فارماکولوژی',level:'مقدماتی',desc:'مفاهیم عمومی دارو، اثر، عوارض و ایمنی دارویی.',lesson:'فارماکولوژی علم مطالعهٔ داروها و اثر آن‌ها بر بدن است. انتخاب دارو و مقدار مصرف به تشخیص متخصص، سن، وضعیت صحی و عوامل دیگر بستگی دارد. دارو را خودسرانه آغاز یا قطع نکنید.',task:'چرا بررسی عوارض و تداخلات دارویی اهمیت دارد؟'},
+{cat:'firstaid',title:'مبانی کمک‌های اولیه',level:'مقدماتی',desc:'ایمنی محل، درخواست کمک و شناخت اصول اولیهٔ امداد.',lesson:'در هر رویداد نخست ایمنی محل را بررسی کنید، از خدمات اضطراری کمک بخواهید و بدون آموزش لازم فرد را در معرض خطر بیشتر قرار ندهید. آموزش عملی کمک‌های اولیه باید از نهاد معتبر دریافت شود.',task:'سه اقدام نخست و عمومی هنگام مشاهدهٔ یک رویداد اضطراری را نام ببرید.'},
+{cat:'nursing',title:'مبانی پرستاری',level:'مقدماتی',desc:'مراقبت محترمانه، ارتباط با بیمار، حفظ حریم خصوصی و کنترل عفونت.',lesson:'پرستاری بر مراقبت ایمن و محترمانه، ارتباط روشن، حفظ محرمانگی و رعایت اصول کنترل عفونت استوار است. مهارت‌های بالینی باید زیر نظر آموزگار واجد صلاحیت تمرین شوند.',task:'چهار اصل مراقبت محترمانه از بیمار را بنویسید.'},
+{cat:'publichealth',title:'مبانی صحت عامه',level:'مقدماتی',desc:'پیشگیری، واکسیناسیون، آب سالم، تغذیه و سلامت جامعه.',lesson:'صحت عامه بر پیشگیری از بیماری و بهبود سلامت جمعیت تمرکز دارد. آب آشامیدنی سالم، واکسیناسیون، تغذیهٔ مناسب و آموزش صحی از موضوعات کلیدی‌اند.',task:'دو نمونه از اقدام‌های پیشگیرانه در سطح جامعه را مثال بزنید.'}
+];
+function renderHealthCenter(){
+ const grid=$('#healthCourseGrid');if(!grid)return;
+ const q=($('#healthSearch')?.value||'').trim().toLocaleLowerCase();
+ const cat=$('#healthCategory')?.value||'all';
+ const items=healthCourses.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="health-course-card"><span class="health-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مطالعهٔ درس و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">موضوعی پیدا نشد؛ عبارت دیگری را جستجو کنید.</p>';
+}
+$('#healthSearch')?.addEventListener('input',renderHealthCenter);
+$('#healthCategory')?.addEventListener('change',renderHealthCenter);
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
