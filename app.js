@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','health','business','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','business','law','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -121,7 +121,26 @@ $('#businessCalcBtn')?.addEventListener('click',()=>{
  const result=revenue-costs;out.textContent=result>0?'سود ساده: '+result.toLocaleString():result<0?'زیان ساده: '+Math.abs(result).toLocaleString():'عواید و مصارف برابر است؛ سود یا زیان صفر است.';
 });
 
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+
+const lawCourses=[
+{cat:'citizen',title:'حقوق و مسئولیت‌های شهروندی',level:'مقدماتی',desc:'مفهوم شهروندی، مسئولیت اجتماعی و آگاهی از حقوق.',lesson:'آگاهی شهروندی شامل شناخت حقوق، مسئولیت‌ها، رعایت حقوق دیگران و آشنایی با راه‌های قانونی مراجعه به نهادهای عمومی است. جزئیات حقوق و ضمانت اجرا به قانون نافذ و شرایط هر کشور وابسته است.',task:'سه مسئولیت اجتماعی و سه حق بنیادین را با مراجعه به منبع معتبر فهرست کنید.'},
+{cat:'civil',title:'مبانی حقوق مدنی',level:'مقدماتی',desc:'شخصیت حقوقی، مالکیت، تعهد و مسئولیت مدنی.',lesson:'حقوق مدنی روابط اشخاص، اموال، قراردادها و تعهدات را تنظیم می‌کند. مالکیت، تصرف و استفاده از مال مفاهیم جداگانه‌اند و اسناد و قوانین مربوط در هر قضیه باید بررسی شوند.',task:'تفاوت مالکیت و تصرف را با یک مثال ساده توضیح دهید.'},
+{cat:'criminal',title:'آشنایی با حقوق جزا',level:'مقدماتی',desc:'مفهوم جرم، مسئولیت جزایی و اصول روند عادلانه.',lesson:'حقوق جزا رفتارهای ممنوع و پیامدهای قانونی آن‌ها را تعریف می‌کند. مسئولیت جزایی و روند رسیدگی تابع قانون نافذ، ادله و تصمیم مرجع صلاحیت‌دار است؛ نباید از یک مثال عمومی نتیجهٔ قضیهٔ مشخص را پیش‌بینی کرد.',task:'تفاوت ادعای ارتکاب جرم و اثبات آن در روند قانونی را شرح دهید.'},
+{cat:'business',title:'حقوق تجارت و قراردادها',level:'مقدماتی',desc:'طرفین قرارداد، تعهدات، پرداخت و حل اختلاف.',lesson:'قرارداد توافقی است که می‌تواند برای طرف‌ها تعهد ایجاد کند. موضوع، مبلغ، زمان اجرا، مسئولیت‌ها و روش حل اختلاف باید روشن باشد. اعتبار و قابلیت اجرای هر شرط را قانون نافذ تعیین می‌کند.',task:'برای یک قرارداد ساده، پنج موردی را بنویسید که باید روشن باشند.'},
+{cat:'family',title:'حقوق خانواده و حمایت از اطفال',level:'مقدماتی',desc:'مفاهیم عمومی خانواده، مسئولیت والدین و منافع طفل.',lesson:'مسائل خانواده ممکن است شامل نکاح، نفقه، حضانت، سرپرستی و حمایت از طفل باشد. قواعد قابل اجرا ممکن است به قانون نافذ و مرجع صلاحیت‌دار وابسته باشند؛ موضوعات حساس باید با متخصص واجد صلاحیت بررسی شوند.',task:'چند نیاز اساسی طفل را که باید در تصمیم‌های مربوط به او در نظر گرفته شود، فهرست کنید.'},
+{cat:'admin',title:'اداره و اسناد رسمی',level:'مقدماتی',desc:'درخواست رسمی، ثبت مکتوب، شماره صادره و نگهداری اسناد.',lesson:'در مکاتبات اداری، عنوان مرجع، موضوع روشن، شرح کوتاه واقعات، درخواست مشخص و ضمایم مرتب اهمیت دارد. از اصل اسناد محافظت کنید و رسید ثبت یا شماره تعقیب را نگه دارید.',task:'یک درخواست فرضی اداری با موضوع، شرح کوتاه و تقاضای مشخص تنظیم کنید.'}
+];
+function renderLawCenter(){
+ const grid=$('#lawCourseGrid');if(!grid)return;
+ const q=($('#lawSearch')?.value||'').trim().toLocaleLowerCase();
+ const cat=$('#lawCategory')?.value||'all';
+ const items=lawCourses.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="law-course-card"><span class="law-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مطالعهٔ درس و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">موضوعی پیدا نشد؛ عبارت دیگری را جستجو کنید.</p>';
+}
+$('#lawSearch')?.addEventListener('input',renderLawCenter);
+$('#lawCategory')?.addEventListener('change',renderLawCenter);
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
