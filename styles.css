@@ -587,3 +587,22 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .business-references li{margin:9px 0}
 .business-references a{color:var(--accent,#269caa)}
 @media(max-width:560px){.business-controls,.business-calc-fields{grid-template-columns:1fr}.business-controls input,.business-controls select{grid-row:auto}.business-course-grid{grid-template-columns:1fr}}
+
+
+/* Law and civic awareness learning center */
+.law-notice,.law-checklist,.law-references{padding:18px;border:1px solid var(--border);border-radius:15px;background:var(--surface);margin:16px 0}
+.law-notice p,.law-checklist p{color:var(--muted);line-height:1.85;margin:8px 0 0}
+.law-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;align-items:center;margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.law-controls label{font-weight:650}
+.law-controls input,.law-controls select{grid-row:2;width:100%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.law-course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:13px;margin:18px 0}
+.law-course-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:17px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.law-course-card h3{margin:2px 0;line-height:1.65}
+.law-course-card p{line-height:1.85;margin:0;color:var(--muted)}
+.law-level{font-size:.78rem;color:var(--accent,#269caa);font-weight:700}
+.law-course-card details{width:100%;margin-top:6px;padding-top:10px;border-top:1px solid var(--border)}
+.law-course-card summary{cursor:pointer;font-weight:700}
+.law-course-card details p{margin:9px 0}
+.law-checklist li,.law-references li{margin:9px 0;line-height:1.8}
+.law-references a{color:var(--accent,#269caa)}
+@media(max-width:560px){.law-controls{grid-template-columns:1fr}.law-controls input,.law-controls select{grid-row:auto}.law-course-grid{grid-template-columns:1fr}}
