@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -25,7 +25,36 @@ function renderLibrary(){
 $('#librarySearch')?.addEventListener('input',renderLibrary);
 $('#libraryCategory')?.addEventListener('change',renderLibrary);
 
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+
+const languagePhrases=[
+{topic:'greetings',en:'Hello. How are you?',fa:'سلام. حال شما چطور است؟',ps:'سلام. تاسو څنګه یاست؟'},
+{topic:'greetings',en:'Good morning.',fa:'صبح بخیر.',ps:'سهار مو پخیر.'},
+{topic:'greetings',en:'Thank you very much.',fa:'بسیار تشکر.',ps:'ډېره مننه.'},
+{topic:'greetings',en:'See you again.',fa:'دوباره می‌بینمتان.',ps:'بیا به ووینو.'},
+{topic:'education',en:'I am a student.',fa:'من شاگرد هستم.',ps:'زه زده‌کوونکی یم.'},
+{topic:'education',en:'I study every day.',fa:'من هر روز درس می‌خوانم.',ps:'زه هره ورځ زده کړه کوم.'},
+{topic:'education',en:'Please open your book.',fa:'لطفاً کتاب خود را باز کنید.',ps:'مهرباني وکړئ خپل کتاب خلاص کړئ.'},
+{topic:'education',en:'Knowledge is important.',fa:'دانش مهم است.',ps:'پوهه مهمه ده.'},
+{topic:'daily',en:'Where is the school?',fa:'مکتب کجا است؟',ps:'ښوونځی چېرته دی؟'},
+{topic:'daily',en:'I need some water.',fa:'من به کمی آب نیاز دارم.',ps:'زه لږو اوبو ته اړتیا لرم.'},
+{topic:'daily',en:'What time is it?',fa:'ساعت چند است؟',ps:'اوس څو بجې دي؟'},
+{topic:'daily',en:'I am learning a new language.',fa:'من یک زبان جدید یاد می‌گیرم.',ps:'زه نوې ژبه زده کوم.'},
+{topic:'health',en:'I need a doctor.',fa:'من به داکتر نیاز دارم.',ps:'زه ډاکټر ته اړتیا لرم.'},
+{topic:'health',en:'I have a headache.',fa:'سرم درد می‌کند.',ps:'سر مې درد کوي.'},
+{topic:'health',en:'Please help me.',fa:'لطفاً به من کمک کنید.',ps:'مهرباني وکړئ مرسته راسره وکړئ.'}
+];
+function renderLanguageCenter(){
+ const grid=$('#languagePhraseGrid');if(!grid)return;
+ const q=($('#languageSearch')?.value||'').trim().toLocaleLowerCase();
+ const topic=$('#languageTopic')?.value||'all';
+ const items=languagePhrases.filter(x=>(topic==='all'||x.topic===topic)&&(!q||[x.en,x.fa,x.ps].some(v=>v.toLocaleLowerCase().includes(q))));
+ grid.innerHTML=items.length?items.map(x=>'<article class="language-phrase-card"><span class="language-topic">'+({greetings:'سلام و احوال‌پرسی',education:'آموزش و مکتب',daily:'زندگی روزمره',health:'صحت و تندرستی'}[x.topic])+'</span><h3>'+x.en+'</h3><p><b>دری:</b> '+x.fa+'</p><p><b>پښتو:</b> '+x.ps+'</p><button type="button" class="outline language-speak" data-speak="'+encodeURIComponent(x.en)+'">🔊 شنیدن انگلیسی</button></article>').join(''):'<p class="empty-state">عبارت مورد نظر پیدا نشد.</p>';
+ grid.querySelectorAll('[data-speak]').forEach(btn=>btn.addEventListener('click',()=>{if(!('speechSynthesis'in window)){alert('گفتار در این مرورگر پشتیبانی نمی‌شود.');return}const utterance=new SpeechSynthesisUtterance(decodeURIComponent(btn.dataset.speak));utterance.lang='en-US';speechSynthesis.cancel();speechSynthesis.speak(utterance)}));
+}
+$('#languageSearch')?.addEventListener('input',renderLanguageCenter);
+$('#languageTopic')?.addEventListener('change',renderLanguageCenter);
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
