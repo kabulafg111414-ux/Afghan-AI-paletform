@@ -21,6 +21,7 @@
   <div class="profile"><div class="profile-icon">🎓</div><div><b id="welcomeSmall">خوش آمدید!</b><small id="roleLabel">دانش‌آموز مهمان</small></div></div>
   <button class="nav active" data-page="dashboard"><span class="nav-icon">⌂</span><span data-i18n="navHome">صفحهٔ اصلی</span></button>
   <button class="nav" data-page="tutor"><span class="nav-icon">✦</span><span data-i18n="navTutor">معلم هوشمند</span></button>
+  <button class="nav" data-page="translator"><span class="nav-icon">⇄</span><span>مترجم هوشمند</span></button>
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
   <button class="nav" data-page="quiz"><span class="nav-icon">☑</span><span data-i18n="navQuiz">امتحان آزمایشی</span></button>
   <button class="nav" data-page="progress"><span class="nav-icon">▥</span><span data-i18n="navProgress">پیشرفت من</span></button>
@@ -99,6 +100,17 @@
  <div id="messages" class="messages"><div class="bubble bot" data-i18n="greeting">سلام دانش‌آموز عزیز! 🌟\nامروز در کدام درس کمکت کنم؟ سوالت را بنویس تا ساده و مرحله‌به‌مرحله توضیح بدهم.</div></div>
  <div class="quick-prompts"><button>کسر چیست؟</button><button>فتوسنتز را تشریح کن</button><button>در ریاضی کمکم کن</button><button>Explain gravity</button></div>
  <form id="chatForm" class="chat-input"><textarea id="question" rows="1" placeholder="سوالت را اینجا بنویس..." required></textarea><button type="submit" aria-label="ارسال">➤</button></form><p class="disclaimer" data-i18n="aiDisclaimer">پاسخ‌های هوش مصنوعی ممکن است اشتباه باشند؛ مطالب مهم را با کتاب درسی و استاد بررسی کن.</p></div>
+</section>
+
+<section id="translatorPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">زبان‌ها را به هم نزدیک کنیم</span><h1>⇄ مترجم هوشمند Afghan AI</h1><p>ترجمهٔ دری، پشتو و انگلیسی در یک فضای ساده و مناسب موبایل.</p></div>
+ <div class="translator-card">
+  <div class="translator-languages"><label>زبان مبدأ<select id="translatorFrom"><option value="fa">دری</option><option value="ps">پښتو</option><option value="en">English</option></select></label><button type="button" id="translatorSwap" class="outline translator-swap" aria-label="جابه‌جایی زبان‌ها">⇄</button><label>زبان مقصد<select id="translatorTo"><option value="en">English</option><option value="ps">پښتو</option><option value="fa">دری</option></select></label></div>
+  <label class="translator-label" for="translatorInput">متن برای ترجمه</label><textarea id="translatorInput" rows="6" maxlength="5000" placeholder="متن خود را اینجا بنویسید..." dir="auto"></textarea><div class="translator-meta"><small id="translatorLength">۰ / ۵۰۰۰</small><button type="button" id="translatorClear" class="link-button">پاک‌کردن متن</button></div>
+  <button type="button" id="translatorRun" class="primary translator-run">ترجمهٔ هوشمند <span>✦</span></button>
+  <div class="translator-result-wrap"><div class="translator-result-title"><b>نتیجهٔ ترجمه</b><span id="translatorState">آماده</span></div><div id="translatorResult" class="translator-result" dir="auto" aria-live="polite">ترجمهٔ شما در اینجا نمایش داده می‌شود.</div><div class="translator-result-actions"><button type="button" id="translatorCopy" class="outline">کاپی ترجمه</button></div></div>
+  <p class="disclaimer" id="translatorNotice">اتصال ترجمهٔ هوش مصنوعی هنوز فعال نشده است. این صفحه فعلاً آماده‌سازی رابط کاربری است؛ لطفاً متن حساس وارد نکنید.</p>
+ </div>
 </section>
 
 <section id="lessonsPage" class="page hidden">
