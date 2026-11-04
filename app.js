@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','lessons','quiz','progress','family','admin','sources'];
+const pages=['dashboard','tutor','lessons','quiz','progress','family','admin','tools','sources'];
 function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='lessons')renderLessons();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
@@ -59,3 +59,22 @@ $('#checkApi').onclick=async()=>{let out=$('#apiStatus');out.textContent='در �
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.info('Offline support unavailable:',err)));
 let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('#installBtn').classList.remove('hidden')});$('#installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}};
 updateStats();renderProgress();startQuiz();
+
+
+// Learning toolkit: local-only notes, flashcards, focus timer and speech.
+let focusSeconds=25*60, focusInterval=null, flashcards=JSON.parse(localStorage.getItem('afghanai-flashcards')||'[]'), flashIndex=0, flashRevealed=false;
+const clock=$('#focusClock');
+function paintClock(){if(clock)clock.textContent=String(Math.floor(focusSeconds/60)).padStart(2,'0')+':'+String(focusSeconds%60).padStart(2,'0')}
+function stopFocus(){if(focusInterval){clearInterval(focusInterval);focusInterval=null}}
+$('#timerStart')?.addEventListener('click',()=>{if(focusInterval)return;$('#timerStatus').textContent='زمان تمرکز آغاز شد؛ موفق باشی!';focusInterval=setInterval(()=>{focusSeconds--;paintClock();if(focusSeconds<=0){stopFocus();$('#timerStatus').textContent='آفرین! زمان مطالعه تمام شد؛ کمی استراحت کن.';if('Notification'in window&&Notification.permission==='granted')new Notification('Afghan AI',{body:'زمان تمرکز تمام شد؛ استراحت کوتاه کن.'});} },1000)});
+$('#timerPause')?.addEventListener('click',()=>{stopFocus();$('#timerStatus').textContent='تایمر متوقف شد.'});
+$('#timerReset')?.addEventListener('click',()=>{stopFocus();focusSeconds=25*60;paintClock();$('#timerStatus').textContent='تایمر دوباره آماده است.'});paintClock();
+$('#studyNotes').value=localStorage.getItem('afghanai-study-notes')||'';
+$('#saveNotes')?.addEventListener('click',()=>{localStorage.setItem('afghanai-study-notes',$('#studyNotes').value);$('#notesStatus').textContent='یادداشت با موفقیت در همین دستگاه ذخیره شد.'});
+$('#clearNotes')?.addEventListener('click',()=>{if(confirm('یادداشت‌ها پاک شوند؟')){$('#studyNotes').value='';localStorage.removeItem('afghanai-study-notes');$('#notesStatus').textContent='یادداشت‌ها پاک شد.'}});
+function renderFlashcard(){let el=$('#flashcardDisplay');if(!flashcards.length){el.textContent='هنوز کارتی نساخته‌ای.';$('#flashcardCount').textContent='۰ کارت ذخیره شده';return}let f=flashcards[flashIndex];el.textContent=flashRevealed?f.back:f.front;$('#flashcardCount').textContent=(flashIndex+1)+' از '+flashcards.length+' کارت';}
+$('#addFlashcard')?.addEventListener('click',()=>{let front=$('#cardFront').value.trim(),back=$('#cardBack').value.trim();if(!front||!back){alert('لطفاً پرسش و پاسخ را هر دو بنویس.');return}flashcards.push({front,back});localStorage.setItem('afghanai-flashcards',JSON.stringify(flashcards));flashIndex=flashcards.length-1;flashRevealed=false;$('#cardFront').value='';$('#cardBack').value='';renderFlashcard()});
+$('#revealFlashcard')?.addEventListener('click',()=>{if(!flashcards.length)return;flashRevealed=!flashRevealed;renderFlashcard()});
+$('#nextFlashcard')?.addEventListener('click',()=>{if(!flashcards.length)return;flashIndex=(flashIndex+1)%flashcards.length;flashRevealed=false;renderFlashcard()});renderFlashcard();
+$('#speakStart')?.addEventListener('click',()=>{let text=$('#speakText').value.trim();if(!text)return;if(!('speechSynthesis'in window)){ $('#speechStatus').textContent='خواندن صوتی در این مرورگر پشتیبانی نمی‌شود.';return}speechSynthesis.cancel();let utterance=new SpeechSynthesisUtterance(text);utterance.lang=($('#uiLanguage').value==='en'?'en-US':$('#uiLanguage').value==='ps'?'ps-AF':'fa-IR');speechSynthesis.speak(utterance);$('#speechStatus').textContent='در حال خواندن متن...'});
+$('#speakStop')?.addEventListener('click',()=>{if('speechSynthesis'in window)speechSynthesis.cancel();$('#speechStatus').textContent='خواندن متوقف شد.'});
