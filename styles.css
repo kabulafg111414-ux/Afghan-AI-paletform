@@ -308,3 +308,19 @@ body{background:radial-gradient(ellipse at 92% 0%,#e6f5ed 0,transparent 34%),var
  .home-redesign .home-primary{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.home-redesign .home-service,.home-redesign .home-primary{transition:none}}
+
+
+/* Refined cards for the new local study utilities */
+.study-task-form{display:flex;gap:9px;align-items:center;margin:12px 0}
+.study-task-form input{flex:1;min-width:0}
+.study-task-list{display:grid;gap:8px;margin:12px 0}
+.study-task-row{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--border,#dce7ef);border-radius:12px;background:var(--card,#fff);cursor:pointer}
+.study-task-row input{width:18px;height:18px;accent-color:#087f68;flex-shrink:0}
+.study-task-row span{flex:1;overflow-wrap:anywhere}
+.study-task-row.is-done span{text-decoration:line-through;opacity:.58}
+.study-task-delete{border:0;background:transparent;color:#c34d4d;font-size:24px;line-height:1;padding:2px 8px;cursor:pointer}
+.study-task-empty{margin:8px 0;color:var(--muted,#6b7c8c);font-size:.92rem}
+.text-lab-stats{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+.text-lab-stats span{flex:1;min-width:90px;padding:11px;border:1px solid var(--border,#dce7ef);border-radius:12px;background:var(--surface,#f6fafc);font-size:.9rem}
+.text-lab-stats b{display:block;font-size:1.25rem;color:var(--primary,#087f68);margin-top:4px}
+@media(max-width:520px){.study-task-form{align-items:stretch;flex-wrap:wrap}.study-task-form input{flex-basis:100%}.study-task-form button{width:100%}.text-lab-stats span{min-width:calc(50% - 8px)}}
