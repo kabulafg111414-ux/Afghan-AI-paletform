@@ -63,6 +63,16 @@ function advanceQuiz(){if(!chosen)return;if(qi<questions.length-1){qi++;chosen=f
 $('#nextQuestion').onclick=advanceQuiz;
 function renderProgress(){updateStats();let list=$('#activityList');list.innerHTML='';if(!state.activity.length){list.innerHTML='<div class="empty-state">هنوز فعالیتی ثبت نشده است. یک درس مرور کن یا امتحان را انجام بده.</div>';return}state.activity.slice(0,10).forEach(a=>{let el=document.createElement('div');el.className='activity-item';let label=document.createElement('span');label.textContent=a.label;let time=document.createElement('small');time.textContent=a.time;el.append(label,time);list.appendChild(el)})}
 $('#resetProgress').onclick=()=>{if(confirm('آیا مطمئن هستید که تمام آمار این دستگاه پاک شود؟')){state.questions=0;state.lessons=0;state.quizzes=0;state.correct=0;state.activity=[];saveState();renderProgress()}}
+
+/* Translator UI interactions. Translation backend is intentionally not simulated. */
+const trFrom=$('#translatorFrom'),trTo=$('#translatorTo'),trInput=$('#translatorInput'),trResult=$('#translatorResult'),trState=$('#translatorState');
+function translatorCount(){const n=trInput.value.length;$('#translatorLength').textContent=n.toLocaleString()+' / ۵۰۰۰'}
+trInput?.addEventListener('input',translatorCount);translatorCount();
+$('#translatorSwap')?.addEventListener('click',()=>{const a=trFrom.value;trFrom.value=trTo.value;trTo.value=a;});
+$('#translatorClear')?.addEventListener('click',()=>{trInput.value='';trResult.textContent='ترجمهٔ شما در اینجا نمایش داده می‌شود.';trState.textContent='آماده';translatorCount();trInput.focus()});
+$('#translatorRun')?.addEventListener('click',()=>{if(!trInput.value.trim()){trState.textContent='متن وارد نشده';trInput.focus();return}trState.textContent='سرویس وصل نیست';trResult.textContent='ترجمهٔ واقعی هنوز در دسترس نیست. برای فعال‌سازی باید API هوش مصنوعی از طریق سرور امن وصل شود. متن شما به هیچ سرویسی ارسال نشد.';});
+$('#translatorCopy')?.addEventListener('click',async()=>{const text=trResult.textContent;if(!text||text==='ترجمهٔ شما در اینجا نمایش داده می‌شود.')return;try{await navigator.clipboard.writeText(text);$('#translatorState').textContent='کاپی شد'}catch(e){$('#translatorState').textContent='کاپی خودکار پشتیبانی نشد؛ متن را دستی انتخاب کنید'}});
+
 $('#profileBtn').onclick=()=>alert('این نسخه نمایشی است. ورود امن و پروفایل شخصی در مرحلهٔ بعد توسعه می‌یابد.');
 $('#checkApi').onclick=async()=>{let out=$('#apiStatus');out.textContent='در حال بررسی...';try{let r=await fetch('/api/health');let d=await r.json();out.textContent=d.ai_configured?'سرور در دسترس است؛ کلید API تنظیم شده.':'سرور در دسترس است، اما کلید API هنوز تنظیم نشده است.'}catch(e){out.textContent='سرور پیدا نشد. برای پاسخ هوش مصنوعی، برنامهٔ سرور را مطابق README اجرا کنید.'}};
 if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.info('Offline support unavailable:',err)));
