@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','engineering','historyculture','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','health','business','law','agriculture','engineering','historyculture','lab','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -508,3 +508,28 @@ function moveVocab(delta){if(!vocabVisible.length)return;let p=vocabVisible.inde
 $('#vocabPrev')?.addEventListener('click',()=>moveVocab(-1));$('#vocabNext')?.addEventListener('click',()=>moveVocab(1));
 function setVocabState(state){if(vocabIndex<0)return;vocabStates[vocabIndex]=state;localStorage.setItem('afghanai-vocab-states',JSON.stringify(vocabStates));if($('#vocabFilter').value!=='all')filterVocab();else renderVocab()}
 $('#vocabKnown')?.addEventListener('click',()=>setVocabState('known'));$('#vocabReview')?.addEventListener('click',()=>setVocabState('review'));filterVocab();
+
+
+const virtualLabLessons=[
+{cat:'physics',title:'سرعت و حرکت',level:'مقدماتی',desc:'رابطهٔ فاصله، زمان و سرعت متوسط.',lesson:'سرعت متوسط از تقسیم فاصلهٔ طی‌شده بر زمان به‌دست می‌آید. اگر جسمی ۱۰۰ متر را در ۲۰ ثانیه طی کند، سرعت متوسط آن ۵ متر در ثانیه است.',task:'اگر دوچرخه‌سواری ۶۰ متر را در ۱۰ ثانیه طی کند، سرعت متوسط او چند متر در ثانیه است؟'},
+{cat:'physics',title:'قانون اهم و مدار ساده',level:'مقدماتی',desc:'آشنایی نظری با ولتاژ، جریان و مقاومت.',lesson:'قانون اهم رابطهٔ ولتاژ، جریان و مقاومت را بیان می‌کند: ولتاژ برابر است با جریان ضرب‌در مقاومت. این درس صرفاً نظری است؛ با برق شهری آزمایش نکنید.',task:'اگر مقاومت ۴ اهم و جریان ۲ آمپر باشد، ولتاژ چند ولت است؟'},
+{cat:'chemistry',title:'شناخت اسید و باز',level:'مقدماتی',desc:'مفهوم pH و تفاوت اسید، باز و محلول خنثی.',lesson:'مقیاس pH برای بیان اسیدی یا بازی بودن محلول آبی به‌کار می‌رود. در دمای معمول، pH کمتر از ۷ اسیدی، نزدیک ۷ خنثی و بیشتر از ۷ بازی است. از چشیدن یا لمس مواد ناشناخته خودداری کنید.',task:'آب خالص با pH نزدیک ۷ در کدام گروه قرار می‌گیرد؟'},
+{cat:'biology',title:'فتوسنتز در گیاهان',level:'مقدماتی',desc:'چگونگی استفادهٔ گیاه از نور برای ساخت مواد غذایی.',lesson:'گیاهان سبز با کمک انرژی نور، آب و دی‌اکسید کربن مواد قندی می‌سازند و اکسیژن آزاد می‌کنند. کلروفیل در جذب نور نقش اساسی دارد.',task:'سه ماده یا عامل ضروری برای فتوسنتز را نام ببرید.'},
+{cat:'math',title:'نسبت و تناسب',level:'مقدماتی',desc:'کاربرد نسبت در اندازه‌گیری و مسائل روزمره.',lesson:'نسبت مقایسهٔ دو مقدار هم‌نوع است. اگر نسبت ۲ به ۳ باشد، مجموع بخش‌ها پنج قسمت برابر خواهد بود.',task:'اگر نسبت سیب‌های سرخ به سبز ۲ به ۳ و مجموع ۲۰ باشد، چند سیب سرخ داریم؟'},
+{cat:'environment',title:'چرخهٔ آب',level:'مقدماتی',desc:'تبخیر، تراکم، بارندگی و جریان آب.',lesson:'انرژی خورشید آب را تبخیر می‌کند. بخار آب سرد شده و متراکم می‌شود، ابرها شکل می‌گیرند و سپس بارندگی بخشی از آب را به زمین بازمی‌گرداند.',task:'چهار مرحلهٔ اصلی چرخهٔ آب را به ترتیب بنویسید.'}
+];
+function renderVirtualLab(){
+ const grid=$('#labCourseGrid');if(!grid)return;
+ const q=($('#labSearch')?.value||'').trim().toLocaleLowerCase(),cat=$('#labCategory')?.value||'all';
+ const items=virtualLabLessons.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="historyculture-course-card"><span class="historyculture-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مشاهدهٔ آزمایش و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">آزمایشی پیدا نشد.</p>';
+}
+$('#labSearch')?.addEventListener('input',renderVirtualLab);
+$('#labCategory')?.addEventListener('change',renderVirtualLab);
+$('#labDensityBtn')?.addEventListener('click',()=>{
+ const mass=Number($('#labMass')?.value),volume=Number($('#labVolume')?.value),out=$('#labDensityResult');
+ if(!out)return;
+ if(!Number.isFinite(mass)||!Number.isFinite(volume)||mass<0||volume<=0){out.textContent='لطفاً جرم معتبر و حجم بزرگ‌تر از صفر وارد کنید.';return;}
+ out.textContent='چگالی: '+(mass/volume).toFixed(3)+' گرام بر سانتی‌متر مکعب';
+});
+renderVirtualLab();
