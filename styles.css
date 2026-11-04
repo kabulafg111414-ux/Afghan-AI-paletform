@@ -606,3 +606,26 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .law-checklist li,.law-references li{margin:9px 0;line-height:1.8}
 .law-references a{color:var(--accent,#269caa)}
 @media(max-width:560px){.law-controls{grid-template-columns:1fr}.law-controls input,.law-controls select{grid-row:auto}.law-course-grid{grid-template-columns:1fr}}
+
+
+/* Agriculture, livestock and natural resources center */
+.agri-notice,.agri-water,.agri-references{padding:18px;border:1px solid var(--border);border-radius:15px;background:var(--surface);margin:16px 0}
+.agri-notice p,.agri-water p{color:var(--muted);line-height:1.85;margin:8px 0}
+.agri-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;align-items:center;margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.agri-controls label{font-weight:650}
+.agri-controls input,.agri-controls select,.agri-calc-fields input{width:100%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.agri-controls input,.agri-controls select{grid-row:2}
+.agri-course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:13px;margin:18px 0}
+.agri-course-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:17px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.agri-course-card h3{margin:2px 0;line-height:1.65}
+.agri-course-card p{line-height:1.85;margin:0;color:var(--muted)}
+.agri-level{font-size:.78rem;color:var(--accent,#269caa);font-weight:700}
+.agri-course-card details{width:100%;margin-top:6px;padding-top:10px;border-top:1px solid var(--border)}
+.agri-course-card summary{cursor:pointer;font-weight:700}
+.agri-course-card details p{margin:9px 0}
+.agri-calc-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.agri-water button{padding:11px 17px;border:0;border-radius:10px;background:var(--accent,#269caa);color:white;font-weight:700;cursor:pointer}
+.agri-water small{display:block;color:var(--muted);line-height:1.7;margin-top:10px}
+.agri-references li{margin:9px 0}
+.agri-references a{color:var(--accent,#269caa)}
+@media(max-width:560px){.agri-controls,.agri-calc-fields{grid-template-columns:1fr}.agri-controls input,.agri-controls select{grid-row:auto}.agri-course-grid{grid-template-columns:1fr}}
