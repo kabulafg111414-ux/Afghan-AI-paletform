@@ -56,7 +56,15 @@ const questions=[
  {q:'کدام بخش گیاه بیشتر نور را جذب می‌کند؟',opts:['ریشه','گل‌برگ','برگ','دانه'],a:2,ex:'برگ‌ها نور را جذب می‌کنند و در فتوسنتز نقش اساسی دارند.'},
  {q:'آب خالص در فشار معمولی در چند درجهٔ سانتی‌گراد یخ می‌بندد؟',opts:['۰ درجه','۱۰ درجه','۵۰ درجه','۱۰۰ درجه'],a:0,ex:'آب خالص در صفر درجهٔ سانتی‌گراد یخ می‌بندد.'},
  {q:'کدام گزینه یک منبع انرژی تجدیدپذیر است؟',opts:['زغال‌سنگ','نفت','نور خورشید','گاز طبیعی'],a:2,ex:'نور خورشید منبع انرژی تجدیدپذیر است.'},
- {q:'کدام جمله به زبان انگلیسی درست است؟',opts:['She are a student.','She is a student.','She am a student.','She be student.'],a:1,ex:'برای She در زمان حال از فعل is استفاده می‌کنیم.'}
+,
+ {q:'اگر ۲x + ۵ = ۱۵ باشد، مقدار x چند است؟',opts:['۳','۵','۱۰','۱۵'],a:1,ex:'۵ را از دو طرف کم می‌کنیم: ۲x=۱۰؛ سپس بر ۲ تقسیم می‌کنیم و x=۵ به‌دست می‌آید.'},
+ {q:'واحد اندازه‌گیری نیرو در دستگاه SI چیست؟',opts:['ژول','وات','نیوتن','پاسکال'],a:2,ex:'نیرو در دستگاه بین‌المللی یکاها با نیوتن اندازه‌گیری می‌شود.'},
+ {q:'فرمول کیمیاوی آب کدام است؟',opts:['CO₂','H₂O','O₂','NaCl'],a:1,ex:'هر مولکول آب از دو اتم هایدروجن و یک اتم اکسیجن ساخته شده است.'},
+ {q:'کدام اندام در بدن انسان خون را پمپ می‌کند؟',opts:['شُش‌ها','معده','قلب','گرده‌ها'],a:2,ex:'قلب با انقباض و انبساط، خون را در بدن به گردش درمی‌آورد.'},
+ {q:'کدام واژه از نظر املایی درست نوشته شده است؟',opts:['مسولیت','مسئولیت','مسوولیتت','مسئولیتت'],a:1,ex:'در نوشتار معیار فارسی، «مسئولیت» صورت درست این واژه است.'},
+ {q:'پایتخت افغانستان کدام شهر است؟',opts:['هرات','قندهار','کابل','مزارشریف'],a:2,ex:'کابل پایتخت افغانستان است.'},
+ {q:'کدام گزینه سیارهٔ منظومهٔ شمسی است؟',opts:['ماه','مریخ','خورشید','ستارهٔ قطبی'],a:1,ex:'مریخ یکی از سیاره‌های منظومهٔ شمسی است؛ ماه قمر زمین و خورشید یک ستاره است.'},
+ {q:'کدام گزینه شکل گذشتهٔ فعل انگلیسی “go” است؟',opts:['goed','gone','went','going'],a:2,ex:'گذشتهٔ سادهٔ فعل بی‌قاعدهٔ go، واژهٔ went است.'}
 ];let qi=0,chosen=false,score=0,quizInProgress=false,quizMisses=[];
 function startQuiz(){qi=0;score=0;quizMisses=[];chosen=false;quizInProgress=true;$('#nextQuestion').onclick=advanceQuiz;drawQuestion()}
 function drawQuestion(){let q=questions[qi];$('#quizCount').textContent=`سوال ${qi+1} از ${questions.length}`;$('#quizBar').style.width=((qi+1)/questions.length*100)+'%';$('#quizQuestion').textContent=q.q;$('#quizOptions').innerHTML='';$('#quizFeedback').textContent='';$('#nextQuestion').disabled=true;$('#nextQuestion').textContent=qi===questions.length-1?'دیدن نتیجه':'سوال بعدی ←';q.opts.forEach((o,i)=>{let b=document.createElement('button');b.className='quiz-option';b.textContent=o;b.onclick=()=>chooseAnswer(i,b);$('#quizOptions').appendChild(b)})}
