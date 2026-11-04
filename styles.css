@@ -335,3 +335,13 @@ body{background:radial-gradient(ellipse at 92% 0%,#e6f5ed 0,transparent 34%),var
 .vocabulary-tool .tool-actions{flex-wrap:wrap}
 .vocabulary-tool .tool-actions button{flex:1;min-width:100px}
 @media(max-width:520px){.vocab-toolbar{grid-template-columns:1fr}.vocab-card{min-height:155px;padding:16px}}
+
+/* Offline math practice tool */
+.math-settings{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.math-settings label{display:grid;gap:5px;font-size:12px;color:var(--mut)}
+.math-settings select{width:100%;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px;background:#fff;color:var(--ink)}
+.math-question{margin:14px 0;padding:20px 12px;border-radius:15px;text-align:center;background:linear-gradient(120deg,#082b57,#0878b8);color:#fff;font-size:clamp(25px,4vw,36px);font-weight:800;direction:ltr}
+.math-answer-form{display:flex;gap:8px;align-items:center}
+.math-answer-form input{flex:1;min-width:0}
+.math-answer-form button{white-space:nowrap}
+@media(max-width:420px){.math-answer-form{flex-direction:column;align-items:stretch}.math-answer-form button{width:100%}}
