@@ -103,3 +103,29 @@ $('#revealFlashcard')?.addEventListener('click',()=>{if(!flashcards.length)retur
 $('#nextFlashcard')?.addEventListener('click',()=>{if(!flashcards.length)return;flashIndex=(flashIndex+1)%flashcards.length;flashRevealed=false;renderFlashcard()});renderFlashcard();
 $('#speakStart')?.addEventListener('click',()=>{let text=$('#speakText').value.trim();if(!text)return;if(!('speechSynthesis'in window)){ $('#speechStatus').textContent='خواندن صوتی در این مرورگر پشتیبانی نمی‌شود.';return}speechSynthesis.cancel();let utterance=new SpeechSynthesisUtterance(text);utterance.lang=($('#uiLanguage').value==='en'?'en-US':$('#uiLanguage').value==='ps'?'ps-AF':'fa-IR');speechSynthesis.speak(utterance);$('#speechStatus').textContent='در حال خواندن متن...'});
 $('#speakStop')?.addEventListener('click',()=>{if('speechSynthesis'in window)speechSynthesis.cancel();$('#speechStatus').textContent='خواندن متوقف شد.'});
+
+
+// Study checklist and text lab — private, browser-local helpers.
+let studyTasks=JSON.parse(localStorage.getItem('afghanai-study-tasks')||'[]');
+function renderStudyTasks(){
+ const host=$('#studyTaskList'); if(!host)return; host.replaceChildren();
+ if(!studyTasks.length){const empty=document.createElement('p');empty.className='study-task-empty';empty.textContent='هنوز کاری اضافه نشده است.';host.append(empty);return}
+ studyTasks.forEach((task,index)=>{
+  const row=document.createElement('label');row.className='study-task-row'+(task.done?' is-done':'');
+  const check=document.createElement('input');check.type='checkbox';check.checked=!!task.done;check.setAttribute('aria-label','انجام شد: '+task.text);
+  check.addEventListener('change',()=>{studyTasks[index].done=check.checked;localStorage.setItem('afghanai-study-tasks',JSON.stringify(studyTasks));renderStudyTasks()});
+  const title=document.createElement('span');title.textContent=task.text;
+  const del=document.createElement('button');del.type='button';del.className='study-task-delete';del.textContent='×';del.setAttribute('aria-label','حذف '+task.text);
+  del.addEventListener('click',()=>{studyTasks.splice(index,1);localStorage.setItem('afghanai-study-tasks',JSON.stringify(studyTasks));renderStudyTasks()});
+  row.append(check,title,del);host.append(row);
+ });
+ const done=studyTasks.filter(t=>t.done).length;const status=$('#studyTaskStatus');if(status)status.textContent=done+' از '+studyTasks.length+' کار انجام شده است.';
+}
+$('#studyTaskForm')?.addEventListener('submit',e=>{e.preventDefault();const field=$('#studyTaskInput'),value=field.value.trim();if(!value)return;studyTasks.push({text:value,done:false});localStorage.setItem('afghanai-study-tasks',JSON.stringify(studyTasks));field.value='';renderStudyTasks();field.focus()});
+$('#clearStudyTasks')?.addEventListener('click',()=>{if(!studyTasks.length)return;if(confirm('تمام کارهای فهرست پاک شوند؟')){studyTasks=[];localStorage.removeItem('afghanai-study-tasks');renderStudyTasks()}});
+renderStudyTasks();
+const textLab=$('#textLabInput');
+function updateTextLab(){if(!textLab)return;const v=textLab.value.trim();const words=v?v.split(/\\s+/u).filter(Boolean).length:0;const sentences=v?v.split(/[.!?؟。]+/u).filter(s=>s.trim()).length:0;$('#textLabWords').textContent=words.toLocaleString();$('#textLabChars').textContent=textLab.value.length.toLocaleString();$('#textLabSentences').textContent=sentences.toLocaleString()}
+textLab?.addEventListener('input',updateTextLab);updateTextLab();
+$('#textLabClear')?.addEventListener('click',()=>{textLab.value='';updateTextLab();$('#textLabStatus').textContent='متن پاک شد.';textLab.focus()});
+$('#textLabCopy')?.addEventListener('click',async()=>{if(!textLab.value.trim()){ $('#textLabStatus').textContent='اول متن وارد کنید.';return}try{await navigator.clipboard.writeText(textLab.value);$('#textLabStatus').textContent='متن کاپی شد.'}catch(e){$('#textLabStatus').textContent='کاپی خودکار ممکن نشد؛ متن را دستی انتخاب کنید.'}});
