@@ -22,6 +22,7 @@
   <button class="nav active" data-page="dashboard"><span class="nav-icon">⌂</span><span data-i18n="navHome">صفحهٔ اصلی</span></button>
   <button class="nav" data-page="tutor"><span class="nav-icon">✦</span><span data-i18n="navTutor">معلم هوشمند</span></button>
   <button class="nav" data-page="translator"><span class="nav-icon">⇄</span><span data-i18n="navTranslator">مترجم هوشمند</span></button>
+  <button class="nav" data-page="language"><span class="nav-icon">🌐</span><span>مرکز آموزش زبان‌ها</span></button>
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
   <button class="nav" data-page="library"><span class="nav-icon">📚</span><span>کتابخانهٔ دیجیتال</span></button>
   <button class="nav" data-page="quiz"><span class="nav-icon">☑</span><span data-i18n="navQuiz">امتحان آزمایشی</span></button>
@@ -114,6 +115,16 @@
   <div class="translator-result-wrap"><div class="translator-result-title"><b>نتیجهٔ ترجمه</b><span id="translatorState">آماده</span></div><div id="translatorResult" class="translator-result" dir="auto" aria-live="polite">ترجمهٔ شما در اینجا نمایش داده می‌شود.</div><div class="translator-result-actions"><button type="button" id="translatorCopy" class="outline">کاپی ترجمه</button></div></div>
   <p class="disclaimer" id="translatorNotice">اتصال ترجمهٔ هوش مصنوعی هنوز فعال نشده است. این صفحه فعلاً آماده‌سازی رابط کاربری است؛ لطفاً متن حساس وارد نکنید.</p>
  </div>
+</section>
+
+
+<section id="languagePage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">LANGUAGE LEARNING CENTER</span><h1>🌐 مرکز آموزش زبان‌ها</h1><p>تمرین واژگان و عبارت‌های روزمره به دری، پشتو و انگلیسی.</p></div>
+ <div class="language-intro"><b>یادگیری روزانه</b><p>عبارت را جستجو کنید، معنی سه‌زبانه را ببینید و با صدای دستگاه تمرین کنید.</p></div>
+ <div class="language-controls"><label for="languageSearch">جستجوی واژه یا عبارت</label><input id="languageSearch" type="search" placeholder="مثلاً سلام، کتاب، school..." dir="auto"><label for="languageTopic">موضوع</label><select id="languageTopic"><option value="all">همهٔ موضوعات</option><option value="greetings">سلام و احوال‌پرسی</option><option value="education">آموزش و مکتب</option><option value="daily">زندگی روزمره</option><option value="health">صحت و تندرستی</option></select></div>
+ <div id="languagePhraseGrid" class="language-phrase-grid" aria-live="polite"></div>
+ <article class="language-grammar"><h2>📘 نکتهٔ کوتاه دستور زبان انگلیسی</h2><p><b>Present Simple:</b> برای عادت‌ها و واقعیت‌های عمومی استفاده می‌شود.</p><p><b>ساختار:</b> Subject + base verb (برای he/she/it معمولاً فعل s می‌گیرد).</p><p><b>مثال:</b> I study every day. — من هر روز درس می‌خوانم.</p><p>پښتو: زه هره ورځ زده کړه کوم.</p></article>
+ <p class="disclaimer">تلفظ با قابلیت گفتار مرورگر انجام می‌شود و کیفیت صدا به دستگاه و زبان‌های نصب‌شده بستگی دارد. این بخش فعلاً آموزش مقدماتی است و ترجمهٔ ماشینی یا معلم زندهٔ هوش مصنوعی نیست.</p>
 </section>
 
 <section id="lessonsPage" class="page hidden">
