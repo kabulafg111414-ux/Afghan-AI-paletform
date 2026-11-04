@@ -23,6 +23,7 @@
   <button class="nav" data-page="tutor"><span class="nav-icon">✦</span><span data-i18n="navTutor">معلم هوشمند</span></button>
   <button class="nav" data-page="translator"><span class="nav-icon">⇄</span><span data-i18n="navTranslator">مترجم هوشمند</span></button>
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
+  <button class="nav" data-page="library"><span class="nav-icon">📚</span><span>کتابخانهٔ دیجیتال</span></button>
   <button class="nav" data-page="quiz"><span class="nav-icon">☑</span><span data-i18n="navQuiz">امتحان آزمایشی</span></button>
   <button class="nav" data-page="progress"><span class="nav-icon">▥</span><span data-i18n="navProgress">پیشرفت من</span></button>
   <button class="nav" data-page="family"><span class="nav-icon">♧</span><span data-i18n="navFamily">والدین و استاد</span></button>
@@ -121,6 +122,17 @@
  <div id="lessonGrid" class="subject-grid"></div>
  <div id="lessonDetail" class="lesson-detail hidden"></div>
  <p class="disclaimer" data-i18n="curriculumNote">محتوای رسمی کتاب‌های معارف باید از نسخه‌های معتبر وزارت معارف وارد و بررسی شود. این درس‌ها نمونهٔ آموزشی هستند.</p>
+</section>
+
+
+<section id="libraryPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI DIGITAL LIBRARY</span><h1>📚 کتابخانهٔ دیجیتال افغانستان</h1><p>مرکز دسته‌بندی منابع آموزشی، کتاب‌های درسی و پیوندهای علمی معتبر.</p></div>
+ <div class="library-controls">
+  <label for="librarySearch">جستجو در منابع</label><input id="librarySearch" type="search" placeholder="نام کتاب، مضمون یا موضوع را بنویسید..." dir="auto">
+  <label for="libraryCategory">دسته‌بندی منابع</label><select id="libraryCategory"><option value="all">همهٔ دسته‌ها</option><option value="school">کتاب‌های مکتب</option><option value="kankor">آمادگی کانکور</option><option value="university">منابع دانشگاهی</option><option value="medical">علوم طبی و صحت</option><option value="language">زبان و ادبیات</option><option value="religion">علوم اسلامی</option><option value="afghan">تاریخ و فرهنگ افغانستان</option></select>
+ </div>
+ <div id="libraryGrid" class="library-grid" aria-live="polite"></div>
+ <p class="disclaimer">این نسخه فهرست راهنمای منابع است، نه مخزن فایل‌های PDF. پیوندها به منابع رسمی یا شناخته‌شده هدایت می‌کنند. پیش از دانلود، مجوز نشر و حقوق مؤلف را رعایت کنید. محتوای درسی باید با نصاب رسمی و منابع معتبر تطبیق شود.</p>
 </section>
 
 <section id="quizPage" class="page hidden">
