@@ -1,6 +1,31 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','lessons','quiz','progress','family','admin','tools','guide','sources'];
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='lessons')renderLessons();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+const pages=['dashboard','tutor','translator','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+
+const libraryResources=[
+ {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
+ {title:'وزارت تحصیلات عالی',category:'university',type:'منبع رسمی',desc:'اطلاعات دانشگاهی، رهنمودها و منابع مرتبط با تحصیلات عالی افغانستان.',url:'https://mohe.gov.af/'},
+ {title:'UNESCO Digital Library',category:'university',type:'کتابخانهٔ علمی',desc:'منابع پژوهشی و نشرات آموزشی در موضوعات گوناگون.',url:'https://unesdoc.unesco.org/'},
+ {title:'World Health Organization — Publications',category:'medical',type:'علوم طبی و صحت',desc:'رهنمودها و نشرات معتبر جهانی در زمینهٔ صحت عامه و طب.',url:'https://www.who.int/publications'},
+ {title:'OpenStax',category:'university',type:'کتاب‌های درسی آزاد',desc:'کتاب‌های آموزشی رایگان و با مجوز روشن در علوم و مضامین دانشگاهی؛ زبان عمدتاً انگلیسی.',url:'https://openstax.org/subjects'},
+ {title:'Khan Academy',category:'kankor',type:'آموزش و تمرین',desc:'درس‌ها و تمرین‌های ریاضی، علوم و موضوعات دیگر؛ زبان و دسترسی هر درس را بررسی کنید.',url:'https://www.khanacademy.org/'},
+ {title:'Project Gutenberg',category:'language',type:'کتاب‌های ادبی',desc:'کتاب‌های دیجیتال در مالکیت عمومی؛ وضعیت حقوق نشر را مطابق کشور بررسی کنید.',url:'https://www.gutenberg.org/'},
+ {title:'Internet Archive — Texts',category:'language',type:'آرشیف کتاب‌ها',desc:'مجموعهٔ گستردهٔ کتاب‌ها و اسناد دیجیتال؛ شرایط امانت و حقوق نشر متفاوت است.',url:'https://archive.org/details/texts'},
+ {title:'Quran.com',category:'religion',type:'قرآن کریم',desc:'متن قرآن، ترجمه‌ها و ابزارهای مطالعه و تلاوت.',url:'https://quran.com/'},
+ {title:'Encyclopaedia Iranica',category:'afghan',type:'تاریخ و فرهنگ',desc:'مقالات پژوهشی دربارهٔ تاریخ، فرهنگ و تمدن منطقه؛ برای مطالعهٔ انتقادی و مقایسهٔ منابع.',url:'https://iranicaonline.org/'},
+ {title:'Library of Congress — Afghanistan',category:'afghan',type:'اسناد و پژوهش',desc:'راهنماها و منابع پژوهشی دربارهٔ افغانستان و تاریخ آن.',url:'https://www.loc.gov/'},
+ {title:'PubMed',category:'medical',type:'پژوهش طبی',desc:'پایگاه جستجوی مقالات علوم طبی و زیستی؛ مقالهٔ علمی را با دقت و توجه به کیفیت شواهد بخوانید.',url:'https://pubmed.ncbi.nlm.nih.gov/'}
+];
+function renderLibrary(){
+ const grid=$('#libraryGrid');if(!grid)return;
+ const q=($('#librarySearch')?.value||'').trim().toLocaleLowerCase();
+ const cat=$('#libraryCategory')?.value||'all';
+ const items=libraryResources.filter(x=>(cat==='all'||x.category===cat)&&(!q||(x.title+' '+x.desc+' '+x.type).toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map(x=>'<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><a href="'+x.url+'" target="_blank" rel="noopener noreferrer">بازکردن منبع ↗</a></article>').join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
+}
+$('#librarySearch')?.addEventListener('input',renderLibrary);
+$('#libraryCategory')?.addEventListener('change',renderLibrary);
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
