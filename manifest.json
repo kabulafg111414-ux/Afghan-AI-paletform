@@ -1,0 +1,20 @@
+{
+  "name": "Afghan AI — معلم هوشمند افغانستان",
+  "short_name": "Afghan AI",
+  "description": "پلتفرم آموزشی هوشمند به زبان‌های دری، پشتو و انگلیسی",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f8f6",
+  "theme_color": "#08664f",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
