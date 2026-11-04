@@ -423,3 +423,41 @@ body.dark .notice{background:#2b281b;border-color:#554a2b;color:#f5e7b7}
 body.dark .notice p{color:#d8c99b}
 body.dark .empty-state{background:#14231e;border-color:#385348}
 @media(prefers-reduced-motion:reduce){button:not(:disabled){transition:none}}
+
+
+/* Afghan AI creative visual identity — 2026 */
+/* Layered atmospheric background, inspired by Afghan mountain horizons */
+body{background-color:#eef4f8;background-image:radial-gradient(ellipse at 82% 8%,rgba(43,164,220,.13),transparent 32%),radial-gradient(ellipse at 12% 38%,rgba(15,132,102,.09),transparent 30%),linear-gradient(145deg,#f4f8fc 0%,#edf5f3 48%,#f7f4ee 100%);background-attachment:fixed}
+.main{position:relative;isolation:isolate;background:radial-gradient(ellipse at 96% 2%,rgba(32,153,202,.08),transparent 28%),radial-gradient(ellipse at 0% 78%,rgba(16,132,96,.055),transparent 30%)}
+.main:before,.main:after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(2px)}
+.main:before{width:310px;height:310px;top:105px;right:-170px;background:radial-gradient(circle,rgba(42,169,219,.09),transparent 70%)}
+.main:after{width:360px;height:360px;bottom:-170px;left:180px;background:radial-gradient(circle,rgba(19,143,105,.075),transparent 70%)}
+.home-hero{border:1px solid rgba(89,190,230,.28);background:radial-gradient(ellipse at 78% 18%,rgba(34,196,232,.25),transparent 32%),linear-gradient(118deg,#06172f 0%,#082b54 48%,#075c83 100%);box-shadow:0 22px 55px rgba(3,31,62,.2),inset 0 1px rgba(255,255,255,.12)}
+.home-hero:after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.17;background-image:linear-gradient(115deg,transparent 0 47%,rgba(255,255,255,.18) 47.2%,transparent 47.6%),radial-gradient(circle at 20% 25%,#fff 0 1px,transparent 1.7px),radial-gradient(circle at 60% 15%,#fff 0 1px,transparent 1.7px),radial-gradient(circle at 88% 40%,#fff 0 1px,transparent 1.7px);background-size:auto,130px 130px,170px 170px,210px 210px}
+.home-hero-copy{z-index:2}
+.home-hero-art{background:linear-gradient(180deg,#173c67 0%,#4d9bc0 39%,#d8e9e9 40%,#466d80 42%,#102c49 100%)}
+.home-hero-art:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(145deg,transparent 38%,rgba(255,255,255,.16) 38.2%,transparent 38.8%),linear-gradient(25deg,transparent 65%,rgba(5,25,51,.3) 65.3%,transparent 66%);mix-blend-mode:screen}
+.hero-sun{background:radial-gradient(circle at 35% 35%,#fffde8,#ffe6a6 65%,#f7b86b);box-shadow:0 0 30px #fff5bd,0 0 90px #ffe9a455}
+.mountain-back{background:linear-gradient(145deg,#eff4ef 0%,#a8c3c9 44%,#557f9b 100%)}
+.mountain-front{background:linear-gradient(135deg,#628d91 0%,#285d70 48%,#102d4c 100%)}
+.home-section-heading{padding:4px 2px}
+.home-feature-grid{gap:14px}
+.home-service{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.16);box-shadow:0 12px 26px rgba(8,34,66,.15)}
+.home-service:after{content:"";position:absolute;width:130px;height:130px;right:-55px;top:-58px;border:1px solid rgba(255,255,255,.17);border-radius:50%;box-shadow:0 0 0 18px rgba(255,255,255,.035),0 0 0 38px rgba(255,255,255,.025);pointer-events:none}
+.home-service:hover{transform:translateY(-5px);box-shadow:0 18px 34px rgba(8,34,66,.22)}
+.home-service .service-symbol{box-shadow:inset 0 1px rgba(255,255,255,.22),0 7px 18px rgba(0,0,0,.09)}
+.home-promo{box-shadow:0 10px 24px rgba(7,39,74,.13)}
+.home-stat{box-shadow:0 6px 18px rgba(20,55,75,.045);transition:transform .2s,box-shadow .2s}
+.home-stat:hover{transform:translateY(-2px);box-shadow:0 11px 24px rgba(20,55,75,.09)}
+.home-side-card,.home-quote{box-shadow:0 10px 25px rgba(5,30,58,.14)}
+.page-title{position:relative;overflow:hidden}
+.page-title:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;inset-inline-end:-70px;top:-95px;background:radial-gradient(circle,rgba(15,144,112,.12),transparent 70%);pointer-events:none}
+body.dark{background-color:#091512;background-image:radial-gradient(ellipse at 82% 8%,rgba(35,128,163,.14),transparent 32%),radial-gradient(ellipse at 12% 38%,rgba(15,132,102,.1),transparent 30%),linear-gradient(145deg,#0b1715,#0d1b19 52%,#111b19);background-attachment:fixed}
+body.dark .main{background:radial-gradient(ellipse at 96% 2%,rgba(32,153,202,.07),transparent 28%),radial-gradient(ellipse at 0% 78%,rgba(16,132,96,.05),transparent 30%)}
+body.dark .home-section-heading h2,body.dark .home-footer b{color:#e5f2ee}
+body.dark .home-section-heading p,body.dark .home-footer p,body.dark .home-footer small{color:#a5b9b0}
+body.dark .home-footer{border-color:#294138}
+body.dark .home-footer>div{border-color:#294138}
+body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
+@media(max-width:700px){body{background-attachment:scroll}.main{background:radial-gradient(ellipse at 100% 0%,rgba(32,153,202,.06),transparent 30%)}.home-hero{border-radius:18px}.home-service{min-height:190px}}
+@media(prefers-reduced-motion:reduce){.home-service,.home-stat{transition:none}.home-service:hover,.home-stat:hover{transform:none}}
