@@ -125,6 +125,7 @@
 
 <section id="quizPage" class="page hidden">
  <div class="page-title"><span class="eyebrow" data-i18n="testYourself">خودت را بسنج</span><h1 data-i18n="quizTitle">🎓 آزمون تمرینی کانکور و امتحان آزمایشی</h1><p data-i18n="quizDesc">سوالات آموزشی تألیفی از مضامین گوناگون؛ این‌ها سوالات رسمی یا نقل‌شده از دفترچه‌های کانکور نیستند.</p></div>
+ <article class="tool-card kankor-plan-card"><div class="tool-icon">🗓️</div><h2>برنامهٔ شخصی آمادگی کانکور</h2><p>هدف و زمان مطالعه‌ات را تعیین کن تا یک برنامهٔ نمونه برایت ساخته شود. اطلاعات فقط در همین مرورگر نگهداری می‌شود.</p><div class="form-grid"><label>رشتهٔ مورد علاقه<input id="kankorGoal" placeholder="مثلاً طب، انجنیری، اقتصاد"></label><label>روزهای باقی‌مانده<input id="kankorDays" type="number" min="1" max="365" value="60"></label><label>ساعت مطالعه در روز<input id="kankorHours" type="number" min="1" max="12" value="4"></label></div><button id="makeKankorPlan" class="primary">ساخت برنامهٔ مطالعه</button><div id="kankorPlanResult" aria-live="polite"></div></article>
  <div class="quiz-card"><div class="quiz-progress"><span id="quizCount">سوال ۱ از ۱۳</span><strong id="quizTimer" aria-live="off">زمان باقی‌مانده: 15:00</strong><div><span id="quizBar"></span></div></div><h2 id="quizQuestion"></h2><div id="quizOptions" class="quiz-options"></div><p id="quizFeedback" aria-live="polite"></p><button id="nextQuestion" class="primary" disabled>سوال بعدی ←</button></div>
 </section>
 
