@@ -324,3 +324,14 @@ body{background:radial-gradient(ellipse at 92% 0%,#e6f5ed 0,transparent 34%),var
 .text-lab-stats span{flex:1;min-width:90px;padding:11px;border:1px solid var(--border,#dce7ef);border-radius:12px;background:var(--surface,#f6fafc);font-size:.9rem}
 .text-lab-stats b{display:block;font-size:1.25rem;color:var(--primary,#087f68);margin-top:4px}
 @media(max-width:520px){.study-task-form{align-items:stretch;flex-wrap:wrap}.study-task-form input{flex-basis:100%}.study-task-form button{width:100%}.text-lab-stats span{min-width:calc(50% - 8px)}}
+
+/* Vocabulary trainer visual system */
+.vocab-toolbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.7fr);gap:9px;margin:12px 0}
+.vocab-card{min-height:170px;padding:20px;border-radius:18px;border:1px solid #cfe3ef;background:linear-gradient(145deg,#f4fbff,#eaf5ff);color:#123653;display:flex;flex-direction:column;justify-content:center;gap:9px;margin:12px 0}
+.vocab-card small{color:#16816f;font-weight:800}
+.vocab-card h3{font-size:1.8rem;margin:2px 0;color:#103e68}
+.vocab-card p{margin:0;line-height:1.7}
+.vocab-card span{font-size:.85rem;color:#5c7286}
+.vocab-tool .tool-actions{flex-wrap:wrap}
+.vocab-tool .tool-actions button{flex:1;min-width:100px}
+@media(max-width:520px){.vocab-toolbar{grid-template-columns:1fr}.vocab-card{min-height:155px;padding:16px}}
