@@ -475,3 +475,13 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .subject-performance-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#2686d9,#25b9a4);transition:width .35s ease}
 .subject-performance-row small{color:var(--muted);line-height:1.7}
 @media(max-width:600px){.subject-performance-card{padding:15px}.subject-performance{grid-template-columns:1fr}}
+
+
+/* Weekly Kankor study schedule */
+.kankor-week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
+.kankor-day{display:flex;flex-direction:column;gap:8px;padding:15px;border:1px solid var(--border);border-radius:15px;background:var(--surface,rgba(120,140,170,.06))}
+.kankor-day strong{color:var(--accent,#269caa);font-size:.9rem}
+.kankor-day b{line-height:1.6}
+.kankor-day span,.kankor-day small{color:var(--muted);line-height:1.7}
+.kankor-day small{padding-top:5px;border-top:1px solid var(--border)}
+@media(max-width:520px){.kankor-week-grid{grid-template-columns:1fr 1fr}.kankor-day{padding:11px}}
