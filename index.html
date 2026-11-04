@@ -29,6 +29,7 @@
   <button class="nav" data-page="law"><span class="nav-icon">⚖️</span><span>حقوق و آگاهی شهروندی</span></button>
   <button class="nav" data-page="agriculture"><span class="nav-icon">🌱</span><span>کشاورزی و منابع طبیعی</span></button>
   <button class="nav" data-page="engineering"><span class="nav-icon">⚙️</span><span>مهندسی و تکنالوژی</span></button>
+  <button class="nav" data-page="lab"><span class="nav-icon">🧪</span><span>آزمایشگاه علمی</span></button>
   <button class="nav" data-page="historyculture"><span class="nav-icon">🏛️</span><span>تاریخ و فرهنگ افغانستان</span></button>
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
   <button class="nav" data-page="library"><span class="nav-icon">📚</span><span>کتابخانهٔ دیجیتال</span></button>
@@ -200,6 +201,15 @@
  <p class="disclaimer">نتایج محاسبه‌گر جایگزین طراحی مهندسی نیست. برای نصب سیستم برق، سازه یا ماشین‌آلات از مهندس واجد صلاحیت کمک بگیرید.</p>
 </section>
 
+
+<section id="labPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI VIRTUAL SCIENCE LAB</span><h1>🧪 آزمایشگاه علمی و مجازی</h1><p>یادگیری علوم از راه مشاهده، محاسبه و آزمایش‌های آموزشی امن.</p></div>
+ <div class="historyculture-notice"><b>ایمنی در آزمایشگاه</b><p>این آزمایشگاه شبیه‌سازی آموزشی است، نه جایگزین لابراتوار واقعی. از مواد کیمیایی، شعله، برق شهری یا تجهیزات خطرناک بدون نظارت استاد استفاده نکنید.</p></div>
+ <div class="historyculture-controls"><label for="labSearch">جستجوی آزمایش</label><input id="labSearch" type="search" placeholder="مثلاً چگالی، سرعت، فتوسنتز..." dir="auto"><label for="labCategory">موضوع</label><select id="labCategory"><option value="all">همهٔ موضوعات</option><option value="physics">فزیک</option><option value="chemistry">کیمیا</option><option value="biology">بیولوژی</option><option value="math">ریاضی</option><option value="environment">محیط زیست</option></select></div>
+ <div id="labCourseGrid" class="historyculture-course-grid"></div>
+ <article class="tool-card" style="max-width:650px;margin-top:22px"><h2>🧮 محاسبه‌گر چگالی</h2><p>جرم را بر حجم تقسیم کنید تا چگالی به دست آید.</p><label for="labMass">جرم (گرام)</label><input id="labMass" type="number" min="0" step="any" placeholder="مثلاً 120"><label for="labVolume">حجم (سانتی‌متر مکعب)</label><input id="labVolume" type="number" min="0" step="any" placeholder="مثلاً 40"><button id="labDensityBtn" class="primary">محاسبهٔ چگالی</button><p id="labDensityResult" aria-live="polite">نتیجه اینجا نمایش داده می‌شود.</p></article>
+ <p class="disclaimer">نتایج ابزارها آموزشی‌اند. آزمایش واقعی باید با نظارت آموزگار و مطابق اصول ایمنی انجام شود.</p>
+</section>
 
 <section id="historyculturePage" class="page hidden">
  <div class="page-title"><span class="eyebrow">AFGHANISTAN HISTORY & CULTURE</span><h1>🏛️ مرکز تاریخ، فرهنگ و تمدن افغانستان</h1><p>سفر آموزشی از تمدن‌های باستانی تا تاریخ معاصر، زبان‌ها و میراث فرهنگی افغانستان.</p></div>
