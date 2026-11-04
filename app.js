@@ -12,6 +12,7 @@ const uiStrings={
 };
 function applyLanguage(lang){const dict=uiStrings[lang]||uiStrings.fa;document.documentElement.lang=lang==='fa'?'fa':lang;document.documentElement.dir=lang==='en'?'ltr':'rtl';$$('[data-i18n]').forEach(el=>{let k=el.dataset.i18n;if(dict[k])el.textContent=dict[k]});$('#question').placeholder=lang==='en'?'Write your question here...':lang==='ps'?'خپله پوښتنه دلته ولیکئ...':'سوالت را اینجا بنویس...';$('#lessonSearch').placeholder=lang==='en'?'Subject or topic...':lang==='ps'?'د مضمون یا موضوع نوم...':'نام مضمون یا موضوع...';$('#welcomeSmall').textContent=lang==='en'?'Welcome!':lang==='ps'?'ښه راغلاست!':'خوش آمدید!';localStorage.setItem('afghanai-lang',lang)}
 $('#uiLanguage').value=localStorage.getItem('afghanai-lang')||'fa';$('#uiLanguage').addEventListener('change',e=>applyLanguage(e.target.value));applyLanguage($('#uiLanguage').value);
+$('[data-set-language]').forEach(btn=>btn.addEventListener('click',()=>{const lang=btn.dataset.setLanguage;$('#uiLanguage').value=lang;applyLanguage(lang);$('[data-home-lang]').forEach(b=>b.classList.toggle('active',b.dataset.homeLang===lang))}));
 
 const state=JSON.parse(localStorage.getItem('afghanai-state')||'{"questions":0,"lessons":0,"quizzes":0,"correct":0,"activity":[]}');
 function saveState(){localStorage.setItem('afghanai-state',JSON.stringify(state));updateStats()}
