@@ -360,3 +360,66 @@ body{background:radial-gradient(ellipse at 92% 0%,#e6f5ed 0,transparent 34%),var
 .google-ai-card a:hover{text-decoration:underline}
 .google-ai-note{margin:16px 0 0;padding-top:12px;border-top:1px solid #e3ebf3}
 @media(max-width:600px){.google-ai-grid{grid-template-columns:1fr}.google-ai-card p{min-height:0}}
+
+
+/* Afghan AI 2026 interface refinement: consistent surfaces, translator and dark theme */
+:root{--surface:#ffffff;--surface-soft:#f6faf8;--line-soft:#dfeae4;--text-main:#172c25;--text-muted:#667b72}
+.page-title{padding:clamp(16px,2.4vw,25px);border:1px solid var(--line-soft);border-radius:18px;background:linear-gradient(120deg,#ffffff,#f2faf6);box-shadow:0 8px 24px #123b2b08}
+.page-title .eyebrow{display:inline-flex;padding:5px 10px;border-radius:999px;background:#e8f6ef;color:#087458}
+.page-title h1{letter-spacing:-.35px}
+.chat-card,.translator-card,.quiz-card,.admin-card,.info-card,.tool-card,.lesson-detail{box-shadow:0 12px 32px #153d2c0c;transition:box-shadow .2s,border-color .2s}
+.chat-card:hover,.translator-card:hover,.tool-card:hover{border-color:#c7dfd3;box-shadow:0 16px 38px #153d2c12}
+.translator-card{padding:clamp(15px,3vw,26px);border:1px solid var(--line);border-radius:20px;background:var(--surface);box-shadow:0 12px 32px #153d2c0c}
+.translator-languages{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;align-items:end}
+.translator-languages label{display:grid;gap:7px;color:var(--mut);font-size:13px;font-weight:700}
+.translator-languages select{width:100%;min-width:0;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink)}
+.translator-swap{width:44px;height:44px;border-radius:13px;font-size:21px}
+.translator-examples{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:18px 0}
+.translator-examples span,.translator-label{font-size:13px;font-weight:750;color:var(--ink)}
+.translator-examples button{border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:var(--surface-soft);color:var(--ink);font-size:12px}
+.translator-label{display:block;margin:14px 0 7px}
+#translatorInput{width:100%;min-height:150px;resize:vertical;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface-soft);color:var(--ink);line-height:1.9}
+.translator-meta,.translator-result-title,.translator-result-actions{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.translator-meta{margin:6px 0 14px;color:var(--mut);font-size:12px}
+.translator-run{width:100%;min-height:48px;font-weight:800}
+.translator-result-wrap{margin-top:18px;padding:15px;border:1px solid var(--line);border-radius:15px;background:var(--surface-soft)}
+.translator-result-title{color:var(--ink)}
+#translatorState{font-size:11px;color:var(--g);padding:4px 9px;border-radius:999px;background:#e6f5ed}
+.translator-result{min-height:90px;margin:12px 0;padding:13px;border-radius:12px;background:var(--surface);border:1px dashed #c7d9ce;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.9;color:var(--ink)}
+.translator-result-actions{justify-content:flex-end}
+.translator-card .disclaimer{padding:12px 0 0;margin:8px 0 0;line-height:1.8}
+button,.nav,.home-service,.subject,.tool-card{ -webkit-tap-highlight-color:transparent }
+button:not(:disabled){transition:transform .16s ease,filter .16s ease,background-color .16s ease}
+button:active:not(:disabled){transform:scale(.985)}
+@media(max-width:560px){
+ .page-title{padding:15px;border-radius:15px;margin-bottom:17px}
+ .translator-languages{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:7px}
+ .translator-languages select{padding:10px 6px;font-size:12px}
+ .translator-swap{width:38px;height:40px}
+ .translator-examples{align-items:stretch}
+ .translator-examples span{width:100%}
+ .translator-examples button{flex:1}
+ .translator-card{padding:14px}
+ #translatorInput{min-height:125px}
+}
+/* Respect the existing theme switch throughout the application */
+body.dark{--ink:#e7f1ec;--mut:#a8b9b1;--bg:#0c1714;--line:#263b33;--line-soft:#263b33;--surface:#14231e;--surface-soft:#101d18;color:var(--ink);background:radial-gradient(ellipse at 90% 0%,#123d3028 0,transparent 38%),var(--bg);color-scheme:dark}
+body.dark .topbar,body.dark .sidebar,body.dark .page-title,body.dark .chat-card,body.dark .translator-card,body.dark .quiz-card,body.dark .admin-card,body.dark .info-card,body.dark .tool-card,body.dark .lesson-detail,body.dark .subject,body.dark .activity-item,body.dark .stat,body.dark .progress-card{background:var(--surface);color:var(--ink);border-color:var(--line)}
+body.dark .page-title{background:linear-gradient(120deg,#142720,#102019)}
+body.dark .nav{color:#b6c8bf}body.dark .nav.active,body.dark .nav:hover{background:#1d3a2e;color:#8ce0b8}
+body.dark .messages{background:#0f1c17}body.dark .bubble.bot{background:#192a23;color:var(--ink);border-color:var(--line)}
+body.dark .chat-input textarea,body.dark .lang-select,body.dark .chat-head select,body.dark .filters select,body.dark .filters input,body.dark .translator-languages select,body.dark #translatorInput,body.dark .tool-card textarea,body.dark .tool-card input,body.dark .math-settings select{background:#0f1c17;color:var(--ink);border-color:var(--line)}
+body.dark .translator-result-wrap{background:#101d18;border-color:var(--line)}body.dark .translator-result{background:#172820;color:var(--ink);border-color:#355447}
+body.dark .translator-examples button,body.dark .outline,body.dark .quick-prompts button,body.dark .quiz-options button{background:#192a23;color:var(--ink);border-color:var(--line)}
+body.dark .vocab-card{background:linear-gradient(145deg,#142b36,#172b3a);color:#e4f4ff;border-color:#31566a}
+body.dark .home-redesign .home-service,body.dark .home-redesign .home-side-card{background:#14231e;color:#e7f1ec;border-color:#263b33}
+body.dark .home-redesign .home-service h3,body.dark .home-redesign .home-side-card h3{color:#e7f1ec}
+body.dark .home-redesign .home-service p,body.dark .home-redesign .home-side-card p{color:#a8b9b1}
+body.dark .home-redesign .home-stat{background:#14231e;border-color:#263b33}
+body.dark .home-redesign .home-stat b{color:#b7e8d0}
+body.dark .home-redesign .home-promo{background:linear-gradient(110deg,#142c25,#14283a);border-color:#285243}
+body.dark .home-redesign .home-promo h2,body.dark .home-redesign .home-promo p{color:#d8eee3}
+body.dark .notice{background:#2b281b;border-color:#554a2b;color:#f5e7b7}
+body.dark .notice p{color:#d8c99b}
+body.dark .empty-state{background:#14231e;border-color:#385348}
+@media(prefers-reduced-motion:reduce){button:not(:disabled){transition:none}}
