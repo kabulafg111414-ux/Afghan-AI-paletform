@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','translator','language','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','language','digital','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -54,7 +54,28 @@ function renderLanguageCenter(){
 $('#languageSearch')?.addEventListener('input',renderLanguageCenter);
 $('#languageTopic')?.addEventListener('change',renderLanguageCenter);
 
-function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+
+const digitalCourses=[
+{cat:'computer',title:'مبانی کمپیوتر',level:'مبتدی',desc:'شناخت سخت‌افزار، نرم‌افزار، سیستم‌عامل، فایل‌ها و پوشه‌ها.',lesson:'کمپیوتر از سخت‌افزار و نرم‌افزار تشکیل می‌شود. سیستم‌عامل مانند Windows، macOS یا Linux منابع دستگاه را مدیریت می‌کند.',task:'سه نمونه سخت‌افزار و سه نمونه نرم‌افزار را نام ببرید.'},
+{cat:'internet',title:'اینترنت و جستجوی هوشمند',level:'مبتدی',desc:'مرورگر، وب‌سایت، ایمیل، جستجوی مؤثر و تشخیص اطلاعات نادرست.',lesson:'مرورگر برای بازکردن وب‌سایت‌ها استفاده می‌شود. هنگام جستجو، منبع، تاریخ نشر و شواهد را بررسی کنید و روی پیوندهای مشکوک کلیک نکنید.',task:'برای یک موضوع علمی، دو منبع معتبر پیدا و تاریخ نشر آن‌ها را مقایسه کنید.'},
+{cat:'ai',title:'آشنایی با هوش مصنوعی',level:'مبتدی',desc:'مفهوم AI، مدل‌های زبانی، کاربردها و محدودیت‌ها.',lesson:'هوش مصنوعی سامانه‌هایی است که وظایفی مانند تحلیل متن یا تصویر را انجام می‌دهند. پاسخ مدل ممکن است اشتباه باشد؛ اطلاعات مهم را با منبع معتبر بررسی کنید.',task:'از یک ابزار هوش مصنوعی بخواهید یک مفهوم علمی را ساده توضیح دهد و سپس پاسخ را با کتاب درسی مقایسه کنید.'},
+{cat:'html',title:'HTML؛ ساختار صفحات وب',level:'مبتدی',desc:'عنوان‌ها، پاراگراف‌ها، پیوندها، تصاویر و فرم‌ها.',lesson:'HTML ساختار محتوا را مشخص می‌کند. تگ h1 عنوان اصلی و تگ p پاراگراف می‌سازد. بیشتر تگ‌ها باز و بسته می‌شوند.',task:'یک صفحه با عنوان، دو پاراگراف و یک پیوند بسازید.'},
+{cat:'html',title:'CSS؛ طراحی و زیباسازی وب',level:'مبتدی',desc:'رنگ، فاصله، فونت، چیدمان و طراحی واکنش‌گرا.',lesson:'CSS ظاهر عناصر HTML را کنترل می‌کند. selector عنصر را انتخاب می‌کند و property ویژگی مورد نظر را تغییر می‌دهد؛ مثلاً p { color: blue; }.',task:'برای یک عنوان رنگ، اندازه فونت و فاصله مناسب تعیین کنید.'},
+{cat:'javascript',title:'JavaScript؛ تعامل در وب',level:'مبتدی',desc:'متغیرها، شرط‌ها، توابع و رویدادهای کلیک.',lesson:'JavaScript رفتار تعاملی می‌سازد. متغیر مقدار را نگه می‌دارد، شرط تصمیم می‌گیرد و تابع مجموعه‌ای از دستورها را اجرا می‌کند.',task:'یک متغیر با نام studentName بسازید و مقدار آن را در کنسول چاپ کنید.'},
+{cat:'security',title:'امنیت سایبری و حفاظت حساب‌ها',level:'مبتدی',desc:'رمز قوی، احراز هویت دومرحله‌ای، فیشینگ و حریم خصوصی.',lesson:'برای هر حساب رمز یکتا بسازید، احراز هویت دومرحله‌ای را فعال کنید، کد تأیید را به کسی ندهید و نشانی وب‌سایت را پیش از ورود بررسی کنید.',task:'تنظیمات امنیتی یکی از حساب‌های خود را بررسی و تأیید دومرحله‌ای را فعال کنید.'},
+{cat:'career',title:'مهارت‌های دیجیتال برای کار',level:'مقدماتی',desc:'ایمیل حرفه‌ای، اسناد، صفحه‌گسترده و همکاری آنلاین.',lesson:'مهارت‌های پایه شامل نوشتن ایمیل روشن، تنظیم سند، کار با جدول و نگهداری منظم فایل‌ها است. پیش از ارسال، نام فایل و دسترسی اشتراک‌گذاری را بررسی کنید.',task:'یک رزومه ساده و یک ایمیل رسمی تمرینی آماده کنید.'}
+];
+function renderDigitalCenter(){
+ const grid=$('#digitalCourseGrid');if(!grid)return;
+ const q=($('#digitalSearch')?.value||'').trim().toLocaleLowerCase();
+ const cat=$('#digitalCategory')?.value||'all';
+ const items=digitalCourses.filter(x=>(cat==='all'||x.cat===cat)&&[x.title,x.desc,x.lesson,x.task].some(v=>v.toLocaleLowerCase().includes(q)));
+ grid.innerHTML=items.length?items.map((x,i)=>'<article class="digital-course-card"><span class="digital-level">'+x.level+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><details><summary>مشاهدهٔ درس و تمرین</summary><p>'+x.lesson+'</p><b>تمرین:</b><p>'+x.task+'</p></details></article>').join(''):'<p class="empty-state">درسی پیدا نشد؛ عبارت دیگری را جستجو کنید.</p>';
+}
+$('#digitalSearch')?.addEventListener('input',renderDigitalCenter);
+$('#digitalCategory')?.addEventListener('change',renderDigitalCenter);
+
+function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
