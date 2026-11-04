@@ -345,3 +345,18 @@ body{background:radial-gradient(ellipse at 92% 0%,#e6f5ed 0,transparent 34%),var
 .math-answer-form input{flex:1;min-width:0}
 .math-answer-form button{white-space:nowrap}
 @media(max-width:420px){.math-answer-form{flex-direction:column;align-items:stretch}.math-answer-form button{width:100%}}
+
+/* Google AI official tools directory */
+.google-ai-hub{margin:24px 0;padding:clamp(17px,3vw,26px);border:1px solid #dce8f3;border-radius:20px;background:linear-gradient(145deg,#f5faff,#fff 62%,#f3f8ff);box-shadow:0 12px 32px #163f6810}
+.google-ai-heading h2{margin:8px 0;font-size:clamp(21px,3vw,28px);color:var(--ink)}
+.google-ai-heading p,.google-ai-note{color:var(--mut);font-size:13px;line-height:1.8}
+.google-ai-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:17px}
+.google-ai-card{min-width:0;padding:17px;border:1px solid #e1eaf3;border-radius:15px;background:#fff;box-shadow:0 5px 17px #143f3010;transition:transform .18s,box-shadow .18s}
+.google-ai-card:hover{transform:translateY(-3px);box-shadow:0 10px 25px #173d2c18}
+.google-ai-mark{display:grid;place-items:center;width:39px;height:39px;border-radius:12px;background:linear-gradient(135deg,#e8f2ff,#eefaf6);font-size:21px}
+.google-ai-card h3{margin:11px 0 5px;font-size:17px;color:var(--ink)}
+.google-ai-card p{min-height:58px;margin:0 0 12px;color:var(--mut);font-size:13px;line-height:1.8}
+.google-ai-card a{display:inline-flex;color:#075fc5;font-weight:750;text-decoration:none;padding:7px 0}
+.google-ai-card a:hover{text-decoration:underline}
+.google-ai-note{margin:16px 0 0;padding-top:12px;border-top:1px solid #e3ebf3}
+@media(max-width:600px){.google-ai-grid{grid-template-columns:1fr}.google-ai-card p{min-height:0}}
