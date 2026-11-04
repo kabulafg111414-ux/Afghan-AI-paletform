@@ -29,6 +29,7 @@
   <button class="nav" data-page="law"><span class="nav-icon">⚖️</span><span>حقوق و آگاهی شهروندی</span></button>
   <button class="nav" data-page="agriculture"><span class="nav-icon">🌱</span><span>کشاورزی و منابع طبیعی</span></button>
   <button class="nav" data-page="engineering"><span class="nav-icon">⚙️</span><span>مهندسی و تکنالوژی</span></button>
+  <button class="nav" data-page="airobotics"><span class="nav-icon">🤖</span><span>هوش مصنوعی و رباتیک</span></button>
   <button class="nav" data-page="space"><span class="nav-icon">🚀</span><span>نجوم و فضا</span></button>
   <button class="nav" data-page="lab"><span class="nav-icon">🧪</span><span>آزمایشگاه علمی</span></button>
   <button class="nav" data-page="historyculture"><span class="nav-icon">🏛️</span><span>تاریخ و فرهنگ افغانستان</span></button>
@@ -210,6 +211,15 @@
  <div id="labCourseGrid" class="historyculture-course-grid"></div>
  <article class="tool-card" style="max-width:650px;margin-top:22px"><h2>🧮 محاسبه‌گر چگالی</h2><p>جرم را بر حجم تقسیم کنید تا چگالی به دست آید.</p><label for="labMass">جرم (گرام)</label><input id="labMass" type="number" min="0" step="any" placeholder="مثلاً 120"><label for="labVolume">حجم (سانتی‌متر مکعب)</label><input id="labVolume" type="number" min="0" step="any" placeholder="مثلاً 40"><button id="labDensityBtn" class="primary">محاسبهٔ چگالی</button><p id="labDensityResult" aria-live="polite">نتیجه اینجا نمایش داده می‌شود.</p></article>
  <p class="disclaimer">نتایج ابزارها آموزشی‌اند. آزمایش واقعی باید با نظارت آموزگار و مطابق اصول ایمنی انجام شود.</p>
+</section>
+
+<section id="airoboticsPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI • AI & ROBOTICS ACADEMY</span><h1>🤖 مرکز هوش مصنوعی و رباتیک</h1><p>از مفاهیم پایهٔ هوش مصنوعی تا یادگیری ماشین، رباتیک و پروژه‌های عملی آموزشی.</p></div>
+ <div class="historyculture-notice"><b>یادگیری مسئولانهٔ هوش مصنوعی</b><p>این بخش محتوای آموزشی و شبیه‌سازی ساده ارائه می‌کند؛ مدل هوش مصنوعی واقعی یا کنترل ربات فیزیکی بدون اتصال سرویس و سخت‌افزار جداگانه فعال نمی‌شود. از واردکردن اطلاعات شخصی و محرمانه در ابزارهای عمومی خودداری کنید.</p></div>
+ <div class="historyculture-controls"><label for="aiRoboticsSearch">جستجوی درس</label><input id="aiRoboticsSearch" type="search" placeholder="مثلاً شبکه عصبی، ربات، الگوریتم..." dir="auto"><label for="aiRoboticsCategory">موضوع</label><select id="aiRoboticsCategory"><option value="all">همهٔ موضوعات</option><option value="basics">مبانی هوش مصنوعی</option><option value="ml">یادگیری ماشین</option><option value="deep">یادگیری عمیق</option><option value="robotics">رباتیک</option><option value="vision">بینایی کمپیوتر</option><option value="language">پردازش زبان</option><option value="ethics">اخلاق و ایمنی</option></select></div>
+ <div id="aiRoboticsCourseGrid" class="historyculture-course-grid"></div>
+ <article class="tool-card" style="max-width:680px;margin-top:22px"><h2>🧠 شبیه‌ساز سادهٔ نورون مصنوعی</h2><p>دو ورودی و وزن آن‌ها را تعیین کنید. این نمونه فقط جمع وزن‌دار و تابع آستانه را نشان می‌دهد.</p><label for="aiInputOne">ورودی اول (۰ یا ۱)</label><select id="aiInputOne"><option value="0">۰</option><option value="1">۱</option></select><label for="aiWeightOne">وزن اول</label><input id="aiWeightOne" type="number" step="0.1" value="1"><label for="aiInputTwo">ورودی دوم (۰ یا ۱)</label><select id="aiInputTwo"><option value="0">۰</option><option value="1">۱</option></select><label for="aiWeightTwo">وزن دوم</label><input id="aiWeightTwo" type="number" step="0.1" value="1"><label for="aiThreshold">آستانه</label><input id="aiThreshold" type="number" step="0.1" value="1"><button id="aiNeuronRun" class="primary">اجرای شبیه‌سازی</button><p id="aiNeuronResult" aria-live="polite">برای دیدن نتیجه، شبیه‌سازی را اجرا کنید.</p></article>
+ <p class="disclaimer">شبیه‌ساز برای درک مفهوم نورون مصنوعی است و مدل آموزش‌دیده یا سیستم تصمیم‌گیری واقعی نیست.</p>
 </section>
 
 <section id="spacePage" class="page hidden">
