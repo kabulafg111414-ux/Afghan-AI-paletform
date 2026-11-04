@@ -68,6 +68,13 @@ $('#resetProgress').onclick=()=>{if(confirm('آیا مطمئن هستید که �
 const trFrom=$('#translatorFrom'),trTo=$('#translatorTo'),trInput=$('#translatorInput'),trResult=$('#translatorResult'),trState=$('#translatorState');
 function translatorCount(){const n=trInput.value.length;$('#translatorLength').textContent=n.toLocaleString()+' / ۵۰۰۰'}
 trInput?.addEventListener('input',translatorCount);translatorCount();
+
+const translatorExamples={
+greeting:{fa:'سلام، حال شما چطور است؟',ps:'سلام، تاسو څنګه یاست؟',en:'Hello, how are you?'},
+school:{fa:'آموزش کلید پیشرفت جامعه است.',ps:'زده کړه د ټولنې د پرمختګ کیلي ده.',en:'Education is the key to a society’s progress.'}
+};
+document.querySelectorAll('[data-translator-sample]').forEach(btn=>btn.addEventListener('click',()=>{const samples=translatorExamples[btn.dataset.translatorSample];if(!samples)return;trInput.value=samples[trFrom.value]||samples.fa;translatorCount();trInput.focus()}));
+
 $('#translatorSwap')?.addEventListener('click',()=>{const a=trFrom.value;trFrom.value=trTo.value;trTo.value=a;});
 $('#translatorClear')?.addEventListener('click',()=>{trInput.value='';trResult.textContent='ترجمهٔ شما در اینجا نمایش داده می‌شود.';trState.textContent='آماده';translatorCount();trInput.focus()});
 $('#translatorRun')?.addEventListener('click',()=>{if(!trInput.value.trim()){trState.textContent='متن وارد نشده';trInput.focus();return}trState.textContent='سرویس وصل نیست';trResult.textContent='ترجمهٔ واقعی هنوز در دسترس نیست. برای فعال‌سازی باید API هوش مصنوعی از طریق سرور امن وصل شود. متن شما به هیچ سرویسی ارسال نشد.';});
