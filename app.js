@@ -78,7 +78,7 @@ function renderLessons(){const term=$('#lessonSearch').value.toLowerCase();$('#l
 function openLesson(l){const d=$('#lessonDetail');d.classList.remove('hidden');d.innerHTML=`<h2>${l.icon} ${l.name} — ${l.topic}</h2><p>${l.body}</p><p><b>مثال آموزشی:</b> ${l.example}</p><div class="lesson-actions"><button id="markLesson">✓ علامت‌گذاری به‌عنوان مرورشده</button><button id="askAboutLesson">✦ از معلم دربارهٔ این درس بپرس</button></div>`;$('#markLesson').onclick=()=>{state.lessons++;saveState();recordActivity('مرور درس: '+l.name);$('#markLesson').textContent='✓ مرور ثبت شد';$('#markLesson').disabled=true};$('#askAboutLesson').onclick=()=>{showPage('tutor');$('#question').value=`برای ${$('#grade').value}، موضوع «${l.topic}» در مضمون ${l.name} را با مثال‌های ساده توضیح بده.`;$('#question').focus()};d.scrollIntoView({behavior:'smooth',block:'nearest'})}
 $('#lessonSearch').addEventListener('input',renderLessons);renderLessons();
 
-const questions=[
+const questionBank=[
  {q:'حاصل ۷ × ۸ چند است؟',opts:['۴۸','۵۶','۶۴','۵۴'],a:1,ex:'۷ ضربدر ۸ برابر با ۵۶ است.'},
  {q:'کدام بخش گیاه بیشتر نور را جذب می‌کند؟',opts:['ریشه','گل‌برگ','برگ','دانه'],a:2,ex:'برگ‌ها نور را جذب می‌کنند و در فتوسنتز نقش اساسی دارند.'},
  {q:'آب خالص در فشار معمولی در چند درجهٔ سانتی‌گراد یخ می‌بندد؟',opts:['۰ درجه','۱۰ درجه','۵۰ درجه','۱۰۰ درجه'],a:0,ex:'آب خالص در صفر درجهٔ سانتی‌گراد یخ می‌بندد.'},
@@ -92,10 +92,14 @@ const questions=[
  {q:'پایتخت افغانستان کدام شهر است؟',opts:['هرات','قندهار','کابل','مزارشریف'],a:2,ex:'کابل پایتخت افغانستان است.'},
  {q:'کدام گزینه سیارهٔ منظومهٔ شمسی است؟',opts:['ماه','مریخ','خورشید','ستارهٔ قطبی'],a:1,ex:'مریخ یکی از سیاره‌های منظومهٔ شمسی است؛ ماه قمر زمین و خورشید یک ستاره است.'},
  {q:'کدام گزینه شکل گذشتهٔ فعل انگلیسی “go” است؟',opts:['goed','gone','went','going'],a:2,ex:'گذشتهٔ سادهٔ فعل بی‌قاعدهٔ go، واژهٔ went است.'}
-];let qi=0,chosen=false,score=0,quizInProgress=false,quizMisses=[],quizTimer=null,quizSeconds=900;
+];
+const questionSubjects=['math','biology','science','science','math','math','physics','chemistry','biology','dari','history','science','english'];
+questionBank.forEach((q,i)=>q.subject=questionSubjects[i]);
+let questions=questionBank;
+let qi=0,chosen=false,score=0,quizInProgress=false,quizMisses=[],quizTimer=null,quizSeconds=900;
 function updateQuizTimer(){const el=$('#quizTimer');if(el)el.textContent=`زمان باقی‌مانده: ${String(Math.floor(quizSeconds/60)).padStart(2,'0')}:${String(quizSeconds%60).padStart(2,'0')}`}
 function startQuizTimer(){clearInterval(quizTimer);quizSeconds=900;updateQuizTimer();quizTimer=setInterval(()=>{quizSeconds--;updateQuizTimer();if(quizSeconds<=0)finishQuizByTimeout();},1000);}
-function startQuiz(){qi=0;score=0;quizMisses=[];chosen=false;quizInProgress=true;$('#nextQuestion').onclick=advanceQuiz;drawQuestion();startQuizTimer()}
+function startQuiz(){const subject=$('#quizSubject')?.value||'all';questions=subject==='all'?questionBank:questionBank.filter(q=>q.subject===subject);if(!questions.length){$('#quizFeedback').textContent='برای این مضمون هنوز سوالی ثبت نشده است.';return;}qi=0;score=0;quizMisses=[];chosen=false;quizInProgress=true;$('#nextQuestion').onclick=advanceQuiz;drawQuestion();startQuizTimer()}
 function finishQuizByTimeout(){if(!quizInProgress)return;clearInterval(quizTimer);quizTimer=null;quizInProgress=false;chosen=true;quizMisses.push({question:'زمان آزمون پایان یافت',answer:'—',explanation:'پاسخ‌گویی در زمان تعیین‌شده را تمرین کنید.'});$('#quizQuestion').textContent='زمان آزمون پایان یافت';$('#quizOptions').innerHTML='';$('#quizFeedback').textContent='نتیجهٔ شما: '+score+' پاسخ درست از '+questions.length+' سوال. برای دیدن کارنامه، دکمهٔ زیر را بزنید.';$('#nextQuestion').textContent='دیدن نتیجه';$('#nextQuestion').disabled=false;$('#nextQuestion').onclick=showQuizResult}
 function showQuizResult(){clearInterval(quizTimer);quizTimer=null;state.quizzes++;saveState();recordActivity('آزمون زمان‌دار تکمیل شد؛ امتیاز '+score+' از '+questions.length);const pct=Math.round(score/questions.length*100);$('#quizQuestion').textContent='کارنامهٔ آزمون: '+score+' از '+questions.length+' ('+pct+'٪)';$('#quizOptions').innerHTML='';$('#quizFeedback').textContent=quizMisses.length?'مرور نکات:\n'+quizMisses.map((m,n)=>(n+1)+'. '+m.question+'\nپاسخ درست: '+m.answer+'\n'+m.explanation).join('\n\n'):'آفرین! همهٔ پاسخ‌ها درست بود.';$('#nextQuestion').textContent='آزمون دوباره';$('#nextQuestion').disabled=false;$('#nextQuestion').onclick=()=>startQuiz()}
 function drawQuestion(){let q=questions[qi];$('#quizCount').textContent=`سوال ${qi+1} از ${questions.length}`;$('#quizBar').style.width=((qi+1)/questions.length*100)+'%';$('#quizQuestion').textContent=q.q;$('#quizOptions').innerHTML='';$('#quizFeedback').textContent='';$('#nextQuestion').disabled=true;$('#nextQuestion').textContent=qi===questions.length-1?'دیدن نتیجه':'سوال بعدی ←';q.opts.forEach((o,i)=>{let b=document.createElement('button');b.className='quiz-option';b.textContent=o;b.onclick=()=>chooseAnswer(i,b);$('#quizOptions').appendChild(b)})}
