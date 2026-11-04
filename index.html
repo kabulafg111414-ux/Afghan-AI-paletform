@@ -26,7 +26,8 @@
   <button class="nav" data-page="progress"><span class="nav-icon">▥</span><span data-i18n="navProgress">پیشرفت من</span></button>
   <button class="nav" data-page="family"><span class="nav-icon">♧</span><span data-i18n="navFamily">والدین و استاد</span></button>
   <button class="nav" data-page="admin"><span class="nav-icon">⚙</span><span data-i18n="navAdmin">مدیریت</span></button>
-  <button class="nav" data-page="sources"><span class="nav-icon">ⓘ</span><span>منابع و سپاسگزاری</span></button>
+<button class="nav" data-page="tools"><span class="nav-icon">🧰</span><span>ابزارهای یادگیری</span></button>
+    <button class="nav" data-page="sources"><span class="nav-icon">ⓘ</span><span>منابع و سپاسگزاری</span></button>
   <div class="side-bottom"><div class="help-card"><b data-i18n="needHelp">کمک درسی می‌خواهی؟</b><p data-i18n="helpText">سوالت را بنویس تا با هم بررسی کنیم.</p><button data-page="tutor" class="link-button" data-i18n="askTutor">پرسش از معلم ←</button></div><small>Afghan AI • MVP 2.0</small></div>
 </aside>
 <main class="main">
@@ -89,6 +90,18 @@
  <div class="admin-banner"><div class="admin-mark">AI</div><div><b>Afghan AI — پنل بنیان‌گذار</b><p>بنیان‌گذار: سیدمحب‌الله (هاشمی)</p><small>این پنل در حال حاضر نمایشی است؛ ورود امن و نقش‌های مدیریتی هنوز پیاده‌سازی نشده‌اند.</small></div></div>
  <div class="admin-grid"><div class="admin-card"><span>📚</span><b>مدیریت محتوا</b><p>ثبت و بازبینی درس‌ها و منابع معتبر.</p><em>در نقشهٔ راه</em></div><div class="admin-card"><span>👥</span><b>مدیریت کاربران</b><p>نقش دانش‌آموز، استاد و سرپرست.</p><em>نیازمند بک‌اند امن</em></div><div class="admin-card"><span>📈</span><b>گزارش‌ها</b><p>آمار استفاده و کیفیت پاسخ‌ها.</p><em>در نقشهٔ راه</em></div><div class="admin-card"><span>🛡️</span><b>امنیت و حریم خصوصی</b><p>کنترل دسترسی و حفاظت از داده‌ها.</p><em>پیش‌شرط انتشار</em></div></div>
  <div class="notice"><span>🔧</span><div><b>وضعیت سرویس هوش مصنوعی</b><p id="apiStatus">وضعیت اتصال از سرور بررسی نشده است.</p><button id="checkApi" class="text-button">بررسی اتصال ←</button></div></div>
+</section>
+
+
+<section id="toolsPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">Smart learning toolkit</span><h1>🧰 ابزارهای هوشمند یادگیری</h1><p>ابزارهای کاربردی برای تمرکز، یادداشت‌برداری و تمرین حافظه.</p></div>
+ <div class="tools-grid">
+  <article class="tool-card"><div class="tool-icon">⏱️</div><h2>تایمر تمرکز</h2><p>۲۵ دقیقه مطالعه و سپس ۵ دقیقه استراحت.</p><div id="focusClock" class="focus-clock">25:00</div><div class="tool-actions"><button id="timerStart" class="primary">شروع</button><button id="timerPause" class="outline">توقف</button><button id="timerReset" class="outline">از نو</button></div><small id="timerStatus" aria-live="polite">آمادهٔ تمرکز هستی؟</small></article>
+  <article class="tool-card"><div class="tool-icon">📝</div><h2>دفترچهٔ یادداشت</h2><p>یادداشت‌ها به‌صورت محلی در همین دستگاه ذخیره می‌شوند.</p><textarea id="studyNotes" rows="7" placeholder="نکته‌های مهم درس را اینجا بنویس..."></textarea><div class="tool-actions"><button id="saveNotes" class="primary">ذخیرهٔ یادداشت</button><button id="clearNotes" class="outline">پاک‌کردن</button></div><small id="notesStatus" aria-live="polite">یادداشت‌ها فقط در این مرورگر می‌مانند.</small></article>
+  <article class="tool-card"><div class="tool-icon">🧠</div><h2>فلش‌کارت حافظه</h2><p>واژه یا پرسش را بنویس و پاسخ را برای مرور آشکار کن.</p><input id="cardFront" placeholder="پرسش یا واژه"><textarea id="cardBack" rows="3" placeholder="پاسخ یا معنی"></textarea><div class="tool-actions"><button id="addFlashcard" class="primary">افزودن کارت</button><button id="revealFlashcard" class="outline">نمایش پاسخ</button><button id="nextFlashcard" class="outline">کارت بعدی</button></div><div id="flashcardDisplay" class="flashcard-display">هنوز کارتی نساخته‌ای.</div><small id="flashcardCount">۰ کارت ذخیره شده</small></article>
+  <article class="tool-card"><div class="tool-icon">🔊</div><h2>خواندن متن با صدا</h2><p>متن آموزشی را وارد کن تا مرورگر آن را با صدای دستگاه بخواند؛ پشتیبانی زبان‌ها به دستگاه بستگی دارد.</p><textarea id="speakText" rows="5" placeholder="متن مورد نظر را اینجا وارد کن..."></textarea><div class="tool-actions"><button id="speakStart" class="primary">▶ خواندن متن</button><button id="speakStop" class="outline">توقف صدا</button></div><small id="speechStatus">از قابلیت گفتار مرورگر استفاده می‌شود.</small></article>
+ </div>
+ <div class="notice"><span>🔐</span><div><b>حریم خصوصی</b><p>یادداشت‌ها و فلش‌کارت‌ها در حافظهٔ همین مرورگر ذخیره می‌شوند؛ با پاک‌کردن داده‌های مرورگر ممکن است حذف شوند.</p></div></div>
 </section>
 
 <section id="sourcesPage" class="page hidden">
