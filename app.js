@@ -1,5 +1,5 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-const pages=['dashboard','tutor','lessons','quiz','progress','family','admin','tools','sources'];
+const pages=['dashboard','tutor','translator','lessons','quiz','progress','family','admin','tools','sources'];
 function showPage(name){pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');if(name==='lessons')renderLessons();if(name==='quiz'&&!quizInProgress)startQuiz();if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
 $('#mobileMenu').onclick=()=>$('#sidebar').classList.toggle('open');
