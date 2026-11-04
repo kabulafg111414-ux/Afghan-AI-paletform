@@ -31,21 +31,66 @@
   <div class="side-bottom"><div class="help-card"><b data-i18n="needHelp">کمک درسی می‌خواهی؟</b><p data-i18n="helpText">سوالت را بنویس تا با هم بررسی کنیم.</p><button data-page="tutor" class="link-button" data-i18n="askTutor">پرسش از معلم ←</button></div><small>Afghan AI • MVP 2.0</small></div>
 </aside>
 <main class="main">
-<section id="dashboardPage" class="page">
-  <div class="welcome"><div><span class="eyebrow" data-i18n="eyebrow">آینده با دانش ساخته می‌شود</span><h1 data-i18n="welcomeTitle">سلام! آمادهٔ یادگیری هستی؟ 👋</h1><p data-i18n="welcomeDesc">هر روز یک قدم کوچک، یک پیشرفت بزرگ.</p><button class="welcome-cta" data-page="tutor" data-i18n="startLearning">یادگیری را آغاز کن ←</button></div><div class="hero-art">📚<span>✦</span></div></div>
-  <div class="stats">
-    <div class="stat"><span>📘</span><small data-i18n="statLessons">درس‌های تکمیل‌شده</small><b id="statLessons">۰</b></div>
-    <div class="stat"><span>🎯</span><small data-i18n="statGoal">هدف روزانه</small><b>۲۰ دقیقه</b></div>
-    <div class="stat"><span>🔥</span><small data-i18n="statQuestions">پرسش‌های مطرح‌شده</small><b id="statQuestions">۰</b></div>
+<section id="dashboardPage" class="page home-redesign">
+  <div class="home-hero">
+    <div class="home-hero-copy">
+      <span class="home-kicker">✦ AI for a Better Tomorrow</span>
+      <h1>Welcome to <span>Afghan AI</span></h1>
+      <p class="home-lead">Empowering people with Artificial Intelligence for education, innovation and sustainable development in Afghanistan.</p>
+      <div class="home-language-actions">
+        <button class="home-lang active" data-home-lang="fa" data-set-language="fa">دری</button>
+        <button class="home-lang" data-home-lang="ps" data-set-language="ps">پښتو</button>
+        <button class="home-lang" data-home-lang="en" data-set-language="en">◎ English</button>
+      </div>
+      <button class="home-primary" data-page="tutor">✦ Start Learning <span>→</span></button>
+    </div>
+    <div class="home-hero-art" role="img" aria-label="نمایی از کوه‌های افغانستان و کابل">
+      <div class="hero-sun"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div>
+      <div class="home-skyline">✧　افغانستان　✧</div>
+      <div class="home-art-caption">Knowledge • Innovation • Opportunity</div>
+    </div>
   </div>
-  <div class="section-head"><div><h2 data-i18n="continueLearning">یادگیری را ادامه بده</h2><p data-i18n="chooseSection">یک بخش را انتخاب کن.</p></div><button class="text-button" data-page="lessons" data-i18n="allLessons">همهٔ درس‌ها ←</button></div>
-  <div class="feature-grid">
-    <button class="feature green" data-page="tutor"><div class="feature-icon">✦</div><h3 data-i18n="featureTutor">معلم هوشمند</h3><p data-i18n="featureTutorDesc">سوال بپرس و توضیح ساده بگیر.</p><span data-i18n="openSection">باز کردن بخش ←</span></button>
-    <button class="feature blue" data-page="lessons"><div class="feature-icon">📚</div><h3 data-i18n="featureLessons">کتابخانهٔ درسی</h3><p data-i18n="featureLessonsDesc">موضوعات آموزشی را مرور کن.</p><span data-i18n="openSection">باز کردن بخش ←</span></button>
-    <button class="feature amber" data-page="quiz"><div class="feature-icon">☑</div><h3 data-i18n="featureQuiz">امتحان آزمایشی</h3><p data-i18n="featureQuizDesc">دانسته‌هایت را بررسی کن.</p><span data-i18n="openSection">باز کردن بخش ←</span></button>
+
+  <div class="home-content-layout">
+    <div class="home-main-column">
+      <div class="home-section-heading">
+        <div><span class="home-section-kicker">DISCOVER</span><h2>Featured AI Tools</h2><p>Smart tools for students, professionals and the community.</p></div>
+        <button class="home-view-link" data-page="tools">Explore tools ↗</button>
+      </div>
+      <div class="home-feature-grid">
+        <button class="home-service service-blue" data-page="tutor"><span class="service-symbol">🎓</span><h3>AI Teacher</h3><p>Learn with a step-by-step AI tutor.</p><span class="service-cta">Start Learning　→</span></button>
+        <button class="home-service service-green" data-page="tutor"><span class="service-symbol">文</span><h3>Language Help</h3><p>Ask and learn in Dari, Pashto or English.</p><span class="service-cta">Ask the Tutor　→</span></button>
+        <button class="home-service service-purple" data-page="tutor"><span class="service-symbol">✦</span><h3>Smart Assistant</h3><p>Get explanations, ideas and study support.</p><span class="service-cta">Ask AI　→</span></button>
+        <button class="home-service service-orange" data-page="lessons"><span class="service-symbol">📖</span><h3>Education Hub</h3><p>Explore subjects and learning resources.</p><span class="service-cta">Explore Lessons　→</span></button>
+      </div>
+      <div class="home-promo">
+        <div class="promo-icon">↗</div><div class="promo-copy"><h2>Building a Smarter Afghanistan</h2><p>Together with technology, education and innovation.</p></div>
+        <button data-page="lessons">Explore Education　→</button>
+      </div>
+      <div class="home-stats">
+        <div class="home-stat"><span>📘</span><small data-i18n="statLessons">درس‌های تکمیل‌شده</small><b id="statLessons">۰</b></div>
+        <div class="home-stat"><span>🎯</span><small data-i18n="statGoal">هدف روزانه</small><b>۲۰ دقیقه</b></div>
+        <div class="home-stat"><span>🔥</span><small data-i18n="statQuestions">پرسش‌های مطرح‌شده</small><b id="statQuestions">۰</b></div>
+      </div>
+      <div class="notice"><span>💡</span><div><b data-i18n="tipTitle">نکتهٔ امروز</b><p data-i18n="tipText">وقتی درس دشوار است، از معلم بخواه آن را با یک مثال روزمره توضیح دهد.</p></div></div>
+    </div>
+    <aside class="home-side-column">
+      <div class="home-side-card quick-card"><h3><span>ϟ</span> Quick Access</h3>
+        <button data-page="tools"><span>⌁</span> AI Tools <b>›</b></button>
+        <button data-page="lessons"><span>▣</span> Education Resources <b>›</b></button>
+        <button data-page="sources"><span>◎</span> Resources & Sources <b>›</b></button>
+        <button data-page="family"><span>☏</span> Student Support <b>›</b></button>
+      </div>
+      <div class="home-side-card connected-card"><h3>Stay Connected</h3><p>Follow the project for updates and new features.</p><div class="social-note">Afghan AI <span>•</span> Learning for everyone</div></div>
+      <div class="home-quote"><p>“Technology is most powerful when it opens the door to learning.”</p><span>— Afghan AI</span></div>
+    </aside>
   </div>
-  <div class="notice"><span>💡</span><div><b data-i18n="tipTitle">نکتهٔ امروز</b><p data-i18n="tipText">وقتی درس دشوار است، از معلم بخواه آن را با یک مثال روزمره توضیح دهد.</p></div></div>
-  <footer>Afghan AI <span>•</span> بنیان‌گذار: سیدمحب‌الله (هاشمی) <span>•</span> نسخهٔ توسعه‌ای</footer>
+  <footer class="home-footer">
+    <div><strong class="footer-brand">✧ Afghan <span>AI</span></strong><p>Smart solutions for a brighter Afghanistan.</p><small>© 2026 Afghan AI • All rights reserved.</small></div>
+    <div><b>License & Intellectual Property</b><p>This project and its contents are the intellectual property of Sayed Moheb Ullah Hashimi.</p><small>Use and distribution are subject to the project's LICENSE file.</small></div>
+    <div><b>Project Information</b><p>Afghan AI<br>Founder: Sayed Moheb Ullah Hashimi<br>Educational technology initiative</p><button class="footer-link" data-page="sources">Resources & acknowledgements →</button></div>
+    <div><b>Explore</b><button class="footer-link" data-page="tutor">AI Teacher</button><button class="footer-link" data-page="lessons">Education</button><button class="footer-link" data-page="tools">Learning Tools</button><button class="footer-link" data-page="family">Support</button></div>
+  </footer>
 </section>
 
 <section id="tutorPage" class="page hidden">
