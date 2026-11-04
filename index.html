@@ -29,6 +29,7 @@
   <button class="nav" data-page="law"><span class="nav-icon">⚖️</span><span>حقوق و آگاهی شهروندی</span></button>
   <button class="nav" data-page="agriculture"><span class="nav-icon">🌱</span><span>کشاورزی و منابع طبیعی</span></button>
   <button class="nav" data-page="engineering"><span class="nav-icon">⚙️</span><span>مهندسی و تکنالوژی</span></button>
+  <button class="nav" data-page="space"><span class="nav-icon">🚀</span><span>نجوم و فضا</span></button>
   <button class="nav" data-page="lab"><span class="nav-icon">🧪</span><span>آزمایشگاه علمی</span></button>
   <button class="nav" data-page="historyculture"><span class="nav-icon">🏛️</span><span>تاریخ و فرهنگ افغانستان</span></button>
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
@@ -209,6 +210,15 @@
  <div id="labCourseGrid" class="historyculture-course-grid"></div>
  <article class="tool-card" style="max-width:650px;margin-top:22px"><h2>🧮 محاسبه‌گر چگالی</h2><p>جرم را بر حجم تقسیم کنید تا چگالی به دست آید.</p><label for="labMass">جرم (گرام)</label><input id="labMass" type="number" min="0" step="any" placeholder="مثلاً 120"><label for="labVolume">حجم (سانتی‌متر مکعب)</label><input id="labVolume" type="number" min="0" step="any" placeholder="مثلاً 40"><button id="labDensityBtn" class="primary">محاسبهٔ چگالی</button><p id="labDensityResult" aria-live="polite">نتیجه اینجا نمایش داده می‌شود.</p></article>
  <p class="disclaimer">نتایج ابزارها آموزشی‌اند. آزمایش واقعی باید با نظارت آموزگار و مطابق اصول ایمنی انجام شود.</p>
+</section>
+
+<section id="spacePage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI SPACE & ASTRONOMY</span><h1>🚀 مرکز نجوم و اکتشافات فضایی</h1><p>سفر آموزشی از منظومهٔ شمسی تا کهکشان‌ها، ستارگان و فناوری فضایی.</p></div>
+ <div class="historyculture-notice"><b>دانش علمی و مشاهدهٔ مسئولانه</b><p>مطالب این مرکز برای آموزش عمومی است. برای رصد خورشید هرگز بدون فیلتر استاندارد مخصوص خورشید به آن نگاه نکنید؛ عینک آفتابی معمولی ایمن نیست.</p></div>
+ <div class="historyculture-controls"><label for="spaceSearch">جستجوی موضوع</label><input id="spaceSearch" type="search" placeholder="مثلاً مریخ، ماه، کهکشان..." dir="auto"><label for="spaceCategory">دسته‌بندی</label><select id="spaceCategory"><option value="all">همهٔ موضوعات</option><option value="solar">منظومهٔ شمسی</option><option value="stars">ستارگان و کهکشان‌ها</option><option value="physics">فیزیک فضا</option><option value="technology">فناوری فضایی</option></select></div>
+ <div id="spaceCourseGrid" class="historyculture-course-grid"></div>
+ <article class="tool-card" style="max-width:680px;margin-top:22px"><h2>🪐 مقایسهٔ وزن روی سیاره‌ها</h2><p>وزن تقریبی شما روی هر جرم آسمانی بر اساس گرانش سطحی محاسبه می‌شود؛ جرم بدن تغییر نمی‌کند.</p><label for="spaceEarthWeight">وزن روی زمین (کیلوگرام‌نیرو، مقدار تقریبی ترازو)</label><input id="spaceEarthWeight" type="number" min="0" step="any" placeholder="مثلاً 60"><label for="spacePlanet">انتخاب جرم آسمانی</label><select id="spacePlanet"><option value="0.38">عطارد</option><option value="0.38">مریخ</option><option value="0.91">زهره</option><option value="0.17">ماه</option><option value="2.34">مشتری</option><option value="0.92">زحل</option><option value="0.89">اورانوس</option><option value="1.12">نپتون</option></select><button id="spaceWeightBtn" class="primary">محاسبه</button><p id="spaceWeightResult" aria-live="polite">نتیجه اینجا نمایش داده می‌شود.</p></article>
+ <p class="disclaimer">مقادیر گرانش نسبی تقریبی‌اند و برای آموزش استفاده می‌شوند؛ این ابزار شبیه‌سازی ساده است.</p>
 </section>
 
 <section id="historyculturePage" class="page hidden">
