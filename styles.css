@@ -653,3 +653,22 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .engineering-references a{color:var(--accent,#269caa)}
 @media(max-width:650px){.engineering-calc-fields{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.engineering-controls{grid-template-columns:1fr}.engineering-controls input,.engineering-controls select{grid-row:auto}.engineering-course-grid,.engineering-calc-fields{grid-template-columns:1fr}}
+
+
+/* Afghanistan history, culture and heritage center */
+.historyculture-notice,.historyculture-timeline,.historyculture-references{padding:18px;border:1px solid var(--border);border-radius:15px;background:var(--surface);margin:16px 0}
+.historyculture-notice p,.historyculture-timeline p{color:var(--muted);line-height:1.85;margin:8px 0}
+.historyculture-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;align-items:center;margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.historyculture-controls label{font-weight:650}
+.historyculture-controls input,.historyculture-controls select{grid-row:2;width:100%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.historyculture-course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:13px;margin:18px 0}
+.historyculture-course-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:17px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.historyculture-course-card h3{margin:2px 0;line-height:1.65}
+.historyculture-course-card p{line-height:1.85;margin:0;color:var(--muted)}
+.historyculture-level{font-size:.78rem;color:var(--accent,#269caa);font-weight:700}
+.historyculture-course-card details{width:100%;margin-top:6px;padding-top:10px;border-top:1px solid var(--border)}
+.historyculture-course-card summary{cursor:pointer;font-weight:700}
+.historyculture-course-card details p{margin:9px 0}
+.historyculture-timeline li,.historyculture-references li{margin:10px 0;line-height:1.8}
+.historyculture-references a{color:var(--accent,#269caa)}
+@media(max-width:560px){.historyculture-controls{grid-template-columns:1fr}.historyculture-controls input,.historyculture-controls select{grid-row:auto}.historyculture-course-grid{grid-template-columns:1fr}}
