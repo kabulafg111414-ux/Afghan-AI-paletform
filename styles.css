@@ -545,3 +545,22 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .digital-course-card details p{margin:9px 0}
 .digital-practice pre{overflow:auto;padding:13px;border-radius:10px;background:rgba(110,130,150,.12);direction:ltr;text-align:left}
 @media(max-width:560px){.digital-controls{grid-template-columns:1fr}.digital-controls input,.digital-controls select{grid-row:auto}.digital-course-grid{grid-template-columns:1fr}}
+
+
+/* Health sciences and public health learning center */
+.health-notice,.health-reference{padding:18px;border:1px solid var(--border);border-radius:15px;background:var(--surface);margin:16px 0}
+.health-notice p{color:var(--muted);line-height:1.85;margin:8px 0 0}
+.health-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px 14px;align-items:center;margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.health-controls label{font-weight:650}
+.health-controls input,.health-controls select{grid-row:2;width:100%;min-width:0;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text)}
+.health-course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:13px;margin:18px 0}
+.health-course-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:17px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.health-course-card h3{margin:2px 0;line-height:1.65}
+.health-course-card p{line-height:1.85;margin:0;color:var(--muted)}
+.health-level{font-size:.78rem;color:var(--accent,#269caa);font-weight:700}
+.health-course-card details{width:100%;margin-top:6px;padding-top:10px;border-top:1px solid var(--border)}
+.health-course-card summary{cursor:pointer;font-weight:700}
+.health-course-card details p{margin:9px 0}
+.health-reference li{margin:9px 0;line-height:1.7}
+.health-reference a{color:var(--accent,#269caa)}
+@media(max-width:560px){.health-controls{grid-template-columns:1fr}.health-controls input,.health-controls select{grid-row:auto}.health-course-grid{grid-template-columns:1fr}}
