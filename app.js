@@ -129,3 +129,29 @@ function updateTextLab(){if(!textLab)return;const v=textLab.value.trim();const w
 textLab?.addEventListener('input',updateTextLab);updateTextLab();
 $('#textLabClear')?.addEventListener('click',()=>{textLab.value='';updateTextLab();$('#textLabStatus').textContent='متن پاک شد.';textLab.focus()});
 $('#textLabCopy')?.addEventListener('click',async()=>{if(!textLab.value.trim()){ $('#textLabStatus').textContent='اول متن وارد کنید.';return}try{await navigator.clipboard.writeText(textLab.value);$('#textLabStatus').textContent='متن کاپی شد.'}catch(e){$('#textLabStatus').textContent='کاپی خودکار ممکن نشد؛ متن را دستی انتخاب کنید.'}});
+
+
+// Trilingual vocabulary trainer with locally stored mastery states.
+const vocabEntries=[
+ {en:'Hello',fa:'سلام',ps:'سلام',pron:'heh-LOH'},
+ {en:'Book',fa:'کتاب',ps:'کتاب',pron:'book'},
+ {en:'School',fa:'مکتب',ps:'ښوونځی',pron:'skool'},
+ {en:'Teacher',fa:'معلم / استاد',ps:'ښوونکی / استاد',pron:'TEE-cher'},
+ {en:'Student',fa:'شاگرد',ps:'زده‌کوونکی',pron:'STOO-dent'},
+ {en:'Water',fa:'آب',ps:'اوبه',pron:'WAW-ter'},
+ {en:'Knowledge',fa:'دانش',ps:'پوهه',pron:'NOL-ij'},
+ {en:'Family',fa:'خانواده',ps:'کورنۍ',pron:'FAM-uh-lee'},
+ {en:'Friend',fa:'دوست',ps:'ملګری',pron:'frend'},
+ {en:'Beautiful',fa:'زیبا',ps:'ښکلی',pron:'BYOO-tuh-ful'},
+ {en:'Learn',fa:'یاد گرفتن',ps:'زده کول',pron:'lern'},
+ {en:'Future',fa:'آینده',ps:'راتلونکی',pron:'FYOO-cher'}
+];
+let vocabStates=JSON.parse(localStorage.getItem('afghanai-vocab-states')||'{}'),vocabIndex=0,vocabRevealed=false,vocabVisible=[...vocabEntries.keys()];
+function filterVocab(){const q=($('#vocabSearch')?.value||'').trim().toLowerCase(),f=$('#vocabFilter')?.value||'all';vocabVisible=vocabEntries.map((v,i)=>i).filter(i=>{const v=vocabEntries[i],known=vocabStates[i]==='known';return(f==='all'||(f==='known'?known:!known))&&(!q||[v.en,v.fa,v.ps].some(x=>x.toLowerCase().includes(q))) });if(!vocabVisible.includes(vocabIndex))vocabIndex=vocabVisible[0]??-1;vocabRevealed=false;renderVocab()}
+function renderVocab(){const host=$('#vocabCard');if(!host)return;host.replaceChildren();if(vocabIndex<0||!vocabVisible.length){const empty=document.createElement('p');empty.textContent='واژه‌ای با این جستجو پیدا نشد.';host.append(empty);$('#vocabStatus').textContent='فیلتر را تغییر دهید یا واژهٔ دیگری جستجو کنید.';return}const v=vocabEntries[vocabIndex],pos=vocabVisible.indexOf(vocabIndex);const small=document.createElement('small');small.textContent='واژهٔ '+(pos+1)+' از '+vocabVisible.length;const title=document.createElement('h3');title.textContent=v.en;host.append(small,title);if(vocabRevealed){const fa=document.createElement('p');fa.textContent='دری: '+v.fa;const ps=document.createElement('p');ps.textContent='پښتو: '+v.ps;const pr=document.createElement('span');pr.textContent='Pronunciation: '+v.pron;host.append(fa,ps,pr)}else{const hint=document.createElement('p');hint.textContent='برای دیدن معنی، دکمهٔ «نمایش معنی» را بزنید.';host.append(hint)}const known=vocabStates[vocabIndex]==='known';$('#vocabStatus').textContent=(Object.values(vocabStates).filter(x=>x==='known').length)+' واژه یادگرفته‌شده؛ '+vocabEntries.length+' واژه در این مجموعه.'+(known?' این واژه یاد گرفته شده است.':'')}
+$('#vocabSearch')?.addEventListener('input',filterVocab);$('#vocabFilter')?.addEventListener('change',filterVocab);
+$('#vocabReveal')?.addEventListener('click',()=>{if(vocabIndex<0)return;vocabRevealed=!vocabRevealed;renderVocab()});
+function moveVocab(delta){if(!vocabVisible.length)return;let p=vocabVisible.indexOf(vocabIndex);vocabIndex=vocabVisible[(p+delta+vocabVisible.length)%vocabVisible.length];vocabRevealed=false;renderVocab()}
+$('#vocabPrev')?.addEventListener('click',()=>moveVocab(-1));$('#vocabNext')?.addEventListener('click',()=>moveVocab(1));
+function setVocabState(state){if(vocabIndex<0)return;vocabStates[vocabIndex]=state;localStorage.setItem('afghanai-vocab-states',JSON.stringify(vocabStates));if($('#vocabFilter').value!=='all')filterVocab();else renderVocab()}
+$('#vocabKnown')?.addEventListener('click',()=>setVocabState('known'));$('#vocabReview')?.addEventListener('click',()=>setVocabState('review'));filterVocab();
