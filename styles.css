@@ -684,3 +684,9 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 #spacePage .tool-card input,#spacePage .tool-card select{width:100%;box-sizing:border-box;margin-bottom:9px}
 #spaceWeightResult{font-weight:750;color:var(--accent,#269caa);margin-top:14px}
 #spacePage .disclaimer{margin-top:18px}
+
+/* AI and robotics academy */
+#airoboticsPage .tool-card label{display:block;margin:12px 0 5px;font-weight:650}
+#airoboticsPage .tool-card input,#airoboticsPage .tool-card select{width:100%;box-sizing:border-box;margin-bottom:9px}
+#aiNeuronResult{font-weight:750;color:var(--accent,#269caa);margin-top:14px}
+#airoboticsPage .disclaimer{margin-top:18px}
