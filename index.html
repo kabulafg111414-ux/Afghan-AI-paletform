@@ -418,6 +418,40 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
  <footer>Afghan AI <span>•</span> بنیان‌گذار: سیدمحب‌الله (هاشمی) <span>•</span> منابع و سپاسگزاری</footer>
 </section>
 </main></div>
+<script>
+/* Independent navigation fallback: keeps every existing page reachable on mobile even if app.js initialization fails. */
+(function(){
+  if(window.__afghanAiNavigationFallback)return;
+  window.__afghanAiNavigationFallback=true;
+  var pageNames=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
+  function navigate(name){
+    if(pageNames.indexOf(name)===-1)return false;
+    var target=document.getElementById(name+'Page');
+    if(!target)return false;
+    document.querySelectorAll('main .page').forEach(function(page){page.classList.add('hidden');});
+    target.classList.remove('hidden');
+    document.querySelectorAll('.nav[data-page]').forEach(function(button){button.classList.toggle('active',button.getAttribute('data-page')===name);});
+    var sidebar=document.getElementById('sidebar');
+    var backdrop=document.getElementById('sidebarBackdrop');
+    if(sidebar)sidebar.classList.remove('open');
+    if(backdrop)backdrop.classList.remove('is-visible');
+    document.body.classList.remove('sidebar-menu-open');
+    var menu=document.getElementById('mobileMenu');
+    if(menu)menu.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+    return true;
+  }
+  document.addEventListener('click',function(event){
+    var button=event.target&&event.target.closest?event.target.closest('[data-page]'):null;
+    if(!button)return;
+    var name=button.getAttribute('data-page');
+    if(!pageNames.includes(name)||!document.getElementById(name+'Page'))return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    navigate(name);
+  },true);
+})();
+</script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./app.js?v=20261106-mobile-nav-safe-0210"></script>
 </body></html>
