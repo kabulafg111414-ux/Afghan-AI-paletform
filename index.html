@@ -406,7 +406,8 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
    <div class="fund-account"><span>شماره تماس / حساب‌پی</span><strong dir="ltr">0093787111414</strong><button type="button" class="outline" id="fundCopyNumber">کاپی شماره</button></div>
    <div class="fund-qr-placeholder fund-qr-live"><img src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&format=png&data=1%3A01*2%3Ap*3%3A93.787111414*4%3Ageneral*5%3ASaid%20Mohabullah%20Hashmi*6%3A971*7%3A1307100" alt="بارکود رسمی حساب‌پی برای کمک به Afghan AI" loading="lazy" width="300" height="300"><b>بارکود حساب‌پی</b><small>بارکود از اطلاعات رمزگشایی‌شدهٔ تصویر ارسالی بازسازی شده است. پیش از پرداخت، نام صاحب حساب و شماره را در حساب‌پی بررسی کنید.</small></div>
    <p class="publication-hint">نام صاحب حساب و شماره را پیش از تأیید پرداخت در اپلیکیشن حساب‌پی با دقت بررسی کنید.</p>
-   <a class="fund-app-link" href="https://hesab.com/download-app" target="_blank" rel="noopener noreferrer">دانلود رسمی اپلیکیشن حساب‌پی ↗</a>
+   <div class="fund-howto"><h3>چگونه کمک ارسال کنید؟</h3><ol><li>اپلیکیشن حساب‌پی را باز کنید یا از لینک رسمی نصب نمایید.</li><li>گزینهٔ اسکن QR را انتخاب کرده و بارکود بالا را اسکن کنید.</li><li>نام صاحب حساب و شماره را بررسی کنید، مبلغ را وارد کرده و پرداخت را در خود حساب‌پی تأیید نمایید.</li></ol></div>
+   <a class="fund-app-link fund-open-app" href="https://hesab.com/download-app" target="_blank" rel="noopener noreferrer">باز کردن / دریافت اپلیکیشن حساب‌پی ↗</a>
   </article>
   <article class="fund-card fund-choice">
    <span class="eyebrow">CHOOSE YOUR PURPOSE</span><h2>مقصد کمک خود را انتخاب کنید</h2>
@@ -517,4 +518,17 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./app.js?v=20261106-mobile-nav-safe-0210"></script>
+<script id="fund-payment-guide">
+(function(){
+ const copy=document.getElementById('fundCopyNumber');
+ if(copy&&!copy.dataset.ready){
+  copy.dataset.ready='1';
+  copy.addEventListener('click',async function(){
+   const number='0093787111414';
+   try{await navigator.clipboard.writeText(number);copy.textContent='شماره کاپی شد ✓';}
+   catch(e){copy.textContent='شماره: '+number;}
+  });
+ }
+})();
+</script>
 </body></html>
