@@ -2285,3 +2285,7 @@ body.dark .fund-howto h3{color:#a8e8c9}
 .hesabpay-verified span{font-size:22px}
 .hesabpay-card-caption{font-size:12px;opacity:.9;margin:14px 0 0}
 @media(max-width:390px){.hesabpay-profile-card{padding:17px 12px}.hesabpay-card-top{gap:14px}.hesabpay-avatar,.hesabpay-card-qr{width:96px;height:96px}.hesabpay-card-name{font-size:16px}}
+
+
+/* Remove the unwanted red cross beside the mobile navigation header. */
+.sidebar-mobile-head button#closeSidebar{display:none!important}
