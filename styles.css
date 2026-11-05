@@ -1934,3 +1934,125 @@ body.dark .topbar .mobile-menu{background:#f5f8fa!important;color:#173149!import
  .topbar{gap:6px}
  .top-actions{gap:5px}
 }
+
+
+/* Afghan AI unified visual polish — typography, surfaces, controls and responsive rhythm */
+:root{
+ --aa-ink:#142f45;
+ --aa-copy:#3e5669;
+ --aa-muted:#5a7182;
+ --aa-link:#075f9e;
+ --aa-line:#d5e1e9;
+ --aa-surface:#ffffff;
+ --aa-soft:#f3f7fa;
+ --aa-shadow:0 8px 24px rgba(18,48,70,.08);
+}
+body{color:var(--aa-ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.page{color:var(--aa-copy)}
+.page h1,.page h2,.page h3,.page h4,.page legend{color:var(--aa-ink);letter-spacing:-.015em}
+.page p,.page li,.page label,.page .description,.page .hint{color:var(--aa-copy);line-height:1.72}
+.page small,.page .muted,.page .eyebrow{color:var(--aa-muted)}
+.page a:not(.nav):not(.home-primary){color:var(--aa-link);text-underline-offset:3px}
+.page-title{border-bottom:1px solid var(--aa-line);padding-bottom:14px;margin-bottom:22px}
+.page-title h1{font-weight:800;line-height:1.2}
+.page-title p{max-width:72ch}
+.stat,.progress-card,.feature,.info-card,.chat-card,.quiz-card,.admin-card,.admin-banner,.tool-card,
+.translator-card,.lesson-detail,.subject-card,.library-card,.language-phrase-card,.digital-course-card,
+.health-course-card,.google-ai-card,.vocab-card,.study-task-form,.subject-performance-card{
+ background:var(--aa-surface);
+ color:var(--aa-ink);
+ border:1px solid var(--aa-line);
+ border-radius:16px;
+ box-shadow:var(--aa-shadow);
+}
+.stat small,.progress-card small,.feature p,.info-card p,.admin-card p,.tool-card p,.tool-card small,
+.library-card p,.language-phrase-card p,.digital-course-card p,.health-course-card p{
+ color:var(--aa-copy);
+}
+.section-head h2,.quiz-card h2,.tool-card h2,.library-card h3,.language-phrase-card h3,
+.digital-course-card h3,.health-course-card h3,.vocab-card h3{color:var(--aa-ink)}
+.page button,.page input,.page select,.page textarea{font:inherit}
+.page input,.page textarea,.page select,.filters input,.filters select,.lang-select,
+.chat-head select,.translator-languages select{
+ border:1px solid #bdcfdb;
+ border-radius:11px;
+ background:#fff;
+ color:#173149;
+ min-height:42px;
+}
+.page input::placeholder,.page textarea::placeholder{color:#657d8e;opacity:1}
+.page button{font-weight:650;letter-spacing:.005em}
+.page button:active{transform:translateY(1px)}
+.page button:disabled{filter:grayscale(.12);opacity:.62;cursor:not-allowed}
+.page button:not(.primary):not(.home-primary):not(.nav):not(.home-service):not(.link-button):not(.text-button):not(.footer-link):not(.home-view-link){
+ border-radius:11px;
+}
+.page .notice,.page .help-card,.page .health-notice,.page .health-reference{
+ border-radius:14px;
+}
+.page table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:12px}
+.page th{background:#eaf1f6;color:#173149;font-weight:750}
+.page td{color:#40586b}
+.page th,.page td{padding:10px 12px;border-bottom:1px solid var(--aa-line);text-align:start}
+.topbar{box-shadow:0 3px 18px rgba(13,42,61,.06);border-bottom:1px solid var(--aa-line)}
+.sidebar .nav{border-radius:11px;margin:2px 8px;transition:background .18s,color .18s}
+.sidebar .nav:hover{background:rgba(255,255,255,.10)}
+.home-side-card,.home-quote,.home-stat,.quick-card,.connected-card{
+ border:1px solid var(--aa-line);
+ box-shadow:var(--aa-shadow);
+}
+.home-section-heading h2{font-weight:850;letter-spacing:-.025em}
+.home-service{border:1px solid rgba(255,255,255,.15);box-shadow:0 12px 26px rgba(5,25,45,.16)}
+.home-primary{min-height:48px;font-weight:800}
+body.dark{
+ --aa-ink:#edf5fa;
+ --aa-copy:#c7d5df;
+ --aa-muted:#a9bdca;
+ --aa-line:#30495b;
+ --aa-surface:#172d3d;
+ --aa-soft:#20394b;
+ --aa-shadow:0 8px 24px rgba(0,0,0,.18);
+ color:#edf5fa;
+}
+body.dark .page{color:var(--aa-copy)}
+body.dark .page h1,body.dark .page h2,body.dark .page h3,body.dark .page h4,body.dark .page legend,
+body.dark .section-head h2,body.dark .quiz-card h2,body.dark .tool-card h2,
+body.dark .library-card h3,body.dark .language-phrase-card h3,
+body.dark .digital-course-card h3,body.dark .health-course-card h3,
+body.dark .vocab-card h3{color:#f1f6fa}
+body.dark .page p,body.dark .page li,body.dark .page label,body.dark .page .description,
+body.dark .page .hint,body.dark .stat small,body.dark .progress-card small,
+body.dark .feature p,body.dark .info-card p,body.dark .admin-card p,body.dark .tool-card p,
+body.dark .tool-card small,body.dark .library-card p,body.dark .language-phrase-card p,
+body.dark .digital-course-card p,body.dark .health-course-card p{color:#c7d5df}
+body.dark .page small,body.dark .page .muted,body.dark .page .eyebrow{color:#a9bdca}
+body.dark .stat,body.dark .progress-card,body.dark .feature,body.dark .info-card,
+body.dark .chat-card,body.dark .quiz-card,body.dark .admin-card,body.dark .admin-banner,
+body.dark .tool-card,body.dark .translator-card,body.dark .lesson-detail,body.dark .subject-card,
+body.dark .library-card,body.dark .language-phrase-card,body.dark .digital-course-card,
+body.dark .health-course-card,body.dark .google-ai-card,body.dark .vocab-card,
+body.dark .study-task-form,body.dark .subject-performance-card{
+ background:#172d3d;color:#edf5fa;border-color:#30495b;
+}
+body.dark .page-title{border-color:#30495b}
+body.dark .page th{background:#294456;color:#f1f6fa}
+body.dark .page td{color:#d1dee6}
+body.dark .page th,body.dark .page td{border-color:#30495b}
+body.dark .page a:not(.nav):not(.home-primary){color:#91d2ff}
+body.dark .page input,body.dark .page textarea,body.dark .page select,
+body.dark .filters input,body.dark .filters select,body.dark .lang-select,
+body.dark .chat-head select,body.dark .translator-languages select{
+ background:#f5f8fa;color:#173149;border-color:#91aabc;
+}
+body.dark .page input::placeholder,body.dark .page textarea::placeholder{color:#526a7b}
+@media(max-width:760px){
+ .page-title{margin-bottom:16px}
+ .stat,.progress-card,.feature,.info-card,.chat-card,.quiz-card,.admin-card,.tool-card,
+ .translator-card,.lesson-detail,.subject-card,.library-card,.language-phrase-card,
+ .digital-course-card,.health-course-card{border-radius:13px}
+ .page table{display:block;overflow-x:auto;white-space:nowrap}
+ .page p,.page li{overflow-wrap:anywhere}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
