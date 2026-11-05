@@ -461,11 +461,24 @@ function renderHistoryCultureCenter(){
 $('#historycultureSearch')?.addEventListener('input',renderHistoryCultureCenter);
 $('#historycultureCategory')?.addEventListener('change',renderHistoryCultureCenter);
 
-function showPage(name){if(name!=='quiz'&&quizInProgress&&quizTimer!==null){clearInterval(quizTimer);quizTimer=null;}pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));$('#sidebar').classList.remove('open');$('#mobileMenu').setAttribute('aria-expanded','false');if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='agriculture')renderAgricultureCenter();if(name==='engineering')renderEngineeringCenter();if(name==='historyculture')renderHistoryCultureCenter();if(name==='historyculture'&&afghanLeafletMap)setTimeout(()=>afghanLeafletMap.invalidateSize(),120);if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'){if(!quizInProgress)startQuiz();else if(quizTimer===null)startQuizTimer();}if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+function showPage(name){if(name!=='quiz'&&quizInProgress&&quizTimer!==null){clearInterval(quizTimer);quizTimer=null;}pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));closeMobileMenu();if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='agriculture')renderAgricultureCenter();if(name==='engineering')renderEngineeringCenter();if(name==='historyculture')renderHistoryCultureCenter();if(name==='historyculture'&&afghanLeafletMap)setTimeout(()=>afghanLeafletMap.invalidateSize(),120);if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'){if(!quizInProgress)startQuiz();else if(quizTimer===null)startQuizTimer();}if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
 $('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
-$('#mobileMenu').onclick=()=>{const sidebar=$('#sidebar');const open=!sidebar.classList.contains('open');sidebar.classList.toggle('open',open);$('#mobileMenu').setAttribute('aria-expanded',String(open))};
-$('#closeSidebar').onclick=()=>{$('#sidebar').classList.remove('open');$('#mobileMenu').setAttribute('aria-expanded','false')};
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#sidebar').classList.contains('open')){$('#sidebar').classList.remove('open');$('#mobileMenu').setAttribute('aria-expanded','false')}});
+function closeMobileMenu(){
+ const sidebar=$('#sidebar'),backdrop=$('#sidebarBackdrop');
+ sidebar.classList.remove('open');backdrop.classList.remove('is-visible');
+ document.body.classList.remove('sidebar-menu-open');
+ $('#mobileMenu').setAttribute('aria-expanded','false');
+}
+$('#mobileMenu').onclick=()=>{
+ const sidebar=$('#sidebar'),backdrop=$('#sidebarBackdrop');
+ const open=!sidebar.classList.contains('open');
+ sidebar.classList.toggle('open',open);backdrop.classList.toggle('is-visible',open);
+ document.body.classList.toggle('sidebar-menu-open',open);
+ $('#mobileMenu').setAttribute('aria-expanded',String(open));
+};
+$('#closeSidebar').onclick=closeMobileMenu;
+$('#sidebarBackdrop').onclick=closeMobileMenu;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#sidebar').classList.contains('open'))closeMobileMenu()});
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');safeStorageSet('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
 if(safeStorageGet('afghanai-dark')==='1')document.body.classList.add('dark');
 const uiStrings={
