@@ -43,6 +43,25 @@ const languagePhrases=[
 {topic:'health',en:'I have a headache.',fa:'سرم درد می‌کند.',ps:'سر مې درد کوي.'},
 {topic:'health',en:'Please help me.',fa:'لطفاً به من کمک کنید.',ps:'مهرباني وکړئ مرسته راسره وکړئ.'}
 ];
+const afghanLanguageProfiles=[
+{key:'dari',name:'دری',family:'هندواروپایی؛ شاخهٔ ایرانی',script:'خط فارسی-عربی',note:'یکی از زبان‌های اصلی افغانستان؛ دارای گونه‌ها و لهجه‌های منطقه‌ای.'},
+{key:'pashto',name:'پشتو',family:'هندواروپایی؛ شاخهٔ ایرانی',script:'خط پشتو بر پایهٔ فارسی-عربی',note:'زبان مهم افغانستان با گویش‌های گوناگون.'},
+{key:'uzbeki',name:'ازبیکی',family:'ترکی؛ شاخهٔ قارلقی',script:'در افغانستان معمولاً خط فارسی-عربی؛ شیوه‌های دیگر نیز وجود دارد',note:'در میان جوامع ازبیک‌زبان افغانستان رایج است.'},
+{key:'turkmeni',name:'ترکمنی',family:'ترکی؛ شاخهٔ اغوز',script:'در افغانستان خط فارسی-عربی؛ گونه‌های نوشتاری دیگر نیز شناخته شده‌اند',note:'زبان جامعهٔ ترکمن افغانستان با سنت شفاهی و ادبی.'},
+{key:'balochi',name:'بلوچی',family:'هندواروپایی؛ شاخهٔ ایرانی',script:'شیوه‌های نوشتاری با خط فارسی-عربی و لاتین',note:'دارای گونه‌های گویشی متعدد؛ منابع آموزشی باید گونهٔ محلی را مشخص کنند.'},
+{key:'nuristani',name:'زبان‌های نورستانی',family:'شاخهٔ نورستانی از هندواروپایی',script:'شیوهٔ نوشتار بسته به زبان و منبع متفاوت است',note:'خانواده‌ای از زبان‌هاست؛ یک زبان واحد نیست و شامل چند زبان مستقل می‌شود.'},
+{key:'pashayi',name:'زبان‌های پشه‌ای',family:'هندواروپایی؛ شاخهٔ داردی',script:'نوشتار و رسم‌الخط در منابع آموزشی یکسان و فراگیر نیست',note:'مجموعه‌ای از گونه‌ها و زبان‌های نزدیک به هم با تنوع محلی.'},
+{key:'english',name:'انگلیسی',family:'هندواروپایی؛ شاخهٔ ژرمنی',script:'الفبای لاتین',note:'زبان بین‌المللی برای علم، فناوری و ارتباطات.'}
+];
+function renderAfghanLanguageProfiles(){
+ const grid=$('#afghanLanguageGrid');if(!grid)return;
+ const key=$('#afghanLanguageSelect')?.value||'all';
+ const items=afghanLanguageProfiles.filter(x=>key==='all'||x.key===key);
+ grid.innerHTML=items.map(x=>'<article class="language-phrase-card"><span class="language-topic">معرفی زبان</span><h3>'+x.name+'</h3><p><b>خانوادهٔ زبانی:</b> '+x.family+'</p><p><b>خط/نوشتار:</b> '+x.script+'</p><p>'+x.note+'</p></article>').join('');
+}
+$('#afghanLanguageSelect')?.addEventListener('change',renderAfghanLanguageProfiles);
+renderAfghanLanguageProfiles();
+
 function renderLanguageCenter(){
  const grid=$('#languagePhraseGrid');if(!grid)return;
  const q=($('#languageSearch')?.value||'').trim().toLocaleLowerCase();
