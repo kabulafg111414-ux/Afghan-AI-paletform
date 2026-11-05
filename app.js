@@ -279,6 +279,51 @@ const historyCultureCourses=[
 const afghanProvinceDirectory=[
  ['Badakhshan','Fayzabad'],['Badghis','Qala-e-Naw'],['Baghlan','Pul-e-Khumri'],['Balkh','Mazar-e-Sharif'],['Bamyan','Bamyan'],['Daykundi','Nili'],['Farah','Farah'],['Faryab','Maymana'],['Ghazni','Ghazni'],['Ghor','Firozkoh'],['Helmand','Lashkar Gah'],['Herat','Herat'],['Jawzjan','Sheberghan'],['Kabul','Kabul'],['Kandahar','Kandahar'],['Kapisa','Mahmud-i-Raqi'],['Khost','Khost'],['Kunar','Asadabad'],['Kunduz','Kunduz'],['Laghman','Mehtarlam'],['Logar','Pul-e-Alam'],['Nangarhar','Jalalabad'],['Nimroz','Zaranj'],['Nuristan','Parun'],['Paktia','Gardez'],['Paktika','Sharana'],['Panjshir','Bazarak'],['Parwan','Charikar'],['Samangan','Aybak'],['Sar-e Pol','Sar-e Pol'],['Takhar','Taloqan'],['Uruzgan','Tarinkot'],['Maidan Wardak','Maidan Shahr'],['Zabul','Qalat']
 ];
+const afghanProvinceLabels={
+'Badakhshan':{fa:'بدخشان',ps:'بدخشان',capitalFa:'فیض‌آباد',capitalPs:'فیض‌آباد'},
+'Badghis':{fa:'بادغیس',ps:'بادغیس',capitalFa:'قلعه‌نو',capitalPs:'قلعه نو'},
+'Baghlan':{fa:'بغلان',ps:'بغلان',capitalFa:'پلخمری',capitalPs:'پلخمري'},
+'Balkh':{fa:'بلخ',ps:'بلخ',capitalFa:'مزار شریف',capitalPs:'مزار شریف'},
+'Bamyan':{fa:'بامیان',ps:'بامیان',capitalFa:'بامیان',capitalPs:'بامیان'},
+'Daykundi':{fa:'دایکندی',ps:'دایکندي',capitalFa:'نیلی',capitalPs:'نیلي'},
+'Farah':{fa:'فراه',ps:'فراه',capitalFa:'فراه',capitalPs:'فراه'},
+'Faryab':{fa:'فاریاب',ps:'فاریاب',capitalFa:'میمنه',capitalPs:'میمنه'},
+'Ghazni':{fa:'غزنی',ps:'غزني',capitalFa:'غزنی',capitalPs:'غزني'},
+'Ghor':{fa:'غور',ps:'غور',capitalFa:'فیروزکوه',capitalPs:'فیروزکوه'},
+'Helmand':{fa:'هلمند',ps:'هلمند',capitalFa:'لشکرگاه',capitalPs:'لښکرګاه'},
+'Herat':{fa:'هرات',ps:'هرات',capitalFa:'هرات',capitalPs:'هرات'},
+'Jawzjan':{fa:'جوزجان',ps:'جوزجان',capitalFa:'شبرغان',capitalPs:'شبرغان'},
+'Kabul':{fa:'کابل',ps:'کابل',capitalFa:'کابل',capitalPs:'کابل'},
+'Kandahar':{fa:'قندهار',ps:'کندهار',capitalFa:'قندهار',capitalPs:'کندهار'},
+'Kapisa':{fa:'کاپیسا',ps:'کاپیسا',capitalFa:'محمود راقی',capitalPs:'محمودراقي'},
+'Khost':{fa:'خوست',ps:'خوست',capitalFa:'خوست',capitalPs:'خوست'},
+'Kunar':{fa:'کنر',ps:'کونړ',capitalFa:'اسعدآباد',capitalPs:'اسعدآباد'},
+'Kunduz':{fa:'کندز',ps:'کندز',capitalFa:'کندز',capitalPs:'کندز'},
+'Laghman':{fa:'لغمان',ps:'لغمان',capitalFa:'مهترلام',capitalPs:'مهترلام'},
+'Logar':{fa:'لوگر',ps:'لوګر',capitalFa:'پل علم',capitalPs:'پل علم'},
+'Nangarhar':{fa:'ننگرهار',ps:'ننګرهار',capitalFa:'جلال‌آباد',capitalPs:'جلال‌آباد'},
+'Nimroz':{fa:'نیمروز',ps:'نیمروز',capitalFa:'زرنج',capitalPs:'زرنج'},
+'Nuristan':{fa:'نورستان',ps:'نورستان',capitalFa:'پارون',capitalPs:'پارون'},
+'Paktia':{fa:'پکتیا',ps:'پکتیا',capitalFa:'گردیز',capitalPs:'ګردېز'},
+'Paktika':{fa:'پکتیکا',ps:'پکتیکا',capitalFa:'شرنه',capitalPs:'ښرنه'},
+'Panjshir':{fa:'پنجشیر',ps:'پنجشېر',capitalFa:'بازارک',capitalPs:'بازارک'},
+'Parwan':{fa:'پروان',ps:'پروان',capitalFa:'چاریکار',capitalPs:'چاریکار'},
+'Samangan':{fa:'سمنگان',ps:'سمنګان',capitalFa:'ایبک',capitalPs:'ایبک'},
+'Sar-e Pol':{fa:'سرپل',ps:'سرپل',capitalFa:'سرپل',capitalPs:'سرپل'},
+'Takhar':{fa:'تخار',ps:'تخار',capitalFa:'تالقان',capitalPs:'تالقان'},
+'Uruzgan':{fa:'ارزگان',ps:'اروزګان',capitalFa:'ترینکوت',capitalPs:'ترینکوټ'},
+'Maidan Wardak':{fa:'میدان وردک',ps:'میدان وردګ',capitalFa:'میدان‌شهر',capitalPs:'میدانښار'},
+'Zabul':{fa:'زابل',ps:'زابل',capitalFa:'قلات',capitalPs:'قلات'}
+};
+function afghanProvinceDisplayName(province,lang){
+ const item=afghanProvinceLabels[province];
+ return !item?province:lang==='en'?province:lang==='ps'?item.ps:item.fa;
+}
+function afghanCapitalDisplayName(province,lang,englishCapital){
+ const item=afghanProvinceLabels[province];
+ return !item?englishCapital:lang==='en'?englishCapital:lang==='ps'?item.capitalPs:item.capitalFa;
+}
+
 const afghanProvinceAttractions=[
  {province:'Bamyan',name:'چشم‌انداز فرهنگی و بقایای باستان‌شناختی درهٔ بامیان',type:'میراث جهانی فرهنگی',status:'ثبت‌شده در فهرست میراث جهانی یونسکو در ۲۰۰۳؛ در فهرست میراث در معرض خطر نیز قرار دارد.',description:'مجموعه‌ای از صومعه‌ها و زیارتگاه‌های بودایی، غارها و استحکامات تاریخی؛ شامل جایگاه تندیس‌های بودا که در ۲۰۰۱ تخریب شدند.',url:'https://whc.unesco.org/en/list/208/',source:'UNESCO World Heritage Centre'},
  {province:'Ghor',name:'منار و بقایای باستان‌شناختی جام',type:'میراث جهانی فرهنگی',status:'ثبت‌شده در فهرست میراث جهانی یونسکو در ۲۰۰۲؛ در فهرست میراث در معرض خطر نیز قرار دارد.',description:'منار آجری حدود ۶۵ متری در درهٔ رود هری‌رود؛ یونسکو تاریخ ساخت آن را ۱۱۹۴ میلادی ذکر می‌کند.',url:'https://whc.unesco.org/en/list/211/',source:'UNESCO World Heritage Centre'},
@@ -311,9 +356,9 @@ function initAfghanProvinceExplorer(){
  select.dataset.ready='true';
  const search=$('#afgProvinceSearch');
  const fillProvinceOptions=(query='')=>{
-  const current=select.value,term=query.trim().toLocaleLowerCase();
-  select.innerHTML='<option value="">'+(document.documentElement.lang==='en'?'Select a province':document.documentElement.lang==='ps'?'ولایت وټاکئ':'یک ولایت را انتخاب کنید')+'</option>';
-  afghanProvinceDirectory.filter(([province,capital])=>!term||[province,capital].some(value=>value.toLocaleLowerCase().includes(term))).forEach(([province])=>{const option=document.createElement('option');option.value=province;option.textContent=province;select.appendChild(option);});
+  const current=select.value,term=query.trim().toLocaleLowerCase(),lang=document.documentElement.lang||'fa';
+  select.innerHTML='<option value="">'+(lang==='en'?'Select a province':lang==='ps'?'ولایت وټاکئ':'یک ولایت را انتخاب کنید')+'</option>';
+  afghanProvinceDirectory.filter(([province,capital])=>{const label=afghanProvinceLabels[province]||{};return !term||[province,capital,label.fa,label.ps,label.capitalFa,label.capitalPs].some(value=>(value||'').toLocaleLowerCase().includes(term));}).forEach(([province])=>{const option=document.createElement('option');option.value=province;option.textContent=afghanProvinceDisplayName(province,lang);select.appendChild(option);});
   if(current&&[...select.options].some(option=>option.value===current))select.value=current;
  };
  fillProvinceOptions();
@@ -321,7 +366,8 @@ function initAfghanProvinceExplorer(){
  select.addEventListener('change',()=>{
   const item=afghanProvinceDirectory.find(([province])=>province===select.value);
   renderAfghanProvinceAttractions(select.value);
-  details.textContent=item?'ولایت: '+item[0]+' | مرکز: '+item[1]+' — نام مرکز نیازمند تأیید رسمی است.':'پس از انتخاب ولایت، اطلاعات آن اینجا نمایش داده می‌شود.';
+  const lang=document.documentElement.lang||'fa';
+  details.textContent=item?(lang==='en'?'Province: '+item[0]+' | Capital: '+item[1]+' — capital name requires official verification.':lang==='ps'?'ولایت: '+afghanProvinceDisplayName(item[0],lang)+' | مرکز: '+afghanCapitalDisplayName(item[0],lang,item[1])+' — د مرکز نوم رسمي تایید ته اړتیا لري.':'ولایت: '+afghanProvinceDisplayName(item[0],lang)+' | مرکز: '+afghanCapitalDisplayName(item[0],lang,item[1])+' — نام مرکز نیازمند تأیید رسمی است.'):(lang==='en'?'Select a province to see its information.':lang==='ps'?'د معلوماتو لپاره ولایت وټاکئ.':'پس از انتخاب ولایت، اطلاعات آن اینجا نمایش داده می‌شود.');
  });
 }
 initAfghanProvinceExplorer();
