@@ -2056,3 +2056,56 @@ body.dark .page input::placeholder,body.dark .page textarea::placeholder{color:#
 @media(prefers-reduced-motion:reduce){
  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+/* Homepage footer contrast fix — consistent readable cards in light and dark themes */
+#dashboardPage .home-footer>div{
+  background:#ffffff!important;
+  color:#173149!important;
+  border:1px solid #d7e2e9!important;
+  border-radius:14px;
+  padding:16px!important;
+  box-shadow:0 6px 18px rgba(18,48,70,.07);
+}
+#dashboardPage .home-footer>div b,
+#dashboardPage .home-footer>div strong,
+#dashboardPage .home-footer>div .footer-brand{
+  color:#142f45!important;
+  opacity:1!important;
+  -webkit-text-fill-color:currentColor!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-footer>div p,
+#dashboardPage .home-footer>div small{
+  color:#40586b!important;
+  opacity:1!important;
+  -webkit-text-fill-color:currentColor!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-footer>div .footer-brand span{color:#0876b9!important;-webkit-text-fill-color:#0876b9!important}
+#dashboardPage .home-footer>div .footer-link{
+  display:block;
+  width:100%;
+  min-height:34px;
+  padding:6px 0!important;
+  background:transparent!important;
+  color:#075f9e!important;
+  -webkit-text-fill-color:#075f9e!important;
+  text-align:start;
+  font-weight:750;
+}
+#dashboardPage .home-footer>div .footer-link:hover{text-decoration:underline}
+body.dark #dashboardPage .home-footer>div{
+  background:#ffffff!important;
+  color:#173149!important;
+  border-color:#d7e2e9!important;
+}
+body.dark #dashboardPage .home-footer>div b,
+body.dark #dashboardPage .home-footer>div strong,
+body.dark #dashboardPage .home-footer>div .footer-brand{color:#142f45!important;-webkit-text-fill-color:#142f45!important}
+body.dark #dashboardPage .home-footer>div p,
+body.dark #dashboardPage .home-footer>div small{color:#40586b!important;-webkit-text-fill-color:#40586b!important}
+body.dark #dashboardPage .home-footer>div .footer-link{color:#075f9e!important;-webkit-text-fill-color:#075f9e!important}
+@media(max-width:650px){
+ #dashboardPage .home-footer{grid-template-columns:1fr!important;gap:10px}
+ #dashboardPage .home-footer>div{padding:14px!important;border:1px solid #d7e2e9!important}
+}
