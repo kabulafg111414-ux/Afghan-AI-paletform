@@ -729,3 +729,16 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 #historyculturePage .historyculture-course-card summary{cursor:pointer;font-weight:700}
 #historyculturePage .historyculture-timeline,#historyculturePage .historyculture-references{margin-top:20px}
 #historyculturePage .historyculture-controls input,#historyculturePage .historyculture-controls select{max-width:100%}
+
+/* Afghanistan province directory */
+.afg-province-explorer{margin:20px 0;padding:19px;border:1px solid var(--border);border-radius:17px;background:var(--surface)}
+.afg-province-heading{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.afg-province-heading>span{font-size:1.8rem}
+.afg-province-heading h2{margin:0 0 4px;font-size:1.15rem}
+.afg-province-heading p,.afg-province-source{margin:0;color:var(--muted);line-height:1.8}
+.afg-province-explorer label{display:block;margin:12px 0 7px;font-weight:700}
+.afg-province-explorer select{width:100%;max-width:520px;box-sizing:border-box;padding:13px;border:1px solid var(--border);border-radius:11px;background:var(--surface);color:var(--text);font:inherit}
+.afg-province-details{margin:14px 0;padding:13px;border-radius:11px;background:var(--background,transparent);line-height:1.8}
+.afg-province-source{font-size:.88rem;margin:10px 0}
+.afg-province-explorer>a{display:inline-block;margin-top:8px;color:var(--accent,#269caa)}
+@media(max-width:560px){.afg-province-explorer{padding:14px}.afg-province-explorer select{max-width:none}}
