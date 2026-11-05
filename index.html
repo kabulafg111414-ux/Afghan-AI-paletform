@@ -31,7 +31,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 </head>
 <body>
 <header class="topbar">
-  <button class="mobile-menu" id="mobileMenu" aria-label="باز کردن منو">☰</button>
+  <button class="mobile-menu" id="mobileMenu" aria-label="باز کردن فهرست بخش‌ها" aria-controls="sidebar" aria-expanded="false">☰</button>
   <a class="brand" href="#" data-page="dashboard"><img class="brand-logo-img" src="./assets/afghan-ai-logo.svg" alt="Afghan AI logo"><div><strong>Afghan AI</strong><small id="brandSub">معلم هوشمند افغانستان</small></div></a>
   <div class="top-actions">
     <select id="uiLanguage" class="lang-select" aria-label="زبان رابط"><option value="fa">دری</option><option value="ps">پښتو</option><option value="en">English</option></select>
@@ -42,6 +42,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 <div class="layout">
 <aside class="sidebar" id="sidebar">
   <div class="profile"><div class="profile-icon">🎓</div><div><b id="welcomeSmall">خوش آمدید!</b><small id="roleLabel">دانش‌آموز مهمان</small></div></div>
+  <div class="sidebar-mobile-head"><strong>تمام بخش‌های افغان AI</strong><button type="button" id="closeSidebar" aria-label="بستن فهرست">✕</button></div>
   <button class="nav active" data-page="dashboard"><span class="nav-icon">⌂</span><span data-i18n="navHome">صفحهٔ اصلی</span></button>
   <button class="nav" data-page="tutor"><span class="nav-icon">✦</span><span data-i18n="navTutor">معلم هوشمند</span></button>
   <button class="nav" data-page="translator"><span class="nav-icon">⇄</span><span data-i18n="navTranslator">مترجم هوشمند</span></button>
