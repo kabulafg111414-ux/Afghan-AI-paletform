@@ -348,8 +348,21 @@ function renderAfghanProvinceAttractions(province){
  const panel=$('#afgProvinceSites');if(!panel)return;
  const provinceKey=normalizeAfghanProvinceName(province);
  const items=afghanProvinceAttractions.filter(item=>item.province===provinceKey);
- panel.innerHTML='<h3>میراث و طبیعت این ولایت</h3>'+(items.length?items.map(item=>'<article class="afg-attraction-card"><span class="afg-attraction-type">'+item.type+'</span><h4>'+item.name+'</h4><p>'+item.description+'</p><p class="afg-attraction-status">'+item.status+'</p><a href="'+item.url+'" target="_blank" rel="noopener noreferrer">منبع: '+item.source+'</a></article>').join(''):'<p>در این نسخه هنوز جاذبهٔ دارای منبع معتبر برای این ولایت ثبت نشده است. از افزودن اطلاعات تأییدنشده خودداری شده است.</p>');
+ const search=$('#afgAttractionSearch'),filter=$('#afgAttractionFilter');
+ const lang=document.documentElement.lang||'fa';
+ const term=(search?.value||'').trim().toLocaleLowerCase(),kind=filter?.value||'all';
+ const types=[...new Set(items.map(item=>item.type))];
+ if(filter){
+  const previous=filter.value||'all';
+  filter.innerHTML='<option value="all">'+(lang==='en'?'All categories':lang==='ps'?'ټولې کټګورۍ':'همهٔ دسته‌ها')+'</option>'+types.map(type=>'<option value="'+type.replace(/"/g,'&quot;')+'">'+type+'</option>').join('');
+  filter.value=types.includes(previous)?previous:'all';
+ }
+ const filtered=items.filter(item=>(kind==='all'||item.type===kind)&&(!term||[item.name,item.type,item.description,item.status,item.source].some(value=>(value||'').toLocaleLowerCase().includes(term))));
+ const title=lang==='en'?'Heritage and nature':lang==='ps'?'د دې ولایت میراث او طبیعت':'میراث و طبیعت این ولایت';
+ const empty=lang==='en'?'No sourced attractions match this search.':lang==='ps'?'د دې لټون لپاره د باوري سرچینې لرونکي ځایونه ونه موندل شول.':'برای این جستجو جاذبهٔ دارای منبع معتبر پیدا نشد.';
+ panel.innerHTML='<h3>'+title+'</h3>'+(filtered.length?filtered.map(item=>'<article class="afg-attraction-card"><span class="afg-attraction-type">'+item.type+'</span><h4>'+item.name+'</h4><p>'+item.description+'</p><p class="afg-attraction-status">'+item.status+'</p><a href="'+item.url+'" target="_blank" rel="noopener noreferrer">'+(lang==='en'?'Source: ':lang==='ps'?'سرچینه: ':'منبع: ')+item.source+'</a></article>').join(''):'<p>'+empty+'</p>');
 }
+
 function initAfghanProvinceExplorer(){
  const select=$('#afgProvinceSelect'),details=$('#afgProvinceDetails');
  if(!select||!details||select.dataset.ready==='true')return;
@@ -371,6 +384,8 @@ function initAfghanProvinceExplorer(){
  });
 }
 initAfghanProvinceExplorer();
+$('#afgAttractionSearch')?.addEventListener('input',()=>renderAfghanProvinceAttractions($('#afgProvinceSelect')?.value));
+$('#afgAttractionFilter')?.addEventListener('change',()=>renderAfghanProvinceAttractions($('#afgProvinceSelect')?.value));
 let afghanLeafletMap=null,afghanProvinceLayer=null;
 function initAfghanInteractiveMap(){
  const host=$('#afgProvinceMap'),details=$('#afgProvinceDetails'),select=$('#afgProvinceSelect');
