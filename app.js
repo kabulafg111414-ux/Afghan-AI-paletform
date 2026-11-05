@@ -604,7 +604,11 @@ $('#translatorCopy')?.addEventListener('click',async()=>{const text=trResult.tex
 
 $('#profileBtn').onclick=()=>alert('این نسخه نمایشی است. ورود امن و پروفایل شخصی در مرحلهٔ بعد توسعه می‌یابد.');
 $('#checkApi').onclick=async()=>{let out=$('#apiStatus');out.textContent='در حال بررسی...';try{let r=await fetch('/api/health');let d=await r.json();out.textContent=d.ai_configured?'سرور در دسترس است؛ کلید API تنظیم شده.':'سرور در دسترس است، اما کلید API هنوز تنظیم نشده است.'}catch(e){out.textContent='سرور پیدا نشد. برای پاسخ هوش مصنوعی، برنامهٔ سرور را مطابق README اجرا کنید.'}};
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(err=>console.info('Offline support unavailable:',err)));
+// Disable the stale offline worker while the platform is being refreshed.
+if('serviceWorker'in navigator)window.addEventListener('load',async()=>{
+ try{const regs=await navigator.serviceWorker.getRegistrations();await Promise.all(regs.map(reg=>reg.unregister()));}catch(e){console.info('Service worker cleanup:',e)}
+ try{if('caches'in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('afghan-ai-')).map(k=>caches.delete(k)));}}catch(e){console.info('Cache cleanup:',e)}
+});
 let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('#installBtn').classList.remove('hidden')});$('#installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}};
 updateStats();renderProgress();startQuiz();
 
