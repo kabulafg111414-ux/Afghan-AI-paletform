@@ -2270,3 +2270,18 @@ body.dark .fund-qr-placeholder{background:#132722;border-color:#426458;color:#e3
 .fund-open-app:hover{background:#06664f}
 body.dark .fund-howto{background:#203b34;border-color:#426458;color:#eaf6ef}
 body.dark .fund-howto h3{color:#a8e8c9}
+
+/* HesabPay profile card preview */
+.hesabpay-profile-card{margin:16px 0 20px;padding:22px 18px 18px;border-radius:22px;background:linear-gradient(145deg,#0879a8,#0795c6);color:#fff;text-align:center;box-shadow:0 12px 28px rgba(0,91,135,.2);overflow:hidden}
+.hesabpay-card-top{display:flex;justify-content:center;align-items:center;gap:22px;margin-bottom:22px}
+.hesabpay-avatar{width:112px;height:112px;border:5px solid #f7fbff;border-radius:50%;overflow:hidden;background:#ddd;flex:none}
+.hesabpay-avatar svg{width:100%;height:100%;display:block}
+.hesabpay-card-qr{width:112px;height:112px;background:#fff;border-radius:22px;padding:8px;flex:none}
+.hesabpay-card-qr img{width:100%;height:100%;object-fit:contain;display:block}
+.hesabpay-card-name{font-size:clamp(17px,4vw,25px);font-weight:850;letter-spacing:.025em;line-height:1.25;overflow-wrap:anywhere}
+.hesabpay-card-phone{font-size:clamp(17px,3.6vw,23px);margin:12px 0 15px;color:#f5fbff}
+.hesabpay-card-phone span{font-size:.8em}
+.hesabpay-verified{display:inline-flex;align-items:center;gap:8px;padding:8px 24px;border:2px solid #ccebd9;border-radius:30px;background:#edf8f3;color:#208b4c;font-size:19px;font-weight:800}
+.hesabpay-verified span{font-size:22px}
+.hesabpay-card-caption{font-size:12px;opacity:.9;margin:14px 0 0}
+@media(max-width:390px){.hesabpay-profile-card{padding:17px 12px}.hesabpay-card-top{gap:14px}.hesabpay-avatar,.hesabpay-card-qr{width:96px;height:96px}.hesabpay-card-name{font-size:16px}}
