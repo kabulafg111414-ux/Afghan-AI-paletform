@@ -461,7 +461,27 @@ function renderHistoryCultureCenter(){
 $('#historycultureSearch')?.addEventListener('input',renderHistoryCultureCenter);
 $('#historycultureCategory')?.addEventListener('change',renderHistoryCultureCenter);
 
-function showPage(name){if(name!=='quiz'&&quizInProgress&&quizTimer!==null){clearInterval(quizTimer);quizTimer=null;}pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));closeMobileMenu();if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='agriculture')renderAgricultureCenter();if(name==='engineering')renderEngineeringCenter();if(name==='historyculture')renderHistoryCultureCenter();if(name==='historyculture'&&afghanLeafletMap)setTimeout(()=>afghanLeafletMap.invalidateSize(),120);if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'){if(!quizInProgress)startQuiz();else if(quizTimer===null)startQuizTimer();}if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
+function showPage(name){
+ if(!pages.includes(name))return false;
+ if(name!=='quiz'&&quizInProgress&&quizTimer!==null){clearInterval(quizTimer);quizTimer=null;}
+ pages.forEach(pageName=>{
+  const section=document.getElementById(pageName+'Page');
+  if(section)section.classList.toggle('hidden',pageName!==name);
+ });
+ document.querySelectorAll('.nav[data-page]').forEach(button=>button.classList.toggle('active',button.dataset.page===name));
+ try{if(typeof closeMobileMenu==='function')closeMobileMenu();}catch(error){console.warn('Menu close:',error);}
+ const renderers={
+  language:()=>renderLanguageCenter(),digital:()=>renderDigitalCenter(),health:()=>renderHealthCenter(),
+  business:()=>renderBusinessCenter(),law:()=>renderLawCenter(),agriculture:()=>renderAgricultureCenter(),
+  engineering:()=>renderEngineeringCenter(),historyculture:()=>renderHistoryCultureCenter(),
+  lessons:()=>renderLessons(),library:()=>renderLibrary(),progress:()=>renderProgress()
+ };
+ try{if(renderers[name])renderers[name]();}catch(error){console.error('Afghan AI section renderer failed:',name,error);}
+ if(name==='historyculture'&&afghanLeafletMap){try{setTimeout(()=>afghanLeafletMap.invalidateSize(),120);}catch(error){}}
+ if(name==='quiz'){try{if(!quizInProgress)startQuiz();else if(quizTimer===null)startQuizTimer();}catch(error){console.error('Quiz start failed:',error);}}
+ window.scrollTo({top:0,behavior:'smooth'});
+ return true;
+}
 $$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const target=b.dataset.page;if(pages.includes(target)&&$('#'+target+'Page'))showPage(target)}));
 function closeMobileMenu(){
  const sidebar=$('#sidebar'),backdrop=$('#sidebarBackdrop');
@@ -891,45 +911,14 @@ $('#vocationalPlanBtn')?.addEventListener('click',()=>{
 renderVocationalCenter();
 
 
-/* Afghan AI navigation recovery: tolerate missing optional sections and
-   guarantee that every existing data-page destination can be opened. */
-(function installNavigationRecovery(){
-  const previousShowPage = showPage;
-  window.showPage = function(name){
-    if(!Array.isArray(pages) || !pages.includes(name)) return;
-    try {
-      if(typeof previousShowPage === 'function') previousShowPage(name);
-    } catch(error) {
-      console.warn('Afghan AI navigation fallback:', error);
-    }
-    // Always finish the page transition, even if an optional renderer fails.
-    pages.forEach(function(pageName){
-      const section = document.getElementById(pageName + 'Page');
-      if(section) section.classList.toggle('hidden', pageName !== name);
-    });
-    document.querySelectorAll('.nav[data-page]').forEach(function(button){
-      button.classList.toggle('active', button.dataset.page === name);
-    });
-    document.body.classList.remove('sidebar-menu-open');
-    const sidebar = document.getElementById('sidebar');
-    const backdrop = document.getElementById('sidebarBackdrop');
-    const menuButton = document.getElementById('mobileMenu');
-    if(sidebar) sidebar.classList.remove('open');
-    if(backdrop) backdrop.classList.remove('is-visible');
-    if(menuButton) menuButton.setAttribute('aria-expanded','false');
-    window.scrollTo({top:0,behavior:'smooth'});
-  };
+/* Mobile navigation uses one delegated handler for all menu buttons. */
+document.addEventListener('click',function(event){
+ const button=event.target&&event.target.closest?event.target.closest('#sidebar [data-page], [data-page].home-primary, [data-page].link-button'):null;
+ if(!button)return;
+ const target=button.dataset.page;
+ if(!pages.includes(target)||!document.getElementById(target+'Page'))return;
+ event.preventDefault();
+ event.stopImmediatePropagation();
+ showPage(target);
+},true);
 
-  // Capture navigation taps first so mobile taps and nested card elements work.
-  document.addEventListener('click', function(event){
-    const button = event.target && event.target.closest
-      ? event.target.closest('[data-page]') : null;
-    if(!button) return;
-    const target = button.dataset.page;
-    if(!pages || !pages.includes(target) ||
-       !document.getElementById(target + 'Page')) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    window.showPage(target);
-  }, true);
-})();
