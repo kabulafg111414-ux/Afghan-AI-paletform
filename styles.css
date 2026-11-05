@@ -761,3 +761,120 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .afg-attraction-type{font-size:.8rem;font-weight:750;color:var(--accent,#269caa)}
 .afg-attraction-status{font-size:.88rem;color:var(--muted)!important}
 .afg-attraction-card a{color:var(--accent,#269caa);overflow-wrap:anywhere}
+
+
+/* Afghan AI — premium interface refinement */
+:root{
+ --g:#087b63;--ink:#142b36;--mut:#667b86;--bg:#f2f6f8;--line:#dce7ec;
+ --afg-navy:#071d36;--afg-blue:#0b4770;--afg-cyan:#45c3d5;--afg-mint:#5bd3b0;
+}
+.topbar{
+ background:rgba(255,255,255,.88);backdrop-filter:blur(18px);
+ border-bottom:1px solid rgba(130,160,177,.22);
+ box-shadow:0 5px 24px rgba(13,43,65,.055);
+}
+.brand{gap:12px}.brand-logo-img{width:43px;height:43px;object-fit:contain;filter:drop-shadow(0 5px 9px rgba(7,69,91,.12))}
+.brand strong{letter-spacing:-.035em;font-size:1.12rem;color:#092d48}
+.brand small{letter-spacing:.01em}
+.lang-select,.top-actions .outline,.icon-btn,.avatar{
+ min-height:42px;border-radius:13px;border:1px solid #dce8ed;
+ transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+.lang-select:focus-visible,.top-actions button:focus-visible,.nav:focus-visible,
+.home-redesign button:focus-visible{outline:3px solid rgba(39,164,190,.65);outline-offset:3px}
+.sidebar{background:rgba(255,255,255,.91);backdrop-filter:blur(16px);border-color:#e0eaf0}
+.profile{border-color:#e5edf1}.profile-icon{background:linear-gradient(145deg,#e4f8f1,#e7f3ff);color:#087b63}
+.nav{border:1px solid transparent;transition:background .18s ease,color .18s ease,transform .18s ease}
+.nav:hover{transform:translateX(-2px)}
+.nav.active{background:linear-gradient(100deg,#e6f7f2,#edf7fb);border-color:#d6eee7;color:#08745f}
+.home-redesign{max-width:1240px}
+.home-hero{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;padding:clamp(24px,4vw,48px);min-height:330px}
+.home-hero-copy{max-width:590px}
+.home-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid rgba(130,225,229,.28);border-radius:999px;background:rgba(10,48,78,.48);color:#a8f0e1;letter-spacing:.08em;font-size:.76rem;font-weight:800}
+.home-hero h1{font-size:clamp(2rem,4.5vw,3.7rem);line-height:1.12;letter-spacing:-.045em;text-wrap:balance}
+.home-hero h1 span{background:linear-gradient(90deg,#80f0d0,#70d9ef 75%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.home-lead{max-width:54ch;line-height:1.85;color:#d4e7f2}
+.home-primary{border:0;border-radius:14px;padding:13px 20px;background:linear-gradient(105deg,#70e0bf,#8be4ed);color:#082b40;font-weight:850;box-shadow:0 10px 28px rgba(66,211,195,.2)}
+.home-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(66,211,195,.3)}
+.home-language-actions{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.home-lang{border:1px solid rgba(210,239,248,.28);background:rgba(255,255,255,.08);color:#e8f7fb;border-radius:999px;padding:8px 14px}
+.home-lang.active{background:#e5fff5;color:#075a50;border-color:#a9ead6;font-weight:800}
+.home-hero-art{border:1px solid rgba(255,255,255,.22);border-radius:23px;box-shadow:0 18px 42px rgba(0,0,0,.2)}
+.home-content-layout{gap:24px;margin-top:28px}
+.home-section-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}
+.home-section-heading h2{font-size:clamp(1.35rem,2.4vw,1.8rem);letter-spacing:-.025em}
+.home-section-kicker{font-size:.72rem;letter-spacing:.16em;font-weight:850;color:#078b80}
+.home-service{border-radius:20px;min-height:190px;padding:20px;background:linear-gradient(145deg,#fff,#f5f9fc);color:#15344a;text-align:start}
+.home-service h3{font-size:1.08rem;letter-spacing:-.015em}
+.home-service p{color:#657c89;line-height:1.75}
+.home-service .service-cta{color:#087b70;font-weight:850}
+.home-service.service-blue{background:linear-gradient(145deg,#edf6ff,#e5f0ff)}
+.home-service.service-green{background:linear-gradient(145deg,#eafaf3,#e0f5ed)}
+.home-service.service-purple{background:linear-gradient(145deg,#f4efff,#eee9ff)}
+.home-service.service-orange{background:linear-gradient(145deg,#fff5e8,#ffeedc)}
+.home-service .service-symbol{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.78);display:grid;place-items:center;font-size:1.55rem}
+.home-promo{border:1px solid rgba(115,202,190,.2);border-radius:20px;background:linear-gradient(110deg,#082c4b,#0a6c70);padding:22px}
+.home-promo h2{color:#f1fffc}.home-promo p{color:#c2e7e1}
+.home-promo button{border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:10px 14px;background:#e5fff5;color:#07564c;font-weight:800}
+.home-stat{border:1px solid #e1ebef;border-radius:18px;background:rgba(255,255,255,.88);padding:18px}
+.home-stat b{color:#0b4960;font-size:1.55rem}
+.home-side-card,.home-quote{border:1px solid #e1ebef;border-radius:20px;background:rgba(255,255,255,.9);color:#19394b}
+.home-side-card h3{color:#123c50}
+.home-side-card button{border-radius:12px;transition:background .18s ease,transform .18s ease}
+.home-side-card button:hover{background:#edf8f6;transform:translateX(-2px)}
+.home-quote{background:linear-gradient(145deg,#0a3151,#0b6670);color:#e9fffa;border:0}
+.home-quote p{line-height:1.9}
+.home-footer{gap:22px;border-top:1px solid #dce8ed}
+.home-footer>div{padding:16px;border:1px solid #e2ebef;border-radius:16px;background:rgba(255,255,255,.48)}
+.home-footer .footer-brand{font-size:1.3rem;color:#0c4560}
+body.dark .topbar,body.dark .sidebar{background:rgba(12,29,29,.92);border-color:#24413c}
+body.dark .brand strong{color:#e2f5ef}
+body.dark .brand small,body.dark .profile small{color:#a5bdb4}
+body.dark .nav{color:#b6c9c2}
+body.dark .nav.active{background:linear-gradient(100deg,#153b34,#173544);border-color:#285a50;color:#8fe4ca}
+body.dark .lang-select,body.dark .icon-btn{background:#142b2a;color:#e5f4ee;border-color:#34534a}
+body.dark .home-service{color:#e3f2f7;border-color:#35515d}
+body.dark .home-service p{color:#bdd0d7}
+body.dark .home-service.service-blue{background:linear-gradient(145deg,#142c42,#18364d)}
+body.dark .home-service.service-green{background:linear-gradient(145deg,#14372f,#19443a)}
+body.dark .home-service.service-purple{background:linear-gradient(145deg,#28233e,#342b50)}
+body.dark .home-service.service-orange{background:linear-gradient(145deg,#3b2c20,#493521)}
+body.dark .home-service .service-cta{color:#8ee7d1}
+body.dark .home-stat,body.dark .home-side-card,body.dark .home-footer>div{background:rgba(17,39,38,.88);border-color:#294841;color:#d9eee7}
+body.dark .home-stat b,body.dark .home-side-card h3,body.dark .home-footer .footer-brand{color:#9debd8}
+body.dark .home-side-card button{color:#dceee8}
+body.dark .home-side-card button:hover{background:#193c35}
+body.dark .home-footer p,body.dark .home-footer small{color:#a9c0b7}
+@media(max-width:900px){
+ .home-hero{min-height:0}.home-content-layout{gap:18px}
+ .home-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+ .topbar{height:64px;padding-inline:12px}
+ .brand-logo-img{width:37px;height:37px}
+ .brand small{max-width:135px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ .main{padding:16px 12px 28px}
+ .home-hero{padding:22px 18px;border-radius:20px;gap:20px}
+ .home-hero h1{font-size:clamp(1.9rem,9vw,2.7rem)}
+ .home-hero-art{min-height:205px}
+ .home-section-heading{align-items:start;flex-direction:column}
+ .home-feature-grid{grid-template-columns:1fr 1fr;gap:10px}
+ .home-service{min-height:184px;padding:14px;border-radius:16px}
+ .home-service h3{font-size:.98rem}
+ .home-service p{font-size:.82rem}
+ .home-promo{padding:17px;gap:12px;flex-wrap:wrap}
+ .home-stats{grid-template-columns:1fr;gap:9px}
+ .home-stat{display:grid;grid-template-columns:38px 1fr auto;align-items:center;gap:8px;padding:12px}
+ .home-stat>span{grid-row:span 2}
+ .home-stat b{grid-column:3;grid-row:1/3}
+ .home-footer{grid-template-columns:1fr;gap:10px}
+ .home-footer>div{padding:14px}
+}
+@media(max-width:380px){
+ .home-feature-grid{grid-template-columns:1fr}
+ .top-actions{gap:5px}.lang-select{max-width:90px;padding:7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .nav,.home-primary,.home-service,.home-side-card button{transition:none}
+ .nav:hover,.home-primary:hover,.home-service:hover,.home-side-card button:hover{transform:none}
+}
