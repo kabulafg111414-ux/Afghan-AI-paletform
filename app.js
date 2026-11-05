@@ -350,13 +350,14 @@ function renderAfghanProvinceAttractions(province){
  const items=afghanProvinceAttractions.filter(item=>item.province===provinceKey);
  const search=$('#afgAttractionSearch'),filter=$('#afgAttractionFilter');
  const lang=document.documentElement.lang||'fa';
- const term=(search?.value||'').trim().toLocaleLowerCase(),kind=filter?.value||'all';
+ const term=(search?.value||'').trim().toLocaleLowerCase();
  const types=[...new Set(items.map(item=>item.type))];
  if(filter){
   const previous=filter.value||'all';
   filter.innerHTML='<option value="all">'+(lang==='en'?'All categories':lang==='ps'?'ټولې کټګورۍ':'همهٔ دسته‌ها')+'</option>'+types.map(type=>'<option value="'+type.replace(/"/g,'&quot;')+'">'+type+'</option>').join('');
   filter.value=types.includes(previous)?previous:'all';
  }
+ const kind=filter?.value||'all';
  const filtered=items.filter(item=>(kind==='all'||item.type===kind)&&(!term||[item.name,item.type,item.description,item.status,item.source].some(value=>(value||'').toLocaleLowerCase().includes(term))));
  const title=lang==='en'?'Heritage and nature':lang==='ps'?'د دې ولایت میراث او طبیعت':'میراث و طبیعت این ولایت';
  const empty=lang==='en'?'No sourced attractions match this search.':lang==='ps'?'د دې لټون لپاره د باوري سرچینې لرونکي ځایونه ونه موندل شول.':'برای این جستجو جاذبهٔ دارای منبع معتبر پیدا نشد.';
