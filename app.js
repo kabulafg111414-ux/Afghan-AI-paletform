@@ -309,7 +309,15 @@ function initAfghanProvinceExplorer(){
  const select=$('#afgProvinceSelect'),details=$('#afgProvinceDetails');
  if(!select||!details||select.dataset.ready==='true')return;
  select.dataset.ready='true';
- afghanProvinceDirectory.forEach(([province,capital])=>{const option=document.createElement('option');option.value=province;option.textContent=province;select.appendChild(option);});
+ const search=$('#afgProvinceSearch');
+ const fillProvinceOptions=(query='')=>{
+  const current=select.value,term=query.trim().toLocaleLowerCase();
+  select.innerHTML='<option value="">'+(document.documentElement.lang==='en'?'Select a province':document.documentElement.lang==='ps'?'ولایت وټاکئ':'یک ولایت را انتخاب کنید')+'</option>';
+  afghanProvinceDirectory.filter(([province,capital])=>!term||[province,capital].some(value=>value.toLocaleLowerCase().includes(term))).forEach(([province])=>{const option=document.createElement('option');option.value=province;option.textContent=province;select.appendChild(option);});
+  if(current&&[...select.options].some(option=>option.value===current))select.value=current;
+ };
+ fillProvinceOptions();
+ search?.addEventListener('input',()=>fillProvinceOptions(search.value));
  select.addEventListener('change',()=>{
   const item=afghanProvinceDirectory.find(([province])=>province===select.value);
   renderAfghanProvinceAttractions(select.value);
