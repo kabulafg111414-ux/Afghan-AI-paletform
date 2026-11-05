@@ -22,6 +22,7 @@
   <button class="nav active" data-page="dashboard"><span class="nav-icon">⌂</span><span data-i18n="navHome">صفحهٔ اصلی</span></button>
   <button class="nav" data-page="tutor"><span class="nav-icon">✦</span><span data-i18n="navTutor">معلم هوشمند</span></button>
   <button class="nav" data-page="translator"><span class="nav-icon">⇄</span><span data-i18n="navTranslator">مترجم هوشمند</span></button>
+  <button class="nav" data-page="vocational"><span class="nav-icon">🛠️</span><span>مهارت‌های حرفه‌ای</span></button>
   <button class="nav" data-page="language"><span class="nav-icon">🌐</span><span>مرکز آموزش زبان‌ها</span></button>
   <button class="nav" data-page="digital"><span class="nav-icon">💻</span><span>مهارت‌های دیجیتال</span></button>
   <button class="nav" data-page="health"><span class="nav-icon">🩺</span><span>مرکز علوم طبی و صحت</span></button>
@@ -127,6 +128,15 @@
  </div>
 </section>
 
+
+<section id="vocationalPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI • VOCATIONAL SKILLS ACADEMY</span><h1>🛠️ مرکز آموزش حرفه‌ای و مهارت‌های بازار کار</h1><p>آموزش مقدماتی مهارت‌های فنی، تمرین‌های کاربردی و آمادگی ورود به بازار کار.</p></div>
+ <div class="historyculture-notice"><b>یادگیری همراه با ایمنی</b><p>مطالب این مرکز آموزشی‌اند. کار با برق شهری، گاز، ماشین‌آلات، ابزار برش و مواد خطرناک باید با استاد ماهر، تجهیزات محافظتی و مقررات ایمنی انجام شود. این درس‌ها جایگزین آموزش عملی و جواز حرفه‌ای نیستند.</p></div>
+ <div class="historyculture-controls"><label for="vocationalSearch">جستجوی مهارت</label><input id="vocationalSearch" type="search" placeholder="مثلاً سولر، موبایل، خیاطی..." dir="auto"><label for="vocationalCategory">دسته‌بندی</label><select id="vocationalCategory"><option value="all">همهٔ مهارت‌ها</option><option value="energy">برق و انرژی</option><option value="repair">ترمیم و تکنالوژی</option><option value="craft">صنایع دستی و تولید</option><option value="construction">ساختمان و چوب</option><option value="food">غذا و خدمات</option></select></div>
+ <div id="vocationalCourseGrid" class="historyculture-course-grid"></div>
+ <article class="tool-card" style="max-width:680px;margin-top:22px"><h2>🧭 طرح مسیر یادگیری مهارت</h2><p>یک مهارت را انتخاب کنید و برنامهٔ تمرین هفتگی پیشنهادی را ببینید.</p><label for="vocationalPath">مهارت مورد علاقه</label><select id="vocationalPath"><option value="solar">نصب سیستم خورشیدی</option><option value="mobile">ترمیم موبایل</option><option value="sewing">خیاطی</option><option value="computer">ترمیم کمپیوتر</option><option value="carpentry">نجاری</option><option value="cooking">آشپزی</option></select><button id="vocationalPlanBtn" class="primary">نمایش برنامهٔ هفتگی</button><div id="vocationalPlanResult" aria-live="polite">برای دیدن برنامه، مهارت را انتخاب کنید.</div></article>
+ <p class="disclaimer">برای ورود به بازار کار، تمرین زیر نظر استاد، رعایت معیارهای ایمنی و آشنایی با مقررات محلی ضروری است.</p>
+</section>
 
 <section id="languagePage" class="page hidden">
  <div class="page-title"><span class="eyebrow">LANGUAGE LEARNING CENTER</span><h1>🌐 مرکز آموزش زبان‌ها</h1><p>تمرین واژگان و عبارت‌های روزمره به دری، پشتو و انگلیسی.</p></div>
