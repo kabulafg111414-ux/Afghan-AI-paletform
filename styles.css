@@ -1560,3 +1560,34 @@ body.dark #dashboardPage .home-footer>div b,body.dark #dashboardPage .home-foote
 body.dark #dashboardPage .home-footer>div p{color:#40586b!important}
 body.dark #dashboardPage .home-footer>div small{color:#526a7b!important}
 body.dark #dashboardPage .home-footer>div .footer-link{color:#075f9e!important}
+
+
+/* License & Intellectual Property card: dark, comfortable text on white */
+#dashboardPage .home-footer>div:nth-child(2){
+  background:#fff!important;
+  color:#173149!important;
+  border:1px solid #d7e2e9!important;
+}
+#dashboardPage .home-footer>div:nth-child(2) b,
+#dashboardPage .home-footer>div:nth-child(2) strong{
+  color:#142f45!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-footer>div:nth-child(2) p{
+  color:#344f63!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-footer>div:nth-child(2) small{
+  color:#4c6577!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+body.dark #dashboardPage .home-footer>div:nth-child(2){
+  background:#fff!important;color:#173149!important;border-color:#d7e2e9!important;
+}
+body.dark #dashboardPage .home-footer>div:nth-child(2) b,
+body.dark #dashboardPage .home-footer>div:nth-child(2) strong{color:#142f45!important}
+body.dark #dashboardPage .home-footer>div:nth-child(2) p{color:#344f63!important}
+body.dark #dashboardPage .home-footer>div:nth-child(2) small{color:#4c6577!important}
