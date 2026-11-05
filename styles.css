@@ -2261,3 +2261,12 @@ body.dark .fund-qr-placeholder{background:#132722;border-color:#426458;color:#e3
 @media(max-width:700px){.fund-grid,.fund-payment-layout{grid-template-columns:1fr}.fund-card,.fund-transparency{padding:16px}}
 
 .fund-qr-live{background:#fff!important;padding:14px!important}.fund-qr-live img{display:block;width:min(100%,300px);height:auto;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:8px}.fund-qr-live b{color:#173b32}.fund-qr-live small{color:#36564a}
+
+/* HesabPay scan and payment guide */
+.fund-howto{margin-top:18px;padding:15px 17px;border:1px solid #d7e6df;border-radius:14px;background:#f5faf7}
+.fund-howto h3{margin:0 0 8px;font-size:16px;color:#174b3a}
+.fund-howto ol{margin:0;padding-inline-start:22px;line-height:1.9}
+.fund-open-app{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 18px;border-radius:12px;background:#087b62;color:#fff!important;text-decoration:none!important;font-weight:800;box-shadow:0 6px 18px #087b6230}
+.fund-open-app:hover{background:#06664f}
+body.dark .fund-howto{background:#203b34;border-color:#426458;color:#eaf6ef}
+body.dark .fund-howto h3{color:#a8e8c9}
