@@ -1244,3 +1244,83 @@ body.dark .home-redesign .home-quote p{color:#d1e1e9!important}
  .home-redesign .home-service p{font-size:.86rem!important;line-height:1.7!important}
  .home-redesign .home-service{min-height:185px;padding:17px!important}
 }
+
+
+/* Global reading accessibility pass — all app sections */
+:root{--read-ink:#173149;--read-muted:#435d72;--read-line:#d4e1e9}
+body{ -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility }
+.page:not(#dashboardPage) .page-title h1,
+.page:not(#dashboardPage) h1,
+.page:not(#dashboardPage) h2,
+.page:not(#dashboardPage) h3,
+.page:not(#dashboardPage) h4{color:var(--read-ink);font-weight:800;line-height:1.45}
+.page:not(#dashboardPage) p,
+.page:not(#dashboardPage) li,
+.page:not(#dashboardPage) label,
+.page:not(#dashboardPage) .disclaimer,
+.page:not(#dashboardPage) .empty-state{color:var(--read-muted);line-height:1.85}
+.page:not(#dashboardPage) .eyebrow{color:#075e55;font-weight:800;letter-spacing:.045em}
+.page:not(#dashboardPage) .tool-card,
+.page:not(#dashboardPage) .chat-card,
+.page:not(#dashboardPage) .translator-card,
+.page:not(#dashboardPage) .quiz-card,
+.page:not(#dashboardPage) .admin-card,
+.page:not(#dashboardPage) .info-card,
+.page:not(#dashboardPage) .lesson-detail,
+.page:not(#dashboardPage) .subject-card,
+.page:not(#dashboardPage) .progress-card,
+.page:not(#dashboardPage) .library-card,
+.page:not(#dashboardPage) .historyculture-card{
+ color:var(--read-ink);background:#fff;border:1px solid var(--read-line);box-shadow:0 8px 26px rgba(16,48,70,.07)
+}
+.page:not(#dashboardPage) input,
+.page:not(#dashboardPage) textarea,
+.page:not(#dashboardPage) select{color:#142f45;background:#fff;border:1px solid #aebfcb}
+.page:not(#dashboardPage) input::placeholder,
+.page:not(#dashboardPage) textarea::placeholder{color:#667c8e;opacity:1}
+.page:not(#dashboardPage) button:not(.primary):not(.home-primary):not(.nav){color:#173149}
+.page:not(#dashboardPage) .quiz-option button,
+.page:not(#dashboardPage) .quiz-options button{color:#173149;background:#fff;border:1px solid #c8d7e1;font-weight:650}
+.page:not(#dashboardPage) .quiz-option button:hover,
+.page:not(#dashboardPage) .quiz-options button:hover{background:#edf6fb;border-color:#4c9bc1}
+body.dark .page:not(#dashboardPage) .page-title h1,
+body.dark .page:not(#dashboardPage) h1,
+body.dark .page:not(#dashboardPage) h2,
+body.dark .page:not(#dashboardPage) h3,
+body.dark .page:not(#dashboardPage) h4{color:#f2f7fb}
+body.dark .page:not(#dashboardPage) p,
+body.dark .page:not(#dashboardPage) li,
+body.dark .page:not(#dashboardPage) label,
+body.dark .page:not(#dashboardPage) .disclaimer,
+body.dark .page:not(#dashboardPage) .empty-state{color:#d1e0e9}
+body.dark .page:not(#dashboardPage) .eyebrow{color:#8fe0ce}
+body.dark .page:not(#dashboardPage) .tool-card,
+body.dark .page:not(#dashboardPage) .chat-card,
+body.dark .page:not(#dashboardPage) .translator-card,
+body.dark .page:not(#dashboardPage) .quiz-card,
+body.dark .page:not(#dashboardPage) .admin-card,
+body.dark .page:not(#dashboardPage) .info-card,
+body.dark .page:not(#dashboardPage) .lesson-detail,
+body.dark .page:not(#dashboardPage) .subject-card,
+body.dark .page:not(#dashboardPage) .progress-card,
+body.dark .page:not(#dashboardPage) .library-card,
+body.dark .page:not(#dashboardPage) .historyculture-card{color:#edf5fa;background:#122b3b;border-color:#345063}
+body.dark .page:not(#dashboardPage) input,
+body.dark .page:not(#dashboardPage) textarea,
+body.dark .page:not(#dashboardPage) select{color:#f2f7fb;background:#0c2231;border-color:#526c7c}
+body.dark .page:not(#dashboardPage) input::placeholder,
+body.dark .page:not(#dashboardPage) textarea::placeholder{color:#b2c5d1}
+body.dark .page:not(#dashboardPage) .quiz-option button,
+body.dark .page:not(#dashboardPage) .quiz-options button{color:#f2f7fb;background:#18374a;border-color:#496579}
+body.dark .page:not(#dashboardPage) .quiz-option button:hover,
+body.dark .page:not(#dashboardPage) .quiz-options button:hover{background:#21475d}
+.home-redesign .home-service{min-height:210px;gap:10px}
+.home-redesign .home-service h3{font-size:clamp(1rem,1.25vw,1.15rem);line-height:1.5;overflow-wrap:anywhere}
+.home-redesign .home-service p{font-size:clamp(.9rem,1vw,.98rem);line-height:1.8;overflow-wrap:anywhere}
+.home-redesign .home-service .service-cta{font-size:.9rem;line-height:1.6;white-space:normal}
+@media(max-width:600px){
+ .page:not(#dashboardPage) .page-title h1,.page:not(#dashboardPage) h1{font-size:clamp(1.45rem,6vw,2rem)}
+ .page:not(#dashboardPage) p,.page:not(#dashboardPage) li{font-size:.96rem}
+ .page:not(#dashboardPage) .tool-card,.page:not(#dashboardPage) .chat-card,.page:not(#dashboardPage) .translator-card,.page:not(#dashboardPage) .quiz-card{padding:16px}
+ .home-redesign .home-service{min-height:195px}
+}
