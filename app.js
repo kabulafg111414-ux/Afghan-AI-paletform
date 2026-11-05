@@ -490,11 +490,6 @@ state.lessons=Number.isFinite(Number(state.lessons))?Number(state.lessons):0;
 state.quizzes=Number.isFinite(Number(state.quizzes))?Number(state.quizzes):0;
 state.correct=Number.isFinite(Number(state.correct))?Number(state.correct):0;
 state.activity=Array.isArray(state.activity)?state.activity:[];
-state.questions=Number.isFinite(Number(state.questions))?Number(state.questions):0;
-state.lessons=Number.isFinite(Number(state.lessons))?Number(state.lessons):0;
-state.quizzes=Number.isFinite(Number(state.quizzes))?Number(state.quizzes):0;
-state.correct=Number.isFinite(Number(state.correct))?Number(state.correct):0;
-state.activity=Array.isArray(state.activity)?state.activity:[];
 state.subjectStats=state.subjectStats&&typeof state.subjectStats==='object'&&!Array.isArray(state.subjectStats)?state.subjectStats:{};
 function saveState(){safeStorageSet('afghanai-state',JSON.stringify(state));updateStats()}
 function recordActivity(label){state.activity.unshift({label,time:new Date().toLocaleString()});state.activity=state.activity.slice(0,15);saveState()}
