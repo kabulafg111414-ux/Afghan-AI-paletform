@@ -1458,3 +1458,77 @@ img,svg,canvas{image-rendering:auto}
  .page:not(#dashboardPage) p,.page:not(#dashboardPage) li,.page:not(#dashboardPage) label{font-size:15px;line-height:1.75}
  .page:not(#dashboardPage) .tool-card,.page:not(#dashboardPage) .info-card,.page:not(#dashboardPage) .feature{padding:16px}
 }
+
+
+/* Human-eye typography audit: balanced contrast, calm colors and comfortable reading */
+:root{
+ --eye-ink:#183247;
+ --eye-body:#40586b;
+ --eye-muted:#586f80;
+ --eye-link:#075f9e;
+ --eye-border:#d7e2e9;
+}
+body{color:var(--eye-ink);font-family:inherit}
+body:not(.dark) .page:not(#dashboardPage) p,
+body:not(.dark) .page:not(#dashboardPage) li,
+body:not(.dark) .page:not(#dashboardPage) label,
+body:not(.dark) .page:not(#dashboardPage) small,
+body:not(.dark) .page:not(#dashboardPage) .muted,
+body:not(.dark) .page:not(#dashboardPage) .hint{color:var(--eye-body)}
+body:not(.dark) .page:not(#dashboardPage) h1,
+body:not(.dark) .page:not(#dashboardPage) h2,
+body:not(.dark) .page:not(#dashboardPage) h3,
+body:not(.dark) .page:not(#dashboardPage) h4,
+body:not(.dark) .page:not(#dashboardPage) strong,
+body:not(.dark) .page:not(#dashboardPage) b{color:var(--eye-ink)}
+body:not(.dark) .page:not(#dashboardPage) small,
+body:not(.dark) .page:not(#dashboardPage) .muted{color:var(--eye-muted)}
+body:not(.dark) .page:not(#dashboardPage) a:not(.primary):not(.footer-link){color:var(--eye-link);text-decoration-thickness:1px;text-underline-offset:3px}
+body:not(.dark) .sidebar .nav{color:#e6f1f7}
+body:not(.dark) .sidebar .nav.active{color:#fff}
+body:not(.dark) #dashboardPage .home-section-heading h2{color:#173149}
+body:not(.dark) #dashboardPage .home-section-heading p{color:#435d72}
+body:not(.dark) #dashboardPage .home-stat,
+body:not(.dark) #dashboardPage .home-side-card,
+body:not(.dark) #dashboardPage .home-quote{color:#173149}
+body:not(.dark) #dashboardPage .home-stat span,
+body:not(.dark) #dashboardPage .home-side-card p,
+body:not(.dark) #dashboardPage .home-quote p{color:#435d72}
+body.dark{color:#edf5fa}
+body.dark .page:not(#dashboardPage) p,
+body.dark .page:not(#dashboardPage) li,
+body.dark .page:not(#dashboardPage) label,
+body.dark .page:not(#dashboardPage) small,
+body.dark .page:not(#dashboardPage) .muted,
+body.dark .page:not(#dashboardPage) .hint{color:#c6d5df}
+body.dark .page:not(#dashboardPage) h1,
+body.dark .page:not(#dashboardPage) h2,
+body.dark .page:not(#dashboardPage) h3,
+body.dark .page:not(#dashboardPage) h4,
+body.dark .page:not(#dashboardPage) strong,
+body.dark .page:not(#dashboardPage) b{color:#f1f6fa}
+body.dark .page:not(#dashboardPage) a:not(.primary):not(.footer-link){color:#9bd5ff}
+body.dark .sidebar .nav{color:#e0edf4}
+body.dark .sidebar .nav.active{color:#fff}
+body.dark #dashboardPage .home-section-heading h2{color:#f1f6fa}
+body.dark #dashboardPage .home-section-heading p{color:#c6d5df}
+body.dark #dashboardPage .home-stat,
+body.dark #dashboardPage .home-side-card,
+body.dark #dashboardPage .home-quote{color:#f1f6fa}
+body.dark #dashboardPage .home-stat span,
+body.dark #dashboardPage .home-side-card p,
+body.dark #dashboardPage .home-quote p{color:#d1e0e8}
+body.dark .page:not(#dashboardPage) .notice,
+body.dark .page:not(#dashboardPage) .notice p{color:#f6e8c9}
+.page button,.page a,.page input,.page textarea,.page select{ -webkit-tap-highlight-color:transparent }
+.page p,.page li{max-width:78ch}
+.page p,.page li,.page label{line-height:1.75}
+.page :focus-visible{outline-color:#087fa5}
+@media(prefers-contrast:more){
+ body:not(.dark) .page:not(#dashboardPage) p,
+ body:not(.dark) .page:not(#dashboardPage) li,
+ body:not(.dark) .page:not(#dashboardPage) label{color:#263f52}
+ body.dark .page:not(#dashboardPage) p,
+ body.dark .page:not(#dashboardPage) li,
+ body.dark .page:not(#dashboardPage) label{color:#edf5fa}
+}
