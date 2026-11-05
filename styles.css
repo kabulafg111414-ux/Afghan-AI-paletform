@@ -1324,3 +1324,137 @@ body.dark .page:not(#dashboardPage) .quiz-options button:hover{background:#21475
  .page:not(#dashboardPage) .tool-card,.page:not(#dashboardPage) .chat-card,.page:not(#dashboardPage) .translator-card,.page:not(#dashboardPage) .quiz-card{padding:16px}
  .home-redesign .home-service{min-height:195px}
 }
+
+
+/* HD readability + foreground/background contrast audit */
+:root{--hd-text:#142f45;--hd-muted:#435c70;--hd-border:#d3e0e9;--hd-link:#075eaa}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;text-rendering:optimizeLegibility}
+body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale }
+.page:not(#dashboardPage){color:var(--hd-text)}
+.page:not(#dashboardPage) .page-title h1,
+.page:not(#dashboardPage) .section-head h2,
+.page:not(#dashboardPage) h2,
+.page:not(#dashboardPage) h3,
+.page:not(#dashboardPage) h4,
+.page:not(#dashboardPage) b,
+.page:not(#dashboardPage) strong{color:var(--hd-text)}
+.page:not(#dashboardPage) .page-title p,
+.page:not(#dashboardPage) p,
+.page:not(#dashboardPage) li,
+.page:not(#dashboardPage) label,
+.page:not(#dashboardPage) small,
+.page:not(#dashboardPage) .disclaimer{color:var(--hd-muted)}
+/* Surfaces that are light in the normal theme must always use dark text */
+.page:not(#dashboardPage) .stat,
+.page:not(#dashboardPage) .progress-card,
+.page:not(#dashboardPage) .feature,
+.page:not(#dashboardPage) .info-card,
+.page:not(#dashboardPage) .chat-card,
+.page:not(#dashboardPage) .quiz-card,
+.page:not(#dashboardPage) .admin-card,
+.page:not(#dashboardPage) .admin-banner,
+.page:not(#dashboardPage) .tool-card,
+.page:not(#dashboardPage) .google-ai-card,
+.page:not(#dashboardPage) .translator-card,
+.page:not(#dashboardPage) .translator-result-wrap,
+.page:not(#dashboardPage) .historyculture-notice,
+.page:not(#dashboardPage) .historyculture-timeline,
+.page:not(#dashboardPage) .historyculture-references,
+.page:not(#dashboardPage) .historyculture-course-card,
+.page:not(#dashboardPage) .business-calculator,
+.page:not(#dashboardPage) .notice{
+ color:#173149;background-color:#fff;
+}
+.page:not(#dashboardPage) .stat h3,.page:not(#dashboardPage) .stat b,
+.page:not(#dashboardPage) .progress-card h3,.page:not(#dashboardPage) .progress-card b,
+.page:not(#dashboardPage) .feature h3,.page:not(#dashboardPage) .info-card h3,
+.page:not(#dashboardPage) .tool-card h2,.page:not(#dashboardPage) .google-ai-card h3,
+.page:not(#dashboardPage) .historyculture-course-card h3{color:#173149}
+.page:not(#dashboardPage) .stat p,.page:not(#dashboardPage) .progress-card p,
+.page:not(#dashboardPage) .feature p,.page:not(#dashboardPage) .info-card p,
+.page:not(#dashboardPage) .tool-card p,.page:not(#dashboardPage) .tool-card small,
+.page:not(#dashboardPage) .google-ai-card p,
+.page:not(#dashboardPage) .historyculture-course-card p{color:#435d72}
+.page:not(#dashboardPage) .notice p{color:#594a2e}
+.page:not(#dashboardPage) .google-ai-card a,
+.page:not(#dashboardPage) a:not(.primary):not(.footer-link){color:#075eaa}
+.page:not(#dashboardPage) input,
+.page:not(#dashboardPage) textarea,
+.page:not(#dashboardPage) select{color:#142f45;background:#fff;border-color:#9eb3c2}
+.page:not(#dashboardPage) input::placeholder,
+.page:not(#dashboardPage) textarea::placeholder{color:#60778a;opacity:1}
+.page:not(#dashboardPage) .bubble.bot{color:#173149;background:#fff}
+.page:not(#dashboardPage) .bubble.user{color:#fff;background:#08664f}
+.page:not(#dashboardPage) .quick-prompts button,
+.page:not(#dashboardPage) .outline{color:#173149;background:#fff;border-color:#aebfcb}
+.page:not(#dashboardPage) button.primary,
+.page:not(#dashboardPage) .primary{color:#fff}
+/* Dark theme: dark panels receive light text; bright controls remain readable */
+body.dark{--hd-text:#edf5fa;--hd-muted:#c0d0da;--hd-border:#3a5363}
+body.dark .page:not(#dashboardPage){color:#edf5fa}
+body.dark .page:not(#dashboardPage) .page-title h1,
+body.dark .page:not(#dashboardPage) .section-head h2,
+body.dark .page:not(#dashboardPage) h2,
+body.dark .page:not(#dashboardPage) h3,
+body.dark .page:not(#dashboardPage) h4,
+body.dark .page:not(#dashboardPage) b,
+body.dark .page:not(#dashboardPage) strong{color:#f2f7fb}
+body.dark .page:not(#dashboardPage) p,
+body.dark .page:not(#dashboardPage) li,
+body.dark .page:not(#dashboardPage) label,
+body.dark .page:not(#dashboardPage) small,
+body.dark .page:not(#dashboardPage) .disclaimer{color:#c4d4de}
+body.dark .page:not(#dashboardPage) .stat,
+body.dark .page:not(#dashboardPage) .progress-card,
+body.dark .page:not(#dashboardPage) .feature,
+body.dark .page:not(#dashboardPage) .info-card,
+body.dark .page:not(#dashboardPage) .chat-card,
+body.dark .page:not(#dashboardPage) .quiz-card,
+body.dark .page:not(#dashboardPage) .admin-card,
+body.dark .page:not(#dashboardPage) .admin-banner,
+body.dark .page:not(#dashboardPage) .tool-card,
+body.dark .page:not(#dashboardPage) .google-ai-card,
+body.dark .page:not(#dashboardPage) .translator-card,
+body.dark .page:not(#dashboardPage) .translator-result-wrap,
+body.dark .page:not(#dashboardPage) .historyculture-notice,
+body.dark .page:not(#dashboardPage) .historyculture-timeline,
+body.dark .page:not(#dashboardPage) .historyculture-references,
+body.dark .page:not(#dashboardPage) .historyculture-course-card,
+body.dark .page:not(#dashboardPage) .business-calculator{color:#edf5fa;background-color:#142b3a;border-color:#3a5363}
+body.dark .page:not(#dashboardPage) .stat h3,
+body.dark .page:not(#dashboardPage) .stat b,
+body.dark .page:not(#dashboardPage) .progress-card h3,
+body.dark .page:not(#dashboardPage) .progress-card b,
+body.dark .page:not(#dashboardPage) .feature h3,
+body.dark .page:not(#dashboardPage) .info-card h3,
+body.dark .page:not(#dashboardPage) .tool-card h2,
+body.dark .page:not(#dashboardPage) .google-ai-card h3,
+body.dark .page:not(#dashboardPage) .historyculture-course-card h3{color:#f2f7fb}
+body.dark .page:not(#dashboardPage) .stat p,
+body.dark .page:not(#dashboardPage) .progress-card p,
+body.dark .page:not(#dashboardPage) .feature p,
+body.dark .page:not(#dashboardPage) .info-card p,
+body.dark .page:not(#dashboardPage) .tool-card p,
+body.dark .page:not(#dashboardPage) .tool-card small,
+body.dark .page:not(#dashboardPage) .google-ai-card p,
+body.dark .page:not(#dashboardPage) .historyculture-course-card p{color:#c4d4de}
+body.dark .page:not(#dashboardPage) .notice{background:#382f1d;color:#f8e8c6;border-color:#67532c}
+body.dark .page:not(#dashboardPage) .notice p{color:#f2dfb5}
+body.dark .page:not(#dashboardPage) input,
+body.dark .page:not(#dashboardPage) textarea,
+body.dark .page:not(#dashboardPage) select{color:#f2f7fb;background:#0d2230;border-color:#536d7d}
+body.dark .page:not(#dashboardPage) input::placeholder,
+body.dark .page:not(#dashboardPage) textarea::placeholder{color:#b7c9d4}
+body.dark .page:not(#dashboardPage) .bubble.bot{color:#edf5fa;background:#193446;border-color:#3a5363}
+body.dark .page:not(#dashboardPage) .bubble.user{color:#fff;background:#08765f}
+body.dark .page:not(#dashboardPage) .quick-prompts button,
+body.dark .page:not(#dashboardPage) .outline{color:#edf5fa;background:#193446;border-color:#526b7b}
+body.dark .page:not(#dashboardPage) a:not(.primary):not(.footer-link){color:#8ccfff}
+.page button:focus-visible,.page a:focus-visible,.page input:focus-visible,
+.page select:focus-visible,.page textarea:focus-visible{outline:3px solid #13a9c5;outline-offset:3px}
+.page p,.page li,.page label,.page button,.page input,.page select,.page textarea{line-height:1.65}
+img,svg,canvas{image-rendering:auto}
+@media(max-width:600px){
+ .page:not(#dashboardPage) p,.page:not(#dashboardPage) li,.page:not(#dashboardPage) label{font-size:15px;line-height:1.75}
+ .page:not(#dashboardPage) .tool-card,.page:not(#dashboardPage) .info-card,.page:not(#dashboardPage) .feature{padding:16px}
+}
