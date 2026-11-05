@@ -1683,3 +1683,115 @@ body.dark #dashboardPage .home-side-card button b{color:#24465f!important}
   outline:3px solid #f0b429!important;
   outline-offset:3px;
 }
+
+
+/* Afghan AI global button contrast system — prevent matching foreground/background colors */
+.page button:not(.nav):not(.home-service):not(.home-lang):not(.home-primary):not(.link-button):not(.text-button):not(.footer-link):not(.home-view-link):not(.quick-card button){
+  color:#173149!important;
+  -webkit-text-fill-color:#173149;
+  background-color:#ffffff;
+  border-color:#c8d8e3;
+  text-shadow:none!important;
+}
+.page button.primary,
+.page button[type="submit"],
+.page button.welcome-cta,
+.page .chat-input button,
+.page .home-promo button,
+.page .home-primary{
+  background:#075985!important;
+  background-image:linear-gradient(110deg,#087da5,#075985)!important;
+  border:1px solid #064766!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  text-shadow:none!important;
+}
+.page button.primary *,
+.page button[type="submit"] *,
+.page button.welcome-cta *,
+.page .chat-input button *,
+.page .home-promo button *,
+.page .home-primary *{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+}
+.page button.outline,
+.page button[class~="outline"]{
+  background:#ffffff!important;
+  background-image:none!important;
+  color:#173149!important;
+  -webkit-text-fill-color:#173149!important;
+  border:1px solid #9bb4c5!important;
+}
+.page button.outline *,
+.page button[class~="outline"] *{
+  color:#173149!important;
+  -webkit-text-fill-color:#173149!important;
+}
+.page button.link-button,
+.page button.text-button,
+.page button.footer-link,
+.page button.home-view-link{
+  background:transparent!important;
+  background-image:none!important;
+  color:#075f9e!important;
+  -webkit-text-fill-color:#075f9e!important;
+  border-color:transparent!important;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.page button.link-button *,
+.page button.text-button *,
+.page button.footer-link *,
+.page button.home-view-link *{
+  color:#075f9e!important;
+  -webkit-text-fill-color:#075f9e!important;
+}
+#dashboardPage .home-primary{
+  background:#075985!important;
+  background-image:linear-gradient(110deg,#087da5,#075985)!important;
+  color:#fff!important;
+  -webkit-text-fill-color:#fff!important;
+}
+#dashboardPage .home-primary span{color:#fff!important;-webkit-text-fill-color:#fff!important}
+#dashboardPage .home-lang{background:#123b5b!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border:1px solid #7eb9d5!important}
+#dashboardPage .home-lang.active,
+#dashboardPage .home-lang[aria-pressed="true"]{background:#e7fbff!important;color:#07365c!important;-webkit-text-fill-color:#07365c!important}
+#dashboardPage .home-service{color:#fff!important;-webkit-text-fill-color:#fff!important}
+#dashboardPage .home-service h3,
+#dashboardPage .home-service p,
+#dashboardPage .home-service .service-cta,
+#dashboardPage .home-service .service-symbol{color:#fff!important;-webkit-text-fill-color:#fff!important}
+#dashboardPage .quick-card button{
+  color:#173149!important;-webkit-text-fill-color:#173149!important;
+  background:#f1f7fa!important;border:1px solid #d4e2eb!important;
+  border-radius:10px;padding-inline:10px;
+}
+#dashboardPage .quick-card button span,
+#dashboardPage .quick-card button b{color:#075f82!important;-webkit-text-fill-color:#075f82!important}
+.page button:hover:not(:disabled){filter:brightness(.96)}
+.page button:focus-visible{outline:3px solid #0b83ad!important;outline-offset:3px}
+.page button:disabled{opacity:.72!important;cursor:not-allowed}
+body.dark .page button:not(.nav):not(.home-service):not(.home-lang):not(.home-primary):not(.link-button):not(.text-button):not(.footer-link):not(.home-view-link):not(.quick-card button){
+  background:#f0f5f8!important;color:#173149!important;-webkit-text-fill-color:#173149!important;border-color:#8da8ba!important;
+}
+body.dark .page button.primary,
+body.dark .page button[type="submit"],
+body.dark .page button.welcome-cta,
+body.dark .page .chat-input button,
+body.dark .page .home-promo button,
+body.dark .page .home-primary{
+  background:#075985!important;background-image:linear-gradient(110deg,#087da5,#075985)!important;
+  color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#56b8d7!important;
+}
+body.dark .page button.outline,
+body.dark .page button[class~="outline"]{background:#f0f5f8!important;color:#173149!important;-webkit-text-fill-color:#173149!important}
+body.dark .page button.link-button,
+body.dark .page button.text-button,
+body.dark .page button.footer-link,
+body.dark .page button.home-view-link{background:transparent!important;color:#8ccfff!important;-webkit-text-fill-color:#8ccfff!important}
+body.dark #dashboardPage .home-lang{background:#123b5b!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+body.dark #dashboardPage .home-lang.active{background:#e7fbff!important;color:#07365c!important;-webkit-text-fill-color:#07365c!important}
+body.dark #dashboardPage .quick-card button{background:#f0f5f8!important;color:#173149!important;-webkit-text-fill-color:#173149!important}
+body.dark #dashboardPage .quick-card button span,
+body.dark #dashboardPage .quick-card button b{color:#075f82!important;-webkit-text-fill-color:#075f82!important}
