@@ -878,3 +878,106 @@ body.dark .home-footer p,body.dark .home-footer small{color:#a9c0b7}
  .nav,.home-primary,.home-service,.home-side-card button{transition:none}
  .nav:hover,.home-primary:hover,.home-service:hover,.home-side-card button:hover{transform:none}
 }
+
+
+/* Final homepage visual pass — editorial layout and premium details */
+.home-redesign{max-width:1320px;margin-inline:auto}
+.home-redesign .home-hero{
+ display:grid;grid-template-columns:minmax(0,1.08fr) minmax(300px,.92fr);
+ align-items:stretch;min-height:390px;padding:0;gap:0;
+ border-radius:30px;border:1px solid rgba(104,220,246,.25);
+ background:radial-gradient(ellipse at 12% 0%,rgba(36,199,228,.19),transparent 38%),linear-gradient(125deg,#06162e 0%,#082d55 56%,#075b78 100%);
+ box-shadow:0 26px 70px rgba(4,27,54,.2),inset 0 1px rgba(255,255,255,.12);
+}
+.home-redesign .home-hero-copy{padding:clamp(28px,4vw,58px);max-width:690px}
+.home-redesign .home-kicker{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.home-redesign .home-hero h1{font-size:clamp(2.25rem,4.7vw,4.15rem);max-width:13ch;line-height:1.06;margin:22px 0 16px}
+.home-redesign .home-lead{font-size:clamp(.95rem,1.25vw,1.08rem);max-width:49ch;line-height:1.9}
+.home-redesign .home-hero-proof{display:flex;align-items:center;flex-wrap:wrap;gap:11px;margin-top:23px;color:#c6dce9;font-size:.72rem;font-weight:700}
+.home-redesign .home-hero-proof span{display:inline-flex;align-items:center;gap:6px}
+.home-redesign .home-hero-proof b{color:#70e6d0;font-size:.88rem}
+.home-redesign .home-hero-proof i{width:4px;height:4px;border-radius:50%;background:#64d7e9;opacity:.8}
+.home-redesign .home-hero-art{
+ min-height:390px;border:0;border-radius:0 29px 29px 0;
+ background-position:center 46%;background-size:cover;
+}
+.home-redesign .home-hero-art:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,27,51,.12),rgba(5,27,51,.02) 35%,rgba(5,27,51,.22)),linear-gradient(0deg,rgba(4,21,42,.72),transparent 48%);z-index:0}
+.home-redesign .home-hero-art:after{opacity:.58}
+.home-redesign .home-skyline{font-size:clamp(1.2rem,2vw,1.7rem);letter-spacing:.08em}
+.home-redesign .home-art-caption{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase}
+.home-redesign .home-content-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:26px;margin-top:30px}
+.home-redesign .home-section-heading{align-items:end;margin-bottom:18px}
+.home-redesign .home-section-heading h2{font-size:clamp(1.55rem,2.6vw,2rem);margin:6px 0}
+.home-redesign .home-section-heading p{font-size:.9rem;color:var(--hd-muted,#718397)}
+.home-redesign .home-view-link{border:1px solid #d7e7ed;border-radius:12px;padding:10px 14px;background:#fff;color:#0b6572;font-weight:800}
+.home-redesign .home-feature-grid{gap:15px}
+.home-redesign .home-service{min-height:210px;padding:22px;border-radius:21px;border:1px solid rgba(22,82,115,.08);box-shadow:0 12px 30px rgba(14,48,75,.07);text-align:start}
+.home-redesign .home-service:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(14,48,75,.13)}
+.home-redesign .home-service .service-symbol{width:56px;height:56px;border-radius:18px;font-size:1.7rem;margin-bottom:14px}
+.home-redesign .home-service h3{font-size:1.08rem;margin:0 0 7px}
+.home-redesign .home-service p{font-size:.86rem;line-height:1.75;max-width:32ch}
+.home-redesign .service-cta{display:inline-flex;margin-top:8px;font-size:.8rem}
+.home-redesign .home-promo{display:flex;align-items:center;gap:16px;margin-top:18px;padding:22px 24px;border-radius:22px;box-shadow:0 16px 36px rgba(7,39,74,.12)}
+.home-redesign .home-promo .promo-icon{flex:0 0 48px;width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:#ffffff18;color:#b6fff0;font-size:1.7rem}
+.home-redesign .promo-copy{flex:1;min-width:0}
+.home-redesign .home-promo h2{font-size:1.12rem;margin-bottom:4px}
+.home-redesign .home-promo p{font-size:.84rem;line-height:1.6}
+.home-redesign .home-promo button{white-space:nowrap}
+.home-redesign .home-stats{gap:12px;margin-top:18px}
+.home-redesign .home-stat{border-radius:17px;box-shadow:0 8px 22px rgba(20,55,75,.055)}
+.home-redesign .home-side-column{display:grid;align-content:start;gap:15px}
+.home-redesign .home-side-card,.home-redesign .home-quote{border-radius:21px;padding:21px;box-shadow:0 12px 28px rgba(5,30,58,.075)}
+.home-redesign .quick-card h3{font-size:1.05rem;margin-bottom:12px}
+.home-redesign .quick-card button{display:flex;align-items:center;gap:10px;width:100%;min-height:47px;padding:9px 11px;text-align:start}
+.home-redesign .quick-card button span{display:grid;place-items:center;width:30px;height:30px;border-radius:10px;background:#e9f5f7;color:#087b80}
+.home-redesign .quick-card button b{margin-inline-start:auto;color:#168b90}
+.home-redesign .connected-card{background:linear-gradient(145deg,#f2fbf9,#edf5fb)}
+.home-redesign .social-note{margin-top:13px;padding:10px 12px;border-radius:12px;background:#fff;color:#0b5265;font-weight:800;font-size:.82rem}
+.home-redesign .home-quote{background:linear-gradient(145deg,#092b4d,#08717a);box-shadow:0 14px 32px rgba(7,53,76,.15)}
+.home-redesign .home-quote p{font-size:1rem;font-weight:650}
+.home-redesign .home-footer{display:grid;grid-template-columns:1.1fr 1.4fr 1fr .8fr;gap:14px;margin-top:32px;padding-top:22px}
+.home-redesign .home-footer>div{min-width:0;border-radius:17px;background:rgba(255,255,255,.72);padding:17px}
+.home-redesign .home-footer p{font-size:.82rem;line-height:1.8}
+.home-redesign .home-footer small{font-size:.72rem;line-height:1.7}
+body.dark .home-redesign .home-view-link{background:#142e38;border-color:#2c5360;color:#9ce8e0}
+body.dark .home-redesign .home-section-heading p{color:#a8c1cb}
+body.dark .home-redesign .connected-card{background:linear-gradient(145deg,#142f31,#172e40)}
+body.dark .home-redesign .social-note{background:#1c4143;color:#b9f2e7}
+body.dark .home-redesign .quick-card button span{background:#1d4145;color:#8fe4d8}
+body.dark .home-redesign .home-footer>div{background:rgba(17,39,38,.88)}
+@media(max-width:1050px){
+ .home-redesign .home-content-layout{grid-template-columns:minmax(0,1fr)}
+ .home-redesign .home-side-column{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .home-redesign .home-quote{grid-column:1/-1}
+}
+@media(max-width:760px){
+ .home-redesign .home-hero{grid-template-columns:1fr;min-height:0;border-radius:22px}
+ .home-redesign .home-hero-copy{padding:25px 21px 22px}
+ .home-redesign .home-hero h1{font-size:clamp(2.05rem,9vw,3rem);max-width:14ch;margin:16px 0 12px}
+ .home-redesign .home-hero-proof{gap:8px;margin-top:17px;font-size:.66rem}
+ .home-redesign .home-hero-art{min-height:220px;border-radius:0 0 21px 21px}
+ .home-redesign .home-content-layout{gap:18px;margin-top:21px}
+ .home-redesign .home-section-heading{align-items:flex-start;flex-direction:column;gap:8px}
+ .home-redesign .home-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .home-redesign .home-service{min-height:190px;padding:15px 13px;border-radius:17px}
+ .home-redesign .home-service .service-symbol{width:46px;height:46px;border-radius:14px;font-size:1.4rem;margin-bottom:10px}
+ .home-redesign .home-service h3{font-size:.94rem}
+ .home-redesign .home-service p{font-size:.77rem;line-height:1.65}
+ .home-redesign .service-cta{font-size:.72rem}
+ .home-redesign .home-promo{align-items:flex-start;flex-wrap:wrap;padding:17px;border-radius:17px}
+ .home-redesign .home-promo button{width:100%;white-space:normal}
+ .home-redesign .home-side-column{grid-template-columns:1fr}
+ .home-redesign .home-quote{grid-column:auto}
+ .home-redesign .home-footer{grid-template-columns:1fr 1fr;gap:9px;margin-top:22px}
+ .home-redesign .home-footer>div{padding:13px}
+}
+@media(max-width:390px){
+ .home-redesign .home-feature-grid{grid-template-columns:1fr}
+ .home-redesign .home-service{min-height:0}
+ .home-redesign .home-footer{grid-template-columns:1fr}
+ .home-redesign .home-hero-proof{font-size:.62rem}
+}
+@media(prefers-reduced-motion:reduce){
+ .home-redesign .home-service,.home-redesign .home-primary,.home-redesign .home-side-card button{transition:none}
+ .home-redesign .home-service:hover,.home-redesign .home-primary:hover,.home-redesign .home-side-card button:hover{transform:none}
+}
