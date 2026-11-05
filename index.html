@@ -520,6 +520,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
     var button=event.target&&event.target.closest?event.target.closest('[data-page]'):null;
     if(!button)return;
     var name=button.getAttribute('data-page');
+    if(window.__afghanAiAppReady)return;
     if(!pageNames.includes(name)||!document.getElementById(name+'Page'))return;
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -536,8 +537,15 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   copy.dataset.ready='1';
   copy.addEventListener('click',async function(){
    const number='0787111414';
-   try{await navigator.clipboard.writeText(number);copy.textContent='شماره کاپی شد ✓';}
-   catch(e){copy.textContent='شماره: '+number;}
+   try{
+    if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(number);}
+    else{
+     const field=document.createElement('textarea');field.value=number;field.setAttribute('readonly','');
+     field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();
+     const copied=document.execCommand('copy');field.remove();if(!copied)throw new Error('Copy unavailable');
+    }
+    copy.textContent='شماره کاپی شد ✓';
+   }catch(e){copy.textContent='شماره: '+number;}
   });
  }
 })();
