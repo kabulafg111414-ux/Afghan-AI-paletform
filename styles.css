@@ -1795,3 +1795,142 @@ body.dark #dashboardPage .home-lang.active{background:#e7fbff!important;color:#0
 body.dark #dashboardPage .quick-card button{background:#f0f5f8!important;color:#173149!important;-webkit-text-fill-color:#173149!important}
 body.dark #dashboardPage .quick-card button span,
 body.dark #dashboardPage .quick-card button b{color:#075f82!important;-webkit-text-fill-color:#075f82!important}
+
+
+/* Final design audit: semantic button roles and reliable contrast on every screen */
+:root{
+ --aa-ink:#173149;
+ --aa-body:#40586b;
+ --aa-muted:#526a7b;
+ --aa-link:#075f9e;
+ --aa-primary:#075985;
+ --aa-primary-hover:#064766;
+ --aa-border:#c8d8e3;
+}
+.page button.primary,
+.page button[type="submit"],
+.page .primary,
+.page .home-promo button{
+ background:linear-gradient(110deg,#087da5,#075985)!important;
+ background-color:#075985!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+ border:1px solid #064766!important;
+ text-shadow:none!important;
+}
+.page button.primary *,
+.page button[type="submit"] *,
+.page .primary *,
+.page .home-promo button *{
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+.page button.outline,
+.page button[class~="outline"],
+.page .tool-actions button:not(.primary){
+ background:#fff!important;
+ background-image:none!important;
+ color:#173149!important;
+ -webkit-text-fill-color:#173149!important;
+ border:1px solid #9bb4c5!important;
+ text-shadow:none!important;
+}
+.page button.outline *,
+.page button[class~="outline"] *,
+.page .tool-actions button:not(.primary) *{
+ color:#173149!important;
+ -webkit-text-fill-color:#173149!important;
+}
+.page button.link-button,
+.page button.text-button,
+.page button.footer-link,
+.page button.home-view-link{
+ background:transparent!important;
+ background-image:none!important;
+ color:#075f9e!important;
+ -webkit-text-fill-color:#075f9e!important;
+ border-color:transparent!important;
+ text-shadow:none!important;
+}
+#dashboardPage .home-primary,
+#dashboardPage .home-primary:link,
+#dashboardPage .home-primary:visited,
+#dashboardPage .home-primary:hover,
+#dashboardPage .home-primary span{
+ background:linear-gradient(110deg,#087da5,#075985)!important;
+ background-color:#075985!important;
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+}
+#dashboardPage .home-service,
+#dashboardPage .home-service h3,
+#dashboardPage .home-service p,
+#dashboardPage .home-service span{
+ color:#fff!important;
+ -webkit-text-fill-color:#fff!important;
+ text-shadow:0 1px 1px #071b32a8;
+}
+#dashboardPage .home-service.service-blue{background:linear-gradient(145deg,#073b70,#1055a0 58%,#082b58)!important}
+#dashboardPage .home-service.service-green{background:linear-gradient(145deg,#07583f,#08785b 58%,#064b3b)!important}
+#dashboardPage .home-service.service-purple{background:linear-gradient(145deg,#39265f,#573b89 58%,#30204f)!important}
+#dashboardPage .home-service.service-orange{background:linear-gradient(145deg,#783b12,#a65319 58%,#65300f)!important}
+.topbar .mobile-menu{
+ background:#fff!important;color:#173149!important;
+ -webkit-text-fill-color:#173149!important;border:1px solid #9bb4c5!important;
+}
+.topbar .icon-btn{
+ background:#142b3a!important;color:#fff!important;
+ -webkit-text-fill-color:#fff!important;border:1px solid #34566b!important;
+}
+.topbar .avatar{
+ background:#075985!important;color:#fff!important;
+ -webkit-text-fill-color:#fff!important;border:1px solid #064766!important;
+}
+.sidebar .nav{color:#e2f2f8!important}
+.sidebar .nav.active{color:#fff!important}
+.page input,.page textarea,.page select{
+ color:#173149;
+ background:#fff;
+ border-color:#c8d8e3;
+}
+.page input::placeholder,.page textarea::placeholder{color:#61798a;opacity:1}
+body.dark .page input,
+body.dark .page textarea,
+body.dark .page select{
+ color:#173149!important;background:#f5f8fa!important;border-color:#8da8ba!important;
+}
+body.dark .page input::placeholder,
+body.dark .page textarea::placeholder{color:#526a7b!important;opacity:1}
+body.dark .page button.primary,
+body.dark .page button[type="submit"],
+body.dark .page .primary,
+body.dark .page .home-promo button{
+ background:linear-gradient(110deg,#087da5,#075985)!important;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+body.dark .page button.outline,
+body.dark .page button[class~="outline"],
+body.dark .page .tool-actions button:not(.primary){
+ background:#f0f5f8!important;color:#173149!important;-webkit-text-fill-color:#173149!important;
+}
+body.dark .page button.link-button,
+body.dark .page button.text-button,
+body.dark .page button.footer-link,
+body.dark .page button.home-view-link{
+ background:transparent!important;color:#8ccfff!important;-webkit-text-fill-color:#8ccfff!important;
+}
+body.dark .topbar .mobile-menu{background:#f5f8fa!important;color:#173149!important;-webkit-text-fill-color:#173149!important}
+.page button:focus-visible,.topbar button:focus-visible,.sidebar button:focus-visible{
+ outline:3px solid #0b83ad!important;outline-offset:3px;
+}
+@media(max-width:760px){
+ .main{min-width:0;width:100%;padding:16px 12px}
+ .home-hero{grid-template-columns:1fr!important}
+ .home-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .home-service{min-width:0;overflow-wrap:anywhere}
+ .home-footer{grid-template-columns:1fr!important}
+}
+@media(max-width:390px){
+ .home-feature-grid{grid-template-columns:1fr!important}
+ .topbar{gap:6px}
+ .top-actions{gap:5px}
+}
