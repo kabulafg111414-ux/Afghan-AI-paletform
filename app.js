@@ -336,7 +336,7 @@ function initAfghanInteractiveMap(){
     details.textContent='ولایت روی نقشه: '+province+' — برای نمایش مرکز ولایت، مورد متناظر را از فهرست انتخاب کنید؛ تطبیق نام نیازمند بازبینی است.';
     renderAfghanProvinceAttractions(normalizeAfghanProvinceName(province));
     const option=[...select.options].find(o=>o.value.toLocaleLowerCase()===province.toLocaleLowerCase());
-    if(option)select.value=option.value;
+    if(option){select.value=option.value;select.dispatchEvent(new Event('change',{bubbles:true}));}
    });
   }}).addTo(afghanLeafletMap);
   afghanLeafletMap.fitBounds(afghanProvinceLayer.getBounds(),{padding:[8,8]});
