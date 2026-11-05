@@ -1,4 +1,4 @@
-const CACHE_NAME='afghan-ai-v5';
+const CACHE_NAME='afghan-ai-v6';
 const APP_SHELL=['./','./index.html','./styles.css','./app.js','./manifest.json','./icon.svg'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_SHELL)));
@@ -27,7 +27,7 @@ self.addEventListener('fetch',event=>{
     }
     return fresh;
    }catch(error){
-    const cached=await cache.match(request)||await cache.match('./index.html');
+    const cached=await cache.match(request,{ignoreSearch:true})||await cache.match('./index.html');
     if(cached)return cached;
     throw error;
    }
