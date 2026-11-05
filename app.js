@@ -462,7 +462,7 @@ $('#historycultureSearch')?.addEventListener('input',renderHistoryCultureCenter)
 $('#historycultureCategory')?.addEventListener('change',renderHistoryCultureCenter);
 
 function showPage(name){if(name!=='quiz'&&quizInProgress&&quizTimer!==null){clearInterval(quizTimer);quizTimer=null;}pages.forEach(p=>$('#'+p+'Page').classList.toggle('hidden',p!==name));$$('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===name));closeMobileMenu();if(name==='language')renderLanguageCenter();if(name==='digital')renderDigitalCenter();if(name==='health')renderHealthCenter();if(name==='business')renderBusinessCenter();if(name==='law')renderLawCenter();if(name==='agriculture')renderAgricultureCenter();if(name==='engineering')renderEngineeringCenter();if(name==='historyculture')renderHistoryCultureCenter();if(name==='historyculture'&&afghanLeafletMap)setTimeout(()=>afghanLeafletMap.invalidateSize(),120);if(name==='lessons')renderLessons();if(name==='library')renderLibrary();if(name==='quiz'){if(!quizInProgress)startQuiz();else if(quizTimer===null)startQuizTimer();}if(name==='progress')renderProgress();window.scrollTo({top:0,behavior:'smooth'})}
-$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showPage(b.dataset.page)}));
+$('[data-page]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const target=b.dataset.page;if(pages.includes(target)&&$('#'+target+'Page'))showPage(target)}));
 function closeMobileMenu(){
  const sidebar=$('#sidebar'),backdrop=$('#sidebarBackdrop');
  sidebar.classList.remove('open');backdrop.classList.remove('is-visible');
