@@ -722,3 +722,10 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 #lawPage .law-course-card summary{cursor:pointer;font-weight:700}
 #lawPage .law-checklist,#lawPage .law-references{margin-top:20px}
 #lawPage .law-controls input,#lawPage .law-controls select{max-width:100%}
+
+/* Afghan history, rulers, geography and literature expansion */
+#historyculturePage .historyculture-notice{border-inline-start:4px solid var(--accent,#269caa);line-height:1.9}
+#historyculturePage .historyculture-course-card details{line-height:1.95}
+#historyculturePage .historyculture-course-card summary{cursor:pointer;font-weight:700}
+#historyculturePage .historyculture-timeline,#historyculturePage .historyculture-references{margin-top:20px}
+#historyculturePage .historyculture-controls input,#historyculturePage .historyculture-controls select{max-width:100%}
