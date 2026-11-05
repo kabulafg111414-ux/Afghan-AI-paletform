@@ -1,7 +1,9 @@
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-function safeStorageGet(key){try{return window.safeStorageGet(key)}catch(error){return null}}
-function safeStorageSet(key,value){try{window.safeStorageSet(key,value);return true}catch(error){return false}}
-function safeStorageRemove(key){try{window.safeStorageRemove(key);return true}catch(error){return false}}
+// Safe browser storage: use localStorage when available and an in-memory fallback otherwise.
+const safeMemoryStorage=new Map();
+function safeStorageGet(key){try{const value=window.localStorage.getItem(key);return value===null?(safeMemoryStorage.has(key)?safeMemoryStorage.get(key):null):value}catch(error){return safeMemoryStorage.has(key)?safeMemoryStorage.get(key):null}}
+function safeStorageSet(key,value){const text=String(value);safeMemoryStorage.set(key,text);try{window.localStorage.setItem(key,text);return true}catch(error){return false}}
+function safeStorageRemove(key){safeMemoryStorage.delete(key);try{window.localStorage.removeItem(key);return true}catch(error){return false}}
 function safeStorageJSON(key,fallback){try{const raw=safeStorageGet(key);return raw===null?fallback:JSON.parse(raw)}catch(error){return fallback}}
 const pages=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','quiz','progress','family','admin','tools','guide','sources'];
 
