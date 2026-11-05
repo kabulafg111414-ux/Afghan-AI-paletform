@@ -1058,3 +1058,11 @@ body.dark .home-redesign .home-service:after{opacity:.09}
  .home-redesign .home-stat,.home-redesign .home-view-link{transition:none}
  .home-redesign .home-stat:hover,.home-redesign .home-view-link:hover{transform:none}
 }
+
+
+/* Visibility and cache-safe landing page polish — 2026-11-05 */
+.home-redesign .home-flag-item{color:#f4f8ff}
+.home-redesign .home-flag-divider{background:rgba(255,255,255,.45)}
+.home-redesign .home-flag{flex:0 0 auto}
+@media(max-width:760px){.home-redesign .home-hero{grid-template-columns:1fr;min-height:0}.home-redesign .home-hero-copy{padding:24px 20px}.home-redesign .home-hero-art{min-height:210px}.home-redesign .home-content-layout{grid-template-columns:1fr}.home-redesign .home-side-column{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.home-redesign .home-quote{grid-column:1/-1}}
+@media(max-width:480px){.home-redesign .home-side-column{grid-template-columns:1fr}.home-redesign .home-flag-pair{gap:10px}.home-redesign .home-flag-item{font-size:11px}}
