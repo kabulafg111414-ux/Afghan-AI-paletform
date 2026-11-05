@@ -922,3 +922,22 @@ document.addEventListener('click',function(event){
  showPage(target);
 },true);
 
+
+/* Support fund summary: local guidance only; no payment is processed here. */
+const fundPrepareButton=$('#fundPrepare');
+if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
+ const purpose=document.querySelector('input[name="fundPurpose"]:checked')?.value||'platform';
+ const amountInput=$('#fundAmount');
+ const amountText=(amountInput?.value||'').trim();
+ const amount=amountText===''?null:Number(amountText);
+ const summary=$('#fundSummary');
+ const labels={platform:'توسعه و ارتقای پلتفرم Afghan AI',families:'حمایت از خانواده‌های نیازمند',both:'حمایت از هر دو بخش'};
+ if(amountText!==''&&(!Number.isFinite(amount)||amount<=0||!Number.isInteger(amount))){
+  summary.textContent='لطفاً مبلغ معتبر و مثبت را به افغانی وارد کنید.';
+  return;
+ }
+ const money=amount===null?'مبلغ هنوز تعیین نشده است.':new Intl.NumberFormat('fa-AF').format(amount)+' افغانی';
+ summary.textContent='مقصد کمک: '+labels[purpose]+'. مبلغ پیشنهادی: '+money+' این خلاصه فقط راهنما است؛ پرداخت یا ثبت تراکنش انجام نمی‌شود.';
+});
+/* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
+window.__afghanAiAppReady=true;
