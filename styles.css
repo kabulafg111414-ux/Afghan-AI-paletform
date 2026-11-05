@@ -2216,3 +2216,20 @@ body.dark #dashboardPage .home-footer>div .footer-link{color:#075f9e!important;-
     border:1px solid #42665a!important;
   }
 }
+
+
+/* Afghan AI publications commission module */
+.publication-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:20px 0}
+.publication-card,.publication-results{background:var(--card-bg,#fff);border:1px solid var(--border-color,#dce6e1);border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(20,55,43,.06);min-width:0}
+.publication-card h2,.publication-results h2{margin:4px 0 16px;font-size:19px}
+.publication-icon{font-size:28px}
+.publication-card label{display:block;margin:12px 0 6px;font-weight:700;font-size:14px}
+.publication-card input,.publication-card select{width:100%;min-height:44px;border:1px solid var(--border-color,#cbd9d2);border-radius:10px;padding:10px 12px;background:var(--input-bg,#fff);color:var(--text-color,#173b32);font:inherit}
+.publication-card button{margin-top:16px;min-height:44px;width:100%}
+.publication-hint{font-size:13px;color:var(--muted-text,#64756e);line-height:1.7;margin:12px 0 0}
+.publication-results{margin:18px 0}
+.publication-result-row{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border-color,#e1e9e5)}
+.publication-result-row.total{border:0;font-weight:800}
+@media(max-width:680px){.publication-grid{grid-template-columns:1fr}.publication-card,.publication-results{padding:16px}.publication-result-row{font-size:14px}}
+body.dark .publication-card,body.dark .publication-results{background:#172b27;border-color:#345148;color:#e9f4ef}
+body.dark .publication-card input,body.dark .publication-card select{background:#10211e;color:#eef8f3;border-color:#426458}
