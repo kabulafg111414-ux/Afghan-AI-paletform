@@ -894,7 +894,7 @@ renderVocationalCenter();
 /* Afghan AI navigation recovery: tolerate missing optional sections and
    guarantee that every existing data-page destination can be opened. */
 (function installNavigationRecovery(){
-  const previousShowPage = window.showPage;
+  const previousShowPage = showPage;
   window.showPage = function(name){
     if(!Array.isArray(pages) || !pages.includes(name)) return;
     try {
@@ -929,6 +929,7 @@ renderVocationalCenter();
     if(!pages || !pages.includes(target) ||
        !document.getElementById(target + 'Page')) return;
     event.preventDefault();
+    event.stopImmediatePropagation();
     window.showPage(target);
   }, true);
 })();
