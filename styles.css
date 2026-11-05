@@ -1532,3 +1532,18 @@ body.dark .page:not(#dashboardPage) .notice p{color:#f6e8c9}
  body.dark .page:not(#dashboardPage) li,
  body.dark .page:not(#dashboardPage) label{color:#edf5fa}
 }
+
+
+/* Fix the Start Learning call-to-action: white surface requires dark readable text */
+#dashboardPage .home-primary,
+#dashboardPage .home-primary:visited{
+  background:#ffffff!important;
+  background-image:none!important;
+  color:#173149!important;
+  border:1px solid #c7d9e5!important;
+  box-shadow:0 8px 22px rgba(7,42,68,.16)!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-primary span{color:#075e91!important}
+#dashboardPage .home-primary:hover{background:#f2f8fc!important;color:#102b40!important}
+#dashboardPage .home-primary:focus-visible{outline:3px solid #087fa5!important;outline-offset:3px}
