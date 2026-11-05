@@ -1652,3 +1652,34 @@ body.dark #dashboardPage .notice p{color:#40586b!important}
 body.dark #dashboardPage .home-side-card button,
 body.dark #dashboardPage .home-side-card button span,
 body.dark #dashboardPage .home-side-card button b{color:#24465f!important}
+
+
+/* Definitive Start Learning button: dark blue surface with white high-contrast label */
+#dashboardPage .home-hero-copy > .home-primary,
+#dashboardPage .home-primary,
+#dashboardPage .home-primary:link,
+#dashboardPage .home-primary:visited{
+  background:#075985!important;
+  background-color:#075985!important;
+  background-image:linear-gradient(110deg,#087da5,#075985)!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+  border:1px solid #064766!important;
+  text-shadow:none!important;
+  box-shadow:0 8px 22px rgba(7,89,133,.28)!important;
+}
+#dashboardPage .home-hero-copy > .home-primary span,
+#dashboardPage .home-primary span{
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+}
+#dashboardPage .home-primary:hover{
+  background:#064766!important;
+  background-image:linear-gradient(110deg,#076b8c,#064766)!important;
+  color:#ffffff!important;
+  -webkit-text-fill-color:#ffffff!important;
+}
+#dashboardPage .home-primary:focus-visible{
+  outline:3px solid #f0b429!important;
+  outline-offset:3px;
+}
