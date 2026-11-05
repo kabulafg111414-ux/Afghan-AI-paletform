@@ -658,9 +658,9 @@ if(planButton)planButton.addEventListener('click',()=>{
  paintChecklist();
  safeStorageSet('afghanai-kankor-plan',JSON.stringify({goal,days,hours}));
 });
-try{const savedPlan=JSON.parse(safeStorageGet('afghanai-kankor-plan')||'null');if(savedPlan&&$('#kankorGoal')){$('#kankorGoal').value=savedPlan.goal;$('#kankorDays').value=savedPlan.days;$('#kankorHours').value=savedPlan.hours}}catch(e){}
+try{const savedPlan=safeStorageJSON('afghanai-kankor-plan',null);if(savedPlan&&$('#kankorGoal')){$('#kankorGoal').value=savedPlan.goal;$('#kankorDays').value=savedPlan.days;$('#kankorHours').value=savedPlan.hours}}catch(e){}
 // Learning toolkit: local-only notes, flashcards, focus timer and speech.
-let focusSeconds=25*60, focusInterval=null, flashcards=JSON.parse(safeStorageGet('afghanai-flashcards')||'[]'), flashIndex=0, flashRevealed=false;
+let focusSeconds=25*60, focusInterval=null, flashcards=safeStorageJSON('afghanai-flashcards',[]), flashIndex=0, flashRevealed=false;
 const clock=$('#focusClock');
 function paintClock(){if(clock)clock.textContent=String(Math.floor(focusSeconds/60)).padStart(2,'0')+':'+String(focusSeconds%60).padStart(2,'0')}
 function stopFocus(){if(focusInterval){clearInterval(focusInterval);focusInterval=null}}
@@ -679,7 +679,7 @@ $('#speakStop')?.addEventListener('click',()=>{if('speechSynthesis'in window)spe
 
 
 // Study checklist and text lab — private, browser-local helpers.
-let studyTasks=JSON.parse(safeStorageGet('afghanai-study-tasks')||'[]');
+let studyTasks=safeStorageJSON('afghanai-study-tasks',[]);
 function renderStudyTasks(){
  const host=$('#studyTaskList'); if(!host)return; host.replaceChildren();
  if(!studyTasks.length){const empty=document.createElement('p');empty.className='study-task-empty';empty.textContent='هنوز کاری اضافه نشده است.';host.append(empty);return}
@@ -751,7 +751,7 @@ const vocabEntries=[
  {en:'Learn',fa:'یاد گرفتن',ps:'زده کول',pron:'lern'},
  {en:'Future',fa:'آینده',ps:'راتلونکی',pron:'FYOO-cher'}
 ];
-let vocabStates=JSON.parse(safeStorageGet('afghanai-vocab-states')||'{}'),vocabIndex=0,vocabRevealed=false,vocabVisible=[...vocabEntries.keys()];
+let vocabStates=safeStorageJSON('afghanai-vocab-states',{}),vocabIndex=0,vocabRevealed=false,vocabVisible=[...vocabEntries.keys()];
 function filterVocab(){const q=($('#vocabSearch')?.value||'').trim().toLowerCase(),f=$('#vocabFilter')?.value||'all';vocabVisible=vocabEntries.map((v,i)=>i).filter(i=>{const v=vocabEntries[i],known=vocabStates[i]==='known';return(f==='all'||(f==='known'?known:!known))&&(!q||[v.en,v.fa,v.ps].some(x=>x.toLowerCase().includes(q))) });if(!vocabVisible.includes(vocabIndex))vocabIndex=vocabVisible[0]??-1;vocabRevealed=false;renderVocab()}
 function renderVocab(){const host=$('#vocabCard');if(!host)return;host.replaceChildren();if(vocabIndex<0||!vocabVisible.length){const empty=document.createElement('p');empty.textContent='واژه‌ای با این جستجو پیدا نشد.';host.append(empty);$('#vocabStatus').textContent='فیلتر را تغییر دهید یا واژهٔ دیگری جستجو کنید.';return}const v=vocabEntries[vocabIndex],pos=vocabVisible.indexOf(vocabIndex);const small=document.createElement('small');small.textContent='واژهٔ '+(pos+1)+' از '+vocabVisible.length;const title=document.createElement('h3');title.textContent=v.en;host.append(small,title);if(vocabRevealed){const fa=document.createElement('p');fa.textContent='دری: '+v.fa;const ps=document.createElement('p');ps.textContent='پښتو: '+v.ps;const pr=document.createElement('span');pr.textContent='Pronunciation: '+v.pron;host.append(fa,ps,pr)}else{const hint=document.createElement('p');hint.textContent='برای دیدن معنی، دکمهٔ «نمایش معنی» را بزنید.';host.append(hint)}const known=vocabStates[vocabIndex]==='known';$('#vocabStatus').textContent=(Object.values(vocabStates).filter(x=>x==='known').length)+' واژه یادگرفته‌شده؛ '+vocabEntries.length+' واژه در این مجموعه.'+(known?' این واژه یاد گرفته شده است.':'')}
 $('#vocabSearch')?.addEventListener('input',filterVocab);$('#vocabFilter')?.addEventListener('change',filterVocab);
