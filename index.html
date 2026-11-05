@@ -61,6 +61,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <button class="nav" data-page="historyculture"><span class="nav-icon">🏛️</span><span>تاریخ و فرهنگ افغانستان</span></button>
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
   <button class="nav" data-page="library"><span class="nav-icon">📚</span><span>کتابخانهٔ دیجیتال</span></button>
+  <button class="nav" data-page="supportfund"><span class="nav-icon">🤝</span><span>صندوق حمایت و توسعه</span></button>
   <button class="nav" data-page="publications"><span class="nav-icon">📰</span><span>انتشارات و کمیسیون</span></button>
   <button class="nav" data-page="quiz"><span class="nav-icon">☑</span><span data-i18n="navQuiz">امتحان آزمایشی</span></button>
   <button class="nav" data-page="progress"><span class="nav-icon">▥</span><span data-i18n="navProgress">پیشرفت من</span></button>
@@ -392,6 +393,35 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 </section>
 
 
+<section id="supportfundPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI • COMMUNITY SUPPORT</span><h1>🤝 صندوق حمایت و توسعه Afghan AI</h1><p>حمایت شفاف از رشد پلتفرم و رسیدگی به نیازهای خانواده‌های آسیب‌پذیر.</p></div>
+ <div class="notice"><span>ℹ️</span><div><b>اطلاعیهٔ شفافیت</b><p>این صفحه فعلاً معرفی و راهنمای کمک است؛ پرداخت آنلاین، دریافت خودکار پول و صدور رسید در پلتفرم فعال نیست. پیش از ارسال کمک، مشخصات حساب را در اپلیکیشن حساب‌پی بررسی کنید.</p></div></div>
+ <div class="fund-grid">
+  <article class="fund-card"><span class="fund-icon">💻</span><h2>توسعه و ارتقای Afghan AI</h2><p>برای بهبود امنیت، سرورها، امکانات هوش مصنوعی، محتوای آموزشی و دسترسی کاربران.</p></article>
+  <article class="fund-card"><span class="fund-icon">❤️</span><h2>حمایت از خانواده‌های نیازمند</h2><p>برای کمک‌های ضروری، مواد غذایی و پشتیبانی آموزشی کودکان با رعایت کرامت و حریم خصوصی.</p></article>
+ </div>
+ <div class="fund-payment-layout">
+  <article class="fund-card fund-payment">
+   <span class="eyebrow">HESABPAY • PAYMENT INFORMATION</span><h2>روش ارسال کمک از طریق حساب‌پی</h2>
+   <div class="fund-account"><span>شماره تماس / حساب‌پی</span><strong dir="ltr">0093787111414</strong><button type="button" class="outline" id="fundCopyNumber">کاپی شماره</button></div>
+   <div class="fund-qr-placeholder"><span>▦</span><b>محل نمایش QR Code رسمی حساب‌پی</b><small>تصویر اصلی بارکود حساب‌پی باید توسط مدیر بارگذاری شود. این بخش فعلاً بارکود پرداخت نیست.</small></div>
+   <p class="publication-hint">نام صاحب حساب و شماره را پیش از تأیید پرداخت در اپلیکیشن حساب‌پی با دقت بررسی کنید.</p>
+   <a class="fund-app-link" href="https://hesab.com/download-app" target="_blank" rel="noopener noreferrer">دانلود رسمی اپلیکیشن حساب‌پی ↗</a>
+  </article>
+  <article class="fund-card fund-choice">
+   <span class="eyebrow">CHOOSE YOUR PURPOSE</span><h2>مقصد کمک خود را انتخاب کنید</h2>
+   <label class="fund-option"><input type="radio" name="fundPurpose" value="platform" checked> توسعه و ارتقای پلتفرم Afghan AI</label>
+   <label class="fund-option"><input type="radio" name="fundPurpose" value="families"> حمایت از خانواده‌های نیازمند</label>
+   <label class="fund-option"><input type="radio" name="fundPurpose" value="both"> حمایت از هر دو بخش</label>
+   <label for="fundAmount">مبلغ مورد نظر (افغانی، اختیاری)</label><input id="fundAmount" type="number" min="1" step="1" inputmode="numeric" placeholder="مثلاً 500">
+   <button type="button" class="primary" id="fundPrepare">نمایش خلاصهٔ کمک</button>
+   <div id="fundSummary" class="fund-summary" aria-live="polite">پس از انتخاب مقصد و مبلغ، خلاصهٔ کمک اینجا نمایش داده می‌شود.</div>
+   <p class="publication-hint">این خلاصه فقط برای راهنمایی است و هیچ تراکنش یا پرداختی انجام نمی‌دهد.</p>
+  </article>
+ </div>
+ <div class="fund-transparency"><h2>تعهدات شفافیت</h2><ul><li>ثبت جداگانهٔ کمک‌های توسعه و کمک‌های بشردوستانه.</li><li>گزارش دوره‌ای مجموع دریافت‌ها و مصارف، بدون افشای هویت خانواده‌ها.</li><li>استفاده از کمک مطابق مقصد انتخاب‌شده توسط اهداکننده.</li><li>عدم ادعای پرداخت یا صدور رسید تا فعال‌شدن سیستم مالی معتبر.</li></ul></div>
+</section>
+
 <section id="publicationsPage" class="page hidden">
  <div class="page-title"><span class="eyebrow">AFGHAN AI • PUBLICATIONS</span><h1>📰 انتشارات و کمیسیون Afghan AI</h1><p>مدیریت آثار نشراتی، سهم نویسنده و سهم پلتفرم در یک محل.</p></div>
  <div class="notice"><span>ℹ️</span><div><b>نسخهٔ ابتدایی محاسبه‌گر</b><p>این بخش فعلاً برای ثبت و محاسبهٔ نمونه‌ای است. حساب واقعی، پرداخت بانکی، تسویه و ذخیره‌سازی مرکزی تا اتصال سرور و سیستم مالی فعال نیست.</p></div></div>
@@ -456,7 +486,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 (function(){
   if(window.__afghanAiNavigationFallback)return;
   window.__afghanAiNavigationFallback=true;
-  var pageNames=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','publications','quiz','progress','family','admin','tools','guide','sources'];
+  var pageNames=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','supportfund','publications','quiz','progress','family','admin','tools','guide','sources'];
   function navigate(name){
     if(pageNames.indexOf(name)===-1)return false;
     var target=document.getElementById(name+'Page');
