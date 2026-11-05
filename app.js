@@ -5,7 +5,7 @@ function safeStorageGet(key){try{const value=window.localStorage.getItem(key);re
 function safeStorageSet(key,value){const text=String(value);safeMemoryStorage.set(key,text);try{window.localStorage.setItem(key,text);return true}catch(error){return false}}
 function safeStorageRemove(key){safeMemoryStorage.delete(key);try{window.localStorage.removeItem(key);return true}catch(error){return false}}
 function safeStorageJSON(key,fallback){try{const raw=safeStorageGet(key);return raw===null?fallback:JSON.parse(raw)}catch(error){return fallback}}
-const pages=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','publications','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','supportfund','publications','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
