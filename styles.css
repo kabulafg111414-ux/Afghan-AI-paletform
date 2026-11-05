@@ -741,7 +741,9 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 .afg-province-details{margin:14px 0;padding:13px;border-radius:11px;background:var(--background,transparent);line-height:1.8}
 .afg-province-source{font-size:.88rem;margin:10px 0}
 .afg-province-explorer>a{display:inline-block;margin-top:8px;color:var(--accent,#269caa)}
-@media(max-width:560px){.afg-province-explorer{padding:14px}.afg-province-explorer select{max-width:none}}
+@media(max-width:560px){.afg-province-explorer{padding:14px}.afg-province-explorer #afgProvinceSearch{display:block;width:100%;max-width:100%;min-height:44px;margin:8px 0 12px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font:inherit}
+.afg-province-explorer #afgProvinceSearch:focus-visible{outline:3px solid var(--accent,#269caa);outline-offset:2px}
+.afg-province-explorer select{max-width:none}}
 
 /* Interactive province map */
 .afg-province-map{width:100%;height:clamp(300px,58vw,520px);margin:14px 0;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--surface);z-index:0}
