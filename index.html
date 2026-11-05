@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08664f"><meta name="description" content="Afghan AI — معلم هوشمند برای دانش‌آموزان افغانستان">
 <link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css">
@@ -254,6 +255,7 @@
   <label for="afgProvinceSelect">انتخاب ولایت</label>
   <select id="afgProvinceSelect" aria-controls="afgProvinceDetails"><option value="">یک ولایت را انتخاب کنید</option></select>
   <div id="afgProvinceDetails" class="afg-province-details" aria-live="polite">پس از انتخاب ولایت، اطلاعات آن اینجا نمایش داده می‌شود.</div>
+  <div id="afgProvinceMap" class="afg-province-map" role="region" aria-label="نقشهٔ تعاملی ولایت‌های افغانستان"><p>نقشه پس از بارگذاری داده‌های جغرافیایی نمایش داده می‌شود.</p></div>
   <p class="afg-province-source">یادداشت: نام مراکز بر اساس فهرست آنلاین پورتال دولتی درج شده و خود پورتال نیز نیاز به تأیید رسمی اطلاعات را یادآوری می‌کند. مرزهای نقشه و جاذبه‌ها در مرحله‌های بعد با داده‌های دارای منبع افزوده می‌شوند.</p>
   <a href="https://afg.gov.af/explore/provinces" target="_blank" rel="noopener noreferrer">مشاهدهٔ فهرست اطلاعات ولایت‌ها در پورتال افغانستان</a>
  </article>
@@ -382,5 +384,6 @@
  <footer>Afghan AI <span>•</span> بنیان‌گذار: سیدمحب‌الله (هاشمی) <span>•</span> منابع و سپاسگزاری</footer>
 </section>
 </main></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="./app.js"></script>
 </body></html>
