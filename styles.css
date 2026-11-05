@@ -2233,3 +2233,29 @@ body.dark #dashboardPage .home-footer>div .footer-link{color:#075f9e!important;-
 @media(max-width:680px){.publication-grid{grid-template-columns:1fr}.publication-card,.publication-results{padding:16px}.publication-result-row{font-size:14px}}
 body.dark .publication-card,body.dark .publication-results{background:#172b27;border-color:#345148;color:#e9f4ef}
 body.dark .publication-card input,body.dark .publication-card select{background:#10211e;color:#eef8f3;border-color:#426458}
+
+
+/* Afghan AI community development and humanitarian support fund */
+.fund-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}
+.fund-payment-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.fund-card,.fund-transparency{background:var(--card-bg,#fff);border:1px solid var(--border-color,#dce6e1);border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(20,55,43,.06);min-width:0}
+.fund-icon{font-size:30px}.fund-card h2,.fund-transparency h2{font-size:19px;margin:8px 0 10px}
+.fund-card p,.fund-transparency li{line-height:1.8}
+.fund-account{display:grid;gap:8px;padding:14px;background:#f0f6f4;border:1px solid #d7e6df;border-radius:13px;margin:16px 0}
+.fund-account strong{font-size:22px;letter-spacing:.04em;color:#075985}
+.fund-account button{justify-self:start}
+.fund-qr-placeholder{min-height:145px;border:2px dashed #a8beb4;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:16px;background:#f8fbf9;color:#36564a}
+.fund-qr-placeholder>span{font-size:42px}.fund-qr-placeholder small{max-width:34ch;line-height:1.6}
+.fund-app-link{display:inline-block;margin-top:12px;font-weight:750}
+.fund-option{display:flex!important;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--border-color,#e1e9e5);font-weight:600}
+.fund-option input{width:18px;height:18px;min-height:18px;accent-color:#087b62}
+.fund-choice>label[for="fundAmount"]{display:block;margin:16px 0 6px;font-weight:700}
+.fund-choice>#fundAmount{width:100%;padding:10px 12px}
+.fund-choice>#fundPrepare{width:100%;margin-top:14px;min-height:44px}
+.fund-summary{margin-top:12px;padding:13px;border-radius:12px;background:#eef6f3;color:#173b32;line-height:1.8;min-height:52px}
+.fund-transparency{margin-top:16px}.fund-transparency ul{padding-inline-start:22px}
+body.dark .fund-card,body.dark .fund-transparency{background:#172b27;border-color:#345148;color:#e9f4ef}
+body.dark .fund-account,body.dark .fund-summary{background:#203b34;border-color:#426458;color:#edf8f2}
+body.dark .fund-account strong{color:#8ed4ff}
+body.dark .fund-qr-placeholder{background:#132722;border-color:#426458;color:#e3f2ea}
+@media(max-width:700px){.fund-grid,.fund-payment-layout{grid-template-columns:1fr}.fund-card,.fund-transparency{padding:16px}}
