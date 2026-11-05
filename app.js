@@ -889,3 +889,46 @@ $('#vocationalPlanBtn')?.addEventListener('click',()=>{
  out.innerHTML='<h3>برنامهٔ هفت‌روزه: '+names[key]+'</h3><ol>'+vocationalPlans[key].map(x=>'<li>'+x+'</li>').join('')+'</ol><p>این برنامهٔ مقدماتی پیشنهادی است؛ مدت و سطح آموزش را با استاد و معیارهای محلی تنظیم کنید.</p>';
 });
 renderVocationalCenter();
+
+
+/* Afghan AI navigation recovery: tolerate missing optional sections and
+   guarantee that every existing data-page destination can be opened. */
+(function installNavigationRecovery(){
+  const previousShowPage = window.showPage;
+  window.showPage = function(name){
+    if(!Array.isArray(window.pages) || !window.pages.includes(name)) return;
+    try {
+      if(typeof previousShowPage === 'function') previousShowPage(name);
+    } catch(error) {
+      console.warn('Afghan AI navigation fallback:', error);
+    }
+    // Always finish the page transition, even if an optional renderer fails.
+    window.pages.forEach(function(pageName){
+      const section = document.getElementById(pageName + 'Page');
+      if(section) section.classList.toggle('hidden', pageName !== name);
+    });
+    document.querySelectorAll('.nav[data-page]').forEach(function(button){
+      button.classList.toggle('active', button.dataset.page === name);
+    });
+    document.body.classList.remove('sidebar-menu-open');
+    const sidebar = document.getElementById('sidebar');
+    const backdrop = document.getElementById('sidebarBackdrop');
+    const menuButton = document.getElementById('mobileMenu');
+    if(sidebar) sidebar.classList.remove('open');
+    if(backdrop) backdrop.classList.remove('is-visible');
+    if(menuButton) menuButton.setAttribute('aria-expanded','false');
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  // Capture navigation taps first so mobile taps and nested card elements work.
+  document.addEventListener('click', function(event){
+    const button = event.target && event.target.closest
+      ? event.target.closest('[data-page]') : null;
+    if(!button) return;
+    const target = button.dataset.page;
+    if(!window.pages || !window.pages.includes(target) ||
+       !document.getElementById(target + 'Page')) return;
+    event.preventDefault();
+    window.showPage(target);
+  }, true);
+})();
