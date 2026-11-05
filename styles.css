@@ -703,3 +703,9 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 #vocationalPlanResult ol{padding-inline-start:24px}
 #vocationalPlanResult li{margin:6px 0}
 #vocationalPage .disclaimer{margin-top:18px}
+
+/* Business center expansion: trade and break-even tools */
+.business-break-even{margin-top:18px}
+.business-break-even .business-calc-fields label{display:block;margin:12px 0 5px;font-weight:650}
+.business-break-even .business-calc-fields input{width:100%;box-sizing:border-box;margin-bottom:8px}
+#businessBreakEvenResult{font-weight:750;margin-top:14px;color:var(--accent,#269caa)}
