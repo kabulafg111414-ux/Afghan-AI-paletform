@@ -1591,3 +1591,64 @@ body.dark #dashboardPage .home-footer>div:nth-child(2) b,
 body.dark #dashboardPage .home-footer>div:nth-child(2) strong{color:#142f45!important}
 body.dark #dashboardPage .home-footer>div:nth-child(2) p{color:#344f63!important}
 body.dark #dashboardPage .home-footer>div:nth-child(2) small{color:#4c6577!important}
+
+
+/* Homepage white-card readability audit: every light panel uses dark typography */
+#dashboardPage .home-side-card,
+#dashboardPage .home-stat,
+#dashboardPage .home-quote,
+#dashboardPage .notice{
+  color:#173149!important;
+}
+#dashboardPage .home-side-card h3,
+#dashboardPage .home-side-card h3 span,
+#dashboardPage .home-stat b,
+#dashboardPage .home-stat strong,
+#dashboardPage .home-quote span,
+#dashboardPage .notice b{
+  color:#142f45!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-side-card p,
+#dashboardPage .home-stat small,
+#dashboardPage .home-quote p,
+#dashboardPage .notice p{
+  color:#40586b!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-side-card button,
+#dashboardPage .home-side-card button span,
+#dashboardPage .home-side-card button b{
+  color:#24465f!important;
+  opacity:1!important;
+  text-shadow:none!important;
+}
+#dashboardPage .home-side-card button:hover{
+  color:#075f9e!important;
+}
+#dashboardPage .home-section-heading h2{color:#173149!important}
+#dashboardPage .home-section-heading p{color:#435d72!important}
+#dashboardPage .home-promo .promo-copy h2{color:#173149!important}
+#dashboardPage .home-promo .promo-copy p{color:#40586b!important}
+#dashboardPage .home-promo .promo-icon{color:#075f9e!important}
+body.dark #dashboardPage .home-side-card,
+body.dark #dashboardPage .home-stat,
+body.dark #dashboardPage .home-quote,
+body.dark #dashboardPage .notice{
+  color:#173149!important;
+}
+body.dark #dashboardPage .home-side-card h3,
+body.dark #dashboardPage .home-side-card h3 span,
+body.dark #dashboardPage .home-stat b,
+body.dark #dashboardPage .home-stat strong,
+body.dark #dashboardPage .home-quote span,
+body.dark #dashboardPage .notice b{color:#142f45!important}
+body.dark #dashboardPage .home-side-card p,
+body.dark #dashboardPage .home-stat small,
+body.dark #dashboardPage .home-quote p,
+body.dark #dashboardPage .notice p{color:#40586b!important}
+body.dark #dashboardPage .home-side-card button,
+body.dark #dashboardPage .home-side-card button span,
+body.dark #dashboardPage .home-side-card button b{color:#24465f!important}
