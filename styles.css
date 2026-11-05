@@ -715,3 +715,10 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 #healthPage .health-reference{margin-top:20px}
 #healthPage .health-course-card details{line-height:1.9}
 #healthPage .health-controls select,#healthPage .health-controls input{max-width:100%}
+
+/* Civic legal learning center refinements */
+#lawPage .law-notice{border-inline-start:4px solid var(--accent,#269caa);line-height:1.9}
+#lawPage .law-course-card details{line-height:1.95}
+#lawPage .law-course-card summary{cursor:pointer;font-weight:700}
+#lawPage .law-checklist,#lawPage .law-references{margin-top:20px}
+#lawPage .law-controls input,#lawPage .law-controls select{max-width:100%}
