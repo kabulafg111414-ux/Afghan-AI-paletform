@@ -2259,3 +2259,5 @@ body.dark .fund-account,body.dark .fund-summary{background:#203b34;border-color:
 body.dark .fund-account strong{color:#8ed4ff}
 body.dark .fund-qr-placeholder{background:#132722;border-color:#426458;color:#e3f2ea}
 @media(max-width:700px){.fund-grid,.fund-payment-layout{grid-template-columns:1fr}.fund-card,.fund-transparency{padding:16px}}
+
+.fund-qr-live{background:#fff!important;padding:14px!important}.fund-qr-live img{display:block;width:min(100%,300px);height:auto;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:8px}.fund-qr-live b{color:#173b32}.fund-qr-live small{color:#36564a}
