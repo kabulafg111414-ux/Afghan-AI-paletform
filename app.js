@@ -896,14 +896,14 @@ renderVocationalCenter();
 (function installNavigationRecovery(){
   const previousShowPage = window.showPage;
   window.showPage = function(name){
-    if(!Array.isArray(window.pages) || !window.pages.includes(name)) return;
+    if(!Array.isArray(pages) || !pages.includes(name)) return;
     try {
       if(typeof previousShowPage === 'function') previousShowPage(name);
     } catch(error) {
       console.warn('Afghan AI navigation fallback:', error);
     }
     // Always finish the page transition, even if an optional renderer fails.
-    window.pages.forEach(function(pageName){
+    pages.forEach(function(pageName){
       const section = document.getElementById(pageName + 'Page');
       if(section) section.classList.toggle('hidden', pageName !== name);
     });
@@ -926,7 +926,7 @@ renderVocationalCenter();
       ? event.target.closest('[data-page]') : null;
     if(!button) return;
     const target = button.dataset.page;
-    if(!window.pages || !window.pages.includes(target) ||
+    if(!pages || !pages.includes(target) ||
        !document.getElementById(target + 'Page')) return;
     event.preventDefault();
     window.showPage(target);
