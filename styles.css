@@ -2109,3 +2109,69 @@ body.dark #dashboardPage .home-footer>div .footer-link{color:#075f9e!important;-
  #dashboardPage .home-footer{grid-template-columns:1fr!important;gap:10px}
  #dashboardPage .home-footer>div{padding:14px!important;border:1px solid #d7e2e9!important}
 }
+
+
+/* Mobile navigation drawer: keep every platform section reachable on small screens. */
+.sidebar-mobile-head{display:none}
+@media(max-width:820px){
+  .topbar{position:sticky;top:0;z-index:25}
+  .topbar .mobile-menu{display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 42px;width:42px;height:42px;min-width:42px;font-size:21px;line-height:1}
+  .sidebar{
+    display:none;
+    position:fixed;
+    z-index:30;
+    top:64px;
+    bottom:0;
+    inset-inline-start:0;
+    width:min(330px,88vw);
+    height:calc(100dvh - 64px);
+    max-height:calc(100dvh - 64px);
+    overflow-x:hidden;
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    padding:12px 12px max(22px,env(safe-area-inset-bottom));
+    gap:5px;
+    box-shadow:0 12px 38px rgba(0,0,0,.24);
+  }
+  .sidebar.open{display:flex!important}
+  .sidebar-mobile-head{
+    display:flex;
+    position:sticky;
+    top:-12px;
+    z-index:2;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:-12px -12px 8px;
+    padding:12px 14px;
+    background:#f2f8f6;
+    color:#173b32;
+    border-bottom:1px solid #d8e8e1;
+  }
+  .sidebar-mobile-head strong{font-size:14px}
+  .sidebar-mobile-head button{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:36px;height:36px;min-width:36px;border-radius:10px;
+    border:1px solid #c5d9d0;background:#fff;color:#173b32;
+    font-size:18px;font-weight:800;
+  }
+  .sidebar .nav{
+    display:flex!important;
+    flex:0 0 auto;
+    width:100%;
+    min-height:46px;
+    padding:10px 12px;
+    font-size:14px;
+    line-height:1.5;
+    white-space:normal;
+    text-align:start;
+  }
+  .sidebar .nav span:last-child{min-width:0;overflow-wrap:anywhere}
+  .sidebar .side-bottom{margin-top:12px}
+  body.dark .sidebar-mobile-head{background:#142d2a;color:#e7f5ef;border-color:#34564c}
+  body.dark .sidebar-mobile-head button{background:#203d37;color:#f1fbf6;border-color:#42665a}
+}
+@media(max-width:540px){
+  .sidebar{top:64px;height:calc(100dvh - 64px);max-height:calc(100dvh - 64px)}
+}
