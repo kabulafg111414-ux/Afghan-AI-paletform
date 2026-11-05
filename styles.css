@@ -1189,3 +1189,58 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 }
 @media(max-width:390px){#dashboardPage .home-feature-grid{grid-template-columns:1fr}#dashboardPage .home-flag-pair{gap:8px;padding:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+
+/* Accessibility/readability fix: card text contrast */
+.home-redesign .home-service,
+.home-redesign .home-service h3,
+.home-redesign .home-service p,
+.home-redesign .home-service .service-cta,
+.home-redesign .home-service .service-symbol{
+ color:#fff!important;
+ text-shadow:0 1px 2px rgba(0,0,0,.24);
+ opacity:1!important;
+}
+.home-redesign .home-service{
+ background-color:#123d60!important;
+ border:1px solid rgba(255,255,255,.34)!important;
+}
+.home-redesign .home-service.service-blue{background-image:linear-gradient(145deg,#073b70,#1055a0 58%,#082b58)!important}
+.home-redesign .home-service.service-green{background-image:linear-gradient(145deg,#07583f,#08785b 58%,#064b3b)!important}
+.home-redesign .home-service.service-purple{background-image:linear-gradient(145deg,#39265f,#573b89 58%,#30204f)!important}
+.home-redesign .home-service.service-orange{background-image:linear-gradient(145deg,#783b12,#a65319 58%,#65300f)!important}
+.home-redesign .home-service h3{font-weight:850!important;line-height:1.4!important;font-size:1.05rem!important}
+.home-redesign .home-service p{font-size:.9rem!important;line-height:1.75!important;font-weight:550!important;color:#f5f9ff!important}
+.home-redesign .home-service .service-cta{font-weight:800!important;color:#fff!important;margin-top:auto}
+.home-redesign .home-service .service-symbol{background:rgba(255,255,255,.18)!important;border:1px solid rgba(255,255,255,.24)!important}
+.home-redesign .home-side-card,
+.home-redesign .home-side-card h3,
+.home-redesign .home-side-card p,
+.home-redesign .home-stat,
+.home-redesign .home-stat b,
+.home-redesign .home-stat span,
+.home-redesign .home-quote,
+.home-redesign .home-quote p{
+ color:#17334a!important;
+ text-shadow:none!important;
+}
+.home-redesign .home-side-card p,.home-redesign .home-quote p{color:#425b70!important}
+.home-redesign .home-stat{background:#fff!important;border-color:#d6e4ed!important}
+body.dark .home-redesign .home-side-card,
+body.dark .home-redesign .home-stat,
+body.dark .home-redesign .home-quote{background:#122c3b!important;border-color:#355262!important}
+body.dark .home-redesign .home-side-card,
+body.dark .home-redesign .home-side-card h3,
+body.dark .home-redesign .home-side-card p,
+body.dark .home-redesign .home-stat,
+body.dark .home-redesign .home-stat b,
+body.dark .home-redesign .home-stat span,
+body.dark .home-redesign .home-quote,
+body.dark .home-redesign .home-quote p{color:#f0f7fb!important}
+body.dark .home-redesign .home-side-card p,
+body.dark .home-redesign .home-quote p{color:#d1e1e9!important}
+@media(max-width:700px){
+ .home-redesign .home-service h3{font-size:1rem!important}
+ .home-redesign .home-service p{font-size:.86rem!important;line-height:1.7!important}
+ .home-redesign .home-service{min-height:185px;padding:17px!important}
+}
