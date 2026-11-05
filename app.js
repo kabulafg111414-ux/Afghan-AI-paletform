@@ -290,6 +290,45 @@ function initAfghanProvinceExplorer(){
  });
 }
 initAfghanProvinceExplorer();
+let afghanLeafletMap=null,afghanProvinceLayer=null;
+function initAfghanInteractiveMap(){
+ const host=$('#afgProvinceMap'),details=$('#afgProvinceDetails'),select=$('#afgProvinceSelect');
+ if(!host||host.dataset.started==='true')return;
+ host.dataset.started='true';
+ if(!window.L){host.textContent='کتابخانهٔ نقشه بارگذاری نشد؛ لطفاً اتصال اینترنت را بررسی کنید. فهرست ولایت‌ها همچنان قابل استفاده است.';return;}
+ afghanLeafletMap=L.map(host,{scrollWheelZoom:false}).setView([33.9,66.2],5);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:12}).addTo(afghanLeafletMap);
+ const geoJsonUrl='https://services5.arcgis.com/sjP4Ugu5s0dZWLjd/ArcGIS/rest/services/Admin1_Afghanistan/FeatureServer/1/query?where=1%3D1&outFields=PROV_34_NA&returnGeometry=true&outSR=4326&f=geojson';
+ host.setAttribute('aria-busy','true');
+ fetch(geoJsonUrl).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json();}).then(data=>{
+  if(!data.features||!data.features.length)throw new Error('No province polygons');
+  afghanProvinceLayer=L.geoJSON(data,{style:{color:'#2c9da5',weight:1.5,fillColor:'#4e9da2',fillOpacity:.18},onEachFeature:(feature,layer)=>{
+   const province=feature.properties?.PROV_34_NA||'نام ثبت‌نشده';
+   layer.bindTooltip(province,{sticky:true});
+   layer.on('click',()=>{
+    details.textContent='ولایت روی نقشه: '+province+' — برای نمایش مرکز ولایت، مورد متناظر را از فهرست انتخاب کنید؛ تطبیق نام نیازمند بازبینی است.';
+    const option=[...select.options].find(o=>o.value.toLocaleLowerCase()===province.toLocaleLowerCase());
+    if(option)select.value=option.value;
+   });
+  }}).addTo(afghanLeafletMap);
+  afghanLeafletMap.fitBounds(afghanProvinceLayer.getBounds(),{padding:[8,8]});
+  host.dataset.loaded='true';
+ }).catch(error=>{
+  host.textContent='دادهٔ مرزهای ولایت‌ها فعلاً بارگذاری نشد. اتصال اینترنت را بررسی کنید؛ فهرست انتخاب ولایت‌ها همچنان فعال است.';
+  host.dataset.error='true';
+ }).finally(()=>host.removeAttribute('aria-busy'));
+ select?.addEventListener('change',()=>{
+  if(!afghanProvinceLayer||!select.value)return;
+  afghanProvinceLayer.eachLayer(layer=>{
+   const name=layer.feature.properties?.PROV_34_NA||'';
+   const active=name.toLocaleLowerCase()===select.value.toLocaleLowerCase();
+   layer.setStyle({color:active?'#d97706':'#2c9da5',weight:active?3:1.5,fillColor:active?'#f59e0b':'#4e9da2',fillOpacity:active?.42:.18});
+   if(active)afghanLeafletMap.fitBounds(layer.getBounds(),{padding:[20,20],maxZoom:8});
+  });
+ });
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAfghanInteractiveMap,{once:true});else initAfghanInteractiveMap();
+
 
 function renderHistoryCultureCenter(){
  const grid=$('#historycultureCourseGrid');if(!grid)return;
