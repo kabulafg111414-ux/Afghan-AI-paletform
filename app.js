@@ -481,8 +481,13 @@ function applyLandingText(lang){const t=landingText[lang]||landingText.fa;const 
 const previousLanguageApply=applyLanguage;applyLanguage=function(lang){previousLanguageApply(lang);applyLandingText(lang)};applyLandingText($('#uiLanguage').value);
 
 
-const state=safeStorageJSON('afghanai-state',{questions:0,lessons:0,quizzes:0,correct:0,activity:[]});
-if(!state||typeof state!=='object'||Array.isArray(state))Object.assign(state,{questions:0,lessons:0,quizzes:0,correct:0,activity:[]});
+const storedState=safeStorageJSON('afghanai-state',{});
+const state=storedState&&typeof storedState==='object'&&!Array.isArray(storedState)?storedState:{};
+state.questions=Number.isFinite(Number(state.questions))?Number(state.questions):0;
+state.lessons=Number.isFinite(Number(state.lessons))?Number(state.lessons):0;
+state.quizzes=Number.isFinite(Number(state.quizzes))?Number(state.quizzes):0;
+state.correct=Number.isFinite(Number(state.correct))?Number(state.correct):0;
+state.activity=Array.isArray(state.activity)?state.activity:[];
 state.questions=Number.isFinite(Number(state.questions))?Number(state.questions):0;
 state.lessons=Number.isFinite(Number(state.lessons))?Number(state.lessons):0;
 state.quizzes=Number.isFinite(Number(state.quizzes))?Number(state.quizzes):0;
