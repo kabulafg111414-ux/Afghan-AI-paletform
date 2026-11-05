@@ -2191,3 +2191,28 @@ body.dark #dashboardPage .home-footer>div .footer-link{color:#075f9e!important;-
  body.sidebar-menu-open{overflow:hidden;touch-action:pan-y}
 }
 @media(prefers-reduced-motion:reduce){.sidebar-backdrop{transition:none}}
+
+
+/* Fix: mobile drawer close (X) control must not inherit danger/red button styles. */
+@media(max-width:820px){
+  .sidebar-mobile-head button#closeSidebar,
+  .sidebar-mobile-head button#closeSidebar:hover,
+  .sidebar-mobile-head button#closeSidebar:focus,
+  .sidebar-mobile-head button#closeSidebar:active{
+    color:#173b32!important;
+    -webkit-text-fill-color:#173b32!important;
+    background:#ffffff!important;
+    border:1px solid #c5d9d0!important;
+    box-shadow:none!important;
+    outline-color:#6b9d87;
+  }
+  body.dark .sidebar-mobile-head button#closeSidebar,
+  body.dark .sidebar-mobile-head button#closeSidebar:hover,
+  body.dark .sidebar-mobile-head button#closeSidebar:focus,
+  body.dark .sidebar-mobile-head button#closeSidebar:active{
+    color:#f1fbf6!important;
+    -webkit-text-fill-color:#f1fbf6!important;
+    background:#203d37!important;
+    border:1px solid #42665a!important;
+  }
+}
