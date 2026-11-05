@@ -690,3 +690,8 @@ body.dark .home-stat{box-shadow:0 8px 20px rgba(0,0,0,.15)}
 #airoboticsPage .tool-card input,#airoboticsPage .tool-card select{width:100%;box-sizing:border-box;margin-bottom:9px}
 #aiNeuronResult{font-weight:750;color:var(--accent,#269caa);margin-top:14px}
 #airoboticsPage .disclaimer{margin-top:18px}
+
+/* Afghan multilingual and local-language profiles */
+#afghanLanguageGrid{margin:16px 0 24px}
+#afghanLanguageGrid .language-phrase-card{height:100%}
+#afghanLanguageSelect{max-width:100%;margin-bottom:12px}
