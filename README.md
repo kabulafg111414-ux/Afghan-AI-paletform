@@ -25,3 +25,4 @@ Afghan AI is a mobile-first learning platform prototype for students in Afghanis
 
 ## Founder
 Sayed Moheb Ullah Hashimi
+phone :+93787111414   +93782111414
