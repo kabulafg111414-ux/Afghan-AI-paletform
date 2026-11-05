@@ -276,6 +276,21 @@ const historyCultureCourses=[
 {cat:'geography',title:'ولایت‌ها و تنوع طبیعی افغانستان',level:'مقدماتی',desc:'آشنایی با تفاوت‌های اقلیمی، طبیعی و اقتصادی ولایت‌ها.',lesson:'افغانستان دارای ۳۴ ولایت است. از دشت‌های خشک تا دره‌های سرسبز و کوهستان‌های بلند، تنوع طبیعی بر نوع زراعت، مالداری، معماری و شیوهٔ زندگی مردم اثر می‌گذارد. برای آمار و نام‌های اداری باید از نقشه‌ها و منابع رسمی به‌روز استفاده شود.',task:'ولایت محل زندگی خود را انتخاب کنید و سه ویژگی طبیعی یا اقتصادی آن را بنویسید.'}
 
 ];
+const afghanProvinceDirectory=[
+ ['Badakhshan','Fayzabad'],['Badghis','Qala-e-Naw'],['Baghlan','Pul-e-Khumri'],['Balkh','Mazar-e-Sharif'],['Bamyan','Bamyan'],['Daykundi','Nili'],['Farah','Farah'],['Faryab','Maymana'],['Ghazni','Ghazni'],['Ghor','Firozkoh'],['Helmand','Lashkar Gah'],['Herat','Herat'],['Jawzjan','Sheberghan'],['Kabul','Kabul'],['Kandahar','Kandahar'],['Kapisa','Mahmud-i-Raqi'],['Khost','Khost'],['Kunar','Asadabad'],['Kunduz','Kunduz'],['Laghman','Mehtarlam'],['Logar','Pul-e-Alam'],['Nangarhar','Jalalabad'],['Nimroz','Zaranj'],['Nuristan','Parun'],['Paktia','Gardez'],['Paktika','Sharana'],['Panjshir','Bazarak'],['Parwan','Charikar'],['Samangan','Aybak'],['Sar-e Pol','Sar-e Pol'],['Takhar','Taloqan'],['Uruzgan','Tarinkot'],['Maidan Wardak','Maidan Shahr'],['Zabul','Qalat']
+];
+function initAfghanProvinceExplorer(){
+ const select=$('#afgProvinceSelect'),details=$('#afgProvinceDetails');
+ if(!select||!details||select.dataset.ready==='true')return;
+ select.dataset.ready='true';
+ afghanProvinceDirectory.forEach(([province,capital])=>{const option=document.createElement('option');option.value=province;option.textContent=province;select.appendChild(option);});
+ select.addEventListener('change',()=>{
+  const item=afghanProvinceDirectory.find(([province])=>province===select.value);
+  details.textContent=item?'ولایت: '+item[0]+' | مرکز: '+item[1]+' — نام مرکز نیازمند تأیید رسمی است.':'پس از انتخاب ولایت، اطلاعات آن اینجا نمایش داده می‌شود.';
+ });
+}
+initAfghanProvinceExplorer();
+
 function renderHistoryCultureCenter(){
  const grid=$('#historycultureCourseGrid');if(!grid)return;
  const q=($('#historycultureSearch')?.value||'').trim().toLocaleLowerCase();
