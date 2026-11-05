@@ -1547,3 +1547,16 @@ body.dark .page:not(#dashboardPage) .notice p{color:#f6e8c9}
 #dashboardPage .home-primary span{color:#075e91!important}
 #dashboardPage .home-primary:hover{background:#f2f8fc!important;color:#102b40!important}
 #dashboardPage .home-primary:focus-visible{outline:3px solid #087fa5!important;outline-offset:3px}
+
+
+/* Project Information / footer cards: light cards must never inherit pale text */
+#dashboardPage .home-footer>div{background:#fff!important;color:#173149!important;border:1px solid #d7e2e9!important}
+#dashboardPage .home-footer>div b,#dashboardPage .home-footer>div strong{color:#142f45!important;opacity:1!important;text-shadow:none!important}
+#dashboardPage .home-footer>div p{color:#40586b!important;opacity:1!important;text-shadow:none!important}
+#dashboardPage .home-footer>div small{color:#526a7b!important;opacity:1!important;text-shadow:none!important}
+#dashboardPage .home-footer>div .footer-link{color:#075f9e!important;opacity:1!important;font-weight:700!important;text-shadow:none!important}
+body.dark #dashboardPage .home-footer>div{background:#fff!important;color:#173149!important;border-color:#d7e2e9!important}
+body.dark #dashboardPage .home-footer>div b,body.dark #dashboardPage .home-footer>div strong{color:#142f45!important}
+body.dark #dashboardPage .home-footer>div p{color:#40586b!important}
+body.dark #dashboardPage .home-footer>div small{color:#526a7b!important}
+body.dark #dashboardPage .home-footer>div .footer-link{color:#075f9e!important}
