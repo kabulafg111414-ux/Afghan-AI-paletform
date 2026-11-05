@@ -284,9 +284,14 @@ const afghanProvinceAttractions=[
  {province:'Ghor',name:'منار و بقایای باستان‌شناختی جام',type:'میراث جهانی فرهنگی',status:'ثبت‌شده در فهرست میراث جهانی یونسکو در ۲۰۰۲؛ در فهرست میراث در معرض خطر نیز قرار دارد.',description:'منار آجری حدود ۶۵ متری در درهٔ رود هری‌رود؛ یونسکو تاریخ ساخت آن را ۱۱۹۴ میلادی ذکر می‌کند.',url:'https://whc.unesco.org/en/list/211/',source:'UNESCO World Heritage Centre'},
  {province:'Bamyan',name:'بند امیر',type:'میراث طبیعی — نامزد/فهرست موقت',status:'در فهرست موقت میراث جهانی افغانستان نزد یونسکو در ۲۰۰۴ درج شده؛ این به معنای ثبت نهایی در فهرست میراث جهانی نیست.',description:'مجموعهٔ دریاچه‌های طبیعی در ولایت بامیان؛ وضعیت و شرایط بازدید باید پیش از سفر از منابع محلی معتبر بررسی شود.',url:'https://whc.unesco.org/en/statesparties/AF',source:'UNESCO World Heritage Convention — Tentative List'}
 ];
+function normalizeAfghanProvinceName(name){
+ const key=(name||'').toLocaleLowerCase().replace(/[\\s_-]+/g,'').trim();
+ const aliases={bamian:'Bamyan',bamyan:'Bamyan',ghowr:'Ghor',ghor:'Ghor'};
+ return aliases[key]||name;
+}
 function renderAfghanProvinceAttractions(province){
  const panel=$('#afgProvinceSites');if(!panel)return;
- const items=afghanProvinceAttractions.filter(item=>item.province===province);
+ const provinceKey=normalizeAfghanProvinceName(province);\n const items=afghanProvinceAttractions.filter(item=>item.province===provinceKey);
  panel.innerHTML='<h3>میراث و طبیعت این ولایت</h3>'+(items.length?items.map(item=>'<article class="afg-attraction-card"><span class="afg-attraction-type">'+item.type+'</span><h4>'+item.name+'</h4><p>'+item.description+'</p><p class="afg-attraction-status">'+item.status+'</p><a href="'+item.url+'" target="_blank" rel="noopener noreferrer">منبع: '+item.source+'</a></article>').join(''):'<p>در این نسخه هنوز جاذبهٔ دارای منبع معتبر برای این ولایت ثبت نشده است. از افزودن اطلاعات تأییدنشده خودداری شده است.</p>');
 }
 function initAfghanProvinceExplorer(){
@@ -318,7 +323,7 @@ function initAfghanInteractiveMap(){
    layer.bindTooltip(province,{sticky:true});
    layer.on('click',()=>{
     details.textContent='ولایت روی نقشه: '+province+' — برای نمایش مرکز ولایت، مورد متناظر را از فهرست انتخاب کنید؛ تطبیق نام نیازمند بازبینی است.';
-    renderAfghanProvinceAttractions(province);
+    renderAfghanProvinceAttractions(normalizeAfghanProvinceName(province));
     const option=[...select.options].find(o=>o.value.toLocaleLowerCase()===province.toLocaleLowerCase());
     if(option)select.value=option.value;
    });
