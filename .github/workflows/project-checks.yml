@@ -1,0 +1,35 @@
+name: Project checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax-and-config:
+    name: JavaScript syntax and manifest validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check app.js
+          node --check sw.js
+
+      - name: Validate web app manifest
+        run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json', 'utf8')); console.log('manifest.json is valid JSON')"
+
+      - name: Confirm core application files exist
+        run: |
+          test -s index.html
+          test -s app.js
+          test -s styles.css
+          test -s sw.js
+          test -s manifest.json
