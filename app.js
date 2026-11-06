@@ -496,7 +496,7 @@ $('#mobileMenu').onclick=()=>{
  document.body.classList.toggle('sidebar-menu-open',open);
  $('#mobileMenu').setAttribute('aria-expanded',String(open));
 };
-$('#closeSidebar').onclick=closeMobileMenu;
+$('#closeSidebar')?.addEventListener('click',closeMobileMenu);
 $('#sidebarBackdrop').onclick=closeMobileMenu;
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#sidebar').classList.contains('open'))closeMobileMenu()});
 $('#themeBtn').onclick=()=>{document.body.classList.toggle('dark');safeStorageSet('afghanai-dark',document.body.classList.contains('dark')?'1':'0')};
