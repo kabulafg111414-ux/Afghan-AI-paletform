@@ -5,7 +5,7 @@ function safeStorageGet(key){try{const value=window.localStorage.getItem(key);re
 function safeStorageSet(key,value){const text=String(value);safeMemoryStorage.set(key,text);try{window.localStorage.setItem(key,text);return true}catch(error){return false}}
 function safeStorageRemove(key){safeMemoryStorage.delete(key);try{window.localStorage.removeItem(key);return true}catch(error){return false}}
 function safeStorageJSON(key,fallback){try{const raw=safeStorageGet(key);return raw===null?fallback:JSON.parse(raw)}catch(error){return fallback}}
-const pages=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','supportfund','publications','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','supportfund','featureideas','publications','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -944,3 +944,32 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
 });
 /* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
 window.__afghanAiAppReady=true;
+
+/* Feature ideas: saved locally only; no remote submission is implied. */
+(function(){
+ const form=$('#featureIdeaForm'),list=$('#featureIdeaList'),status=$('#featureIdeaStatus');
+ if(!form||form.dataset.ready==='true')return;
+ form.dataset.ready='true';
+ const key='afghanai-feature-ideas-v1';
+ const read=()=>safeStorageJSON(key,[]);
+ const render=()=>{
+  if(!list)return;
+  const items=read();
+  list.innerHTML=items.length?items.slice().reverse().map(item=>'<article class="info-card" style="margin-top:12px"><b>'+escapeIdeaText(item.title)+'</b><p>'+escapeIdeaText(item.category)+' • '+escapeIdeaText(item.date)+'</p><p>'+escapeIdeaText(item.details)+'</p></article>').join(''):'<p class="publication-hint">هنوز پیشنهادی ثبت نشده است.</p>';
+ };
+ function escapeIdeaText(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  const category=$('#featureIdeaCategory')?.value||'سایر';
+  const title=$('#featureIdeaTitle')?.value.trim()||'';
+  const details=$('#featureIdeaDetails')?.value.trim()||'';
+  if(!title||!details){if(status)status.textContent='لطفاً عنوان و شرح پیشنهاد را تکمیل کنید.';return;}
+  const items=read();
+  items.push({category,title,details,date:new Intl.DateTimeFormat('fa-AF').format(new Date())});
+  if(!safeStorageSet(key,JSON.stringify(items))){if(status)status.textContent='ذخیره‌سازی ممکن نشد؛ فضای مرورگر را بررسی کنید.';return;}
+  form.reset();
+  if(status)status.textContent='پیشنهاد در همین دستگاه ذخیره شد؛ هنوز به مدیریت ارسال نشده است.';
+  render();
+ });
+ render();
+})();
