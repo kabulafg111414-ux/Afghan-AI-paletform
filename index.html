@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08664f"><meta name="description" content="Afghan AI — معلم هوشمند برای دانش‌آموزان افغانستان">
-<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261106-fund-title-0530">
+<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261106-feature-ideas-0545">
 <title>Afghan AI | معلم هوشمند افغانستان</title>
 <style id="afghan-ai-visual-fallback">
 /* Critical visual layer: stays visible even if the external stylesheet is delayed */
@@ -61,6 +61,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <button class="nav" data-page="historyculture"><span class="nav-icon">🏛️</span><span>تاریخ و فرهنگ افغانستان</span></button>
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
   <button class="nav" data-page="library"><span class="nav-icon">📚</span><span>کتابخانهٔ دیجیتال</span></button>
+<button class="nav" data-page="featureideas"><span class="nav-icon">💡</span><span>پیشنهاد قابلیت‌های جدید</span></button>
   <button class="nav" data-page="supportfund"><span class="nav-icon">🤝</span><span>صندوق حمایت و توسعه Afghan AI</span></button>
   <button class="nav" data-page="publications"><span class="nav-icon">📰</span><span>انتشارات و کمیسیون</span></button>
   <button class="nav" data-page="quiz"><span class="nav-icon">☑</span><span data-i18n="navQuiz">امتحان آزمایشی</span></button>
@@ -128,6 +129,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
         <button data-page="lessons"><span>▣</span> Education Resources <b>›</b></button>
         <button data-page="sources"><span>◎</span> Resources & Sources <b>›</b></button>
         <button data-page="family"><span>☏</span> Student Support <b>›</b></button>
+         <button data-page="featureideas"><span>💡</span> پیشنهاد قابلیت‌های جدید <b>›</b></button>
          <button data-page="supportfund"><span>🤝</span> صندوق حمایت و توسعه Afghan AI <b>›</b></button>
       </div>
       <div class="home-side-card connected-card"><h3>Stay Connected</h3><p>Follow the project for updates and new features.</p><div class="social-note">Afghan AI <span>•</span> Learning for everyone</div></div>
@@ -458,6 +460,29 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
  </div>
  <div class="notice"><span>🌐</span><div><b>راهنمای زبان‌ها</b><p>رابط کاربری به دری، پشتو و انگلیسی قابل تغییر است. بعضی توضیحات و محتوای نمونه ممکن است هنوز به همهٔ زبان‌ها ترجمه نشده باشند.</p></div></div>
  <div class="notice"><span>🛠️</span><div><b>گزارش مشکل و پیشنهاد</b><p>اگر دکمه یا بخشی درست کار نکرد، نام بخش، نوع دستگاه و شرح کوتاه مشکل را یادداشت کنید تا در نسخه‌های بعدی اصلاح شود.</p></div></div>
+</section>
+
+<section id="featureideasPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI • COMMUNITY IDEAS</span><h1>💡 پیشنهاد قابلیت‌های جدید پلتفرم</h1><p>ایدهٔ خود را برای بهترشدن آموزش، خدمات و تجربهٔ کاربران Afghan AI ثبت کنید.</p></div>
+ <div class="feature-grid two">
+  <article class="info-card">
+   <div class="feature-icon blue">🚀</div><h2>ثبت پیشنهاد تازه</h2>
+   <form id="featureIdeaForm">
+    <label for="featureIdeaCategory">موضوع پیشنهاد</label>
+    <select id="featureIdeaCategory" required><option value="آموزش و درس‌ها">آموزش و درس‌ها</option><option value="هوش مصنوعی">هوش مصنوعی</option><option value="زبان‌ها و ترجمه">زبان‌ها و ترجمه</option><option value="مهارت‌های حرفه‌ای">مهارت‌های حرفه‌ای</option><option value="خدمات و پشتیبانی">خدمات و پشتیبانی</option><option value="دسترسی‌پذیری و طراحی">دسترسی‌پذیری و طراحی</option><option value="امنیت و حریم خصوصی">امنیت و حریم خصوصی</option><option value="سایر">سایر</option></select>
+    <label for="featureIdeaTitle">عنوان کوتاه</label><input id="featureIdeaTitle" type="text" maxlength="100" required placeholder="مثلاً آموزش آفلاین">
+    <label for="featureIdeaDetails">شرح قابلیت پیشنهادی</label><textarea id="featureIdeaDetails" rows="5" maxlength="1500" required placeholder="توضیح دهید این قابلیت چه مشکلی را حل می‌کند و چگونه کار کند..."></textarea>
+    <button class="primary" type="submit">ثبت پیشنهاد در این دستگاه</button>
+    <p id="featureIdeaStatus" class="publication-hint" aria-live="polite">پیشنهادها فعلاً فقط در همین مرورگر ذخیره می‌شوند و به مدیریت ارسال نمی‌گردند.</p>
+   </form>
+  </article>
+  <article class="info-card">
+   <div class="feature-icon green">🧭</div><h2>چه پیشنهادهایی مفید است؟</h2>
+   <ul><li>قابلیت‌های تازه برای دانش‌آموزان و استادان</li><li>آموزش بدون اینترنت و منابع قابل دانلود</li><li>بهبود دری، پشتو و انگلیسی</li><li>امنیت، سرعت و سهولت استفاده در موبایل</li><li>خدمات اجتماعی و حمایت از خانواده‌ها</li></ul>
+   <div class="notice"><span>🔒</span><div><b>حریم خصوصی</b><p>در متن پیشنهاد، رمز عبور، شماره تماس، نشانی یا اسناد شخصی خود و دیگران را ننویسید.</p></div></div>
+   <h3>پیشنهادهای ثبت‌شده در همین دستگاه</h3><div id="featureIdeaList" aria-live="polite"><p class="publication-hint">هنوز پیشنهادی ثبت نشده است.</p></div>
+  </article>
+ </div>
 </section>
 
 <section id="sourcesPage" class="page hidden">
