@@ -2289,3 +2289,18 @@ body.dark .fund-howto h3{color:#a8e8c9}
 
 /* Remove the unwanted red cross beside the mobile navigation header. */
 .sidebar-mobile-head button#closeSidebar{display:none!important}
+
+/* Afghan AI Security Center */
+.security-banner,.security-notes{background:var(--aa-surface,#fff);color:var(--aa-ink,#173149);border:1px solid var(--aa-line,#d7e2e9);border-radius:17px;padding:18px;margin:16px 0;box-shadow:var(--aa-shadow,0 8px 24px #1234 10)}
+.security-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(115deg,#082b49,#08664f);color:#fff;border:0}
+.security-banner p{margin:6px 0 0;color:#e0f3ee;line-height:1.8;font-size:13px}
+.security-shield{font-size:42px;flex:none}
+.security-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+.security-summary>div,.security-check{background:var(--aa-surface,#fff);border:1px solid var(--aa-line,#d7e2e9);border-radius:14px;padding:14px;min-width:0}
+.security-summary small,.security-summary b{display:block}.security-summary small{color:var(--aa-muted,#657d8e);font-size:12px}.security-summary b{font-size:19px;margin-top:5px;overflow-wrap:anywhere}
+.security-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0}.security-actions span{font-size:13px;color:var(--aa-copy,#40586b)}
+.security-check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.security-check{display:flex;gap:12px;align-items:flex-start}.security-check>span{font-size:25px}.security-check b{display:block}.security-check p{font-size:12px;color:var(--aa-muted,#657d8e);margin:4px 0 8px}.security-check strong{font-size:12px;color:#64748b}.security-check strong[data-state="ok"]{color:#087b55}.security-check strong[data-state="warning"]{color:#a45b08}.security-check strong[data-state="info"]{color:#64748b}
+.security-notes h2{font-size:18px;margin:0 0 10px}.security-notes ul{padding-inline-start:22px;line-height:2}.security-disclaimer{font-size:12px;color:var(--aa-muted,#657d8e);border-top:1px solid var(--aa-line,#d7e2e9);padding-top:12px}
+body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .security-check strong[data-state="warning"]{color:#ffc477}
+@media(max-width:650px){.security-summary{grid-template-columns:1fr}.security-check-grid{grid-template-columns:1fr}.security-banner{align-items:flex-start}.security-shield{font-size:32px}}
