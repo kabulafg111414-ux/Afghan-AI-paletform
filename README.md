@@ -26,3 +26,9 @@ Afghan AI is a mobile-first learning platform prototype for students in Afghanis
 ## Founder
 Sayed Moheb Ullah Hashimi
 phone :+93787111414   +93782111414
+
+## Intellectual property and licensing
+- The repository's `LICENSE` file contains the Afghan AI proprietary licence and intellectual-property notice as a **draft for legal review**, not a final signed agreement.
+- No open-source reuse, redistribution, modification, or commercial-use permission is granted by that draft.
+- Rights in third-party software, open-source components, AI models, APIs, and educational materials remain with their respective owners and are governed by their own licences and terms.
+- Confirm ownership evidence, company registration details, governing law, and the final signed terms with a qualified lawyer before relying on the notice as a legal agreement.
