@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08664f"><meta name="description" content="Afghan AI — معلم هوشمند برای دانش‌آموزان افغانستان">
-<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261106-distinct-home-tools-01">
+<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261106-security-center-01">
 <title>Afghan AI | معلم هوشمند افغانستان</title>
 <style id="afghan-ai-visual-fallback">
 /* Critical visual layer: stays visible even if the external stylesheet is delayed */
@@ -68,6 +68,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <button class="nav" data-page="progress"><span class="nav-icon">▥</span><span data-i18n="navProgress">پیشرفت من</span></button>
   <button class="nav" data-page="family"><span class="nav-icon">♧</span><span data-i18n="navFamily">والدین و استاد</span></button>
   <button class="nav" data-page="admin"><span class="nav-icon">⚙</span><span data-i18n="navAdmin">مدیریت</span></button>
+  <button class="nav" data-page="security"><span class="nav-icon">🛡️</span><span>مرکز امنیت و حفاظت</span></button>
 <button class="nav" data-page="tools"><span class="nav-icon">🧰</span><span data-i18n="navTools">ابزارهای یادگیری</span></button>
     <button class="nav" data-page="guide"><span class="nav-icon">📘</span><span data-i18n="navGuide">راهنمای استفاده</span></button>
   <button class="nav" data-page="sources"><span class="nav-icon">ⓘ</span><span data-i18n="navSources">منابع و سپاسگزاری</span></button>
@@ -496,6 +497,22 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <p>اگر لینک کامل یا وب‌سایت رسمی سازمان را بفرستید، این بخش را با پیوند مستقیم و توضیح دقیق‌تر به‌روزرسانی می‌کنیم.</p>
  </div>
  <footer>Afghan AI <span>•</span> بنیان‌گذار: سیدمحب‌الله (هاشمی) <span>•</span> منابع و سپاسگزاری</footer>
+</section>
+
+<section id="securityPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI SECURITY</span><h1>🛡️ مرکز امنیت و حفاظت</h1><p>بررسی‌های حفاظتی مرورگر و سلامت ساختار پلتفرم؛ وضعیت‌ها فقط بر اساس آزمایش واقعی نمایش داده می‌شوند.</p></div>
+ <div class="security-banner"><div><b>حفاظت چندلایه Afghan AI</b><p>این نسخه بررسی‌های سمت مرورگر را انجام می‌دهد. فایروال سرور، تشخیص حملات شبکه و پشتیبان‌گیری مرکزی تا زمان راه‌اندازی زیرساخت سرور فعال نیستند.</p></div><span class="security-shield">🛡️</span></div>
+ <div class="security-summary" aria-live="polite"><div><small>آخرین بررسی</small><b id="securityLastScan">هنوز اجرا نشده</b></div><div><small>آزمایش‌های موفق</small><b id="securityPassed">—</b></div><div><small>نیازمند توجه</small><b id="securityAttention">—</b></div></div>
+ <div class="security-actions"><button type="button" class="primary" id="securityRunScan">اجرای بررسی امنیتی</button><span id="securityScanStatus" role="status">برای شروع، بررسی امنیتی را اجرا کنید.</span></div>
+ <div class="security-check-grid" id="securityChecks">
+  <article class="security-check"><span>🔒</span><div><b>اتصال امن HTTPS</b><p>وضعیت اتصال رمزگذاری‌شده</p><strong data-check="https">در انتظار بررسی</strong></div></article>
+  <article class="security-check"><span>📲</span><div><b>Service Worker</b><p>آمادگی قابلیت‌های آفلاین و به‌روزرسانی</p><strong data-check="worker">در انتظار بررسی</strong></div></article>
+  <article class="security-check"><span>🧩</span><div><b>شناسه‌های تکراری</b><p>بررسی شناسه‌های HTML</p><strong data-check="ids">در انتظار بررسی</strong></div></article>
+  <article class="security-check"><span>🧭</span><div><b>مسیر منوها</b><p>بررسی مقصد دکمه‌های ناوبری</p><strong data-check="routes">در انتظار بررسی</strong></div></article>
+  <article class="security-check"><span>💾</span><div><b>ذخیره‌سازی مرورگر</b><p>آزمایش نوشتن و پاک‌کردن داده آزمایشی</p><strong data-check="storage">در انتظار بررسی</strong></div></article>
+  <article class="security-check"><span>🧱</span><div><b>سیاست امنیت سرور</b><p>هدرهای امنیتی و محدودیت دسترسی باید در سرور تنظیم شوند</p><strong data-check="server">نیازمند راه‌اندازی سرور</strong></div></article>
+ </div>
+ <div class="security-notes"><h2>اقدامات حفاظتی بعدی</h2><ul><li>فعال‌سازی HTTPS اجباری و هدرهای CSP، HSTS و ضد کلیک‌ربایی در میزبانی</li><li>نگهداری کلیدهای محرمانه فقط در سرور؛ هرگز داخل JavaScript عمومی قرار نگیرند</li><li>محدودسازی نرخ درخواست‌ها، کنترل نشست‌ها و تأیید دومرحله‌ای پس از ایجاد حساب کاربری</li><li>پشتیبان‌گیری زمان‌بندی‌شده و آزمایش بازیابی از نسخه پشتیبان</li><li>اجرای بررسی وابستگی‌ها و آزمون امنیتی قبل از هر انتشار</li></ul><p class="security-disclaimer">توجه: این صفحه ابزار تشخیص اولیه است و به‌تنهایی جایگزین فایروال، آزمون نفوذ یا حفاظت سمت سرور نیست.</p></div>
 </section>
 </main></div>
 <script>
