@@ -541,7 +541,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 (function(){
   if(window.__afghanAiNavigationFallback)return;
   window.__afghanAiNavigationFallback=true;
-  var pageNames=['dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','supportfund','publications','quiz','progress','family','admin','tools','guide','featureideas','sources'];
+  var pageNames=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','supportfund','publications','quiz','progress','family','admin','tools','guide','featureideas','sources'];
   function navigate(name){
     if(pageNames.indexOf(name)===-1)return false;
     var target=document.getElementById(name+'Page');
@@ -572,7 +572,40 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 })();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./app.js?v=20261106-distinct-home-tools-01"></script>
+<script src="./app.js?v=20261106-security-center-01"></script>
+<script id="afghan-ai-security-checks">
+(function(){
+ const button=document.getElementById('securityRunScan');
+ if(!button||button.dataset.ready)return;
+ button.dataset.ready='1';
+ button.addEventListener('click',async function(){
+  button.disabled=true;
+  const set=(key,value,state)=>{const el=document.querySelector('[data-check="'+key+'"]');if(el){el.textContent=value;el.dataset.state=state||'info';}};
+  let passed=0,attention=0;
+  const result=(key,value,ok)=>{set(key,value,ok?'ok':'warning');if(ok)passed++;else attention++;};
+  const https=location.protocol==='https:'||location.hostname==='localhost';
+  result('https',https?'اتصال امن یا محیط محلی':'HTTPS فعال نیست',https);
+  let worker=false;
+  try{worker='serviceWorker' in navigator&&!!(await navigator.serviceWorker.getRegistration());}catch(e){}
+  result('worker',worker?'Service Worker ثبت شده':'Service Worker ثبت نشده',worker);
+  const ids=[...document.querySelectorAll('[id]')].map(x=>x.id);
+  const duplicates=ids.filter((x,i)=>ids.indexOf(x)!==i);
+  result('ids',duplicates.length?'شناسه تکراری پیدا شد':'شناسه تکراری پیدا نشد',!duplicates.length);
+  const routes=[...new Set([...document.querySelectorAll('[data-page]')].map(x=>x.getAttribute('data-page')).filter(Boolean))];
+  const missing=routes.filter(x=>!document.getElementById(x+'Page'));
+  result('routes',missing.length?'مقصد منو موجود نیست':'تمام مقصدهای منو موجود است',!missing.length);
+  let storage=false;
+  try{localStorage.setItem('afghanai-security-test','1');storage=localStorage.getItem('afghanai-security-test')==='1';localStorage.removeItem('afghanai-security-test');}catch(e){}
+  result('storage',storage?'آزمایش ذخیره‌سازی موفق':'ذخیره‌سازی در دسترس نیست',storage);
+  set('server','نیازمند راه‌اندازی سرور','info');attention++;
+  document.getElementById('securityPassed').textContent=passed;
+  document.getElementById('securityAttention').textContent=attention;
+  document.getElementById('securityLastScan').textContent=new Intl.DateTimeFormat('fa-AF',{dateStyle:'medium',timeStyle:'short'}).format(new Date());
+  document.getElementById('securityScanStatus').textContent='بررسی مرورگر انجام شد؛ حفاظت سروری هنوز فعال نیست.';
+  button.disabled=false;button.textContent='اجرای دوباره بررسی';
+ });
+})();
+</script>
 <script id="feature-ideas-fallback">
 (function(){
  const form=document.getElementById('featureIdeaForm');
