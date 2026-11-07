@@ -62,6 +62,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
   <button class="nav" data-page="library"><span class="nav-icon">📚</span><span>کتابخانهٔ دیجیتال</span></button>
 <button class="nav" data-page="featureideas"><span class="nav-icon">💡</span><span>پیشنهاد قابلیت‌های جدید</span></button>
+ <button class="nav" data-page="innovation"><span class="nav-icon">🚀</span><span>آزمایشگاه نوآوری افغانستان</span></button>
   <button class="nav" data-page="reconstruction"><span class="nav-icon">🏗️</span><span>بازسازی افغانستان ۲۰۲۶–۲۰۳۱</span></button>
  <button class="nav" data-page="socialsupport"><span class="nav-icon">❤️</span><span>مرکز حمایت اجتماعی و خانواده‌ها</span></button>
   <button class="nav" data-page="supportfund"><span class="nav-icon">🤝</span><span>صندوق حمایت و توسعه Afghan AI</span></button>
@@ -728,6 +729,29 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
  </div>
  <div class="notice"><span>🌐</span><div><b>راهنمای زبان‌ها</b><p>رابط کاربری به دری، پشتو و انگلیسی قابل تغییر است. بعضی توضیحات و محتوای نمونه ممکن است هنوز به همهٔ زبان‌ها ترجمه نشده باشند.</p></div></div>
  <div class="notice"><span>🛠️</span><div><b>گزارش مشکل و پیشنهاد</b><p>اگر دکمه یا بخشی درست کار نکرد، نام بخش، نوع دستگاه و شرح کوتاه مشکل را یادداشت کنید تا در نسخه‌های بعدی اصلاح شود.</p></div></div>
+</section>
+
+<section id="innovationPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI • INNOVATION LAB</span><h1>🚀 آزمایشگاه نوآوری و حل چالش‌های افغانستان</h1><p>یک مشکل واقعی را به یک طرح ابتدایی، مرحله‌بندی‌شده و قابل ارزیابی تبدیل کنید.</p></div>
+ <div class="notice"><span>💡</span><div><b>از مشکل تا راه‌حل</b><p>این ابزار بر اساس اطلاعاتی که وارد می‌کنید یک چارچوب ابتدایی پروژه می‌سازد؛ در این نسخه از هوش مصنوعی آنلاین استفاده نمی‌شود و طرح‌ها فقط در همین مرورگر ذخیره می‌شوند.</p></div></div>
+ <div class="feature-grid two">
+  <article class="info-card"><div class="feature-icon blue">🧩</div><h2>ساخت طرح نوآورانه</h2>
+   <form id="innovationForm">
+    <label for="innovationCategory">حوزهٔ طرح</label><select id="innovationCategory" required><option>آموزش و پرورش</option><option>صحت و خدمات طبی</option><option>زراعت و آب</option><option>انرژی و محیط زیست</option><option>تکنالوژی و ارتباطات</option><option>کارآفرینی و اشتغال</option><option>بازسازی و زیربنا</option><option>حمایت اجتماعی</option></select>
+    <label for="innovationTitle">نام طرح</label><input id="innovationTitle" maxlength="100" required placeholder="مثلاً آموزش دیجیتال در روستاها">
+    <label for="innovationProblem">کدام مشکل را حل می‌کنید؟</label><textarea id="innovationProblem" rows="3" maxlength="1200" required placeholder="مشکل، محل و کسانی که با آن روبه‌رو هستند..."></textarea>
+    <label for="innovationSolution">راه‌حل پیشنهادی شما چیست؟</label><textarea id="innovationSolution" rows="3" maxlength="1200" required placeholder="راه‌حل خود را به زبان ساده شرح دهید..."></textarea>
+    <label for="innovationBeneficiaries">چه کسانی بهره‌مند می‌شوند؟</label><input id="innovationBeneficiaries" maxlength="250" placeholder="مثلاً شاگردان و آموزگاران مناطق دوردست">
+    <label for="innovationResources">منابع یا امکانات مورد نیاز (اختیاری)</label><textarea id="innovationResources" rows="2" maxlength="600" placeholder="تیم، تجهیزات، آموزش، بودجهٔ تخمینی..."></textarea>
+    <button class="primary" type="submit">ساخت چارچوب و ذخیرهٔ طرح</button>
+    <p id="innovationStatus" class="publication-hint" aria-live="polite">طرح‌ها فقط در دستگاه شما ذخیره می‌شوند و به نهاد یا سرمایه‌گذار ارسال نمی‌شوند.</p>
+   </form>
+  </article>
+  <article class="info-card"><div class="feature-icon green">🗺️</div><h2>چارچوب اجرای پیشنهادی</h2>
+   <div id="innovationPlan" class="publication-hint" aria-live="polite">پس از تکمیل فورم، چارچوب شامل مراحل اجرا، شاخص‌های سنجش و خطرهای احتمالی اینجا ساخته می‌شود.</div>
+   <h3>طرح‌های ذخیره‌شده</h3><div id="innovationSavedList" aria-live="polite"><p class="publication-hint">هنوز طرحی ذخیره نشده است.</p></div>
+  </article>
+ </div>
 </section>
 
 <section id="featureideasPage" class="page hidden">
