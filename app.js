@@ -406,6 +406,16 @@ function initAfghanProvinceExplorer(){
  if(!select||!details||select.dataset.ready==='true')return;
  select.dataset.ready='true';
  const search=$('#afgProvinceSearch');
+ const coverage=$('#afgProvinceCoverage');
+ if(coverage){
+  const covered=new Set(afghanProvinceAttractions.map(item=>item.province)).size;
+  const lang=document.documentElement.lang||'fa';
+  coverage.textContent=lang==='en'
+   ?'Sourced attraction coverage: '+covered+' of 34 provinces. Other provinces are pending source review; no listing does not mean there are no attractions.'
+   :lang==='ps'
+   ?'د سرچینه لرونکو جاذبو پوښښ: له ۳۴ ولایتونو څخه '+covered+' ولایتونه. د نورو ولایتونو معلومات د سرچینو ارزونې ته منتظر دي؛ د نوملړ نشتوالی د جاذبو نشتوالی نه معنا کوي.'
+   :'پوشش جاذبه‌های دارای منبع: '+covered+' ولایت از ۳۴ ولایت. اطلاعات سایر ولایت‌ها در انتظار بررسی منابع است؛ نبودن مدخل به معنای نبود جاذبه نیست.';
+ }
  const fillProvinceOptions=(query='')=>{
   const current=select.value,term=query.trim().toLocaleLowerCase(),lang=document.documentElement.lang||'fa';
   select.innerHTML='<option value="">'+(lang==='en'?'Select a province':lang==='ps'?'ولایت وټاکئ':'یک ولایت را انتخاب کنید')+'</option>';
