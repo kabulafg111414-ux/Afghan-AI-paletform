@@ -1,8 +1,26 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 const html = readFileSync("index.html", "utf8");
 const app = readFileSync("app.js", "utf8");
 const errors = [];
+
+const reconstructionDocuments = [
+  ["afghanistan-reconstruction-investment-proposal-2026-2031.md", "docs/afghanistan-reconstruction-investment-proposal-2026-2031.md"],
+  ["master-implementation-roadmap-30-chapters-2026-2031.md", "docs/master-implementation-roadmap-30-chapters-2026-2031.md"],
+  ["indicative-investment-portfolio-budget-2026-2031.md", "docs/indicative-investment-portfolio-budget-2026-2031.md"],
+  ["project-level-economic-appraisal-model-2026-2031.md", "docs/project-level-economic-appraisal-model-2026-2031.md"],
+  ["transparency-accountability-anti-corruption-framework-2026-2031.md", "docs/transparency-accountability-anti-corruption-framework-2026-2031.md"],
+  ["international-partnership-investment-engagement-framework-2026-2031.md", "docs/international-partnership-investment-engagement-framework-2026-2031.md"],
+  ["national-development-indicators-dashboard-framework-2026-2031.md", "docs/national-development-indicators-dashboard-framework-2026-2031.md"],
+  ["national-reconstruction-project-atlas-framework-34-provinces-2026-2031.md", "docs/national-reconstruction-project-atlas-framework-34-provinces-2026-2031.md"],
+  ["national-support-and-development-fund-framework-2026-2031.md", "docs/national-support-and-development-fund-framework-2026-2031.md"],
+  ["fund-budget-allocation-and-audit-workflow-2026-2031.md", "docs/fund-budget-allocation-and-audit-workflow-2026-2031.md"],
+];
+for (const [file, path] of reconstructionDocuments) {
+  if (!html.includes(file) || !existsSync(path)) {
+    errors.push(`Reconstruction document link or file is missing: ${file}`);
+  }
+}
 
 const requiredControls = [
   "mobileMenu", "sidebarBackdrop", "themeBtn", "uiLanguage",
