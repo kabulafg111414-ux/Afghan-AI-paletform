@@ -9,6 +9,13 @@ const pages=['security','dashboard','tutor','translator','vocational','language'
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
+ {title:'مرکز معلومات افغانستان در دانشگاه کابل (ACKU)',category:'afghan',type:'آرشیف دیجیتال افغانستان',desc:'آرشیف و کتابخانهٔ دیجیتال اسناد، عکس‌ها، کتاب‌ها و پژوهش‌های مربوط به افغانستان؛ بخشی از منابع به زبان‌های دری و پشتو است.',url:'https://acku.edu.af/'},
+ {title:'آرشیف دیجیتال افغانستان',category:'afghan',type:'اسناد و منابع دیجیتال',desc:'درگاه منابع دیجیتال افغانستان که از سوی مرکز معلومات افغانستان معرفی شده است؛ دسترسی و شرایط استفاده را در وب‌سایت بررسی کنید.',url:'https://archive.af/'},
+ {title:'کتابخانهٔ مرکزی دانشگاه کابل',category:'university',type:'کتابخانهٔ دانشگاهی',desc:'اطلاعات کتابخانهٔ مرکزی دانشگاه کابل و دسترسی به منابع علمی و خدمات کتابخانه‌ای.',url:'https://ku.edu.af/en/central-library'},
+ {title:'کتابخانهٔ دیجیتال دانشگاه کابل',category:'university',type:'کتابخانهٔ الکترونیکی',desc:'سامانهٔ معرفی‌شده برای جستجو و مطالعهٔ آنلاین کتاب‌ها و منابع علمی دانشگاه کابل.',url:'https://kul.af/'},
+ {title:'کتابخانهٔ دانشگاه علوم طبی کابل (ابوعلی ابن‌سینا)',category:'medical',type:'کتابخانهٔ علوم طبی',desc:'اطلاعات کتاب‌ها و ژورنال‌های طبی و خدمات کتابخانهٔ دانشگاه علوم طبی کابل.',url:'https://www.kums.edu.af/en/library'},
+ {title:'کتابخانهٔ دیجیتال دانشگاه ننگرهار',category:'university',type:'کتابخانهٔ دانشگاهی',desc:'بخش کتابخانهٔ دیجیتال در وب‌سایت رسمی دانشگاه ننگرهار؛ موجودی و دسترسی منابع را بررسی کنید.',url:'https://nu.edu.af/en/digital-library'},
+ {title:'پایگاه معلومات قوانین افغانستان',category:'afghan',type:'منبع حقوقی چندزبانه',desc:'پایگاه معرفی‌شده از سوی مرکز معلومات افغانستان برای جستجوی قوانین و اسناد حقوقی؛ متن نافذ بودن هر سند را جداگانه بررسی کنید.',url:'https://laws.af'},
  {title:'وزارت تحصیلات عالی',category:'university',type:'منبع رسمی',desc:'اطلاعات دانشگاهی، رهنمودها و منابع مرتبط با تحصیلات عالی افغانستان.',url:'https://mohe.gov.af/'},
  {title:'UNESCO Digital Library',category:'university',type:'کتابخانهٔ علمی',desc:'منابع پژوهشی و نشرات آموزشی در موضوعات گوناگون.',url:'https://unesdoc.unesco.org/'},
  {title:'World Health Organization — Publications',category:'medical',type:'علوم طبی و صحت',desc:'رهنمودها و نشرات معتبر جهانی در زمینهٔ صحت عامه و طب.',url:'https://www.who.int/publications'},
