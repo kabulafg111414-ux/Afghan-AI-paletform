@@ -42,6 +42,35 @@ BEGIN
         'ci-verified@example.invalid', NOW(), 'active'
     );
 
+    -- Session and invitation tokens must be exact lowercase SHA-256 hex.
+    BEGIN
+        INSERT INTO sessions (
+            id, account_id, token_hash, created_at, expires_at
+        ) VALUES (
+            '00000000-0000-0000-0000-000000000004',
+            '00000000-0000-0000-0000-000000000002',
+            'short', NOW(), NOW() + INTERVAL '1 hour'
+        );
+        RAISE EXCEPTION 'Short session token hash was incorrectly accepted';
+    EXCEPTION
+        WHEN check_violation THEN
+            NULL;
+    END;
+
+    BEGIN
+        INSERT INTO bootstrap_invites (
+            id, token_hash, role, created_at, expires_at
+        ) VALUES (
+            '00000000-0000-0000-0000-000000000005',
+            repeat('G', 64), 'founder_admin',
+            NOW(), NOW() + INTERVAL '1 hour'
+        );
+        RAISE EXCEPTION 'Non-hex invitation token hash was incorrectly accepted';
+    EXCEPTION
+        WHEN check_violation THEN
+            NULL;
+    END;
+
     -- Expiry must be later than creation.
     BEGIN
         INSERT INTO sessions (
