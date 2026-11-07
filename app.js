@@ -1562,11 +1562,22 @@ window.__afghanAiAppReady=true;
  const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
  window.renderTravelGuide=function(){
   const grid=$('#travelDestinationGrid');if(!grid)return;
+  const filters=grid.previousElementSibling;
+  if(filters?.classList.contains('travel-filters')&&!document.getElementById('travelResultsToolbar')){
+   const toolbar=document.createElement('div');toolbar.id='travelResultsToolbar';toolbar.className='travel-results-toolbar';
+   const count=document.createElement('span');count.id='travelResultsCount';count.setAttribute('role','status');count.setAttribute('aria-live','polite');
+   const reset=document.createElement('button');reset.id='travelResetFilters';reset.type='button';reset.className='travel-reset-button';
+   reset.addEventListener('click',()=>{const search=$('#travelSearch'),province=$('#travelProvince'),category=$('#travelCategory');if(search)search.value='';if(province)province.value='all';if(category)category.value='all';window.renderTravelGuide();search?.focus();});
+   toolbar.append(count,reset);filters.insertAdjacentElement('afterend',toolbar);
+  }
   const q=($('#travelSearch')?.value||'').trim().toLocaleLowerCase();
   const province=$('#travelProvince')?.value||'all';
   const category=$('#travelCategory')?.value||'all';
   const items=destinations.filter(x=>(province==='all'||x.province===province)&&(category==='all'||x.category===category)&&[x.name,x.province,x.summary,...(x.aliases||[])].some(v=>v.toLocaleLowerCase().includes(q)));
   grid.innerHTML=items.length?items.map(x=>'<article class="travel-destination" data-destination="'+esc(x.name)+'" data-province="'+esc(x.province)+'" data-category="'+esc(x.category)+'"><span class="travel-destination-icon">'+x.icon+'</span><div class="travel-destination-meta">'+esc(x.province)+' • '+(x.category==='nature'?'طبیعت':x.category==='history'?'تاریخی و فرهنگی':'شهری')+'</div><h3>'+esc(x.name)+'</h3><p class="travel-destination-summary">'+esc(x.summary)+'</p><div class="travel-destination-note"><b>یادداشت سفر:</b> '+esc(x.season)+' '+esc(x.note)+'</div><a class="travel-map-link" href="https://www.openstreetmap.org/search?query='+encodeURIComponent(x.name+' '+x.province+' Afghanistan')+'" target="_blank" rel="noopener noreferrer">'+(document.getElementById('uiLanguage')?.value==='en'?'Open map ↗':document.getElementById('uiLanguage')?.value==='ps'?'نقشه پرانیستل ↗':'نمایش در نقشه ↗')+'</a></article>').join(''):'<div class="empty-state">مقصدی با این مشخصات پیدا نشد؛ جستجو یا فیلتر را تغییر دهید.</div>';
+  const lang=$('#uiLanguage')?.value||'fa',count=$('#travelResultsCount'),reset=$('#travelResetFilters');
+  if(count)count.textContent=lang==='en'?items.length+' destinations found':lang==='ps'?items.length+' ځایونه وموندل شول':items.length+' مقصد یافت شد';
+  if(reset)reset.textContent=lang==='en'?'Clear filters':lang==='ps'?'فلټرونه پاکول':'پاک‌کردن فیلترها';
  };
  const form=$('#travelPlanForm');
  if(form&&!form.dataset.ready){
