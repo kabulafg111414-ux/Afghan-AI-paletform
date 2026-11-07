@@ -628,6 +628,23 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <div class="fund-role-matrix" id="fundRoleMatrix"></div>
   <p class="publication-hint">اصل طراحی: هیچ فردی نباید درخواست را بررسی، تأیید نهایی، پرداخت و سپس همان پرداخت را خودش تطبیق و حسابرسی کند.</p>
  </article>
+
+ <article class="fund-card fund-complaints" id="fundComplaints">
+  <span class="eyebrow">COMPLAINTS • PILOT WORKFLOW</span><h2>۵. سیستم آزمایشی شکایات و اعتراضات</h2>
+  <div class="notice"><span>🧭</span><div><b>مسیر مستقل رسیدگی</b><p>این نمونه فقط در مرورگر همین دستگاه کار می‌کند. برای شکایت واقعی، نام اشخاص، شماره تماس، آدرس، اسناد هویتی، معلومات صحی یا جزئیات خشونت و سوءاستفاده را وارد نکنید. موارد فوری و خطر جانی را از مسیرهای اضطراری و مراجع حمایتی معتبر محل پیگیری کنید.</p></div></div>
+  <div class="fund-operations-grid">
+   <section><h3>ثبت شکایت آزمایشی</h3><form id="fundComplaintForm">
+    <label for="fundComplaintType">موضوع شکایت</label><select id="fundComplaintType" required><option value="">انتخاب موضوع</option><option>تأخیر در رسیدگی</option><option>اعتراض به نتیجهٔ بررسی</option><option>رفتار نامناسب کارمند</option><option>نگرانی دربارهٔ فساد یا تضاد منافع</option><option>مشکل دسترسی یا معلولیت</option><option>پیشنهاد بهبود خدمات</option><option>موضوع دیگر</option></select>
+    <label for="fundComplaintChannel">درخواست رسیدگی</label><select id="fundComplaintChannel" required><option value="">انتخاب کنید</option><option>بررسی محرمانه توسط مسئول مستقل</option><option>بازبینی تصمیم</option><option>رسیدگی اداری</option><option>ثبت پیشنهاد</option></select>
+    <label for="fundComplaintText">شرح عمومی موضوع (بدون مشخصات شخصی)</label><textarea id="fundComplaintText" rows="4" maxlength="700" required placeholder="موضوع را بدون نام، شماره، آدرس یا معلومات حساس توضیح دهید."></textarea>
+    <label class="fund-consent"><input id="fundComplaintConsent" type="checkbox" required> می‌دانم این ثبت آزمایشی و محلی است و شکایت من به مرجع واقعی ارسال نمی‌شود.</label>
+    <button class="primary" type="submit">ثبت شکایت آزمایشی</button>
+   </form><p class="publication-hint" id="fundComplaintStatus" aria-live="polite">هیچ شکایتی به سرور یا مرجع بیرونی ارسال نمی‌شود.</p></section>
+   <section><h3>اصول رسیدگی</h3><ul class="fund-complaint-principles"><li>رسیدگی بی‌طرفانه و بدون انتقام‌جویی.</li><li>امکان اعتراض و بازبینی مستقل.</li><li>دسترسی محدود به معلومات و حفاظت از هویت.</li><li>تفکیک مسئول رسیدگی از شخص مورد شکایت.</li><li>ثبت نتیجه، دلیل تصمیم و اقدام اصلاحی.</li><li>ارجاع موارد تخصصی به نهادهای صلاحیت‌دار.</li></ul></section>
+  </div>
+  <div class="fund-admin-actions"><button type="button" class="outline" id="fundComplaintExport">دریافت گزارش شکایات آزمایشی (CSV)</button><button type="button" class="outline" id="fundComplaintClear">پاک‌کردن شکایات آزمایشی</button></div>
+  <div id="fundComplaintRecords" class="fund-demo-records" aria-live="polite"><p>هنوز شکایت آزمایشی ثبت نشده است.</p></div>
+ </article>
  <div class="fund-transparency"><h2>تعهدات شفافیت</h2><ul><li>ثبت جداگانهٔ کمک‌های توسعه و کمک‌های بشردوستانه.</li><li>گزارش دوره‌ای مجموع دریافت‌ها و مصارف، بدون افشای هویت خانواده‌ها.</li><li>استفاده از کمک مطابق مقصد انتخاب‌شده توسط اهداکننده.</li><li>عدم ادعای پرداخت یا صدور رسید تا فعال‌شدن سیستم مالی معتبر.</li></ul></div>
 </section>
 
