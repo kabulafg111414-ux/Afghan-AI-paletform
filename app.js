@@ -418,6 +418,12 @@ const afghanProvincePhotoGallery={
  ],
  Ghazni:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Ghazni_minar_ghazni_Afghanistan.jpg?width=1200',name:{fa:'مناره‌های تاریخی غزنی',ps:'د غزني تاریخي منارونه',en:'Historic minarets of Ghazni'},credit:'AhmadElhan',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Ghazni_minar_ghazni_Afghanistan.jpg'}
+ ],
+ Kunar:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Valley_in_Kunar-2012.jpg?width=1200',name:{fa:'درهٔ بَدِل در کنر',ps:'د کونړ د بډل دره',en:'Badel Valley, Kunar'},credit:'Spc. Amber Leach / U.S. Army',license:'Public domain (U.S. federal work)',url:'https://commons.wikimedia.org/wiki/File:Valley_in_Kunar-2012.jpg'}
+ ],
+ Nuristan:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Kashtun_da_waygale_Nuristan_-_panoramio.jpg?width=1200',name:{fa:'چشم‌انداز وادی ویگل نورستان',ps:'د نورستان د ویګل درې منظره',en:'Waygal Valley landscape, Nuristan'},credit:'Abdul Qahar Nuristan',license:'CC BY-SA 3.0',url:'https://commons.wikimedia.org/wiki/File:Kashtun_da_waygale_Nuristan_-_panoramio.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
