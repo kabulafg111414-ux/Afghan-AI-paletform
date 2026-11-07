@@ -437,6 +437,9 @@ const afghanProvincePhotoGallery={
  'Sar-e-Pol':[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Balkhab_District.JPG?width=1200',name:{fa:'چشم‌انداز ولسوالی بلخاب، سرپل',ps:'د سرپل د بلخاب ولسوالۍ منظره',en:'Landscape in Balkhab District, Sar-e Pol'},credit:'Ahmad imami',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Balkhab_District.JPG'}
  ],
+ Jawzjan:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Tillya_Tepe_crown.jpg?width=1200',name:{fa:'تاج طلایی تلیاتپه؛ گنجینهٔ باختر',ps:'د تلیاتپې زرینه تاج؛ د باختر خزانه',en:'Golden crown of Tillya Tepe, Jowzjan'},credit:'H Sinica',license:'CC BY-SA 2.0',url:'https://commons.wikimedia.org/wiki/File:Tillya_Tepe_crown.jpg'}
+ ],
  Samangan:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Takht-E_rostum_samangan_province_Afghanistan.jpg?width=1200',name:{fa:'تخت رستم سمنگان',ps:'د سمنګان تخت رستم',en:'Takht-e Rostam, Samangan'},credit:'AhmadElhan',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Takht-E_rostum_samangan_province_Afghanistan.jpg'}
   ,{src:'https://commons.wikimedia.org/wiki/Special:FilePath/Samangan_Province_panorama_(cropped).jpg?width=1200',name:{fa:'چشم‌انداز پانورامای سمنگان',ps:'د سمنګان پراخه منظره',en:'Samangan Province panorama'},credit:'U.S. Army',license:'CC BY 2.0 / U.S. public domain',url:'https://commons.wikimedia.org/wiki/File:Samangan_Province_panorama_(cropped).jpg'}
