@@ -768,7 +768,40 @@ function saveState(){safeStorageSet('afghanai-state',JSON.stringify(state));upda
 function recordActivity(label){state.activity.unshift({label,time:new Date().toLocaleString()});state.activity=state.activity.slice(0,15);saveState()}
 function updateStats(){$('#statLessons').textContent=state.lessons;$('#statQuestions').textContent=state.questions;$('#progressQuestions').textContent=state.questions;$('#progressQuizzes').textContent=state.quizzes;$('#progressCorrect').textContent=state.correct}
 function addBubble(text,who){let d=document.createElement('div');d.className='bubble '+who;d.textContent=text;$('#messages').appendChild(d);$('#messages').scrollTop=$('#messages').scrollHeight;return d}
-async function askAI(q){const lang=$('#answerLanguage').value;const pending=addBubble('در حال آماده‌سازی پاسخ…','bot');try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,language:lang})});const data=await r.json();if(!r.ok)throw Error(data.error||'Service unavailable');pending.textContent=data.answer||'پاسخی دریافت نشد.';recordActivity('پاسخ معلم هوشمند دریافت شد')}catch(e){pending.textContent='سرویس هوش مصنوعی هنوز فعال نیست یا سرور در دسترس نمی‌باشد.\n\nبرای پاسخ واقعی، سرور را طبق README راه‌اندازی و کلید API را به‌صورت امن در متغیر محیطی تنظیم کنید. بقیهٔ بخش‌های آموزشی این نمونه قابل آزمایش‌اند.';recordActivity('پرسش ثبت شد؛ سرویس هوش مصنوعی متصل نیست')}}
+async function askAI(q){
+ const lang=$('#answerLanguage').value;
+ const pending=addBubble('در حال آماده‌سازی پاسخ…','bot');
+ const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),45000);
+ try{
+  const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,language:lang}),signal:controller.signal});
+  let data={};
+  try{data=await r.json()}catch(parseError){throw Error('پاسخ سرور قابل خواندن نیست.')}
+  if(!r.ok){
+   const knownErrors={
+    'AI service is not configured':'سرور در دسترس است، اما کلید API هنوز به‌صورت امن تنظیم نشده است.',
+    'AI request failed':'سرور درخواست را دریافت کرد، اما پاسخ هوش مصنوعی ناموفق بود. گزارش خطای سرور باید بررسی شود.',
+    'Message is too long':'متن پرسش بیش از حد طولانی است؛ لطفاً آن را کوتاه‌تر کنید.',
+    'Message is required':'لطفاً پرسش خود را بنویسید.'
+   };
+   throw Error(knownErrors[data.error]||('خطای سرور (کد '+r.status+'). لطفاً بعداً دوباره تلاش کنید.'));
+  }
+  if(!data.answer)throw Error('پاسخی از سرور دریافت نشد؛ لطفاً دوباره تلاش کنید.');
+  pending.textContent=data.answer;
+  recordActivity('پاسخ معلم هوشمند دریافت شد');
+ }catch(e){
+  if(e.name==='AbortError'){
+   pending.textContent='زمان پاسخ‌گویی سرور به پایان رسید. لطفاً اتصال اینترنت را بررسی کرده و دوباره تلاش کنید.';
+  }else if(e instanceof TypeError){
+   pending.textContent='به سرور معلم هوشمند وصل نشدیم. اگر سایت روی GitHub Pages است، باید بک‌اند جداگانه مستقر شود.';
+  }else{
+   pending.textContent=e.message||'در ارتباط با سرویس هوش مصنوعی خطایی رخ داد.';
+  }
+  recordActivity('پرسش ثبت شد؛ پاسخ سرور دریافت نشد');
+ }finally{
+  clearTimeout(timeout);
+ }
+}
 $('#chatForm').addEventListener('submit',async e=>{e.preventDefault();let q=$('#question').value.trim();if(!q)return;$('#question').value='';addBubble(q,'user');state.questions++;saveState();recordActivity('پرسش از معلم هوشمند');await askAI(q)});
 $('.quick-prompts button').forEach(b=>b.onclick=()=>{$('#question').value=b.textContent;$('#question').focus()});
 const lessons=[
