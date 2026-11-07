@@ -1569,6 +1569,10 @@ window.__afghanAiAppReady=true;
    const reset=document.createElement('button');reset.id='travelResetFilters';reset.type='button';reset.className='travel-reset-button';
    reset.addEventListener('click',()=>{const search=$('#travelSearch'),province=$('#travelProvince'),category=$('#travelCategory');if(search)search.value='';if(province)province.value='all';if(category)category.value='all';window.renderTravelGuide();search?.focus();});
    toolbar.append(count,reset);filters.insertAdjacentElement('afterend',toolbar);
+   const coverage=document.createElement('section');coverage.id='travelProvinceCoverage';coverage.className='travel-province-coverage';coverage.setAttribute('aria-label','Province guide coverage');
+   const heading=document.createElement('p');heading.id='travelCoverageHeading';
+   const chips=document.createElement('div');chips.id='travelCoverageChips';chips.className='travel-coverage-chips';
+   coverage.append(heading,chips);toolbar.insertAdjacentElement('afterend',coverage);
   }
   const q=($('#travelSearch')?.value||'').trim().toLocaleLowerCase();
   const province=$('#travelProvince')?.value||'all';
@@ -1578,6 +1582,16 @@ window.__afghanAiAppReady=true;
   const lang=$('#uiLanguage')?.value||'fa',count=$('#travelResultsCount'),reset=$('#travelResetFilters');
   if(count)count.textContent=lang==='en'?items.length+' destinations found':lang==='ps'?items.length+' ځایونه وموندل شول':items.length+' مقصد یافت شد';
   if(reset)reset.textContent=lang==='en'?'Clear filters':lang==='ps'?'فلټرونه پاکول':'پاک‌کردن فیلترها';
+  const provinceSelect=$('#travelProvince'),coverage=$('#travelProvinceCoverage'),heading=$('#travelCoverageHeading'),chips=$('#travelCoverageChips');
+  if(provinceSelect&&coverage&&heading&&chips){
+   const provinces=Array.from(provinceSelect.options).filter(o=>o.value!=='all').map(o=>o.textContent.trim());
+   const covered=new Set(destinations.map(x=>x.province));
+   const missing=provinces.filter(name=>!covered.has(name));
+   heading.textContent=lang==='en'?covered.size+' of '+provinces.length+' provinces have curated destinations. Explore provinces still being developed:':lang==='ps'?covered.size+' له '+provinces.length+' ولایتونو کې د لیدلو ځایونه شته؛ دا ولایتونه لا د پراختیا په حال کې دي:': 'برای '+covered.size+' ولایت از '+provinces.length+' ولایت، مقصدهای معرفی‌شده داریم؛ راهنمای این ولایت‌ها در حال تکمیل است:';
+   chips.replaceChildren();
+   missing.forEach(name=>{const button=document.createElement('button');button.type='button';button.className='travel-coverage-chip';button.textContent=name;button.addEventListener('click',()=>{provinceSelect.value=name;window.renderTravelGuide();$('#travelSearch')?.focus();});chips.append(button);});
+   coverage.hidden=missing.length===0;
+  }
  };
  const form=$('#travelPlanForm');
  if(form&&!form.dataset.ready){
