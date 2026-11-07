@@ -1310,7 +1310,7 @@ window.__afghanAiAppReady=true;
    const title=card.querySelector('h3');if(!title)return;const item=destinations[title.textContent];if(!item)return;
    const index=lang==='en'?0:lang==='ps'?1:-1;if(index>=0)title.textContent=item[index];
    const p=card.querySelector('p');if(p&&index>=0)p.textContent=(lang==='en'?'':lang==='ps'?'':'')+p.textContent.split(' • ')[0]+' • '+(lang==='en'?(card.textContent.includes('طبیعت')?d.nature:card.textContent.includes('شهری')?d.city:d.history):(card.textContent.includes('طبیعت')?d.nature:card.textContent.includes('شهری')?d.city:d.history));
-   const summary=card.querySelectorAll('p')[1];if(summary&&index>=0)summary.textContent=item[index+2];
+   const summary=card.querySelectorAll('p')[1];if(summary&&index>=0)summary.textContent=item[lang==='en'?3:2];
   });
   if(grid.querySelector('.empty-state'))grid.querySelector('.empty-state').textContent=d.notFound;
  };
