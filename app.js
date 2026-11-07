@@ -363,7 +363,7 @@ const afghanAttractionTranslations={
 function afghanAttractionText(item,lang,field){const translation=afghanAttractionTranslations[item.name]?.[lang];return translation?.[field]||item[field];}
 
 function normalizeAfghanProvinceName(name){
- const key=(name||'').toLocaleLowerCase().normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+ const key=(name||'').toLocaleLowerCase().replace(/[^a-z0-9]/g,'');
  const aliases={
   bamian:'Bamyan',bamyan:'Bamyan',ghowr:'Ghor',ghor:'Ghor',
   jowzjan:'Jawzjan',jawzjan:'Jawzjan',jawjan:'Jawzjan',
