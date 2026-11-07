@@ -482,6 +482,9 @@ const afghanProvincePhotoGallery={
  ],
  Kunduz:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Kunduz_River_valley.jpg?width=1600',name:{fa:'درهٔ رودخانهٔ قندوز',ps:'د کندز سیند درې',en:'Kunduz River valley'},credit:'Dirk Haas / Afghanistan Matters',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Kunduz_River_valley.jpg'}
+ ],
+ Baghlan:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Baghlan_Province_Afghanistan.jpg?width=1600',name:{fa:'چشم‌انداز ولایت بغلان',ps:'د بغلان ولایت منظره',en:'Baghlan Province landscape'},credit:'U.S. Army',license:'Public domain, U.S. government work',url:'https://commons.wikimedia.org/wiki/Category:Baghlan_Province'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
