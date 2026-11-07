@@ -433,6 +433,9 @@ const afghanProvincePhotoGallery={
  ],
  Farah:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/CitadelofAlexander2.jpg?width=1200',name:{fa:'قلعهٔ تاریخی فراه',ps:'د فراه تاریخي کلا',en:'Historic Citadel of Farah'},credit:'Matt Peterson',license:'CC0 1.0',url:'https://commons.wikimedia.org/wiki/File:CitadelofAlexander2.jpg'}
+ ],
+ Samangan:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Takht-E_rostum_samangan_province_Afghanistan.jpg?width=1200',name:{fa:'تخت رستم سمنگان',ps:'د سمنګان تخت رستم',en:'Takht-e Rostam, Samangan'},credit:'AhmadElhan',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Takht-E_rostum_samangan_province_Afghanistan.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
