@@ -37,3 +37,6 @@ jobs:
           test -s styles.css
           test -s sw.js
           test -s manifest.json
+          test -s icon.svg
+          test -s social-support-center.html
+          test -s assets/afghan-ai-social-hero.svg
