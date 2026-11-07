@@ -473,6 +473,9 @@ const afghanProvincePhotoGallery={
  ],
  Helmand:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Helmand_Valley.jpg?width=1200',name:{fa:'درهٔ هلمند',ps:'د هلمند دره',en:'Helmand Valley'},credit:'Olly Lambert',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Helmand_Valley.jpg'}
+ ],
+ Nangarhar:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Landscape_between_Jalalabad_and_Dari_Noor_3.jpg?width=1600',name:{fa:'چشم‌انداز درهٔ دری نور، ننگرهار',ps:'د ننګرهار د دري نور درې منظره',en:'Dari Noor valley landscape, Nangarhar'},credit:'Todd Huffman',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Landscape_between_Jalalabad_and_Dari_Noor_3.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
