@@ -430,6 +430,9 @@ const afghanProvincePhotoGallery={
  ],
  Faryab:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Outside_Faryab_in_Afghanistan_01.jpg?width=1200',name:{fa:'چشم‌انداز بیرون فاریاب',ps:'د فاریاب بهرنی منظره',en:'Landscape outside Faryab'},credit:'PRT Meymaneh',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Outside_Faryab_in_Afghanistan_01.jpg'}
+ ],
+ Farah:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/CitadelofAlexander2.jpg?width=1200',name:{fa:'قلعهٔ تاریخی فراه',ps:'د فراه تاریخي کلا',en:'Historic Citadel of Farah'},credit:'Matt Peterson',license:'CC0 1.0',url:'https://commons.wikimedia.org/wiki/File:CitadelofAlexander2.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
