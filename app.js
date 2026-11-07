@@ -992,9 +992,28 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
   const csv='\\ufeff'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\\r\\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='afghan-ai-fund-pilot-demo.csv';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);
  });
+
+ const roleSelect=$('#fundRolePreview'),roleDescription=$('#fundRoleDescription'),roleMatrix=$('#fundRoleMatrix');
+ const roleData={
+  director:{title:'مدیر صندوق',desc:'نظارت بر برنامه، مشاهدهٔ گزارش‌های کلان و ارجاع موضوعات برای بررسی؛ بدون اختیار انفرادی برای پرداخت یا تغییر اسناد حسابرسی.',permissions:[['مشاهدهٔ داشبورد کلان','مجاز'],['تخصیص و تصویب بودجه در چارچوب مصوبه','با تأیید جمعی'],['تغییر نتیجهٔ ارزیابی فردی','غیرمجاز'],['اجرای پرداخت','غیرمجاز'],['مشاهدهٔ اسناد حساس هویتی','غیرمجاز']]},
+  reviewer:{title:'مسئول بررسی درخواست‌ها',desc:'بررسی معیارها، ثبت یادداشت و پیشنهاد وضعیت؛ تصمیم نهایی باید طبق پالیسی و با بازبینی مستقل انجام شود.',permissions:[['مشاهدهٔ درخواست‌های تخصیص‌یافته','مجاز'],['ثبت ارزیابی و پیشنهاد','مجاز'],['تصویب نهایی کمک','غیرمجاز'],['مشاهدهٔ حساب‌های بانکی','غیرمجاز'],['اجرای پرداخت','غیرمجاز']]},
+  finance:{title:'مسئول مالی',desc:'ثبت اسناد مالی، تطبیق صورت‌حساب و آماده‌سازی پرداخت؛ آزادسازی پرداخت نیازمند تأیید جداگانه و ثبت شواهد است.',permissions:[['مشاهدهٔ دفتر مالی','مجاز'],['ثبت رسید و سند مالی','مجاز'],['تغییر نتیجهٔ انتخاب مستفیدشونده','غیرمجاز'],['آزادسازی انفرادی پرداخت','غیرمجاز'],['تطبیق مستقل حساب خود','غیرمجاز']]},
+  auditor:{title:'حسابرس مستقل',desc:'دسترسی فقط‌خواندنی به اسناد لازم، لاگ تغییرناپذیر و نمونه‌گیری؛ بدون امکان تغییر رکورد یا اجرای پرداخت.',permissions:[['مشاهدهٔ اسناد و گزارش‌های مجاز','فقط‌خواندنی'],['بررسی لاگ و شواهد','مجاز'],['ویرایش درخواست یا دفتر مالی','غیرمجاز'],['اجرای پرداخت','غیرمجاز'],['حذف سوابق','غیرمجاز']]},
+  support:{title:'مسئول پذیرش و راهنمایی',desc:'راهنمایی متقاضی، بررسی کامل‌بودن فورم و ارجاع امن؛ دسترسی به جزئیات حساس باید حداقلی باشد.',permissions:[['ثبت اولیه و شمارهٔ پیگیری','مجاز'],['مشاهدهٔ وضعیت عمومی پرونده','مجاز'],['تصمیم دربارهٔ استحقاق','غیرمجاز'],['مشاهدهٔ اسناد صحی/هویتی','غیرمجاز'],['اجرای پرداخت','غیرمجاز']]}
+ };
+ const renderRole=()=>{
+  if(!roleSelect||!roleMatrix||!roleDescription)return;
+  const role=roleData[roleSelect.value]||roleData.support;roleDescription.replaceChildren();
+  const heading=document.createElement('b');heading.textContent=role.title;const para=document.createElement('p');para.textContent=role.desc;roleDescription.append(heading,para);
+  roleMatrix.replaceChildren();const table=document.createElement('table');table.className='fund-role-table';
+  const head=document.createElement('tr');['صلاحیت','سطح دسترسی'].forEach(t=>{const th=document.createElement('th');th.textContent=t;head.append(th);});table.append(head);
+  role.permissions.forEach(pair=>{const tr=document.createElement('tr');pair.forEach((v,i)=>{const td=document.createElement('td');td.textContent=v;if(i===1)td.dataset.access=v;tr.append(td);});table.append(tr);});
+  roleMatrix.append(table);
+ };
+ roleSelect?.addEventListener('change',renderRole);renderRole();
  render();
 })();
-/* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
+ /* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
 window.__afghanAiAppReady=true;
 
 /* Feature ideas: saved locally only; no remote submission is implied. */
