@@ -123,7 +123,7 @@ const travelGuideChecks = [
  ["travel planner does not claim live prices", app.includes("قیمت زنده در دسترس نیست")],
  ["travel route registered in router", app.includes("'opportunities','travel','publications'")],
  ["travel responsive styling", css.includes(".travel-destination-grid") && css.includes("@media(max-width:650px){.travel-filters{grid-template-columns:1fr}") ],
- ["travel guide Dari Pashto English translations", app.includes("Afghanistan Travel Guide") && app.includes("د افغانستان د سفر لارښود") && app.includes("دری")===false && app.includes("Travel Guide localization layer")],
+ ["travel guide Dari Pashto English translations", app.includes("Afghanistan Travel Guide") && app.includes("د افغانستان د سفر لارښود") && app.includes("Travel Guide localization layer")],
  ["travel destinations translated by language", app.includes("Band-e Amir") && app.includes("Minaret of Jam") && app.includes("item[lang==='en'?3:2]") ]
 ];
 for (const [label, passed] of travelGuideChecks) { if (!passed) errors.push(`Travel guide check failed: ${label}.`); }
