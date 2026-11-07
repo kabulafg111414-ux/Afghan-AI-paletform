@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08664f"><meta name="description" content="Afghan AI — معلم هوشمند برای دانش‌آموزان افغانستان">
-<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261108-vendor-intake-40">
+<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261108-admin-control-41">
 <title>Afghan AI | معلم هوشمند افغانستان</title>
 <style id="afghan-ai-visual-fallback">
 /* Critical visual layer: stays visible even if the external stylesheet is delayed */
@@ -364,10 +364,26 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 </section>
 
 <section id="adminPage" class="page hidden">
- <div class="page-title"><span class="eyebrow">Founder workspace</span><h1>⚙ پنل مدیریت Afghan AI</h1><p>نمای اولیهٔ امکانات مورد نیاز بنیان‌گذار و تیم محتوا.</p></div>
- <div class="admin-banner"><div class="admin-mark">AI</div><div><b>Afghan AI — پنل بنیان‌گذار</b><p>بنیان‌گذار: سیدمحب‌الله (هاشمی)</p><small>این پنل در حال حاضر نمایشی است؛ ورود امن و نقش‌های مدیریتی هنوز پیاده‌سازی نشده‌اند.</small></div></div>
- <div class="admin-grid"><div class="admin-card"><span>📚</span><b>مدیریت محتوا</b><p>ثبت و بازبینی درس‌ها و منابع معتبر.</p><em>در نقشهٔ راه</em></div><div class="admin-card"><span>👥</span><b>مدیریت کاربران</b><p>نقش دانش‌آموز، استاد و سرپرست.</p><em>نیازمند بک‌اند امن</em></div><div class="admin-card"><span>📈</span><b>گزارش‌ها</b><p>آمار استفاده و کیفیت پاسخ‌ها.</p><em>در نقشهٔ راه</em></div><div class="admin-card"><span>🛡️</span><b>امنیت و حریم خصوصی</b><p>کنترل دسترسی و حفاظت از داده‌ها.</p><em>پیش‌شرط انتشار</em></div></div>
- <div class="notice"><span>🔧</span><div><b>وضعیت سرویس هوش مصنوعی</b><p id="apiStatus">وضعیت اتصال از سرور بررسی نشده است.</p><button id="checkApi" class="text-button">بررسی اتصال ←</button></div></div>
+ <div class="page-title"><span class="eyebrow">FOUNDER CONTROL CENTER</span><h1>⚙ مرکز کنترل Afghan AI</h1><p>نمای یکپارچه برای پیگیری بخش‌های پلتفرم، خدمات هوش مصنوعی و آمادگی انتشار.</p></div>
+ <div class="admin-banner"><div class="admin-mark">AI</div><div><b>Afghan AI — مرکز مدیریت</b><p>بنیان‌گذار: سیدمحب‌الله (هاشمی)</p><small>نسخهٔ فعلی نمای مدیریتی است؛ ورود امن، سطح دسترسی و داده‌های مدیریتی مرکزی هنوز فعال نشده‌اند.</small></div></div>
+ <div class="admin-control-summary">
+  <article><span>🧩</span><div><small>وضعیت پلتفرم</small><b>نسخهٔ آزمایشی</b><em>Prototype / MVP</em></div></article>
+  <article><span>🔐</span><div><small>ورود مدیر</small><b>فعال نشده</b><em>نیازمند احراز هویت امن</em></div></article>
+  <article><span>🗄️</span><div><small>پایگاه دادهٔ مرکزی</small><b>راه‌اندازی نشده</b><em>اطلاعات مرکزی ذخیره نمی‌شود</em></div></article>
+ </div>
+ <h2 class="admin-section-title">مدیریت بخش‌های پلتفرم</h2>
+ <div class="admin-grid admin-control-grid">
+  <article class="admin-card"><span>📚</span><b>محتوا و آموزش</b><p>درس‌ها، منابع، آزمون‌ها و کیفیت مطالب آموزشی.</p><em>محتوای نمونه؛ گردش‌کار تأیید نیازمند توسعه</em></article>
+  <article class="admin-card"><span>👥</span><b>کاربران و نقش‌ها</b><p>حساب دانش‌آموز، استاد، سرپرست و مدیر.</p><em>ثبت‌نام و نقش‌های امن هنوز فعال نیست</em></article>
+  <article class="admin-card"><span>🛍️</span><b>بازار و فروشندگان</b><p>درخواست فروشنده، بررسی، فهرست محصولات و گزارش تخلف.</p><em>فعلاً فقط فرم پیش‌نویس ایمیل؛ بدون تأیید واقعی</em></article>
+  <article class="admin-card"><span>🧭</span><b>راهنمای سفر</b><p>مقصدها، اطلاعات فرهنگی و هشدارهای سفر.</p><em>محتوای معرفی؛ وضعیت زندهٔ مسیرها موجود نیست</em></article>
+  <article class="admin-card"><span>📊</span><b>گزارش و تحلیل</b><p>آمار بازدید، استفاده از خدمات و خطاها.</p><em>تحلیل مرکزی و گزارش کاربران هنوز فعال نیست</em></article>
+  <article class="admin-card"><span>🛡️</span><b>امنیت و حریم خصوصی</b><p>کنترل دسترسی، حفاظت از اطلاعات و بررسی آسیب‌پذیری.</p><em>بررسی مرورگر؛ حفاظت کامل سروری نیازمند توسعه</em></article>
+ </div>
+ <h2 class="admin-section-title">دسترسی سریع</h2>
+ <div class="admin-quick-actions"><button class="outline" data-page="travel">🧭 راهنمای سفر</button><button class="outline" data-page="security">🛡️ مرکز امنیت</button><button class="outline" data-page="sources">ℹ️ دربارهٔ پلتفرم</button></div>
+ <div class="notice admin-api-notice"><span>🔧</span><div><b>بررسی دسترسی سرویس هوش مصنوعی</b><p id="apiStatus">وضعیت اتصال از سرور بررسی نشده است.</p><button id="checkApi" class="text-button">بررسی اتصال ←</button><small class="admin-api-help">این بررسی فقط پاسخ سرور را می‌سنجد؛ سلامت کامل مدل، پرداخت یا کیفیت پاسخ را تضمین نمی‌کند.</small></div></div>
+ <div class="admin-launch-checklist"><h2>چک‌لیست پیش از راه‌اندازی عمومی</h2><ul><li><span>۱</span> راه‌اندازی ورود امن و نقش‌های مدیریتی</li><li><span>۲</span> اتصال پایگاه دادهٔ مرکزی و نسخهٔ پشتیبان</li><li><span>۳</span> ساخت گردش‌کار تأیید فروشندگان و محصولات</li><li><span>۴</span> محدودسازی درخواست‌ها و ثبت رخدادهای امنیتی</li><li><span>۵</span> تکمیل سیاست حریم خصوصی و آزمایش موبایل</li></ul><p>تا تکمیل این مراحل، اطلاعات کاربران و فروشندگان را به‌عنوان دادهٔ مرکزی یا تأییدشده معرفی نکنید.</p></div>
 </section>
 
 
