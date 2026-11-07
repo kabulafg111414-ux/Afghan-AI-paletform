@@ -2443,3 +2443,39 @@ img,video,canvas,iframe{max-width:100%}
   .top-actions{min-width:0}
   .lang-select{max-width:82px}
 }
+
+
+/* Afghan AI Travel Guide — responsive destination cards and trip planner */
+.travel-hero{position:relative;overflow:hidden;padding:clamp(25px,5vw,48px);margin-bottom:18px;border-radius:22px;background:radial-gradient(circle at 82% 18%,#3b9c91 0,transparent 28%),linear-gradient(125deg,#082d49,#0b5960 62%,#167d70);color:#fff;box-shadow:0 18px 45px #06384a24}
+.travel-hero .eyebrow{color:#bce9df;font-weight:800;letter-spacing:.08em;font-size:12px}
+.travel-hero h1{color:#fff;font-size:clamp(27px,4vw,42px);margin:12px 0}
+.travel-hero>p{max-width:760px;color:#e5f7f2;line-height:1.9;margin:0}
+.travel-hero-tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.travel-hero-tags span{border:1px solid #ffffff60;background:#ffffff16;border-radius:999px;padding:7px 12px;font-size:12px;color:#f4fffb}
+.travel-section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:25px 0 13px}
+.travel-section-head h2{font-size:clamp(20px,3vw,26px);margin:5px 0}
+.travel-section-head p{margin:0;color:var(--muted,#667085);line-height:1.7;font-size:13px}
+.travel-filters{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:12px;padding:15px;margin:14px 0;border:1px solid var(--border-color,#dce6e1);border-radius:15px;background:var(--card-bg,#fff)}
+.travel-filters label,.travel-planner label{display:grid;gap:7px;font-size:13px;font-weight:700;min-width:0}
+.travel-filters input,.travel-filters select,.travel-planner input,.travel-planner select{width:100%;min-width:0;min-height:44px;padding:10px 12px;border:1px solid var(--border-color,#dce6e1);border-radius:10px;background:var(--input-bg,#fff);color:inherit;font:inherit}
+.travel-destination-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.travel-destination{min-width:0;padding:17px;border:1px solid var(--border-color,#dce6e1);border-radius:16px;background:var(--card-bg,#fff);box-shadow:0 7px 22px #1234 08}
+.travel-destination-icon{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:14px;background:linear-gradient(145deg,#e1f4ef,#e6f0fa);font-size:27px}
+.travel-destination-meta{margin-top:12px;color:#087b70;font-size:11px;font-weight:800}
+.travel-destination h3{font-size:17px;margin:5px 0 8px}
+.travel-destination>p{font-size:13px;line-height:1.8;color:var(--muted,#667085);margin:0 0 12px}
+.travel-destination-note{padding-top:10px;border-top:1px solid var(--border-color,#e4e7ec);font-size:12px;line-height:1.8;color:var(--muted,#667085)}
+.travel-destination-note b{color:var(--text-color,#173b32)}
+.travel-planner{margin:12px 0}
+.travel-planner form{display:grid;gap:10px}
+.travel-planner form button{margin-top:6px;min-height:45px}
+.travel-info-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}
+.travel-info-grid .info-card{min-width:0}
+.travel-info-grid .info-card>span{font-size:25px}
+.travel-info-grid h3{font-size:15px;margin:7px 0}
+.travel-info-grid p{font-size:12px;line-height:1.8;color:var(--muted,#667085);margin:0}
+body.dark .travel-filters,body.dark .travel-destination{background:#172b27;border-color:#345148}
+body.dark .travel-filters input,body.dark .travel-filters select,body.dark .travel-planner input,body.dark .travel-planner select{background:#10211e;border-color:#426458;color:#eef8f3}
+body.dark .travel-destination-icon{background:#203b34}
+@media(max-width:900px){.travel-destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.travel-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.travel-filters{grid-template-columns:1fr}.travel-destination-grid,.travel-info-grid{grid-template-columns:1fr}.travel-hero{border-radius:15px}.travel-destination{padding:15px}}
