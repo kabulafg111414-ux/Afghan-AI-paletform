@@ -434,7 +434,7 @@ const afghanProvincePhotoGallery={
  Farah:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/CitadelofAlexander2.jpg?width=1200',name:{fa:'قلعهٔ تاریخی فراه',ps:'د فراه تاریخي کلا',en:'Historic Citadel of Farah'},credit:'Matt Peterson',license:'CC0 1.0',url:'https://commons.wikimedia.org/wiki/File:CitadelofAlexander2.jpg'}
  ],
- Sar-e-Pol:[
+ 'Sar-e-Pol':[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Balkhab_District.JPG?width=1200',name:{fa:'چشم‌انداز ولسوالی بلخاب، سرپل',ps:'د سرپل د بلخاب ولسوالۍ منظره',en:'Landscape in Balkhab District, Sar-e Pol'},credit:'Ahmad imami',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Balkhab_District.JPG'}
  ],
  Samangan:[
