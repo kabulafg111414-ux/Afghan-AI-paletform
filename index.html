@@ -324,14 +324,14 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 
 
 <section id="libraryPage" class="page hidden">
- <div class="page-title"><span class="eyebrow">AFGHAN AI DIGITAL LIBRARY</span><h1>📚 کتابخانهٔ دیجیتال افغانستان</h1><p>مرکز دسته‌بندی منابع آموزشی، کتاب‌های درسی و پیوندهای علمی معتبر.</p></div>
+ <div class="page-title"><span class="eyebrow">AFGHAN AI DIGITAL LIBRARY</span><h1>📚 کتابخانهٔ دیجیتال افغانستان</h1><p>منابع دری و پشتو، کتاب‌های کودکان، راهنمای صنف‌ها، آمادگی کانکور و کتابخانه‌های دانشگاهی در یک فهرست جستجوپذیر.</p></div>
  <div class="library-controls">
   <label for="librarySearch">جستجو در منابع</label><input id="librarySearch" type="search" placeholder="نام کتاب، مضمون یا موضوع را بنویسید..." dir="auto">
-  <label for="libraryCategory">دسته‌بندی منابع</label><select id="libraryCategory"><option value="all">همهٔ دسته‌ها</option><option value="school">کتاب‌های مکتب</option><option value="kankor">آمادگی کانکور</option><option value="university">منابع دانشگاهی</option><option value="medical">علوم طبی و صحت</option><option value="language">زبان و ادبیات</option><option value="religion">علوم اسلامی</option><option value="afghan">تاریخ و فرهنگ افغانستان</option></select>
+  <label for="libraryCategory">دسته‌بندی منابع</label><select id="libraryCategory"><option value="all">همهٔ دسته‌ها</option><option value="school">همهٔ منابع مکتب</option><option value="primary">ابتدایی</option><option value="secondary">متوسطه و لیسه</option><option value="children">کتاب‌های کودکان</option><option value="dari">منابع دری</option><option value="pashto">منابع پشتو</option><option value="kankor">آمادگی کانکور</option><option value="university">منابع دانشگاهی</option><option value="medical">علوم طبی و صحت</option><option value="language">زبان و ادبیات</option><option value="religion">علوم اسلامی</option><option value="afghan">تاریخ و فرهنگ افغانستان</option></select>
  </div>
  <div class="library-summary" aria-live="polite"><div><strong id="libraryResultCount">۱۲</strong><span>منبع آموزشی و پژوهشی در فهرست</span></div><small>پیوندهای بیرونی • دسته‌بندی‌شده • قابل جستجو</small></div>
  <div id="libraryGrid" class="library-grid" aria-live="polite"></div>
- <p class="disclaimer">این نسخه فهرست راهنمای منابع است، نه مخزن فایل‌های PDF. پیوندها به منابع رسمی یا شناخته‌شده هدایت می‌کنند. پیش از دانلود، مجوز نشر و حقوق مؤلف را رعایت کنید. محتوای درسی باید با نصاب رسمی و منابع معتبر تطبیق شود.</p>
+ <p class="disclaimer">این بخش فهرست راهنمای منابع و پیوندهای جستجو است، نه مخزن فایل‌های PDF. دسته‌بندی‌ها تضمین نمی‌کنند که هر کتاب یا هر صنف در منبع بیرونی موجود باشد. پیش از استفاده، زبان، سطح درسی، سال نشر، اعتبار منبع و حقوق مؤلف را بررسی کنید.</p>
 </section>
 
 <section id="quizPage" class="page hidden">
@@ -933,7 +933,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 })();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./app.js?v=20261108-afghan-library-21"></script>
+<script src="./app.js?v=20261108-dari-pashto-library-22"></script>
 <script id="afghan-ai-security-checks">
 (function(){
  const button=document.getElementById('securityRunScan');
