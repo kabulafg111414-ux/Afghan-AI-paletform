@@ -111,6 +111,21 @@ const innovationChecks = [
 ];
 for (const [label, passed] of innovationChecks) { if (!passed) errors.push(`Innovation lab check failed: ${label}.`); }
 
+const travelGuideChecks = [
+ ["travel navigation item", html.includes('data-page="travel"')],
+ ["travel guide page section", html.includes('id="travelPage"')],
+ ["travel destination search", html.includes('id="travelSearch"')],
+ ["travel province and category filters", html.includes('id="travelProvince"') && html.includes('id="travelCategory"')],
+ ["travel trip planner form", html.includes('id="travelPlanForm"')],
+ ["travel destination data and renderer", app.includes("window.renderTravelGuide=function()") && app.includes("بند امیر")],
+ ["travel plan generator", app.includes("travelPlanOutput")],
+ ["travel safety and freshness disclosure", html.includes("وضعیت امنیتی، بازبودن مسیرها")],
+ ["travel planner does not claim live prices", app.includes("قیمت زنده در دسترس نیست")],
+ ["travel route registered in router", app.includes("'opportunities','travel','publications'")],
+ ["travel responsive styling", css.includes(".travel-destination-grid") && css.includes("@media(max-width:650px){.travel-filters{grid-template-columns:1fr}") ]
+];
+for (const [label, passed] of travelGuideChecks) { if (!passed) errors.push(`Travel guide check failed: ${label}.`); }
+
 const donationSafetyChecks = [
   ["donations disabled pending legal/account verification", html.includes("دریافت کمک مالی فعلاً غیرفعال است")],
   ["personal payment number not published", !html.includes("0787111414")],
