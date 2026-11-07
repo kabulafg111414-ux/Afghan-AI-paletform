@@ -46,7 +46,13 @@ const mobileChecks = [
   ["mobile drawer Escape close", app.includes("e.key==='Escape'&&$('#sidebar').classList.contains('open'))closeMobileMenu()")],
   ["mobile drawer updates expanded state", app.includes("setAttribute('aria-expanded',String(open))")],
   ["mobile drawer restores collapsed state", app.includes("setAttribute('aria-expanded','false')")],
-  ["mobile drawer locks background scroll", css.includes("sidebar-menu-open")]
+  ["mobile drawer locks background scroll", css.includes("sidebar-menu-open")],
+  ["mobile horizontal overflow containment", css.includes("html,body{max-width:100%;overflow-x:clip}")],
+  ["responsive media and canvas sizing", css.includes("img,video,canvas,iframe{max-width:100%}")],
+  ["mobile main content width constraints", css.includes(".layout,.main,.page{min-width:0;max-width:100%;width:100%}")],
+  ["mobile grid single-column fallback", css.includes("grid-template-columns:minmax(0,1fr)")],
+  ["mobile narrow-screen header protection", css.includes("@media(max-width:390px)") && css.includes(".lang-select{max-width:82px}")],
+  ["mobile long text wrapping", css.includes("overflow-wrap:anywhere")]
 ];
 for (const [label, passed] of mobileChecks) {
   if (!passed) errors.push(`Mobile accessibility/responsive check failed: ${label}.`);
@@ -58,4 +64,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Core interaction smoke check passed: ${requiredControls.length} required controls, ${requiredBindings.length} event/validation checks, and 11 mobile accessibility/responsive checks verified.`);
+console.log(`Core interaction smoke check passed: ${requiredControls.length} required controls, ${requiredBindings.length} event/validation checks, and 17 mobile accessibility/responsive checks verified.`);
