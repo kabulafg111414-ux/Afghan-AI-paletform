@@ -2496,3 +2496,6 @@ body.dark .travel-photo-credits a{color:#7ed8c9}
 .travel-hero{background-image:linear-gradient(105deg,#06283eee 0%,#0b5960d9 55%,#167d70a8 100%),url("https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Band_Amir.jpg/1920px-Band_Amir.jpg");background-size:cover;background-position:center 48%}
 @media(max-width:760px){.travel-photo-strip{grid-template-columns:1fr 1fr;grid-template-rows:210px 150px 150px;gap:9px}.travel-photo-strip figure:first-child{grid-column:1/-1;grid-row:auto}.travel-photo-strip figcaption{padding:24px 11px 11px}.travel-photo-strip figcaption strong{font-size:16px}}
 @media(max-width:390px){.travel-photo-strip{grid-template-rows:190px 135px 135px}.travel-photo-strip figure{border-radius:13px}}
+
+.afg-province-explorer #afgProvinceMapReset{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin:4px 0 12px;padding:10px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font:inherit;font-weight:700;cursor:pointer}
+.afg-province-explorer #afgProvinceMapReset:focus-visible{outline:3px solid var(--accent,#269caa);outline-offset:2px}
