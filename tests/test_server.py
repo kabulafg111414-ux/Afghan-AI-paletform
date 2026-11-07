@@ -144,3 +144,25 @@ def test_initial_schema_stores_only_hashed_session_and_invitation_tokens():
     assert "token_hash CHAR(64) NOT NULL UNIQUE" in schema
     assert "CREATE TABLE sessions" in schema
     assert "CREATE TABLE bootstrap_invites" in schema
+
+
+def test_chat_rate_limit_returns_json_429(monkeypatch):
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    c = client()
+    remote = {"REMOTE_ADDR": "198.51.100.42"}
+    for _ in range(10):
+        response = c.post(
+            "/api/chat",
+            json={"message": "سلام"},
+            environ_overrides=remote,
+        )
+        assert response.status_code == 503
+    limited = c.post(
+        "/api/chat",
+        json={"message": "سلام"},
+        environ_overrides=remote,
+    )
+    assert limited.status_code == 429
+    assert limited.get_json() == {
+        "error": "Too many requests. Please try again later."
+    }
