@@ -34,26 +34,22 @@ for (const [label, snippet] of requiredBindings) {
 }
 
 
-const mobileMarkupChecks = [
+const css = readFileSync("styles.css", "utf8");
+const mobileChecks = [
   ["responsive viewport", /<meta[^>]*name=["']viewport["'][^>]*width=device-width/i.test(html)],
-  ["mobile menu accessibility controls", /id="mobileMenu"[^>]*aria-controls="sidebar"[^>]*aria-expanded="false"/.test(html)],
-  ["visible mobile drawer close button", /class="sidebar-mobile-head"[^>]*>[\\s\\S]*?id="closeSidebar"[^>]*aria-label=/.test(html)],
-  ["mobile drawer backdrop", /id="sidebarBackdrop"/.test(html)]
+  ["mobile menu accessibility controls", html.includes('id="mobileMenu" aria-label="باز کردن فهرست بخش‌ها" aria-controls="sidebar" aria-expanded="false"')],
+  ["visible mobile drawer close button", html.includes('id="closeSidebar" aria-label="بستن فهرست"')],
+  ["mobile drawer backdrop", html.includes('id="sidebarBackdrop"')],
+  ["mobile drawer breakpoint", css.includes("@media(max-width:820px)")],
+  ["mobile drawer open state", css.includes(".sidebar.open{display:flex!important}")],
+  ["mobile drawer safe-area padding", css.includes("safe-area-inset-bottom")],
+  ["mobile drawer Escape close", app.includes("e.key==='Escape'&&$('#sidebar').classList.contains('open'))closeMobileMenu()")],
+  ["mobile drawer updates expanded state", app.includes("setAttribute('aria-expanded',String(open))")],
+  ["mobile drawer restores collapsed state", app.includes("setAttribute('aria-expanded','false')")],
+  ["mobile drawer locks background scroll", css.includes("sidebar-menu-open")]
 ];
-for (const [label, passed] of mobileMarkupChecks) {
-  if (!passed) errors.push(`Mobile markup check failed: ${label}.`);
-}
-
-const mobileBehaviorChecks = [
-  ["mobile drawer breakpoint and open state", /@media\\s*\\(max-width:\\s*820px\\)[\\s\\S]*?\\.sidebar\\.open\\s*\\{[^}]*display:\\s*flex/i.test((await import("node:fs")).readFileSync("styles.css", "utf8"))],
-  ["mobile drawer safe-area padding", /safe-area-inset-bottom/.test((await import("node:fs")).readFileSync("styles.css", "utf8"))],
-  ["mobile drawer Escape close", /e\\.key===['"]Escape['"][^}]*closeMobileMenu\\(\\)/.test(app)],
-  ["mobile drawer updates expanded state", /setAttribute\\(['"]aria-expanded['"],String\\(open\\)\\)/.test(app)],
-  ["mobile drawer restores collapsed state", /setAttribute\\(['"]aria-expanded['"],['"]false['"]\\)/.test(app)],
-  ["mobile drawer locks background scroll", /sidebar-menu-open/.test((await import("node:fs")).readFileSync("styles.css", "utf8"))]
-];
-for (const [label, passed] of mobileBehaviorChecks) {
-  if (!passed) errors.push(`Mobile behavior check failed: ${label}.`);
+for (const [label, passed] of mobileChecks) {
+  if (!passed) errors.push(`Mobile accessibility/responsive check failed: ${label}.`);
 }
 
 if (errors.length) {
@@ -62,4 +58,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Core interaction smoke check passed: ${requiredControls.length} required controls, ${requiredBindings.length} event/validation checks, and 10 mobile accessibility/responsive checks verified.`);
+console.log(`Core interaction smoke check passed: ${requiredControls.length} required controls, ${requiredBindings.length} event/validation checks, and 11 mobile accessibility/responsive checks verified.`);
