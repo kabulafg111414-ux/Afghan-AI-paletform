@@ -1002,7 +1002,7 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
  // Treat browser storage as untrusted: ignore malformed or tampered demo records.
  const readLedger=()=>{
   const value=safeStorageJSON(ledgerKey,[]);if(!Array.isArray(value))return [];
-  return value.filter(item=>item&&typeof item==='object'&&!Array.isArray(item)&&allowedLedgerTypes.has(item.type)&&typeof item.id==='string'&&item.id.length<=40&&Number.isSafeInteger(item.amount)&&item.amount>0&&typeof item.date==='string'&&/^\\d{4}-\\d{2}-\\d{2}$/.test(item.date))
+  return value.filter(item=>item&&typeof item==='object'&&!Array.isArray(item)&&allowedLedgerTypes.has(item.type)&&typeof item.id==='string'&&item.id.length<=40&&Number.isSafeInteger(item.amount)&&item.amount>0&&typeof item.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(item.date))
    .map(item=>({id:item.id,type:item.type,label:cleanLedgerText(item.label,100),category:cleanLedgerText(item.category,100),amount:item.amount,date:item.date,reference:cleanLedgerText(item.reference,120),note:cleanLedgerText(item.note,500),createdAt:cleanLedgerText(item.createdAt,40)}));
  };
  const moneyAFN=value=>new Intl.NumberFormat('fa-AF',{maximumFractionDigits:0}).format(Math.max(0,Number(value)||0));
