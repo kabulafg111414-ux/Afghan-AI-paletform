@@ -44,6 +44,10 @@ GitHub Pages is static hosting and cannot execute server.py. The Render Blueprin
 - This is still a prototype backend. Before public launch, add persistent rate limiting/abuse protection, user authentication or another access-control strategy, monitoring, and a privacy/data-retention policy. Do not collect children's personal information until appropriate safeguards and legal review are in place.
 - Health endpoint only reports whether the key is configured; it does not prove that provider billing, network access, or model requests are working.
 
+## Seller marketplace roadmap
+
+The seller onboarding form currently prepares an email draft only; it does not store applications or verify sellers. The secure implementation plan, including the proposed data model, admin moderation controls, API outline, and release gates, is documented in [`docs/SELLER-MARKETPLACE-PLAN.md`](docs/SELLER-MARKETPLACE-PLAN.md). Do not launch seller badges or public listings until server-side authentication, persistent storage, moderation, and privacy safeguards are implemented and tested.
+
 ## Founder
 Sayed Moheb Ullah Hashimi
 phone :+93787111414   +93782111414
