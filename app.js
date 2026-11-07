@@ -489,7 +489,9 @@ function initAfghanInteractiveMap(){
   host.dataset.error='true';
   showError(messages.data);
  }).finally(()=>host.removeAttribute('aria-busy'));
- select?.addEventListener('change',()=>{
+ if(select&&select.dataset.mapBound!=='true'){
+ select.dataset.mapBound='true';
+ select.addEventListener('change',()=>{
   if(!afghanProvinceLayer||!select.value)return;
   afghanProvinceLayer.eachLayer(layer=>{
    const name=layer.feature.properties?.PROV_34_NA||'';
@@ -498,6 +500,7 @@ function initAfghanInteractiveMap(){
    if(active)afghanLeafletMap.fitBounds(layer.getBounds(),{padding:[20,20],maxZoom:8});
   });
  });
+ }
 }
 $('#afgProvinceMapRetry')?.addEventListener('click',()=>{
  if(afghanLeafletMap){afghanLeafletMap.remove();afghanLeafletMap=null;}
