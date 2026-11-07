@@ -2393,3 +2393,10 @@ body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .secur
 .fund-admin-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.fund-demo-records{display:grid;gap:10px;margin-top:12px}
 .fund-demo-row{border:1px solid var(--border-color,#dce6e1);border-radius:12px;padding:13px;display:grid;gap:6px}.fund-demo-row p{margin:0;font-size:13px}
 @media(max-width:760px){.fund-operations-grid{grid-template-columns:1fr}.fund-admin-actions>*{width:100%}}
+
+/* Fund role-based access design preview */
+.fund-role-panel{margin-top:16px}.fund-role-description{padding:13px 15px;margin:12px 0;border:1px solid var(--border-color,#dce6e1);border-radius:12px;background:var(--card-bg,#fff)}
+.fund-role-description p{margin:5px 0 0;font-size:13px;line-height:1.8}.fund-role-panel>label{display:block;font-weight:650;margin:10px 0 6px}
+.fund-role-panel>select{width:100%;max-width:420px;padding:11px;border:1px solid var(--border-color,#dce6e1);border-radius:10px;background:var(--card-bg,#fff);color:inherit}
+.fund-role-table{width:100%;border-collapse:collapse;margin-top:12px}.fund-role-table th,.fund-role-table td{text-align:start;padding:11px;border-bottom:1px solid var(--border-color,#dce6e1);font-size:13px}
+.fund-role-table td:last-child{font-weight:700}.fund-role-table td[data-access="غیرمجاز"]{color:#a33}.fund-role-table td[data-access="مجاز"]{color:#18764e}
