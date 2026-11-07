@@ -2696,3 +2696,23 @@ body.dark .travel-source-link{color:#79cfc0}
 .travel-culture-card a{font-weight:650;text-decoration:none}
 .travel-culture-card a:hover{text-decoration:underline}
 .travel-culture-card a:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}
+
+
+/* Afghan AI — searchable traditional food guide */
+.travel-food-section{margin:34px 0 42px}
+.travel-food-search-label{display:block;margin:14px 0 7px;font-weight:700}
+.travel-food-search{display:block;width:100%;max-width:620px;min-height:46px;padding:10px 13px;border:1px solid var(--border-color,rgba(128,128,128,.28));border-radius:12px;background:var(--card-bg,#fff);color:var(--text,#20332e);font:inherit}
+.travel-food-search:focus-visible{outline:3px solid #f2b84b;outline-offset:2px}
+.travel-food-count{font-size:12px;color:var(--muted-text,var(--text-secondary));margin:8px 0}
+.travel-food-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px;margin-top:12px}
+.travel-food-card{display:flex;flex-direction:column;gap:9px;min-height:210px;padding:18px;border:1px solid var(--border-color,rgba(128,128,128,.22));border-radius:16px;background:var(--card-bg,rgba(128,128,128,.045))}
+.travel-food-card[hidden]{display:none}
+.travel-food-icon{font-size:28px;line-height:1.2}
+.travel-food-card h3{margin:0;font-size:1.02rem}
+.travel-food-card p{margin:0;line-height:1.85;color:var(--muted-text,var(--text-secondary))}
+.travel-food-sources{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:12px}
+.travel-food-sources a{color:var(--primary,#087f70);text-decoration:underline;text-underline-offset:3px}
+.travel-food-sources a:focus-visible{outline:2px solid #f2b84b;outline-offset:3px}
+body.dark .travel-food-search{background:#1d302c;color:#e5f2ee;border-color:#536d67}
+body.dark .travel-food-card{background:#172a27;border-color:#354b48}
+body.dark .travel-food-sources a{color:#79cfc0}
