@@ -26,7 +26,8 @@ function renderLibrary(){
  const q=($('#librarySearch')?.value||'').trim().toLocaleLowerCase();
  const cat=$('#libraryCategory')?.value||'all';
  const items=libraryResources.filter(x=>(cat==='all'||x.category===cat)&&(!q||(x.title+' '+x.desc+' '+x.type).toLocaleLowerCase().includes(q)));
- grid.innerHTML=items.length?items.map(x=>'<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><a href="'+x.url+'" target="_blank" rel="noopener noreferrer">بازکردن منبع ↗</a></article>').join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
+ const count=$('#libraryResultCount');if(count)count.textContent=String(items.length);
+ grid.innerHTML=items.length?items.map(x=>'<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><a href="'+x.url+'" target="_blank" rel="noopener noreferrer" aria-label="بازکردن منبع: '+x.title+' (در زبانهٔ جدید)">بازکردن منبع ↗</a></article>').join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
 }
 $('#librarySearch')?.addEventListener('input',renderLibrary);
 $('#libraryCategory')?.addEventListener('change',renderLibrary);
