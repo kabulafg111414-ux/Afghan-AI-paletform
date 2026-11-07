@@ -363,9 +363,23 @@ const afghanAttractionTranslations={
 function afghanAttractionText(item,lang,field){const translation=afghanAttractionTranslations[item.name]?.[lang];return translation?.[field]||item[field];}
 
 function normalizeAfghanProvinceName(name){
- const key=(name||'').toLocaleLowerCase().replace(/[\\s_-]+/g,'').trim();
- const aliases={bamian:'Bamyan',bamyan:'Bamyan',ghowr:'Ghor',ghor:'Ghor'};
- return aliases[key]||name;
+ const key=(name||'').toLocaleLowerCase().normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+ const aliases={
+  bamian:'Bamyan',bamyan:'Bamyan',ghowr:'Ghor',ghor:'Ghor',
+  jowzjan:'Jawzjan',jawzjan:'Jawzjan',jawjan:'Jawzjan',
+  daykundi:'Daykundi',daikundi:'Daykundi',
+  panjshir:'Panjshir',panjsher:'Panjshir',
+  saripul:'Sar-e Pol',sarepol:'Sar-e Pol',
+  maidanwardak:'Maidan Wardak',wardak:'Maidan Wardak',
+  uruzgan:'Uruzgan',oruzgan:'Uruzgan',
+  nimroz:'Nimroz',nimruz:'Nimroz'
+ };
+ const canonical=aliases[key]||afghanProvinceDirectory.find(([province])=>province.toLocaleLowerCase().replace(/[^a-z0-9]/g,'')===key)?.[0];
+ return canonical||name;
+}
+function findAfghanProvinceOption(name){
+ const canonical=normalizeAfghanProvinceName(name);
+ return [...($('#afgProvinceSelect')?.options||[])].find(option=>option.value===canonical)||null;
 }
 function renderAfghanProvinceAttractions(province){
  const panel=$('#afgProvinceSites');if(!panel)return;
@@ -426,10 +440,14 @@ function initAfghanInteractiveMap(){
    const province=feature.properties?.PROV_34_NA||'نام ثبت‌نشده';
    layer.bindTooltip(province,{sticky:true});
    layer.on('click',()=>{
-    details.textContent='ولایت روی نقشه: '+province+' — برای نمایش مرکز ولایت، مورد متناظر را از فهرست انتخاب کنید؛ تطبیق نام نیازمند بازبینی است.';
-    renderAfghanProvinceAttractions(normalizeAfghanProvinceName(province));
-    const option=[...select.options].find(o=>o.value.toLocaleLowerCase()===province.toLocaleLowerCase());
-    if(option){select.value=option.value;select.dispatchEvent(new Event('change',{bubbles:true}));}
+    const option=findAfghanProvinceOption(province);
+    if(option){
+     select.value=option.value;
+     select.dispatchEvent(new Event('change',{bubbles:true}));
+    }else{
+     details.textContent='نام ولایت در دادهٔ نقشه با فهرست برنامه تطبیق نشد: '+province+'؛ لطفاً از فهرست ولایت‌ها استفاده کنید.';
+     renderAfghanProvinceAttractions('');
+    }
    });
   }}).addTo(afghanLeafletMap);
   afghanLeafletMap.fitBounds(afghanProvinceLayer.getBounds(),{padding:[8,8]});
@@ -442,7 +460,7 @@ function initAfghanInteractiveMap(){
   if(!afghanProvinceLayer||!select.value)return;
   afghanProvinceLayer.eachLayer(layer=>{
    const name=layer.feature.properties?.PROV_34_NA||'';
-   const active=name.toLocaleLowerCase()===select.value.toLocaleLowerCase();
+   const active=normalizeAfghanProvinceName(name)===select.value;
    layer.setStyle({color:active?'#d97706':'#2c9da5',weight:active?3:1.5,fillColor:active?'#f59e0b':'#4e9da2',fillOpacity:active?.42:.18});
    if(active)afghanLeafletMap.fitBounds(layer.getBounds(),{padding:[20,20],maxZoom:8});
   });
