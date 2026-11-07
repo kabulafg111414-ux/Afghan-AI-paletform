@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08664f"><meta name="description" content="Afghan AI — معلم هوشمند برای دانش‌آموزان افغانستان">
-<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261108-culture-section-37">
+<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261108-food-guide-38">
 <title>Afghan AI | معلم هوشمند افغانستان</title>
 <style id="afghan-ai-visual-fallback">
 /* Critical visual layer: stays visible even if the external stylesheet is delayed */
@@ -799,6 +799,61 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   </div>
   <p class="publication-hint">این بخش معرفی فرهنگی و آموزشی است؛ محل تولید، قیمت، موجودی بازار و امکان بازدید از کارگاه‌ها به‌صورت زنده بررسی نمی‌شود. برای خرید صنایع دستی، از هنرمندان و فروشندگان معتبر محلی معلومات بگیرید.</p>
  </section>
+
+ <section class="travel-food-section" aria-labelledby="travelFoodTitle">
+  <div class="travel-section-head"><div><span class="eyebrow">AFGHAN CUISINE • FOOD CULTURE</span><h2 id="travelFoodTitle">غذاهای سنتی افغانستان</h2><p id="travelFoodIntro">با چند غذای شناخته‌شدهٔ سفرهٔ افغانستان آشنا شوید؛ دستورها و شیوهٔ پخت در خانواده‌ها و ولایت‌ها تفاوت دارد.</p></div></div>
+  <label class="travel-food-search-label" for="travelFoodSearch" id="travelFoodSearchLabel">جستجوی غذا</label>
+  <input id="travelFoodSearch" class="travel-food-search" type="search" placeholder="نام غذا را به دری، پشتو یا انگلیسی بنویسید..." autocomplete="off">
+  <p class="travel-food-count" id="travelFoodCount" aria-live="polite">۵ غذای معرفی‌شده</p>
+  <div class="travel-food-grid" id="travelFoodGrid">
+   <article class="travel-food-card" data-search="قابلی پلو قابلي پلاو qabili palaw kabuli pulao rice برنج">
+    <span class="travel-food-icon">🍚</span><h3 data-fa="قابلی پلو" data-ps="قابلي پلاو" data-en="Qabili Palaw">قابلی پلو</h3>
+    <p data-fa="برنج دانه‌بلند با گوشت، زردک و کشمش؛ از غذاهای مشهور مهمانی‌ها و محافل افغانستان." data-ps="له غوښې، ګازرو او ممیزو سره اوږده وریجې؛ د افغان مېلمستیاوو له مشهورو خوړو څخه." data-en="Long-grain rice with meat, carrots and raisins; a well-known dish for Afghan gatherings.">برنج دانه‌بلند با گوشت، زردک و کشمش؛ از غذاهای مشهور مهمانی‌ها و محافل افغانستان.</p>
+   </article>
+   <article class="travel-food-card" data-search="منتو منټو mantu mantoo dumplings">
+    <span class="travel-food-icon">🥟</span><h3 data-fa="منتو" data-ps="منټو" data-en="Mantu">منتو</h3>
+    <p data-fa="خمیرهای نازک بخارپز با مواد گوشتی و پیاز؛ معمولاً با ماست، سس و نعناع خشک سرو می‌شود." data-ps="د نرۍ خمیرې بخارپخې شوې ټوټې چې د غوښې او پیازو مواد لري؛ ډېری وخت له مستو او ساس سره وړاندې کېږي." data-en="Thin dough parcels steamed with a meat-and-onion filling, often served with yoghurt, sauce and dried mint.">خمیرهای نازک بخارپز با مواد گوشتی و پیاز؛ معمولاً با ماست، سس و نعناع خشک سرو می‌شود.</p>
+   </article>
+   <article class="travel-food-card" data-search="آشک اشک ashak aushak leek dumplings">
+    <span class="travel-food-icon">🥬</span><h3 data-fa="آشک" data-ps="اشک" data-en="Ashak">آشک</h3>
+    <p data-fa="خمیرهای آب‌پز با مواد تره یا گندنه؛ با ماست و سس روی آن آماده می‌شود. مواد و چاشنی‌ها در هر خانه فرق می‌کند." data-ps="د ګندنې یا شنو پیازو په موادو ډک شوي اوبه‌جوش شوي خمیرونه؛ له مستو او ساس سره خوړل کېږي." data-en="Boiled dumplings filled with leek or spring onion, commonly served with yoghurt and sauce; fillings and toppings vary by household.">خمیرهای آب‌پز با مواد تره یا گندنه؛ با ماست و سس روی آن آماده می‌شود. مواد و چاشنی‌ها در هر خانه فرق می‌کند.</p>
+   </article>
+   <article class="travel-food-card" data-search="بولانی بولاني bolani bolanee flatbread">
+    <span class="travel-food-icon">🫓</span><h3 data-fa="بولانی" data-ps="بولاني" data-en="Bolani">بولانی</h3>
+    <p data-fa="نان نازک پُرشده با کچالو، گندنه یا کدو؛ معمولاً در تابه پخته و با چتنی یا ماست خورده می‌شود." data-ps="له کچالو، ګندنې یا کدو څخه ډکه نرۍ ډوډۍ؛ عموماً په تبۍ کې پخېږي او له چټني یا مستو سره خوړل کېږي." data-en="A thin stuffed flatbread, often filled with potato, leek or pumpkin, pan-cooked and served with chutney or yoghurt.">نان نازک پُرشده با کچالو، گندنه یا کدو؛ معمولاً در تابه پخته و با چتنی یا ماست خورده می‌شود.</p>
+   </article>
+   <article class="travel-food-card" data-search="سبزی پلو زمرود پلاو sabzi palaw zamarod spinach rice">
+    <span class="travel-food-icon">🥬</span><h3 data-fa="سبزی‌پلو (زمردپلو)" data-ps="سبزي پلاو (زمرد پلاو)" data-en="Sabzi Palaw (Zamarod)">سبزی‌پلو (زمردپلو)</h3>
+    <p data-fa="برنج پخته‌شده با پالک یا سبزی؛ در منابع آشپزی افغانستان به نام زمردپلو نیز یاد شده است." data-ps="له پالک یا شنو سبزیو سره پخې شوې وریجې؛ د افغانستان د خوړو په سرچینو کې زمرد پلاو هم بلل کېږي." data-en="Rice cooked with spinach or greens; Afghan food references also call it Zamarod Palaw.">برنج پخته‌شده با پالک یا سبزی؛ در منابع آشپزی افغانستان به نام زمردپلو نیز یاد شده است.</p>
+   </article>
+  </div>
+  <p class="publication-hint" id="travelFoodNote">این معرفی‌ها آموزشی‌اند، نه دستور پخت قطعی یا رتبه‌بندی غذاها. برای شناخت تفاوت‌های محلی، از آشپزان و خانواده‌های همان منطقه پرس‌وجو کنید. منبع مروری: Encyclopaedia Iranica و راهنمای غذاهای افغانستان دانشگاه نیروی هوایی آمریکا.</p>
+  <div class="travel-food-sources"><a href="https://www.iranicaonline.org/articles/cooking/cooking-iv-in-afghanistan/" target="_blank" rel="noopener noreferrer">مرور آشپزی افغانستان – Encyclopaedia Iranica ↗</a><a href="https://www.airuniversity.af.edu/Portals/10/AFCLC/04.%20Ready%20Airman/Field%20Guides/CENTCOM/ECFG%20Afghanistan%202025-2r.pdf" target="_blank" rel="noopener noreferrer">راهنمای غذاهای افغانستان – Air University ↗</a></div>
+ </section>
+ <script id="afghan-ai-food-guide">
+ (function(){
+  const input=document.getElementById('travelFoodSearch'),grid=document.getElementById('travelFoodGrid'),count=document.getElementById('travelFoodCount'),lang=document.getElementById('uiLanguage');
+  if(!input||!grid||input.dataset.ready)return;input.dataset.ready='1';
+  const labels={
+   fa:{title:'غذاهای سنتی افغانستان',intro:'با چند غذای شناخته‌شدهٔ سفرهٔ افغانستان آشنا شوید؛ دستورها و شیوهٔ پخت در خانواده‌ها و ولایت‌ها تفاوت دارد.',search:'جستجوی غذا',placeholder:'نام غذا را به دری، پشتو یا انگلیسی بنویسید...',note:'این معرفی‌ها آموزشی‌اند، نه دستور پخت قطعی یا رتبه‌بندی غذاها. برای شناخت تفاوت‌های محلی، از آشپزان و خانواده‌های همان منطقه پرس‌وجو کنید. منبع مروری: Encyclopaedia Iranica و راهنمای غذاهای افغانستان دانشگاه نیروی هوایی آمریکا.',found:'غذا نمایش داده می‌شود',none:'غذایی با این نام پیدا نشد؛ املای دیگری را امتحان کنید.'},
+   ps:{title:'د افغانستان دودیز خواړه',intro:'د افغانستان له څو مشهورو خوړو سره بلد شئ؛ د پخلي طریقې په کورنیو او ولایتونو کې توپیر لري.',search:'د خوړو لټون',placeholder:'دري، پښتو یا انګلیسي کې د خوړو نوم ولیکئ...',note:'دا لنډې پېژندنې ښوونیزې دي، وروستی ترکیب یا درجه‌بندي نه ده. د سیمه‌ییزو توپیرونو لپاره له ځایي پخوونکو او کورنیو پوښتنه وکړئ. سرچینې: Encyclopaedia Iranica او Air University.',found:'خواړه ښکاره دي',none:'په دې نوم خواړه ونه موندل شول؛ بله لیکنه وازمویئ.'},
+   en:{title:'Traditional Afghan Food',intro:'Meet several well-known dishes from Afghan tables. Recipes and cooking styles vary between households and provinces.',search:'Search dishes',placeholder:'Search in Dari, Pashto or English...',note:'These are educational introductions, not definitive recipes or rankings. Ask local cooks and families about regional variations. Overview sources: Encyclopaedia Iranica and the Air University Afghan food guide.',found:'dishes shown',none:'No dish matched. Try another spelling.'}
+  };
+  function apply(){
+   const l=labels[lang&&lang.value]||labels.fa;
+   ['travelFoodTitle','travelFoodIntro','travelFoodSearchLabel','travelFoodNote'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=[l.title,l.intro,l.search,l.note][i]});
+   input.placeholder=l.placeholder;
+   grid.querySelectorAll('[data-fa]').forEach(el=>el.textContent=el.dataset[lang&&lang.value]||el.dataset.fa);
+   filter();
+  }
+  function filter(){
+   const q=input.value.trim().toLocaleLowerCase(),cards=[...grid.querySelectorAll('.travel-food-card')];let shown=0;
+   cards.forEach(card=>{const match=!q||(card.dataset.search+' '+card.textContent).toLocaleLowerCase().includes(q);card.hidden=!match;if(match)shown++});
+   if(count)count.textContent=shown?shown+' '+(labels[lang&&lang.value]||labels.fa).found:(labels[lang&&lang.value]||labels.fa).none;
+  }
+  input.addEventListener('input',filter);if(lang)lang.addEventListener('change',apply);apply();
+ })();
+ </script>
  <div class="travel-section-head"><div><span class="eyebrow">PLAN YOUR VISIT</span><h2 id="travelPlannerTitle">برنامه‌ریز ابتدایی سفر</h2><p id="travelPlannerHint">یک برنامهٔ نمونه برای بررسی و تنظیم شخصی بسازید.</p></div></div>
  <div class="feature-grid two travel-planner">
   <article class="info-card"><h2 id="travelFormTitle">مشخصات سفر</h2>
