@@ -2591,3 +2591,10 @@ body.dark #tutorPage .chat-head select{background:#142832;color:#edf5fa;border-c
 .library-card a:focus-visible{outline:3px solid rgba(38,156,170,.35);outline-offset:2px}
 @media(max-width:560px){.library-summary{align-items:flex-start;flex-direction:column}.library-card{min-height:0;padding:17px}.library-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.library-card,.library-controls input,.library-controls select{transition:none}}
+
+/* Library subject filters and resource detail panels */
+.library-subject-tag{display:inline-flex;align-items:center;padding:5px 10px;border-radius:999px;background:rgba(8,116,88,.09);color:var(--accent,#087458);font-size:.78rem;font-weight:700}
+.library-resource-details{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:11px;background:rgba(120,140,170,.045)}
+.library-resource-details summary{cursor:pointer;font-weight:700;color:var(--text);line-height:1.7}
+.library-resource-details p{margin:8px 0 0;line-height:1.8;font-size:.9rem}
+.library-card a{margin-top:auto}
