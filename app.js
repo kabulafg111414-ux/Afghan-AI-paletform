@@ -86,6 +86,7 @@ $('#libraryBookmarks')?.addEventListener('click',event=>{
  try{localStorage.setItem(LIBRARY_BOOKMARK_KEY,JSON.stringify(readLibraryBookmarks().filter(x=>x!==id)));}catch(_){}
  renderLibrary(); 
 });
+renderLibraryBookmarks();
 $('#librarySearch')?.addEventListener('input',renderLibrary);
 $('#libraryCategory')?.addEventListener('change',renderLibrary);
 $('#librarySubject')?.addEventListener('change',renderLibrary);
