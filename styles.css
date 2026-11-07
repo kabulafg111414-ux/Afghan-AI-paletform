@@ -2405,3 +2405,13 @@ body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .secur
 .fund-complaints{margin-top:16px}.fund-complaints h3{font-size:16px;margin:12px 0}
 .fund-complaint-principles{padding-inline-start:22px;line-height:1.9;font-size:13px}
 .fund-complaint-principles li{margin:5px 0}.fund-complaints textarea{resize:vertical}
+
+/* Privacy-preserving aggregate fund dashboard */
+.fund-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin:18px 0}
+.fund-kpi{border:1px solid var(--border-color,#dce6e1);border-radius:14px;padding:15px;background:var(--card-bg,transparent);display:flex;flex-direction:column;gap:8px;min-width:0}
+.fund-kpi span{font-size:12px;line-height:1.6;opacity:.8}.fund-kpi strong{font-size:clamp(20px,3vw,27px);overflow-wrap:anywhere}
+.fund-dashboard-bottom{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.fund-dashboard-bottom>div{border:1px solid var(--border-color,#dce6e1);border-radius:12px;padding:12px}
+.fund-dashboard-bottom h3{font-size:15px;margin:4px 0 10px}
+.fund-state-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-color,#dce6e1);font-size:13px}
+.fund-state-row:last-child{border-bottom:0}
