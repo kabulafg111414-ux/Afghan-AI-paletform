@@ -177,12 +177,12 @@ for (const [label, snippet] of [
   ["security scan click handler", "runButton.addEventListener('click'"],
   ["HTTPS diagnostic", "record('https'"],
   ["service worker diagnostic", "record('worker'"],
-  ["duplicate HTML ID diagnostic", "duplicateIds.length"],
-  ["navigation route diagnostic", "brokenRoutes.length"],
+  ["duplicate HTML ID diagnostic", "duplicates.length"],
+  ["navigation route diagnostic", "missing.length"],
   ["browser storage diagnostic", "afghanai-security-self-test"],
-  ["server security limitation notice", "نیازمند تنظیمات و آزمون سمت سرور"]
+  ["server security limitation notice", "فایروال سرور"]
 ]) {
-  if (!app.includes(snippet)) errors.push(`Security diagnostic check failed: ${label}.`);
+  if (!(app + html).includes(snippet)) errors.push(`Security diagnostic check failed: ${label}.`);
 }
 
 if (errors.length) {
