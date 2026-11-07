@@ -33,6 +33,9 @@ jobs:
       - name: Check offline app-shell assets and local references
         run: node scripts/check-app-shell.mjs
 
+      - name: Check core interface interactions and financial validations
+        run: node scripts/check-core-interactions.mjs
+
       - name: Validate web app manifest
         run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json', 'utf8')); console.log('manifest.json is valid JSON')"
 
