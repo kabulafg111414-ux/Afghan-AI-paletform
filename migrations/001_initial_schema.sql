@@ -9,6 +9,8 @@ CREATE TABLE accounts (
     email_normalized TEXT UNIQUE,
     phone_normalized TEXT UNIQUE,
     password_hash TEXT,
+    email_verified_at TIMESTAMPTZ,
+    phone_verified_at TIMESTAMPTZ,
     status TEXT NOT NULL DEFAULT 'invited'
         CHECK (status IN ('invited', 'active', 'locked', 'disabled')),
     mfa_enrolled_at TIMESTAMPTZ,
@@ -19,7 +21,12 @@ CREATE TABLE accounts (
         OR
         (phone_normalized IS NOT NULL AND length(phone_normalized) BETWEEN 7 AND 32)
     ),
-    CHECK (password_hash IS NULL OR length(password_hash) BETWEEN 20 AND 512)
+    CHECK (password_hash IS NULL OR length(password_hash) BETWEEN 20 AND 512),
+    CHECK (
+        status <> 'active'
+        OR email_verified_at IS NOT NULL
+        OR phone_verified_at IS NOT NULL
+    )
 );
 
 CREATE TABLE role_assignments (
@@ -94,6 +101,7 @@ CREATE TABLE learning_progress (
     UNIQUE (account_id, course_key, item_key)
 );
 
+CREATE INDEX accounts_status_created_idx ON accounts(status, created_at DESC);
 CREATE INDEX role_assignments_account_idx ON role_assignments(account_id);
 CREATE INDEX sessions_account_expiry_idx ON sessions(account_id, expires_at);
 CREATE INDEX sessions_active_expiry_idx ON sessions(expires_at) WHERE revoked_at IS NULL;
