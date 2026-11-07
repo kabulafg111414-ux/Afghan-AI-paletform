@@ -467,6 +467,12 @@ const afghanProvincePhotoGallery={
  ],
  Uruzgan:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Gizab.jpg?width=1600',name:{fa:'چشم‌انداز طبیعی ولسوالی گیزاب، ارزگان',ps:'د ارزګان ګیزاب ولسوالۍ طبیعي منظره',en:'Scenery in Gizab District, Uruzgan'},credit:'Farhadlali',license:'CC BY-SA 3.0',url:'https://commons.wikimedia.org/wiki/File:Gizab.jpg'}
+ ],
+ Daykundi:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Sokhtag.jpg?width=1600',name:{fa:'چشم‌انداز سوختگ در نزدیکی نیلی، دایکندی',ps:'د دایکندي نیلي ته نږدې د سوختګ منظره',en:'Sokhtag landscape near Nili, Daykundi'},credit:'عزت الله حیدری',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Sokhtag.jpg'}
+ ],
+ Helmand:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Helmand_Valley.jpg?width=1200',name:{fa:'درهٔ هلمند',ps:'د هلمند دره',en:'Helmand Valley'},credit:'Olly Lambert',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Helmand_Valley.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
