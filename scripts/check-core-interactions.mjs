@@ -30,7 +30,9 @@ const requiredBindings = [
   ["reconciliation limit validation", "reconciled:totals.disbursed-totals.reconciled"],
   ["ledger rejects malformed local records", "allowedLedgerTypes.has(item.type)"],
   ["ledger validates positive safe-integer amounts", "Number.isSafeInteger(item.amount)&&item.amount>0"],
-  ["ledger bounds user-controlled stored text", "cleanLedgerText(item.note,500)"]
+  ["ledger bounds user-controlled stored text", "cleanLedgerText(item.note,500)"],
+  ["ledger validates real calendar dates", "isValidLedgerDate(item.date)"],
+  ["ledger rejects impossible calendar dates", "date.getUTCDate()===day"]
 ];
 for (const [label, snippet] of requiredBindings) {
   if (!app.includes(snippet)) errors.push(`Expected JavaScript binding or validation for ${label} was not found.`);
