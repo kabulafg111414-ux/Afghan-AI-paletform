@@ -437,6 +437,9 @@ const afghanProvincePhotoGallery={
  'Sar-e-Pol':[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Balkhab_District.JPG?width=1200',name:{fa:'چشم‌انداز ولسوالی بلخاب، سرپل',ps:'د سرپل د بلخاب ولسوالۍ منظره',en:'Landscape in Balkhab District, Sar-e Pol'},credit:'Ahmad imami',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Balkhab_District.JPG'}
  ],
+ Laghman:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Alingar_District_of_Laghman_Province-Afghanistan_%D8%AF_%D8%A7%D9%84%DB%8C%D9%86%DA%AB%D8%A7%D8%B1_%D9%88%D9%84%D8%B3%D9%88%D8%A7%D9%84%DB%8D-%D8%8C%D9%84%D8%BA%D9%85%D8%A7%D9%86_%D9%88%D9%84%D8%A7%DB%8C%D8%AA-%D8%A7%D9%81%D8%BA%D8%A7%D9%86%D8%B3%D8%AA%D8%A7%D9%86%DB%B3.jpg?width=1200',name:{fa:'کشتزارهای ولسوالی الینگار، لغمان',ps:'د لغمان الینګار ولسوالۍ کروندې',en:'Fields in Alingar District, Laghman'},credit:'Usman Mansoor Ansari',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Alingar_District_of_Laghman_Province-Afghanistan_%D8%AF_%D8%A7%D9%84%DB%8C%D9%86%DA%AF%D8%A7%D8%B1_%D9%88%D9%84%D8%B3%D9%88%D8%A7%D9%84%DB%8D-%D8%8C%D9%84%D8%BA%D9%85%D8%A7%D9%86_%D9%88%D9%84%D8%A7%DB%8C%D8%AA-%D8%A7%D9%81%D8%BA%D8%A7%D9%86%D8%B3%D8%AA%D8%A7%D9%86%DB%B3.jpg'}
+ ],
  Kapisa:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Afghans_walk_across_a_river_valley_in_Kapisa_Province.jpg?width=1200',name:{fa:'درهٔ رودخانه در ولسوالی محمودراقی، کاپیسا',ps:'د کاپیسا محمودراقي ولسوالۍ د سیند دره',en:'River valley in Mahmood Raqi District, Kapisa'},credit:'Staff Sgt. Samuel Morse / U.S. Air Force',license:'U.S. public domain',url:'https://commons.wikimedia.org/wiki/File:Afghans_walk_across_a_river_valley_in_Kapisa_Province.jpg'}
  ],
