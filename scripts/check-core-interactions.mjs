@@ -82,6 +82,14 @@ for (const [label, passed] of mobileChecks) {
 }
 
 
+const brandIdentityChecks = [
+  ["Afghan AI identity heading present", html.includes("دربارهٔ Afghan AI")],
+  ["external AI4Afghanistan name removed", !/AI4Afghanistan|AI for Afghanistan|e\\.V\\./i.test(html)]
+];
+for (const [label, passed] of brandIdentityChecks) {
+  if (!passed) errors.push(`Brand identity check failed: ${label}.`);
+}
+
 const donationSafetyChecks = [
   ["donations disabled pending legal/account verification", html.includes("دریافت کمک مالی فعلاً غیرفعال است")],
   ["personal payment number not published", !html.includes("0787111414")],
