@@ -27,6 +27,9 @@ jobs:
       - name: Check navigation targets and page sections
         run: node scripts/check-navigation.mjs
 
+      - name: Check Dari, Pashto and English localization
+        run: node scripts/check-localization.mjs
+
       - name: Validate web app manifest
         run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json', 'utf8')); console.log('manifest.json is valid JSON')"
 
