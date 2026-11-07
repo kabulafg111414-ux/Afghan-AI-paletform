@@ -120,7 +120,8 @@ const provinceMapChecks = [
  ["province map is resized when its page opens", app.includes("afghanLeafletMap.invalidateSize()")],
  ["map province names normalize spelling variants", app.includes("function normalizeAfghanProvinceName(name)") && app.includes("jowzjan:'Jawzjan'") && app.includes("bamian:'Bamyan'") && app.includes("saripul:'Sar-e Pol'")],
  ["map clicks select the matching province directory option", app.includes("function findAfghanProvinceOption(name)") && app.includes("const option=findAfghanProvinceOption(province)") && app.includes("normalizeAfghanProvinceName(name)===select.value")],
- ["sourced attraction coverage indicator exists", html.includes('id="afgProvinceCoverage"') && app.includes("new Set(afghanProvinceAttractions.map(item=>item.province)).size") && app.includes("نبودن مدخل به معنای نبود جاذبه نیست")]
+ ["sourced attraction coverage indicator exists", html.includes('id="afgProvinceCoverage"') && app.includes("new Set(afghanProvinceAttractions.map(item=>item.province)).size") && app.includes("نبودن مدخل به معنای نبود جاذبه نیست")],
+ ["official NEPA protected landscapes are included", ["منظرهٔ طبیعی شاه فولادی","منظرهٔ طبیعی باارزش پلاتوی بامیان","زیستگاه پرندگان آبی کول حشمت‌خان"].every(name=>app.includes("name:'"+name+"'") && app.includes("'"+name+"':{en:")) && app.includes("https://www.nepa.gov.af/showDariPage/64")]
 ];
 for (const [label, passed] of provinceMapChecks) { if (!passed) errors.push(`Province map check failed: ${label}.`); }
 
