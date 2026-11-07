@@ -2337,3 +2337,50 @@ body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .secur
 .recon-project-list b{min-width:125px}
 .recon-project-list span{color:var(--muted,#667085);text-align:start;line-height:1.7}
 @media(max-width:600px){.recon-project-list>div{display:block}.recon-project-list span{display:block;margin-top:5px}.recon-hero{border-radius:15px}}
+
+
+/* Expanded reconstruction program: project briefs, KPIs, financing and governance */
+.recon-project-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.recon-project-card{display:flex;gap:14px;padding:18px;border:1px solid var(--border,#e4e7ec);border-radius:16px;background:var(--card,#fff);min-width:0}
+.recon-project-card>span{font-size:28px;flex:none}
+.recon-project-card small{font-size:11px;font-weight:800;letter-spacing:.04em;color:#a57b32}
+.recon-project-card h3{font-size:16px;margin:4px 0 7px}
+.recon-project-card p,.recon-project-card li{font-size:13px;line-height:1.8;color:var(--muted,#667085)}
+.recon-project-card p{margin:0 0 7px}
+.recon-project-card ul{padding-inline-start:18px;margin:7px 0 0}
+.recon-stage-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.recon-stage-grid article{padding:16px;border-radius:14px;border:1px solid var(--border,#e4e7ec);background:var(--card,#fff)}
+.recon-stage-grid article>b{font-size:21px;color:#a57b32}
+.recon-stage-grid h3{font-size:15px;margin:5px 0}
+.recon-stage-grid p{font-size:13px;line-height:1.8;color:var(--muted,#667085);margin:0}
+.recon-kpi-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.recon-kpi-grid>div{padding:16px;border-radius:14px;background:var(--card,#fff);border:1px solid var(--border,#e4e7ec)}
+.recon-kpi-grid b,.recon-kpi-grid span{display:block}
+.recon-kpi-grid b{margin-bottom:6px}
+.recon-kpi-grid span{font-size:13px;line-height:1.8;color:var(--muted,#667085)}
+.recon-finance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.recon-finance-grid article{padding:18px;border-radius:15px;background:linear-gradient(150deg,var(--card,#fff),#f2f7f5);border:1px solid var(--border,#e4e7ec)}
+.recon-finance-grid h3{font-size:16px;margin:0 0 8px}
+.recon-finance-grid p{font-size:13px;line-height:1.8;color:var(--muted,#667085)}
+.recon-finance-grid small{font-size:11px;font-weight:700;color:#8b672c}
+.recon-risk-list{display:grid;gap:9px}
+.recon-risk-list>div{display:grid;grid-template-columns:minmax(135px,.7fr) 2fr;gap:14px;padding:13px 15px;border:1px solid var(--border,#e4e7ec);border-radius:12px;background:var(--card,#fff)}
+.recon-risk-list span{font-size:13px;line-height:1.8;color:var(--muted,#667085)}
+.recon-inclusion,.recon-next-steps{padding:18px;border:1px solid var(--border,#e4e7ec);border-radius:15px;background:var(--card,#fff);line-height:1.9}
+.recon-inclusion p{margin-top:0}
+.recon-inclusion li,.recon-next-steps li{font-size:13px;line-height:1.9;color:var(--muted,#667085)}
+.recon-profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.recon-profile-grid>div{padding:13px 15px;border-radius:12px;border:1px solid var(--border,#e4e7ec);background:var(--card,#fff)}
+.recon-profile-grid b,.recon-profile-grid span{display:block}
+.recon-profile-grid span{font-size:12px;line-height:1.8;color:var(--muted,#667085);margin-top:3px}
+.recon-next-steps h2{font-size:18px;margin:0 0 8px}
+.recon-next-steps ol{padding-inline-start:22px;margin-bottom:0}
+@media(max-width:760px){
+ .recon-project-cards{grid-template-columns:1fr}
+ .recon-stage-grid,.recon-kpi-grid,.recon-finance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:520px){
+ .recon-stage-grid,.recon-kpi-grid,.recon-finance-grid,.recon-profile-grid{grid-template-columns:1fr}
+ .recon-project-card{padding:14px;gap:10px}
+ .recon-risk-list>div{grid-template-columns:1fr;gap:4px}
+}
