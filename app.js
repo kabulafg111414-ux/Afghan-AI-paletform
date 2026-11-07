@@ -920,7 +920,49 @@ document.querySelectorAll('[data-translator-sample]').forEach(btn=>btn.addEventL
 
 $('#translatorSwap')?.addEventListener('click',()=>{const a=trFrom.value;trFrom.value=trTo.value;trTo.value=a;});
 $('#translatorClear')?.addEventListener('click',()=>{trInput.value='';trResult.textContent='ترجمهٔ شما در اینجا نمایش داده می‌شود.';trState.textContent='آماده';translatorCount();trInput.focus()});
-$('#translatorRun')?.addEventListener('click',()=>{if(!trInput.value.trim()){trState.textContent='متن وارد نشده';trInput.focus();return}trState.textContent='سرویس وصل نیست';trResult.textContent='ترجمهٔ واقعی هنوز در دسترس نیست. برای فعال‌سازی باید API هوش مصنوعی از طریق سرور امن وصل شود. متن شما به هیچ سرویسی ارسال نشد.';});
+$('#translatorRun')?.addEventListener('click',async()=>{
+ const sourceText=trInput.value.trim();
+ if(!sourceText){trState.textContent='متن وارد نشده';trInput.focus();return}
+ if(trFrom.value===trTo.value){trState.textContent='زبان مبدأ و مقصد باید متفاوت باشند';return}
+ const button=$('#translatorRun');
+ const originalLabel=button.innerHTML;
+ const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),45000);
+ button.disabled=true;
+ trState.textContent='در حال ترجمه…';
+ trResult.textContent='ترجمه در حال آماده‌شدن است؛ لطفاً صبر کنید.';
+ try{
+  const response=await fetch('/api/translate',{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({text:sourceText,source_language:trFrom.value,target_language:trTo.value}),
+   signal:controller.signal
+  });
+  let data={};
+  try{data=await response.json()}catch(error){throw Error('پاسخ سرور قابل خواندن نیست.')}
+  if(!response.ok){
+   const errors={
+    'AI service is not configured':'سرویس هوش مصنوعی هنوز در سرور تنظیم نشده است.',
+    'Text is required':'متن برای ترجمه وارد نشده است.',
+    'Text is too long':'متن بیش از حد طولانی است.',
+    'Unsupported language':'زبان انتخاب‌شده پشتیبانی نمی‌شود.',
+    'Choose two different languages':'زبان مبدأ و مقصد باید متفاوت باشند.',
+    'Translation request failed':'ترجمه انجام نشد؛ لطفاً بعداً دوباره تلاش کنید.'
+   };
+   throw Error(errors[data.error]||('خطای سرور: '+response.status));
+  }
+  if(typeof data.translation!=='string'||!data.translation.trim())throw Error('ترجمهٔ معتبری دریافت نشد.');
+  trResult.textContent=data.translation;
+  trState.textContent='ترجمه تکمیل شد';
+ }catch(error){
+  trResult.textContent=error.name==='AbortError'?'زمان انتظار ترجمه پایان یافت؛ دوباره تلاش کنید.':error.message==='Failed to fetch'?'سرور ترجمه در دسترس نیست. پس از راه‌اندازی بک‌اند، نشانی نسخهٔ سروری را باز کنید.':error.message;
+  trState.textContent='ترجمه ناموفق بود';
+ }finally{
+  clearTimeout(timeout);
+  button.disabled=false;
+  button.innerHTML=originalLabel;
+ }
+});
 $('#translatorCopy')?.addEventListener('click',async()=>{const text=trResult.textContent;if(!text||text==='ترجمهٔ شما در اینجا نمایش داده می‌شود.')return;try{await navigator.clipboard.writeText(text);$('#translatorState').textContent='کاپی شد'}catch(e){$('#translatorState').textContent='کاپی خودکار پشتیبانی نشد؛ متن را دستی انتخاب کنید'}});
 
 $('#profileBtn').onclick=()=>alert('این نسخه نمایشی است. ورود امن و پروفایل شخصی در مرحلهٔ بعد توسعه می‌یابد.');
