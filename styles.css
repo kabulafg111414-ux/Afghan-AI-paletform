@@ -2646,3 +2646,13 @@ body.dark #tutorPage .chat-head select{background:#142832;color:#edf5fa;border-c
 .travel-map-link:focus-visible{outline:3px solid #f2b84b;outline-offset:3px}
 body.dark .travel-map-link{border-color:#6bcbbb;color:#9be3d7}
 body.dark .travel-map-link:hover{background:#1e766b;color:#fff}
+
+
+.travel-results-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:12px 0 16px;padding:10px 12px;border:1px solid var(--border,#dbe5e3);border-radius:12px;background:var(--card-bg,rgba(127,160,150,.06))}
+#travelResultsCount{font-size:13px;font-weight:750;color:var(--text-muted,#63736f)}
+.travel-reset-button{min-height:38px;padding:8px 13px;border:1px solid var(--border,#b8cbc5);border-radius:9px;background:transparent;color:var(--text,#20332e);font:inherit;font-size:12px;font-weight:750;cursor:pointer}
+.travel-reset-button:hover{background:rgba(8,129,112,.09);border-color:#0b8175}
+.travel-reset-button:focus-visible{outline:3px solid #f2b84b;outline-offset:3px}
+body.dark .travel-results-toolbar{border-color:#354b48;background:rgba(120,170,158,.07)}
+body.dark #travelResultsCount{color:#b8cbc5}
+body.dark .travel-reset-button{border-color:#536d67;color:#e5f2ee}
