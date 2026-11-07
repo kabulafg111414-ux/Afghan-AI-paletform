@@ -2598,3 +2598,21 @@ body.dark #tutorPage .chat-head select{background:#142832;color:#edf5fa;border-c
 .library-resource-details summary{cursor:pointer;font-weight:700;color:var(--text);line-height:1.7}
 .library-resource-details p{margin:8px 0 0;line-height:1.8;font-size:.9rem}
 .library-card a{margin-top:auto}
+
+/* Saved reading list */
+.library-bookmarks-panel{margin:24px 0;padding:20px;border:1px solid var(--border);border-radius:18px;background:var(--surface)}
+.library-bookmarks-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.library-bookmarks-heading h2{margin:0 0 5px;font-size:1.15rem}
+.library-bookmarks-heading p,.library-bookmark-empty{margin:0;color:var(--muted);line-height:1.8}
+.library-bookmarks-heading>span{white-space:nowrap;padding:7px 11px;border-radius:999px;background:rgba(8,116,88,.09);color:var(--accent,#087458)}
+.library-bookmark-list{display:grid;gap:9px}
+.library-bookmark-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--border);border-radius:12px}
+.library-bookmark-item>div:first-child{display:grid;gap:4px;min-width:0}
+.library-bookmark-item strong{line-height:1.7}
+.library-bookmark-item small{color:var(--muted)}
+.library-bookmark-actions,.library-card-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.library-bookmark-actions a,.library-card-actions a{color:var(--accent,#269caa);font-weight:700;text-decoration:none}
+.library-bookmark-actions button,.library-save-button{padding:8px 11px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font:inherit;cursor:pointer}
+.library-save-button[aria-pressed="true"]{border-color:var(--accent,#087458);color:var(--accent,#087458);font-weight:700}
+.library-card-actions{width:100%;margin-top:auto;justify-content:space-between}
+@media(max-width:560px){.library-bookmark-item{align-items:flex-start;flex-direction:column}.library-bookmark-actions{width:100%;justify-content:space-between}.library-bookmarks-heading{align-items:flex-start}}
