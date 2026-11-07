@@ -28,7 +28,7 @@ CREATE TABLE accounts (
     ),
     CHECK (
         phone_normalized IS NULL
-        OR phone_normalized ~ '^\\+[1-9][0-9]{6,14}
+        OR phone_normalized ~ '^[+][1-9][0-9]{6,14}$')
     CHECK (password_hash IS NULL OR length(password_hash) BETWEEN 20 AND 512),
     CHECK (
         status <> 'active'
