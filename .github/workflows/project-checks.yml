@@ -22,6 +22,7 @@ jobs:
         run: |
           node --check app.js
           node --check sw.js
+          node --check backend/social-support-worker.mjs
 
       - name: Validate web app manifest
         run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json', 'utf8')); console.log('manifest.json is valid JSON')"
