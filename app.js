@@ -410,10 +410,14 @@ const afghanProvincePhotoGallery={
   {src:'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Herat_Citadel%2C_Afghanistan.jpg/960px-Herat_Citadel%2C_Afghanistan.jpg',name:{fa:'قلعهٔ اختیارالدین هرات',ps:'د هرات اختیارالدین کلا',en:'Herat Citadel'},credit:'Marius Arnesen',license:'CC BY-SA 2.0',url:'https://commons.wikimedia.org/wiki/File:Herat_Citadel,_Afghanistan.jpg'}
  ],
  Kabul:[
-  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Bagh-e_Babur_garden_in_Kabul_01.jpg?width=1200',name:{fa:'باغ بابر کابل',ps:'د کابل بابر بڼ',en:'Bagh-e Babur, Kabul'},credit:'Ninaras',license:'CC BY 4.0',url:'https://commons.wikimedia.org/wiki/File:Bagh-e_Babur_garden_in_Kabul_01.jpg'}
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Bagh-e_Babur_garden_in_Kabul_01.jpg?width=1200',name:{fa:'باغ بابر کابل',ps:'د کابل بابر بڼ',en:'Bagh-e Babur, Kabul'},credit:'Ninaras',license:'CC BY 4.0',url:'https://commons.wikimedia.org/wiki/File:Bagh-e_Babur_garden_in_Kabul_01.jpg'},
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Darul_Aman_Palace_in_Kabul.jpg?width=1200',name:{fa:'قصر دارالامان',ps:'د دارالامان ماڼۍ',en:'Darul Aman Palace'},credit:'Ninaras',license:'CC BY 4.0',url:'https://commons.wikimedia.org/wiki/File:Darul_Aman_Palace_in_Kabul.jpg'}
  ],
  Ghor:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Jam_(Afghanistan)_banner.jpg',name:{fa:'منار جام',ps:'د جام منار',en:'Minaret of Jam'},credit:'David Adamec',license:'CC0',url:'https://commons.wikimedia.org/wiki/File:Jam_(Afghanistan)_banner.jpg'}
+ ],
+ Ghazni:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Ghazni_minar_ghazni_Afghanistan.jpg?width=1200',name:{fa:'مناره‌های تاریخی غزنی',ps:'د غزني تاریخي منارونه',en:'Historic minarets of Ghazni'},credit:'AhmadElhan',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Ghazni_minar_ghazni_Afghanistan.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
