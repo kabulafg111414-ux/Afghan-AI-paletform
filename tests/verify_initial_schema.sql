@@ -34,6 +34,28 @@ BEGIN
             NULL;
     END;
 
+    -- Normalized email identifiers must be lowercase and contain no whitespace.
+    BEGIN
+        INSERT INTO accounts (id, email_normalized, status)
+        VALUES ('00000000-0000-0000-0000-000000000006',
+                'UpperCase@example.invalid', 'invited');
+        RAISE EXCEPTION 'Uppercase email identifier was incorrectly accepted';
+    EXCEPTION
+        WHEN check_violation THEN
+            NULL;
+    END;
+
+    -- Phone identifiers must use E.164 format.
+    BEGIN
+        INSERT INTO accounts (id, phone_normalized, status)
+        VALUES ('00000000-0000-0000-0000-000000000007',
+                '0093780000000', 'invited');
+        RAISE EXCEPTION 'Non-E.164 phone identifier was incorrectly accepted';
+    EXCEPTION
+        WHEN check_violation THEN
+            NULL;
+    END;
+
     -- A verified active account must be accepted.
     INSERT INTO accounts (
         id, email_normalized, email_verified_at, status
