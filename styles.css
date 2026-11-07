@@ -2667,3 +2667,14 @@ body.dark .travel-reset-button{border-color:#536d67;color:#e5f2ee}
 body.dark .travel-itinerary-actions{border-color:#354b48}
 body.dark .travel-itinerary-action{background:#1d302c;border-color:#536d67;color:#e5f2ee}
 body.dark .travel-itinerary-action:first-child{background:#087f70;border-color:#087f70;color:#fff}
+
+
+.travel-province-coverage{margin:0 0 18px;padding:12px 14px;border:1px solid var(--border,#dbe5e3);border-radius:12px;background:var(--card-bg,rgba(127,160,150,.05))}
+.travel-province-coverage p{margin:0 0 10px;font-size:13px;line-height:1.8;color:var(--text-muted,#63736f)}
+.travel-coverage-chips{display:flex;flex-wrap:wrap;gap:7px}
+.travel-coverage-chip{padding:6px 10px;border:1px solid var(--border,#b8cbc5);border-radius:999px;background:transparent;color:var(--text,#20332e);font:inherit;font-size:12px;cursor:pointer}
+.travel-coverage-chip:hover{border-color:#0b8175;background:rgba(8,129,112,.08)}
+.travel-coverage-chip:focus-visible{outline:3px solid #f2b84b;outline-offset:3px}
+body.dark .travel-province-coverage{border-color:#354b48;background:rgba(120,170,158,.07)}
+body.dark .travel-province-coverage p{color:#b8cbc5}
+body.dark .travel-coverage-chip{border-color:#536d67;color:#e5f2ee}
