@@ -143,6 +143,8 @@ def translate():
     languages = {"fa": "Dari", "ps": "Pashto", "en": "English"}
     source = body.get("source_language")
     target = body.get("target_language")
+    if not isinstance(source, str) or not isinstance(target, str):
+        return jsonify({"error": "Language codes must be strings"}), 400
     if source not in languages or target not in languages:
         return jsonify({"error": "Unsupported language"}), 400
     if source == target:
