@@ -2678,3 +2678,8 @@ body.dark .travel-itinerary-action:first-child{background:#087f70;border-color:#
 body.dark .travel-province-coverage{border-color:#354b48;background:rgba(120,170,158,.07)}
 body.dark .travel-province-coverage p{color:#b8cbc5}
 body.dark .travel-coverage-chip{border-color:#536d67;color:#e5f2ee}
+
+
+.travel-source-link{display:inline-flex;align-items:center;margin:7px 0 0 10px;color:var(--primary,#087f70);font-size:12px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.travel-source-link:focus-visible{outline:3px solid #f2b84b;outline-offset:3px;border-radius:3px}
+body.dark .travel-source-link{color:#79cfc0}
