@@ -1302,6 +1302,13 @@ window.__afghanAiAppReady=true;
   };
   if(province)[...province.options].slice(1).forEach(option=>{const names=provinceNames[option.value];if(names)option.textContent=lang==='en'?names[0]:lang==='ps'?names[1]:option.value});
   const coverage=document.getElementById('travelCoverageNote');if(coverage)coverage.textContent=lang==='en'?'All 34 provinces are available in the filter. Destination listings will be expanded gradually using verifiable sources. A missing listing does not mean a province has no attractions.':lang==='ps'?'ټول ۳۴ ولایتونه په فلټر کې شته. د ځایونو نوملړ به په تدریجي ډول د باوري سرچینو له مخې بشپړ شي. د یوه ځای نشتوالی دا معنا نه لري چې په هغه ولایت کې د لیدو وړ ځایونه نشته.':'فهرست ولایت‌ها برای جستجو فعال است؛ فهرست جاذبه‌ها به‌تدریج با منابع قابل بررسی تکمیل می‌شود. نبودن یک مقصد در این نسخه به معنی نبود جاذبه در آن ولایت نیست.';
+  const photoCaptions={
+   en:[['Band-e Amir','Bamyan • turquoise lakes'],['Bamiyan Valley','Historical and cultural heritage'],['Panjshir','Valley and mountains'],['Wakhan','Badakhshan • Pamir'],['Arghandab','Kandahar • orchards and valley']],
+   ps:[['بند امیر','بامیان • فیروزه‌يي جهیلونه'],['د بامیان دره','تاریخي او کلتوري میراث'],['پنجشېر','دره او غرونه'],['واخان','بدخشان • پامیر'],['ارغنداب','کندهار • باغونه او دره']]
+  };
+  const photoLanguage=photoCaptions[lang];
+  if(photoLanguage)document.querySelectorAll('.travel-photo-strip figure').forEach((figure,index)=>{const title=figure.querySelector('figcaption strong'),subtitle=figure.querySelector('figcaption span');if(title)title.textContent=photoLanguage[index][0];if(subtitle)subtitle.textContent=photoLanguage[index][1]});
+  else document.querySelectorAll('.travel-photo-strip figure').forEach((figure,index)=>{const title=figure.querySelector('figcaption strong'),subtitle=figure.querySelector('figcaption span');if(title)title.textContent=['بند امیر','درهٔ بامیان','پنجشیر','واخان','ارغنداب'][index];if(subtitle)subtitle.textContent=['بامیان • دریاچه‌های فیروزه‌ای','میراث تاریخی و فرهنگی','دره و کوهستان','بدخشان • پامیر','قندهار • باغ‌ها و دره'][index]});
   const category=document.getElementById('travelCategory');if(category){const labels={nature:d.nature,history:d.history,city:d.city};[...category.options].forEach(o=>{if(o.value==='all')o.textContent=d.allCategories;else if(labels[o.value])o.textContent=labels[o.value]})}
   const planDestination=document.getElementById('travelPlanDestination');
   const destinationLabels=[
