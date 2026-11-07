@@ -105,7 +105,7 @@ const innovationChecks = [
  ["innovation page section", html.includes('id="innovationPage"')],
  ["innovation project form", html.includes('id="innovationForm"')],
  ["innovation local storage disclosure", html.includes("طرح‌ها فقط در دستگاه شما ذخیره می‌شوند")],
- ["innovation page registered in router", app.includes("'featureideas','innovation','publications'")],
+ ["innovation page registered in router", app.includes("'innovation','opportunities'")],
  ["innovation local-only project storage", app.includes("afghanai-innovation-projects-v1")],
  ["innovation project milestones", app.includes("بررسی میدانی مشکل")]
 ];
