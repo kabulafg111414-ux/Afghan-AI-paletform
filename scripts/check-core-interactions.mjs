@@ -111,6 +111,16 @@ const innovationChecks = [
 ];
 for (const [label, passed] of innovationChecks) { if (!passed) errors.push(`Innovation lab check failed: ${label}.`); }
 
+const provinceMapChecks = [
+ ["interactive province map container", html.includes('id="afgProvinceMap"')],
+ ["Leaflet stylesheet and script are loaded before app code", html.includes("leaflet@1.9.4/dist/leaflet.css") && html.indexOf("leaflet@1.9.4/dist/leaflet.js") < html.indexOf("./app.js?")],
+ ["province map initializes and displays OpenStreetMap attribution", app.includes("function initAfghanInteractiveMap()") && app.includes("© OpenStreetMap contributors")],
+ ["province map loads GeoJSON boundaries from a declared source", app.includes("Admin1_Afghanistan/FeatureServer/1/query") && app.includes("returnGeometry=true&outSR=4326&f=geojson")],
+ ["map failure keeps province directory available", app.includes("فهرست ولایت‌ها همچنان قابل استفاده است")],
+ ["province map is resized when its page opens", app.includes("afghanLeafletMap.invalidateSize()")]
+];
+for (const [label, passed] of provinceMapChecks) { if (!passed) errors.push(`Province map check failed: ${label}.`); }
+
 const travelGuideChecks = [
  ["travel navigation item", html.includes('data-page="travel"')],
  ["travel guide page section", html.includes('id="travelPage"')],
