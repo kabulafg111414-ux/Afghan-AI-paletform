@@ -579,6 +579,42 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
    <p class="publication-hint">این خلاصه فقط برای راهنمایی است و هیچ تراکنش یا پرداختی انجام نمی‌دهد.</p>
   </article>
  </div>
+
+ <div class="fund-operations" id="fundOperations">
+  <div class="page-title"><span class="eyebrow">PILOT • LOCAL DEMO</span><h2>سامانهٔ آزمایشی درخواست و پیگیری حمایت</h2><p>برای آزمایش گردش‌کار؛ هیچ درخواست به سرور ارسال نمی‌شود و هیچ پرداختی صورت نمی‌گیرد.</p></div>
+  <div class="notice"><span>🛡️</span><div><b>حفاظت از اطلاعات</b><p>فعلاً نام کامل، شماره تذکره، آدرس دقیق، معلومات صحی یا اسناد حساس وارد نکنید. داده‌های آزمایشی فقط در همین مرورگر ذخیره می‌شوند و ممکن است با پاک‌کردن اطلاعات مرورگر از بین بروند.</p></div></div>
+  <div class="fund-operations-grid">
+   <article class="fund-card">
+    <h3>۱. فورم آزمایشی درخواست حمایت</h3>
+    <form id="fundApplicationForm">
+     <label for="fundApplicantAlias">نام یا کُد مستعار (اختیاری)</label><input id="fundApplicantAlias" maxlength="60" placeholder="مثلاً خانواده-۰۰۱">
+     <label for="fundApplicantProvince">ولایت</label><select id="fundApplicantProvince" required><option value="">انتخاب ولایت</option><option>کابل</option><option>هرات</option><option>بلخ</option><option>قندهار</option><option>ننگرهار</option><option>بامیان</option><option>بدخشان</option><option>غزنی</option><option>کندز</option><option>فاریاب</option><option>ولایت دیگر</option></select>
+     <label for="fundApplicantCategory">نوع حمایت درخواستی</label><select id="fundApplicantCategory" required><option value="">انتخاب کنید</option><option>حمایت خانواده</option><option>آموزش و لوازم مکتب</option><option>حمایت افراد دارای معلولیت</option><option>آموزش مسلکی و اشتغال</option><option>کمک اضطراری</option></select>
+     <label for="fundApplicantNeed">شرح کوتاه نیاز (بدون معلومات حساس)</label><textarea id="fundApplicantNeed" rows="3" maxlength="500" required placeholder="نیاز را به‌صورت عمومی و کوتاه شرح دهید."></textarea>
+     <label class="fund-consent"><input id="fundApplicantConsent" type="checkbox" required> می‌دانم این فورم آزمایشی است و ارسال آن به معنای تأیید یا دریافت کمک نیست.</label>
+     <button class="primary" type="submit">ثبت آزمایشی درخواست</button>
+    </form>
+    <p class="publication-hint" id="fundApplicationStatus" aria-live="polite">درخواست‌ها فقط به‌صورت محلی در این دستگاه نگهداری می‌شوند.</p>
+   </article>
+   <article class="fund-card">
+    <h3>۲. دفتر آزمایشی تعهدات کمک</h3>
+    <form id="fundContributionForm">
+     <label for="fundContributionPurpose">مقصد کمک</label><select id="fundContributionPurpose" required><option value="">انتخاب کنید</option><option>توسعه Afghan AI</option><option>خانواده‌های نیازمند</option><option>آموزش و اطفال</option><option>افراد دارای معلولیت</option><option>اشتغال جوانان</option><option>پروژه‌های اجتماعی</option></select>
+     <label for="fundContributionAmount">مبلغ تعهدشده (افغانی)</label><input id="fundContributionAmount" type="number" min="1" step="1" required inputmode="numeric" placeholder="مبلغ آزمایشی">
+     <label for="fundContributionRef">یادداشت/شناسهٔ غیرحساس (اختیاری)</label><input id="fundContributionRef" maxlength="60" placeholder="بدون شماره حساب یا معلومات شخصی">
+     <label class="fund-consent"><input id="fundContributionConsent" type="checkbox" required> تأیید می‌کنم این فقط ثبت آزمایشی تعهد است، نه رسید دریافت پول.</label>
+     <button class="primary" type="submit">ثبت تعهد آزمایشی</button>
+    </form>
+    <p class="publication-hint" id="fundContributionStatus" aria-live="polite">هیچ مبلغی به‌عنوان پول دریافت‌شده ثبت نمی‌شود.</p>
+   </article>
+  </div>
+  <article class="fund-card" style="margin-top:16px">
+   <h3>۳. میز مدیریت آزمایشی و گردش‌کار</h3>
+   <p>وضعیت‌ها صرفاً برای آزمایش روند بررسی هستند؛ این بخش سیستم مدیریت واقعی یا ابزار تأیید پرداخت نیست.</p>
+   <div class="fund-admin-actions"><button type="button" class="outline" id="fundExportDemo">دریافت گزارش آزمایشی (CSV)</button><button type="button" class="outline" id="fundClearDemo">پاک‌کردن داده‌های آزمایشی همین دستگاه</button></div>
+   <div id="fundDemoRecords" class="fund-demo-records" aria-live="polite"><p>هنوز دادهٔ آزمایشی ثبت نشده است.</p></div>
+  </article>
+ </div>
  <div class="fund-transparency"><h2>تعهدات شفافیت</h2><ul><li>ثبت جداگانهٔ کمک‌های توسعه و کمک‌های بشردوستانه.</li><li>گزارش دوره‌ای مجموع دریافت‌ها و مصارف، بدون افشای هویت خانواده‌ها.</li><li>استفاده از کمک مطابق مقصد انتخاب‌شده توسط اهداکننده.</li><li>عدم ادعای پرداخت یا صدور رسید تا فعال‌شدن سیستم مالی معتبر.</li></ul></div>
 </section>
 
