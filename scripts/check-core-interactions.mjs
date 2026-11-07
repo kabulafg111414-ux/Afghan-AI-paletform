@@ -58,6 +58,26 @@ for (const [label, passed] of mobileChecks) {
   if (!passed) errors.push(`Mobile accessibility/responsive check failed: ${label}.`);
 }
 
+
+const securityControls = [
+  "securityRunScan", "securityLastScan", "securityPassed",
+  "securityAttention", "securityScanStatus"
+];
+for (const id of securityControls) {
+  if (!html.includes(`id="${id}"`)) errors.push(`Security diagnostics control "#${id}" is missing from index.html.`);
+}
+for (const [label, snippet] of [
+  ["security scan click handler", "runButton.addEventListener('click'"],
+  ["HTTPS diagnostic", "record('https'"],
+  ["service worker diagnostic", "record('worker'"],
+  ["duplicate HTML ID diagnostic", "duplicateIds.length"],
+  ["navigation route diagnostic", "brokenRoutes.length"],
+  ["browser storage diagnostic", "afghanai-security-self-test"],
+  ["server security limitation notice", "نیازمند تنظیمات و آزمون سمت سرور"]
+]) {
+  if (!newApp.includes(snippet)) errors.push(`Security diagnostic check failed: ${label}.`);
+}
+
 if (errors.length) {
   console.error("Core interaction smoke check failed:");
   for (const error of errors) console.error(`- ${error}`);
