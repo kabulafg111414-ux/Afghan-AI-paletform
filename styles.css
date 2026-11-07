@@ -2511,3 +2511,28 @@ body.dark .travel-photo-credits a{color:#7ed8c9}
 .afg-province-photo-grid a{color:var(--accent,#269caa);text-decoration:underline;text-underline-offset:2px}
 @media(max-width:560px){.afg-province-photo-grid{grid-template-columns:1fr 1fr;gap:8px}.afg-province-photo-grid figcaption{padding:8px}.afg-province-photo-grid figcaption small{font-size:.74rem;line-height:1.6}}
 @media(max-width:420px){.afg-province-photo-grid{grid-template-columns:1fr}.afg-province-photo-grid figcaption{padding:10px}.afg-province-photo-grid figcaption small{font-size:.78rem}}
+
+
+/* Final homepage mobile usability pass */
+.home-redesign,.home-redesign *{min-width:0}
+.home-redesign .home-service{overflow-wrap:anywhere;min-height:210px}
+.home-redesign .home-service h3{overflow-wrap:anywhere}
+.home-redesign .home-service p{max-width:34ch}
+.home-redesign .home-side-column>*{min-width:0}
+.home-redesign .home-promo{min-width:0}
+.home-redesign .home-footer>div{overflow-wrap:anywhere}
+.home-redesign .home-hero-proof{display:flex;align-items:center;flex-wrap:wrap;gap:9px}
+.home-redesign .home-hero-proof i{width:4px;height:4px;border-radius:50%;background:#7cecff}
+@media(max-width:640px){
+ .home-redesign .home-service{min-height:196px;padding:14px 12px}
+ .home-redesign .service-cta{min-height:38px;display:flex;align-items:center;justify-content:center;line-height:1.45}
+ .home-redesign .home-side-card,.home-redesign .home-quote{min-width:0}
+ .home-redesign .home-stat{min-width:0}
+ .home-redesign .home-hero-proof{font-size:10px;gap:7px}
+}
+@media(max-width:370px){
+ .home-redesign .home-feature-grid{grid-template-columns:1fr}
+ .home-redesign .home-service{min-height:160px}
+ .home-redesign .home-service p{font-size:12px}
+ .home-redesign .home-footer{grid-template-columns:1fr}
+}
