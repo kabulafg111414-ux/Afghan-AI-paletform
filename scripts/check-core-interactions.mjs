@@ -121,7 +121,7 @@ const provinceMapChecks = [
  ["province map exposes a retry control after external data failure", html.includes('id="afgProvinceMapRetry"') && html.includes('id="afgProvinceMapStatus"') && app.includes("afgProvinceMapRetry") && app.includes("showError(messages.data)") && app.includes("afghanLeafletMap.remove()")],
  ["map province names normalize spelling variants", app.includes("function normalizeAfghanProvinceName(name)") && app.includes("jowzjan:'Jawzjan'") && app.includes("bamian:'Bamyan'") && app.includes("saripul:'Sar-e Pol'")],
  ["map clicks select the matching province directory option", app.includes("function findAfghanProvinceOption(name)") && app.includes("const option=findAfghanProvinceOption(province)") && app.includes("normalizeAfghanProvinceName(name)===select.value")],
- ["province map has a reset-to-all control", html.includes('id="afgProvinceMapReset"') && app.includes("afghanProvinceMapReset") && app.includes("afghanProvinceLayer.getBounds()")],
+ ["province map has a reset-to-all control", html.includes('id="afgProvinceMapReset"') && app.includes("afgProvinceMapReset") && app.includes("afghanProvinceLayer.getBounds()")],
  ["sourced attraction coverage indicator exists", html.includes('id="afgProvinceCoverage"') && app.includes("new Set(afghanProvinceAttractions.map(item=>item.province)).size") && app.includes("نبودن مدخل به معنای نبود جاذبه نیست")],
  ["official NEPA protected landscapes are included", ["منظرهٔ طبیعی شاه فولادی","منظرهٔ طبیعی باارزش پلاتوی بامیان","زیستگاه پرندگان آبی کول حشمت‌خان"].every(name=>app.includes("name:'"+name+"'") && app.includes("'"+name+"':{en:")) && app.includes("https://www.nepa.gov.af/showDariPage/64")]
 ];
