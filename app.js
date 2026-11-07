@@ -1566,7 +1566,7 @@ window.__afghanAiAppReady=true;
   const province=$('#travelProvince')?.value||'all';
   const category=$('#travelCategory')?.value||'all';
   const items=destinations.filter(x=>(province==='all'||x.province===province)&&(category==='all'||x.category===category)&&[x.name,x.province,x.summary,...(x.aliases||[])].some(v=>v.toLocaleLowerCase().includes(q)));
-  grid.innerHTML=items.length?items.map(x=>'<article class="travel-destination"><span class="travel-destination-icon">'+x.icon+'</span><div class="travel-destination-meta">'+esc(x.province)+' • '+(x.category==='nature'?'طبیعت':x.category==='history'?'تاریخی و فرهنگی':'شهری')+'</div><h3>'+esc(x.name)+'</h3><p>'+esc(x.summary)+'</p><div class="travel-destination-note"><b>یادداشت سفر:</b> '+esc(x.season)+' '+esc(x.note)+'</div></article>').join(''):'<div class="empty-state">مقصدی با این مشخصات پیدا نشد؛ جستجو یا فیلتر را تغییر دهید.</div>';
+  grid.innerHTML=items.length?items.map(x=>'<article class="travel-destination" data-destination="'+esc(x.name)+'" data-province="'+esc(x.province)+'" data-category="'+esc(x.category)+'"><span class="travel-destination-icon">'+x.icon+'</span><div class="travel-destination-meta">'+esc(x.province)+' • '+(x.category==='nature'?'طبیعت':x.category==='history'?'تاریخی و فرهنگی':'شهری')+'</div><h3>'+esc(x.name)+'</h3><p class="travel-destination-summary">'+esc(x.summary)+'</p><div class="travel-destination-note"><b>یادداشت سفر:</b> '+esc(x.season)+' '+esc(x.note)+'</div><a class="travel-map-link" href="https://www.openstreetmap.org/search?query='+encodeURIComponent(x.name+' '+x.province+' Afghanistan')+'" target="_blank" rel="noopener noreferrer">'+(document.getElementById('uiLanguage')?.value==='en'?'Open map ↗':document.getElementById('uiLanguage')?.value==='ps'?'نقشه پرانیستل ↗':'نمایش در نقشه ↗')+'</a></article>').join(''):'<div class="empty-state">مقصدی با این مشخصات پیدا نشد؛ جستجو یا فیلتر را تغییر دهید.</div>';
  };
  const form=$('#travelPlanForm');
  if(form&&!form.dataset.ready){
@@ -1665,10 +1665,30 @@ window.__afghanAiAppReady=true;
   const lang=document.getElementById('uiLanguage')?.value||'fa',grid=document.getElementById('travelDestinationGrid');if(!grid)return;
   const d=copy[lang]||copy.fa;
   [...grid.querySelectorAll('.travel-destination')].forEach(card=>{
-   const title=card.querySelector('h3');if(!title)return;const item=destinations[title.textContent];if(!item)return;
-   const index=lang==='en'?0:lang==='ps'?1:-1;if(index>=0)title.textContent=item[index];
-   const p=card.querySelector('p');if(p&&index>=0)p.textContent=(lang==='en'?'':lang==='ps'?'':'')+p.textContent.split(' • ')[0]+' • '+(lang==='en'?(card.textContent.includes('طبیعت')?d.nature:card.textContent.includes('شهری')?d.city:d.history):(card.textContent.includes('طبیعت')?d.nature:card.textContent.includes('شهری')?d.city:d.history));
-   const summary=card.querySelectorAll('p')[1];if(summary&&index>=0)summary.textContent=item[lang==='en'?3:2];
+   const originalName=card.dataset.destination,title=card.querySelector('h3'),item=destinations[originalName];
+   if(!title||!item)return;
+   const index=lang==='en'?0:lang==='ps'?1:-1;
+   title.textContent=index>=0?item[index]:originalName;
+   const province=card.dataset.province,category=card.dataset.category;
+   const provinceNames={
+    'کابل':['Kabul','کابل'],'بامیان':['Bamyan','بامیان'],'هرات':['Herat','هرات'],'بلخ':['Balkh','بلخ'],'پنجشیر':['Panjshir','پنجشېر'],'بدخشان':['Badakhshan','بدخشان'],'قندهار':['Kandahar','کندهار'],'غور':['Ghor','غور']
+   };
+   const provinceLabel=provinceNames[province]?(lang==='en'?provinceNames[province][0]:lang==='ps'?provinceNames[province][1]:province):province;
+   const categoryLabel=category==='nature'?d.nature:category==='history'?d.history:d.city;
+   const meta=card.querySelector('.travel-destination-meta');if(meta)meta.textContent=provinceLabel+' • '+categoryLabel;
+   const summary=card.querySelector('.travel-destination-summary');if(summary)summary.textContent=index>=0?item[lang==='en'?3:2]:card.dataset.summary||({
+    'بند امیر':'دریاچه‌های طبیعی و چشم‌اندازهای کوهستانی در نخستین پارک ملی افغانستان.',
+    'درهٔ بامیان':'دره‌ای تاریخی با میراث باستانی و فرهنگی.',
+    'شهر کهنه و ارگ هرات':'بافت تاریخی شهر هرات و ارگ آن.',
+    'مسجد جامع هرات':'نمونه‌ای برجسته از معماری اسلامی و کاشی‌کاری.',
+    'مزارشریف و روضهٔ مبارک':'مکان شناخته‌شدهٔ مذهبی و معماری در مزارشریف.',
+    'کابل و باغ بابر':'پایتخت افغانستان و باغ تاریخی بابر.',
+    'درهٔ پنجشیر':'دره‌ای کوهستانی با رودخانه و چشم‌اندازهای طبیعی.',
+    'دهلیز واخان':'منطقه‌ای دوردست با مناظر بلندکوهستانی.',
+    'منار جام':'اثر معماری تاریخی برجسته در ولایت غور.',
+    'درهٔ ارغنداب':'چشم‌اندازهای رودخانه‌ای و باغداری در قندهار.'
+   }[originalName]||'');
+   const map=card.querySelector('.travel-map-link');if(map)map.textContent=lang==='en'?'Open map ↗':lang==='ps'?'نقشه پرانیستل ↗':'نمایش در نقشه ↗';
   });
   if(grid.querySelector('.empty-state'))grid.querySelector('.empty-state').textContent=d.notFound;
  };
