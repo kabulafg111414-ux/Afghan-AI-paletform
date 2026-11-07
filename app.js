@@ -993,6 +993,47 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='afghan-ai-fund-pilot-demo.csv';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);
  });
 
+
+ /* Financial ledger pilot: distinct stages, local-only synthetic records. */
+ const ledgerKey='afghanai-fund-ledger-demo-v1';
+ const ledgerForm=$('#fundLedgerForm'),ledgerRecords=$('#ledgerRecords');
+ const readLedger=()=>{const value=safeStorageJSON(ledgerKey,[]);return Array.isArray(value)?value:[];};
+ const moneyAFN=value=>new Intl.NumberFormat('fa-AF',{maximumFractionDigits:0}).format(Math.max(0,Number(value)||0));
+ const ledgerTotals=()=>{
+  const items=readLedger(),sum=type=>items.filter(x=>x.type===type).reduce((n,x)=>n+(Number.isSafeInteger(Number(x.amount))&&Number(x.amount)>0?Number(x.amount):0),0);
+  return {planned:sum('planned'),received:sum('received'),allocated:sum('allocated'),disbursed:sum('disbursed'),reconciled:sum('reconciled')};
+ };
+ const refreshLedger=()=>{
+  const t=ledgerTotals(),v={ledgerPlanned:t.planned,ledgerReceived:t.received,ledgerAllocated:t.allocated,ledgerDisbursed:t.disbursed,ledgerReconciled:t.reconciled,ledgerCash:t.received-t.disbursed,ledgerUnallocated:t.received-t.allocated,ledgerUnpaid:t.allocated-t.disbursed,ledgerPending:t.disbursed-t.reconciled};
+  Object.entries(v).forEach(([id,n])=>{const el=document.getElementById(id);if(el)el.textContent=moneyAFN(n);});
+  if(ledgerRecords){ledgerRecords.replaceChildren();const items=readLedger().slice().reverse();if(!items.length)ledgerRecords.append(node('p','','هنوز رویداد مالی آزمایشی ثبت نشده است.'));
+   items.forEach(item=>{const row=node('article','fund-demo-row');row.append(node('b','',item.label+' — '+item.category));row.append(node('p','',moneyAFN(item.amount)+' افغانی | '+item.date+' | '+item.id));if(item.reference)row.append(node('small','', 'مرجع: '+item.reference));if(item.note)row.append(node('small','',item.note));ledgerRecords.append(row);});
+  }
+ };
+ const ledgerLabels={planned:'بودجهٔ برنامه‌ریزی‌شده',received:'دریافت وجه (آزمایشی)',allocated:'تخصیص بودجه',disbursed:'پرداخت / مصرف وجه',reconciled:'تطبیق و تأیید سند'};
+ ledgerForm?.addEventListener('submit',event=>{
+  event.preventDefault();if(!ledgerForm.reportValidity())return;
+  const type=$('#ledgerType').value,amount=Number($('#ledgerAmount').value),totals=ledgerTotals();
+  if(!Number.isSafeInteger(amount)||amount<=0){$('#ledgerStatus').textContent='مبلغ باید عدد صحیح، مثبت و معتبر باشد.';return;}
+  const limits={allocated:totals.received-totals.allocated,disbursed:totals.allocated-totals.disbursed,reconciled:totals.disbursed-totals.reconciled};
+  if(Object.prototype.hasOwnProperty.call(limits,type)&&amount>limits[type]){
+   const names={allocated:'وجه دریافت‌شدهٔ تخصیص‌نیافته',disbursed:'تخصیص پرداخت‌نشده',reconciled:'پرداختِ در انتظار تطبیق'};
+   $('#ledgerStatus').textContent='ثبت نشد: مبلغ از '+names[type]+' ('+moneyAFN(limits[type])+' افغانی) بیشتر است. ابتدا مرحلهٔ قبلی را ثبت کنید.';return;
+  }
+  const items=readLedger(),id='L-'+String(Date.now()).slice(-8);
+  items.push({id,type,label:ledgerLabels[type],category:$('#ledgerCategory').value,amount,date:$('#ledgerDate').value,reference:$('#ledgerReference').value.trim(),note:$('#ledgerNote').value.trim(),createdAt:new Date().toISOString()});
+  if(!safeStorageSet(ledgerKey,JSON.stringify(items))){$('#ledgerStatus').textContent='ذخیره‌سازی ممکن نشد؛ فضای مرورگر را بررسی کنید.';return;}
+  ledgerForm.reset();$('#ledgerDate').value=new Date().toISOString().slice(0,10);$('#ledgerStatus').textContent='رویداد آزمایشی '+id+' در همین مرورگر ثبت شد؛ سند یا تراکنش واقعی ایجاد نشده است.';refreshLedger();refreshFundDashboard();
+ });
+ $('#ledgerClear')?.addEventListener('click',()=>{if(!window.confirm('تمام رویدادهای دفتر مالی آزمایشی از همین مرورگر پاک شود؟'))return;safeStorageRemove(ledgerKey);$('#ledgerStatus').textContent='دفتر مالی آزمایشی محلی پاک شد.';refreshLedger();refreshFundDashboard();});
+ $('#ledgerExport')?.addEventListener('click',()=>{
+  const rows=[['شناسه','نوع رویداد','بخش برنامه','مبلغ AFN','تاریخ','کد مرجع','یادداشت'],...readLedger().map(x=>[x.id,x.label,x.category,x.amount,x.date,x.reference,x.note])];
+  const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='afghan-ai-fund-ledger-demo.csv';document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);
+ });
+ const ledgerDateInput=$('#ledgerDate');if(ledgerDateInput&&!ledgerDateInput.value)ledgerDateInput.value=new Date().toISOString().slice(0,10);
+ refreshLedger();
+
  const roleSelect=$('#fundRolePreview'),roleDescription=$('#fundRoleDescription'),roleMatrix=$('#fundRoleMatrix');
  const roleData={
   director:{title:'مدیر صندوق',desc:'نظارت بر برنامه، مشاهدهٔ گزارش‌های کلان و ارجاع موضوعات برای بررسی؛ بدون اختیار انفرادی برای پرداخت یا تغییر اسناد حسابرسی.',permissions:[['مشاهدهٔ داشبورد کلان','مجاز'],['تخصیص و تصویب بودجه در چارچوب مصوبه','با تأیید جمعی'],['تغییر نتیجهٔ ارزیابی فردی','غیرمجاز'],['اجرای پرداخت','غیرمجاز'],['مشاهدهٔ اسناد حساس هویتی','غیرمجاز']]},
