@@ -1508,7 +1508,7 @@ window.__afghanAiAppReady=true;
 })();
 
 
-/* Browser-side security diagnostics. Server protections are reported as unavailable, never inferred. */
+/* Browser-side security diagnostics. These checks do not replace a professional security audit. */
 (function(){
  const runButton=document.getElementById('securityRunScan');
  if(!runButton||runButton.dataset.ready==='true')return;
@@ -1517,30 +1517,56 @@ window.__afghanAiAppReady=true;
  const last=document.getElementById('securityLastScan');
  const passed=document.getElementById('securityPassed');
  const attention=document.getElementById('securityAttention');
- const setResult=(key,label,ok)=>{
+ const setResult=(key,label,state)=>{
   const target=document.querySelector('[data-check="'+key+'"]');
-  if(target){target.textContent=label;target.dataset.status=ok?'pass':'attention';}
+  if(target){target.textContent=label;target.dataset.state=state;}
  };
- runButton.addEventListener('click',()=>{
+ runButton.addEventListener('click',async()=>{
+  runButton.disabled=true;
+  if(status)status.textContent='بررسی‌ها در حال اجرا است...';
   let good=0,needs=0;
-  const record=(key,label,ok)=>{setResult(key,label,ok);if(ok)good++;else needs++;};
-  record('https',location.protocol==='https:'?'HTTPS فعال':'اتصال HTTPS نیست',location.protocol==='https:');
-  const workerReady='serviceWorker'in navigator;
-  record('worker',workerReady?'Service Worker پشتیبانی می‌شود':'Service Worker پشتیبانی نمی‌شود',workerReady);
-  const ids=[...document.querySelectorAll('[id]')].map(el=>el.id);
-  const duplicateIds=ids.filter((id,index)=>ids.indexOf(id)!==index);
-  record('ids',duplicateIds.length?'شناسهٔ تکراری: '+[...new Set(duplicateIds)].join('، '):'شناسهٔ تکراری پیدا نشد',duplicateIds.length===0);
-  const brokenRoutes=[...document.querySelectorAll('[data-page]')].map(el=>el.dataset.page).filter(name=>!document.getElementById(name+'Page'));
-  record('routes',brokenRoutes.length?'مسیر نامعتبر: '+[...new Set(brokenRoutes)].join('، '):'مسیرهای منو معتبر است',brokenRoutes.length===0);
-  let storageOK=false;
-  try{const key='afghanai-security-self-test';localStorage.setItem(key,'ok');storageOK=localStorage.getItem(key)==='ok';localStorage.removeItem(key);}catch(error){storageOK=false;}
-  record('storage',storageOK?'ذخیره‌سازی آزمایشی موفق':'ذخیره‌سازی در دسترس نیست',storageOK);
-  setResult('server','نیازمند تنظیمات و آزمون سمت سرور',false);
-  needs++;
-  if(last)last.textContent=new Intl.DateTimeFormat('fa-AF',{dateStyle:'medium',timeStyle:'short'}).format(new Date());
-  if(passed)passed.textContent=String(good);
-  if(attention)attention.textContent=String(needs);
-  if(status)status.textContent='بررسی تکمیل شد: '+good+' موفق؛ '+needs+' مورد نیازمند توجه. بررسی مرورگر جایگزین آزمون امنیت سرور نیست.';
+  const record=(key,label,ok)=>{setResult(key,label,ok?'ok':'warning');if(ok)good++;else needs++;};
+  try{
+   record('https',location.protocol==='https:'?'اتصال HTTPS برقرار است':'اتصال فعلی HTTPS نیست',location.protocol==='https:');
+   let workerLabel='Service Worker ثبت نشده است',workerOK=false;
+   if('serviceWorker'in navigator){
+    try{const registration=await navigator.serviceWorker.getRegistration();workerOK=!!registration;workerLabel=workerOK?'Service Worker ثبت شده است':'پشتیبانی موجود است، اما ثبت نشده است';}
+    catch(error){workerLabel='وضعیت ثبت Service Worker قابل خواندن نیست';}
+   }else workerLabel='مرورگر از Service Worker پشتیبانی نمی‌کند';
+   record('worker',workerLabel,workerOK);
+   const seen=new Set(),duplicates=new Set();
+   document.querySelectorAll('[id]').forEach(el=>{if(seen.has(el.id))duplicates.add(el.id);seen.add(el.id);});
+   record('ids',duplicates.size?'شناسه‌های تکراری: '+[...duplicates].slice(0,5).join('، '):'شناسهٔ تکراری پیدا نشد',duplicates.size===0);
+   const broken=[...document.querySelectorAll('[data-page]')].map(el=>el.dataset.page).filter(name=>!document.getElementById(name+'Page'));
+   const uniqueBroken=[...new Set(broken)];
+   record('routes',uniqueBroken.length?'مقصد نامعتبر: '+uniqueBroken.slice(0,5).join('، '):'تمام مقصدهای منو به صفحه وصل‌اند',uniqueBroken.length===0);
+   let storageOK=false;
+   const key='afghanai-security-self-test';
+   try{localStorage.setItem(key,'ok');storageOK=localStorage.getItem(key)==='ok';}
+   catch(error){storageOK=false;}
+   finally{try{localStorage.removeItem(key);}catch(error){}}
+   record('storage',storageOK?'آزمایش نوشتن و پاک‌کردن موفق بود':'ذخیره‌سازی مرورگر در دسترس نیست',storageOK);
+   let apiOK=false,apiLabel='سرور API پاسخ معتبر نداد';
+   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),5000);
+   try{
+    const response=await fetch(new URL('api/health',document.baseURI).toString(),{method:'GET',cache:'no-store',credentials:'same-origin',headers:{Accept:'application/json'},signal:controller.signal});
+    const type=response.headers.get('content-type')||'';
+    if(response.ok&&type.includes('application/json')){
+     const data=await response.json();
+     apiOK=data.ok===true;
+     apiLabel=apiOK?(data.ai_configured?'API فعال است؛ کلید AI در سرور تنظیم شده':'API پاسخ می‌دهد؛ کلید AI هنوز تنظیم نشده است'):'پاسخ سلامت API معتبر نیست';
+    }else apiLabel='مسیر API در این میزبانی موجود نیست یا پاسخ معتبر نیست';
+   }catch(error){apiLabel=error.name==='AbortError'?'مهلت پاسخ API تمام شد':'سرور API در این دامنه در دسترس نیست';}
+   finally{clearTimeout(timer);}
+   record('api',apiLabel,apiOK);
+   if(last)last.textContent=new Intl.DateTimeFormat('fa-AF',{dateStyle:'medium',timeStyle:'short'}).format(new Date());
+   if(passed)passed.textContent=String(good);
+   if(attention)attention.textContent=String(needs);
+   if(status)status.textContent='بررسی تکمیل شد: '+good+' موفق و '+needs+' مورد نیازمند توجه. این بررسی محدود به مرورگر و مسیر سلامت API است.';
+  }catch(error){
+   if(status)status.textContent='بررسی کامل نشد؛ صفحه را تازه‌سازی کنید و دوباره تلاش نمایید.';
+   console.warn('Afghan AI security scan:',error);
+  }finally{runButton.disabled=false;}
  });
 })();
 
