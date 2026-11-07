@@ -5,7 +5,7 @@ function safeStorageGet(key){try{const value=window.localStorage.getItem(key);re
 function safeStorageSet(key,value){const text=String(value);safeMemoryStorage.set(key,text);try{window.localStorage.setItem(key,text);return true}catch(error){return false}}
 function safeStorageRemove(key){safeMemoryStorage.delete(key);try{window.localStorage.removeItem(key);return true}catch(error){return false}}
 function safeStorageJSON(key,fallback){try{const raw=safeStorageGet(key);return raw===null?fallback:JSON.parse(raw)}catch(error){return fallback}}
-const pages=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','reconstruction','socialsupport','supportfund','featureideas','innovation','publications','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','reconstruction','socialsupport','supportfund','featureideas','innovation','opportunities','publications','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -1132,6 +1132,20 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
  /* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
 window.__afghanAiAppReady=true;
 
+/* Career pathway helper: transparent static guidance, not live vacancies. */
+(function(){
+ const form=$('#careerForm'),out=$('#careerPlan');if(!form||form.dataset.ready==='true')return;form.dataset.ready='true';
+ const plans={
+ technology:['آموزش مبانی کمپیوتر و سواد دیجیتال','یادگیری یک زبان برنامه‌نویسی یا مهارت مشخص مانند طراحی وب','ساخت ۲ تا ۳ پروژهٔ نمونه و ثبت آن‌ها در نمونه‌کار','تمرین مصاحبه، ارتباطات و جست‌وجوی فرصت‌های معتبر'],
+ health:['تقویت علوم پایه و اصطلاحات طبی','پیگیری آموزش رسمی و معتبر متناسب با صلاحیت قانونی','تمرین اصول اخلاق، مصونیت و ارتباط با مراجعین','بررسی شرایط قانونی کار و اسناد لازم در محل فعالیت'],
+ agriculture:['آموزش خاک، آب و شیوه‌های پایدار کشت','یادگیری روش‌های آبیاری مؤثر و مدیریت محصول','اجرای آزمایش کوچک و ثبت نتیجه‌ها','بررسی بازار محلی و هزینه/فایدهٔ تولید'],
+ business:['آموزش حسابداری ساده و مدیریت مالی','بررسی نیاز مشتری و مطالعهٔ بازار','تهیهٔ طرح تجارتی کوچک و محاسبهٔ هزینه‌ها','آزمایش محدود ایده و اصلاح بر اساس بازخورد'],
+ engineering:['تقویت ریاضی، فزیک و نقشه‌خوانی','انتخاب یک مهارت فنی و آموزش زیر نظر استاد واجد صلاحیت','ساخت نمونه‌کار و رعایت معیارهای ایمنی','تهیهٔ رزومه و بررسی مجوزهای لازم'],
+ education:['تقویت زبان و مهارت تدریس','یادگیری طراحی درس و ارزیابی شاگردان','تهیهٔ نمونه‌درس و تمرین تدریس','بررسی شرایط مراکز آموزشی و ادامهٔ تحصیل']
+ };
+ const labels={technology:'تکنالوژی و کمپیوتر',health:'صحت و خدمات طبی',agriculture:'زراعت و محیط زیست',business:'تجارت و کارآفرینی',engineering:'انجنیری و مهارت‌های فنی',education:'آموزش و زبان‌ها'};
+ form.addEventListener('submit',e=>{e.preventDefault();const field=$('#careerField').value,level=$('#careerLevel').value,goal=$('#careerGoal').value;const steps=plans[field]||plans.technology;out.innerHTML='<h3>'+labels[field]+'</h3><p><b>سطح فعلی:</b> '+level+' • <b>هدف:</b> '+goal+'</p><ol>'+steps.map(x=>'<li>'+x+'</li>').join('')+'</ol><p><b>گام نخست:</b> یک برنامهٔ هفتگی واقع‌بینانه تنظیم کنید و پیشرفت خود را ثبت نمایید.</p><p>پیش از پرداخت پول یا فرستادن اسناد شخصی برای هر فرصت، اعتبار نهاد و شرایط رسمی آن را مستقل بررسی کنید.</p>';});
+})();
 /* Innovation lab: local project framework only; no remote AI or submission. */
 (function(){
  const form=$('#innovationForm'),plan=$('#innovationPlan'),list=$('#innovationSavedList'),status=$('#innovationStatus');
