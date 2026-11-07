@@ -2287,8 +2287,8 @@ body.dark .fund-howto h3{color:#a8e8c9}
 @media(max-width:390px){.hesabpay-profile-card{padding:17px 12px}.hesabpay-card-top{gap:14px}.hesabpay-avatar,.hesabpay-card-qr{width:96px;height:96px}.hesabpay-card-name{font-size:16px}}
 
 
-/* Remove the unwanted red cross beside the mobile navigation header. */
-.sidebar-mobile-head button#closeSidebar{display:none!important}
+/* Keep the mobile drawer close control visible and accessible. */
+@media(max-width:820px){.sidebar-mobile-head button#closeSidebar{display:inline-flex!important;}}
 
 /* Afghan AI Security Center */
 .security-banner,.security-notes{background:var(--aa-surface,#fff);color:var(--aa-ink,#173149);border:1px solid var(--aa-line,#d7e2e9);border-radius:17px;padding:18px;margin:16px 0;box-shadow:var(--aa-shadow,0 8px 24px #1234 10)}
