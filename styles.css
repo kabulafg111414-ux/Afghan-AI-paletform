@@ -2730,3 +2730,20 @@ body.dark .travel-food-sources a{color:#79cfc0}
 .travel-vendor-form button{justify-self:start;min-height:44px}.travel-vendor-privacy,.travel-vendor-status{margin:0;font-size:12px;line-height:1.8;color:var(--muted-text,var(--text-secondary))}.travel-vendor-status{font-weight:650}
 body.dark .travel-vendor-section{background:#172a27;border-color:#354b48}body.dark .travel-vendor-fields input,body.dark .travel-vendor-fields select,body.dark .travel-vendor-form textarea{background:#1d302c;color:#e5f2ee;border-color:#536d67}
 @media(max-width:560px){.travel-vendor-fields{grid-template-columns:1fr}.travel-vendor-form button{width:100%}}
+
+/* Afghan AI founder control center */
+.admin-control-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 25px}
+.admin-control-summary article{display:flex;align-items:center;gap:12px;padding:15px;border:1px solid var(--line);border-radius:15px;background:var(--card,#fff)}
+.admin-control-summary article>span{font-size:25px}.admin-control-summary small,.admin-control-summary b,.admin-control-summary em{display:block}
+.admin-control-summary small{font-size:11px;color:var(--mut)}.admin-control-summary b{font-size:14px;margin:3px 0}.admin-control-summary em{font-size:10px;color:#9b7628;font-style:normal}
+.admin-section-title{font-size:17px;margin:24px 0 12px}.admin-control-grid .admin-card{padding:17px;border:1px solid var(--line);border-radius:15px;background:var(--card,#fff)}
+.admin-control-grid .admin-card>span{display:block;font-size:25px;margin-bottom:9px}.admin-control-grid .admin-card>b{display:block;font-size:15px}
+.admin-control-grid .admin-card p{line-height:1.8;min-height:48px}.admin-control-grid .admin-card em{display:block;line-height:1.7}
+.admin-quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 20px}.admin-quick-actions button{min-height:42px}
+.admin-api-notice{margin-top:18px}.admin-api-help{display:block;margin-top:8px;color:var(--mut);font-size:11px}
+.admin-launch-checklist{margin-top:20px;padding:18px;border:1px solid var(--line);border-radius:15px;background:var(--card,#fff)}
+.admin-launch-checklist h2{font-size:17px;margin:0 0 12px}.admin-launch-checklist ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.admin-launch-checklist li{display:flex;align-items:flex-start;gap:10px;font-size:13px;line-height:1.8}.admin-launch-checklist li span{display:grid;place-items:center;flex:0 0 25px;height:25px;border-radius:50%;background:#e6f3ec;color:#176b4c;font-weight:700}
+.admin-launch-checklist>p{margin:14px 0 0;padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--mut);line-height:1.8}
+body.dark .admin-control-summary article,body.dark .admin-control-grid .admin-card,body.dark .admin-launch-checklist{background:#172a27;border-color:#354b48}
+@media(max-width:650px){.admin-control-summary{grid-template-columns:1fr}.admin-control-grid .admin-card p{min-height:0}.admin-quick-actions{display:grid;grid-template-columns:1fr}.admin-quick-actions button{width:100%}}
