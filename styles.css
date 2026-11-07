@@ -2415,3 +2415,12 @@ body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .secur
 .fund-dashboard-bottom h3{font-size:15px;margin:4px 0 10px}
 .fund-state-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-color,#dce6e1);font-size:13px}
 .fund-state-row:last-child{border-bottom:0}
+
+
+/* Financial ledger pilot — mobile-first, readable accounting stages */
+.fund-ledger{margin-top:18px}.fund-ledger-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:11px;margin:16px 0}
+.fund-ledger-entry{padding:16px;margin-top:14px;border:1px solid var(--border-color,#dce6e1);border-radius:14px;background:var(--card-bg,transparent)}
+.fund-ledger-entry h3{margin:0 0 12px}.fund-ledger-entry form{display:grid;gap:9px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.fund-ledger-entry label{font-size:13px;font-weight:650}.fund-ledger-entry input,.fund-ledger-entry select{width:100%;min-width:0;padding:11px;border:1px solid var(--border-color,#dce6e1);border-radius:10px;background:var(--card-bg,#fff);color:inherit}
+.fund-ledger-entry form button{grid-column:1/-1}.fund-ledger .fund-demo-row{overflow-wrap:anywhere}
+@media(max-width:560px){.fund-ledger-entry form{grid-template-columns:1fr}.fund-ledger-entry form button{grid-column:auto}}
