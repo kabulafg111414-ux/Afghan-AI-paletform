@@ -75,7 +75,7 @@ for (const [label, snippet] of [
   ["browser storage diagnostic", "afghanai-security-self-test"],
   ["server security limitation notice", "نیازمند تنظیمات و آزمون سمت سرور"]
 ]) {
-  if (!newApp.includes(snippet)) errors.push(`Security diagnostic check failed: ${label}.`);
+  if (!app.includes(snippet)) errors.push(`Security diagnostic check failed: ${label}.`);
 }
 
 if (errors.length) {
