@@ -33,16 +33,36 @@ const libraryResources=[
  {title:'Library of Congress — Afghanistan',category:'afghan',type:'اسناد و پژوهش',desc:'راهنماها و منابع پژوهشی دربارهٔ افغانستان و تاریخ آن.',url:'https://www.loc.gov/'},
  {title:'PubMed',category:'medical',type:'پژوهش طبی',desc:'پایگاه جستجوی مقالات علوم طبی و زیستی؛ مقالهٔ علمی را با دقت و توجه به کیفیت شواهد بخوانید.',url:'https://pubmed.ncbi.nlm.nih.gov/'}
 ];
+const librarySubjectLabels={
+ school:'نصاب مکتب',primary:'آموزش ابتدایی',secondary:'آموزش متوسطه و لیسه',children:'ادبیات کودک',
+ dari:'زبان و ادبیات دری',pashto:'زبان و ادبیات پشتو',kankor:'آمادگی کانکور',
+ university:'علوم و پژوهش دانشگاهی',medical:'طب و صحت',language:'زبان و ادبیات',
+ religion:'علوم اسلامی',afghan:'تاریخ، فرهنگ و حقوق افغانستان'
+};
+const librarySubjectFor=x=>{
+ const t=(x.title+' '+x.desc+' '+x.type).toLocaleLowerCase();
+ if(x.category==='medical'||/طب|صحت|طبی|pubmed|health/.test(t))return 'طب و صحت';
+ if(x.category==='religion'||/قرآن|اسلام/.test(t))return 'علوم اسلامی';
+ if(x.category==='dari'||/دری/.test(t))return 'زبان دری';
+ if(x.category==='pashto'||/پشتو|پښتو/.test(t))return 'زبان پشتو';
+ if(x.category==='children'||/کودک/.test(t))return 'ادبیات کودک';
+ if(x.category==='primary'||x.category==='secondary'||x.category==='school'||x.category==='kankor')return 'آموزش و نصاب';
+ if(x.category==='university')return 'علوم دانشگاهی';
+ if(/قانون|حقوق/.test(t))return 'حقوق و قوانین';
+ if(x.category==='afghan')return 'تاریخ و فرهنگ افغانستان';
+ return 'زبان و ادبیات';
+};
 function renderLibrary(){
  const grid=$('#libraryGrid');if(!grid)return;
  const q=($('#librarySearch')?.value||'').trim().toLocaleLowerCase();
  const cat=$('#libraryCategory')?.value||'all';
- const items=libraryResources.filter(x=>(cat==='all'||x.category===cat)&&(!q||(x.title+' '+x.desc+' '+x.type).toLocaleLowerCase().includes(q)));
+ const subject=$('#librarySubject')?.value||'all';
+ const items=libraryResources.filter(x=>(cat==='all'||cat==='school'&&['school','primary','secondary'].includes(x.category)||x.category===cat)&&(subject==='all'||librarySubjectFor(x)===subject)&&(!q||(x.title+' '+x.desc+' '+x.type+' '+librarySubjectFor(x)).toLocaleLowerCase().includes(q)));
  const count=$('#libraryResultCount');if(count)count.textContent=String(items.length);
- grid.innerHTML=items.length?items.map(x=>'<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><a href="'+x.url+'" target="_blank" rel="noopener noreferrer" aria-label="بازکردن منبع: '+x.title+' (در زبانهٔ جدید)">بازکردن منبع ↗</a></article>').join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
+ grid.innerHTML=items.length?items.map((x,i)=>'<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><span class="library-subject-tag">مضمون: '+librarySubjectFor(x)+'</span><details class="library-resource-details"><summary>جزئیات و راهنمای استفاده</summary><p><b>نوع منبع:</b> '+x.type+'</p><p><b>کاربرد:</b> '+librarySubjectFor(x)+'؛ برای جستجو و مطالعهٔ بیشتر در وب‌سایت منبع.</p><p><b>یادآوری:</b> موجودیت کتاب مشخص، زبان، سطح درسی، سال نشر و اجازهٔ دانلود را در سایت اصلی بررسی کنید.</p></details><a href="'+x.url+'" target="_blank" rel="noopener noreferrer" aria-label="بازکردن منبع: '+x.title+' (در زبانهٔ جدید)">رفتن به وب‌سایت منبع ↗</a></article>').join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
 }
 $('#librarySearch')?.addEventListener('input',renderLibrary);
-$('#libraryCategory')?.addEventListener('change',renderLibrary);
+$('#libraryCategory')?.addEventListener('change',renderLibrary);\n$('#librarySubject')?.addEventListener('change',renderLibrary);
 
 
 const languagePhrases=[
