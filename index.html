@@ -754,37 +754,37 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 <section id="travelPage" class="page hidden">
  <div class="travel-hero">
   <span class="eyebrow">AFGHAN AI • TRAVEL GUIDE</span>
-  <h1>🧭 راهنمای سفر افغانستان</h1>
-  <p>با میراث تاریخی، طبیعت و فرهنگ ولایت‌های افغانستان آشنا شوید و برای سفر آگاهانه برنامه‌ریزی کنید.</p>
+  <h1 id="travelTitle">🧭 راهنمای سفر افغانستان</h1>
+  <p id="travelIntro">با میراث تاریخی، طبیعت و فرهنگ ولایت‌های افغانستان آشنا شوید و برای سفر آگاهانه برنامه‌ریزی کنید.</p>
   <div class="travel-hero-tags"><span>۳۴ ولایت</span><span>طبیعت و تاریخ</span><span>راهنمای دری، پشتو و انگلیسی</span></div>
  </div>
- <div class="notice"><span>⚠️</span><div><b>پیش از هر سفر، وضعیت را دوباره بررسی کنید</b><p>این نسخه یک راهنمای معلوماتی آفلاین است؛ وضعیت امنیتی، بازبودن مسیرها، محدودیت‌های محلی، ویزه، قیمت‌ها و خدمات را به‌صورت زنده تأیید نمی‌کند. پیش از حرکت از منابع رسمی و افراد معتبر محلی معلومات تازه بگیرید و در صورت وجود خطر سفر نکنید.</p></div></div>
- <div class="travel-section-head"><div><span class="eyebrow">EXPLORE AFGHANISTAN</span><h2>مقصدهای پیشنهادی</h2><p>برای یافتن مقصد، ولایت یا نوع جاذبه را انتخاب کنید.</p></div></div>
+ <div class="notice"><span>⚠️</span><div><b id="travelSafetyTitle">پیش از هر سفر، وضعیت را دوباره بررسی کنید</b><p id="travelSafetyText">این نسخه یک راهنمای معلوماتی آفلاین است؛ وضعیت امنیتی، بازبودن مسیرها، محدودیت‌های محلی، ویزه، قیمت‌ها و خدمات را به‌صورت زنده تأیید نمی‌کند. پیش از حرکت از منابع رسمی و افراد معتبر محلی معلومات تازه بگیرید و در صورت وجود خطر سفر نکنید.</p></div></div>
+ <div class="travel-section-head"><div><span class="eyebrow">EXPLORE AFGHANISTAN</span><h2 id="travelDestinationsTitle">مقصدهای پیشنهادی</h2><p id="travelFilterHint">برای یافتن مقصد، ولایت یا نوع جاذبه را انتخاب کنید.</p></div></div>
  <div class="travel-filters">
-  <label for="travelSearch">جستجوی مقصد<input id="travelSearch" type="search" placeholder="نام شهر، ولایت یا جاذبه..."></label>
-  <label for="travelProvince">ولایت<select id="travelProvince"><option value="all">همهٔ ولایت‌ها</option><option>کابل</option><option>بامیان</option><option>هرات</option><option>بلخ</option><option>پنجشیر</option><option>بدخشان</option><option>قندهار</option></select></label>
-  <label for="travelCategory">نوع جاذبه<select id="travelCategory"><option value="all">همهٔ دسته‌ها</option><option value="nature">طبیعت</option><option value="history">تاریخی و فرهنگی</option><option value="city">شهری</option></select></label>
+  <label for="travelSearch"><span id="travelSearchLabel">جستجوی مقصد</span><input id="travelSearch" type="search" placeholder="نام شهر، ولایت یا جاذبه..."></label>
+  <label for="travelProvince"><span id="travelProvinceLabel">ولایت</span><select id="travelProvince"><option value="all">همهٔ ولایت‌ها</option><option>کابل</option><option>بامیان</option><option>هرات</option><option>بلخ</option><option>پنجشیر</option><option>بدخشان</option><option>قندهار</option></select></label>
+  <label for="travelCategory"><span id="travelCategoryLabel">نوع جاذبه</span><select id="travelCategory"><option value="all">همهٔ دسته‌ها</option><option value="nature">طبیعت</option><option value="history">تاریخی و فرهنگی</option><option value="city">شهری</option></select></label>
  </div>
  <div id="travelDestinationGrid" class="travel-destination-grid" aria-live="polite">
   <article class="travel-destination"><span>🏞️</span><h3>بند امیر</h3><p>بامیان • طبیعت</p></article>
  </div>
- <div class="travel-section-head"><div><span class="eyebrow">PLAN YOUR VISIT</span><h2>برنامه‌ریز ابتدایی سفر</h2><p>یک برنامهٔ نمونه برای بررسی و تنظیم شخصی بسازید.</p></div></div>
+ <div class="travel-section-head"><div><span class="eyebrow">PLAN YOUR VISIT</span><h2 id="travelPlannerTitle">برنامه‌ریز ابتدایی سفر</h2><p id="travelPlannerHint">یک برنامهٔ نمونه برای بررسی و تنظیم شخصی بسازید.</p></div></div>
  <div class="feature-grid two travel-planner">
-  <article class="info-card"><h2>مشخصات سفر</h2>
+  <article class="info-card"><h2 id="travelFormTitle">مشخصات سفر</h2>
    <form id="travelPlanForm">
-    <label for="travelPlanDestination">مقصد</label><select id="travelPlanDestination"><option value="بامیان و بند امیر">بامیان و بند امیر</option><option value="هرات">هرات</option><option value="کابل">کابل</option><option value="بلخ و مزارشریف">بلخ و مزارشریف</option><option value="پنجشیر">پنجشیر</option><option value="بدخشان و واخان">بدخشان و واخان</option><option value="قندهار">قندهار</option></select>
-    <label for="travelPlanDays">مدت سفر</label><select id="travelPlanDays"><option value="1">۱ روز</option><option value="2">۲ روز</option><option value="3">۳ روز</option><option value="5">۵ روز</option><option value="7">۷ روز</option></select>
-    <label for="travelPlanStyle">سبک سفر</label><select id="travelPlanStyle"><option>اقتصادی</option><option>متوسط</option><option>خانوادگی</option><option>طبیعت‌گردی</option><option>تاریخی و فرهنگی</option></select>
-    <button class="primary" type="submit">ساخت برنامهٔ نمونه</button>
+    <label for="travelPlanDestination" id="travelPlanDestinationLabel">مقصد</label><select id="travelPlanDestination"><option value="بامیان و بند امیر">بامیان و بند امیر</option><option value="هرات">هرات</option><option value="کابل">کابل</option><option value="بلخ و مزارشریف">بلخ و مزارشریف</option><option value="پنجشیر">پنجشیر</option><option value="بدخشان و واخان">بدخشان و واخان</option><option value="قندهار">قندهار</option></select>
+    <label for="travelPlanDays" id="travelPlanDaysLabel">مدت سفر</label><select id="travelPlanDays"><option value="1">۱ روز</option><option value="2">۲ روز</option><option value="3">۳ روز</option><option value="5">۵ روز</option><option value="7">۷ روز</option></select>
+    <label for="travelPlanStyle" id="travelPlanStyleLabel">سبک سفر</label><select id="travelPlanStyle"><option>اقتصادی</option><option>متوسط</option><option>خانوادگی</option><option>طبیعت‌گردی</option><option>تاریخی و فرهنگی</option></select>
+    <button class="primary" id="travelPlanSubmit" type="submit">ساخت برنامهٔ نمونه</button>
    </form>
   </article>
-  <article class="info-card"><h2>برنامهٔ پیشنهادی</h2><div id="travelPlanOutput" class="publication-hint" aria-live="polite">مقصد و مدت سفر را انتخاب کنید تا یک چارچوب ابتدایی نمایش داده شود.</div></article>
+  <article class="info-card"><h2 id="travelOutputTitle">برنامهٔ پیشنهادی</h2><div id="travelPlanOutput" class="publication-hint" aria-live="polite">مقصد و مدت سفر را انتخاب کنید تا یک چارچوب ابتدایی نمایش داده شود.</div></article>
  </div>
- <div class="travel-info-grid">
-  <article class="info-card"><span>🛂</span><h3>اسناد و مقررات</h3><p>اسناد هویتی و شرایط ورود، اقامت و مجوزهای لازم را پیش از حرکت از مرجع رسمی بررسی کنید.</p></article>
-  <article class="info-card"><span>🚗</span><h3>حمل‌ونقل</h3><p>وضعیت سرک، وسیلهٔ ترانسپورت، راننده و زمان حرکت را از منابع محلی معتبر تأیید کنید.</p></article>
-  <article class="info-card"><span>🏨</span><h3>اقامت و خدمات</h3><p>هویت و اعتبار محل اقامت و شرایط خدمات را پیش از پرداخت پول بررسی کنید؛ این نسخه فهرست زندهٔ هتل‌ها ندارد.</p></article>
-  <article class="info-card"><span>🤝</span><h3>احترام به فرهنگ محلی</h3><p>به عرف، حریم خصوصی، پوشش، محیط زیست و مقررات محل احترام بگذارید و پیش از عکاسی اجازه بگیرید.</p></article>
+ <div class="travel-info-grid" id="travelInfoGrid">
+  <article class="info-card"><span>🛂</span><h3 id="travelDocsTitle">اسناد و مقررات</h3><p>اسناد هویتی و شرایط ورود، اقامت و مجوزهای لازم را پیش از حرکت از مرجع رسمی بررسی کنید.</p></article>
+  <article class="info-card"><span>🚗</span><h3 id="travelTransportTitle">حمل‌ونقل</h3><p>وضعیت سرک، وسیلهٔ ترانسپورت، راننده و زمان حرکت را از منابع محلی معتبر تأیید کنید.</p></article>
+  <article class="info-card"><span>🏨</span><h3 id="travelStayTitle">اقامت و خدمات</h3><p>هویت و اعتبار محل اقامت و شرایط خدمات را پیش از پرداخت پول بررسی کنید؛ این نسخه فهرست زندهٔ هتل‌ها ندارد.</p></article>
+  <article class="info-card"><span>🤝</span><h3 id="travelCultureTitle">احترام به فرهنگ محلی</h3><p>به عرف، حریم خصوصی، پوشش، محیط زیست و مقررات محل احترام بگذارید و پیش از عکاسی اجازه بگیرید.</p></article>
  </div>
 </section>
 
