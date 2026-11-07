@@ -443,6 +443,9 @@ const afghanProvincePhotoGallery={
  Paktika:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Paktika_zerok_village.jpg?width=1200',name:{fa:'کشتزارهای قریهٔ زیرک، پکتیکا',ps:'د پکتیکا د زېړوک کلي کروندې',en:'Fields in Zerok village, Paktika'},credit:'Akbarzadran',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Paktika_zerok_village.jpg'}
  ],
+ Parwan:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Sheikh_Ali_Valley_Parwan_Province_Afghanistan.jpg?width=1600',name:{fa:'درهٔ شیخ‌علی، ولایت پروان',ps:'د پروان ولایت د شیخ علي دره',en:'Sheikh Ali Valley, Parwan Province'},credit:'JialiangGao',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Sheikh_Ali_Valley_Parwan_Province_Afghanistan.jpg'}
+ ],
  Logar:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Black_Mountain_in_Logar_Province.jpg?width=1200',name:{fa:'کوه سیاه در ولایت لوگر، نزدیک مس عینک',ps:'د لوګر ولایت تور غر، د مس عینک شاوخوا',en:'Black Mountain near Mes Aynak, Logar'},credit:'S. K. Vemmer / U.S. Embassy Kabul',license:'U.S. Department of State public domain',url:'https://commons.wikimedia.org/wiki/File:Black_Mountain_in_Logar_Province.jpg'}
  ],
