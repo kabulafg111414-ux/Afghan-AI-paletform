@@ -1269,3 +1269,51 @@ window.__afghanAiAppReady=true;
  ['#travelSearch','#travelProvince','#travelCategory'].forEach(selector=>$(selector)?.addEventListener(selector==='#travelSearch'?'input':'change',window.renderTravelGuide));
  window.renderTravelGuide();
 })();
+
+
+/* Travel Guide localization layer: Dari, Pashto and English interface and destination summaries. */
+(function(){
+ const copy={
+ fa:{travelTitle:'🧭 راهنمای سفر افغانستان',travelIntro:'با میراث تاریخی، طبیعت و فرهنگ ولایت‌های افغانستان آشنا شوید و برای سفر آگاهانه برنامه‌ریزی کنید.',travelSafetyTitle:'پیش از هر سفر، وضعیت را دوباره بررسی کنید',travelSafetyText:'این نسخه راهنمای معلوماتی آفلاین است؛ وضعیت امنیتی، مسیرها، ویزه، قیمت‌ها و خدمات را زنده تأیید نمی‌کند. پیش از حرکت از منابع رسمی و افراد معتبر محلی معلومات تازه بگیرید.',travelDestinationsTitle:'مقصدهای پیشنهادی',travelFilterHint:'برای یافتن مقصد، ولایت یا نوع جاذبه را انتخاب کنید.',travelSearchLabel:'جستجوی مقصد',travelProvinceLabel:'ولایت',travelCategoryLabel:'نوع جاذبه',travelPlannerTitle:'برنامه‌ریز ابتدایی سفر',travelPlannerHint:'یک برنامهٔ نمونه برای بررسی و تنظیم شخصی بسازید.',travelFormTitle:'مشخصات سفر',travelPlanDestinationLabel:'مقصد',travelPlanDaysLabel:'مدت سفر',travelPlanStyleLabel:'سبک سفر',travelPlanSubmit:'ساخت برنامهٔ نمونه',travelOutputTitle:'برنامهٔ پیشنهادی',travelDocsTitle:'اسناد و مقررات',travelTransportTitle:'حمل‌ونقل',travelStayTitle:'اقامت و خدمات',travelCultureTitle:'احترام به فرهنگ محلی',searchPlaceholder:'نام شهر، ولایت یا جاذبه...',allProvinces:'همهٔ ولایت‌ها',allCategories:'همهٔ دسته‌ها',nature:'طبیعت',history:'تاریخی و فرهنگی',city:'شهری',notFound:'مقصدی با این مشخصات پیدا نشد؛ جستجو یا فیلتر را تغییر دهید.',planPrompt:'مقصد و مدت سفر را انتخاب کنید تا یک چارچوب ابتدایی نمایش داده شود.',days:'روز',style:'سبک',duration:'مدت',livePrice:'قیمت زنده در دسترس نیست؛ هزینه‌ها را پیش از سفر جداگانه استعلام کنید.',travelWarning:'این برنامه نمونه است، نه تأیید امنیت یا بازبودن مسیر. پیش از حرکت وضعیت روز را بررسی کنید.'},
+ ps:{travelTitle:'🧭 د افغانستان د سفر لارښود',travelIntro:'د افغانستان د ولایتونو له تاریخي میراث، طبیعت او کلتور سره بلد شئ او خپل سفر په پوهه پلان کړئ.',travelSafetyTitle:'له هر سفر مخکې حالت بیا وګورئ',travelSafetyText:'دا نسخه معلوماتي او آفلاین لارښود دی؛ امنیت، لارې، ویزې، بیې او خدمتونه په ژوندۍ بڼه نه تاییدوي. تر حرکت مخکې له رسمي سرچینو او باوري ځایي کسانو تازه معلومات واخلئ.',travelDestinationsTitle:'وړاندیز شوي ځایونه',travelFilterHint:'د ځای موندلو لپاره ولایت یا د جاذبې ډول وټاکئ.',travelSearchLabel:'د ځای لټون',travelProvinceLabel:'ولایت',travelCategoryLabel:'د جاذبې ډول',travelPlannerTitle:'د سفر لومړنی پلان',travelPlannerHint:'د کتنې او شخصي سمون لپاره نمونه‌ییز پلان جوړ کړئ.',travelFormTitle:'د سفر معلومات',travelPlanDestinationLabel:'موخه',travelPlanDaysLabel:'د سفر موده',travelPlanStyleLabel:'د سفر ډول',travelPlanSubmit:'نمونه‌ییز پلان جوړول',travelOutputTitle:'وړاندیز شوی پلان',travelDocsTitle:'اسناد او مقررات',travelTransportTitle:'ترانسپورټ',travelStayTitle:'استوګنځای او خدمتونه',travelCultureTitle:'ځايي کلتور ته درناوی',searchPlaceholder:'د ښار، ولایت یا ځای نوم...',allProvinces:'ټول ولایتونه',allCategories:'ټولې کټګورۍ',nature:'طبیعت',history:'تاریخي او کلتوري',city:'ښاري',notFound:'دا ډول ځای ونه موندل شو؛ لټون یا فلټر بدل کړئ.',planPrompt:'د سفر د لومړني پلان لپاره موخه او موده وټاکئ.',days:'ورځې',style:'ډول',duration:'موده',livePrice:'ژوندۍ بیې نشته؛ لګښتونه تر سفر مخکې جلا وپوښتئ.',travelWarning:'دا یوازې نمونه‌ییز پلان دی، د امنیت یا لارې د خلاصون تایید نه دی. د حرکت مخکې تازه حالت وګورئ.'},
+ en:{travelTitle:'🧭 Afghanistan Travel Guide',travelIntro:'Discover Afghanistan’s heritage, landscapes and provincial cultures, and plan a more informed journey.',travelSafetyTitle:'Recheck conditions before every trip',travelSafetyText:'This is an offline information guide. It does not verify live security, road access, visas, prices or services. Check current information with official sources and trusted local contacts before departure.',travelDestinationsTitle:'Suggested destinations',travelFilterHint:'Choose a province or attraction type, or search for a destination.',travelSearchLabel:'Search destinations',travelProvinceLabel:'Province',travelCategoryLabel:'Attraction type',travelPlannerTitle:'Basic trip planner',travelPlannerHint:'Create a sample itinerary to review and customize.',travelFormTitle:'Trip details',travelPlanDestinationLabel:'Destination',travelPlanDaysLabel:'Trip duration',travelPlanStyleLabel:'Travel style',travelPlanSubmit:'Create sample itinerary',travelOutputTitle:'Suggested itinerary',travelDocsTitle:'Documents & regulations',travelTransportTitle:'Transportation',travelStayTitle:'Accommodation & services',travelCultureTitle:'Respect local culture',searchPlaceholder:'City, province or attraction...',allProvinces:'All provinces',allCategories:'All categories',nature:'Nature',history:'Historical & cultural',city:'Urban',notFound:'No destinations match. Change your search or filters.',planPrompt:'Choose a destination and duration to see a basic outline.',days:'days',style:'Style',duration:'Duration',livePrice:'Live prices are unavailable; request current quotes before travel.',travelWarning:'This is a sample itinerary, not a safety or road-access confirmation. Check current conditions before departure.'}
+ };
+ const destinations={
+ 'بند امیر':['Band-e Amir','بند امیر','د افغانستان د لومړي ملي پارک ښکلي طبیعي جهیلونه.','A series of striking natural lakes in Afghanistan’s first national park.'],
+ 'درهٔ بامیان':['Bamiyan Valley','د بامیانو دره','د لرغونو اثارو او کلتوري میراثونو تاریخي سیمه.','A historic valley known for archaeological and cultural heritage.'],
+ 'شهر کهنه و ارگ هرات':['Herat Old City & Citadel','د هرات زوړ ښار او کلا','د هرات تاریخي ښاري جوړښت او ارګ.','Herat’s historic urban fabric and citadel.'],
+ 'مسجد جامع هرات':['Herat Great Mosque','د هرات جامع جومات','د اسلامي معمارۍ او کاشي‌کارۍ تاریخي اثر.','A landmark of Islamic architecture and tilework.'],
+ 'مزارشریف و روضهٔ مبارک':['Mazar-i-Sharif & Shrine','مزارشریف او روضه مبارکه','د مزارشریف مشهور مذهبي او معماري ځای.','A well-known religious and architectural site in Mazar-i-Sharif.'],
+ 'کابل و باغ بابر':['Kabul & Bagh-e Babur','کابل او باغ بابر','پایتخت و باغ تاریخی بابر.','The capital city and the historic Bagh-e Babur garden.'],
+ 'درهٔ پنجشیر':['Panjshir Valley','د پنجشېر دره','درهٔ کوهستانی با رودخانه و چشم‌اندازهای طبیعی.','A mountain valley with river scenery and dramatic landscapes.'],
+ 'دهلیز واخان':['Wakhan Corridor','د واخان دهلېز','منطقهٔ دوردست کوهستانی با طبیعت ویژه.','A remote high-mountain region with distinctive landscapes.'],
+ 'منار جام':['Minaret of Jam','د جام منار','اثر برجستهٔ معماری تاریخی در ولایت غور.','A remarkable historic architectural monument in Ghor.'],
+ 'درهٔ ارغنداب':['Arghandab Valley','د ارغنداب دره','چشم‌اندازهای رودخانه‌ای و باغداری در قندهار.','River landscapes and orchards in Kandahar.']
+ };
+ const oldApply=applyLanguage;
+ applyLanguage=function(lang){
+  oldApply(lang);
+  const d=copy[lang]||copy.fa;
+  Object.entries(d).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=value});
+  const search=document.getElementById('travelSearch');if(search)search.placeholder=d.searchPlaceholder;
+  const province=document.getElementById('travelProvince');if(province&&province.options[0])province.options[0].textContent=d.allProvinces;
+  const category=document.getElementById('travelCategory');if(category){const labels={nature:d.nature,history:d.history,city:d.city};[...category.options].forEach(o=>{if(o.value==='all')o.textContent=d.allCategories;else if(labels[o.value])o.textContent=labels[o.value]})}
+  const output=document.getElementById('travelPlanOutput');if(output&&!output.dataset.generated)output.textContent=d.planPrompt;
+  if(window.renderTravelGuide)window.renderTravelGuide();
+ };
+ const originalRender=window.renderTravelGuide;
+ window.renderTravelGuide=function(){
+  originalRender();
+  const lang=document.getElementById('uiLanguage')?.value||'fa',grid=document.getElementById('travelDestinationGrid');if(!grid)return;
+  const d=copy[lang]||copy.fa;
+  [...grid.querySelectorAll('.travel-destination')].forEach(card=>{
+   const title=card.querySelector('h3');if(!title)return;const item=destinations[title.textContent];if(!item)return;
+   const index=lang==='en'?0:lang==='ps'?1:-1;if(index>=0)title.textContent=item[index];
+   const p=card.querySelector('p');if(p&&index>=0)p.textContent=(lang==='en'?'':lang==='ps'?'':'')+p.textContent.split(' • ')[0]+' • '+(lang==='en'?(card.textContent.includes('طبیعت')?d.nature:card.textContent.includes('شهری')?d.city:d.history):(card.textContent.includes('طبیعت')?d.nature:card.textContent.includes('شهری')?d.city:d.history));
+   const summary=card.querySelectorAll('p')[1];if(summary&&index>=0)summary.textContent=item[index+2];
+  });
+  if(grid.querySelector('.empty-state'))grid.querySelector('.empty-state').textContent=d.notFound;
+ };
+ const planner=document.getElementById('travelPlanForm');
+ if(planner)planner.addEventListener('submit',()=>{const out=document.getElementById('travelPlanOutput');if(out)out.dataset.generated='true';});
+})();
