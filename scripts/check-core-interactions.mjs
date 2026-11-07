@@ -82,6 +82,16 @@ for (const [label, passed] of mobileChecks) {
 }
 
 
+const donationSafetyChecks = [
+  ["donations disabled pending legal/account verification", html.includes("دریافت کمک مالی فعلاً غیرفعال است")],
+  ["personal payment number not published", !html.includes("0787111414")],
+  ["payment QR not published", !html.includes("api.qrserver.com/v1/create-qr-code")],
+  ["payment-number copy control removed", !html.includes('id="fundCopyNumber"')]
+];
+for (const [label, passed] of donationSafetyChecks) {
+  if (!passed) errors.push(`Donation safety check failed: ${label}.`);
+}
+
 const securityControls = [
   "securityRunScan", "securityLastScan", "securityPassed",
   "securityAttention", "securityScanStatus"
