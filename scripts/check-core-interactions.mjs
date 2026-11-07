@@ -90,6 +90,17 @@ for (const [label, passed] of brandIdentityChecks) {
   if (!passed) errors.push(`Brand identity check failed: ${label}.`);
 }
 
+const innovationChecks = [
+ ["innovation navigation item", html.includes('data-page="innovation"')],
+ ["innovation page section", html.includes('id="innovationPage"')],
+ ["innovation project form", html.includes('id="innovationForm"')],
+ ["innovation local storage disclosure", html.includes("طرح‌ها فقط در دستگاه شما ذخیره می‌شوند")],
+ ["innovation page registered in router", app.includes("'featureideas','innovation','publications'")],
+ ["innovation local-only project storage", app.includes("afghanai-innovation-projects-v1")],
+ ["innovation project milestones", app.includes("بررسی میدانی مشکل")]
+];
+for (const [label, passed] of innovationChecks) { if (!passed) errors.push(`Innovation lab check failed: ${label}.`); }
+
 const donationSafetyChecks = [
   ["donations disabled pending legal/account verification", html.includes("دریافت کمک مالی فعلاً غیرفعال است")],
   ["personal payment number not published", !html.includes("0787111414")],
