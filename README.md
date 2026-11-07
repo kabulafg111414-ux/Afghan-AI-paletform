@@ -46,7 +46,7 @@ GitHub Pages is static hosting and cannot execute server.py. The Render Blueprin
 
 ## Secure admin and user access roadmap
 
-The founder control center is currently a visual prototype, not a protected admin system. The recommended authentication, roles, PostgreSQL entities, student privacy safeguards, and staged acceptance tests are documented in [docs/ADMIN-AUTHENTICATION-PLAN.md](docs/ADMIN-AUTHENTICATION-PLAN.md). Do not add a front-end-only password prompt and describe it as secure login.
+The founder control center is currently a visual prototype, not a protected admin system. The recommended authentication, roles, PostgreSQL entities, student privacy safeguards, and staged acceptance tests are documented in [docs/ADMIN-AUTHENTICATION-PLAN.md](docs/ADMIN-AUTHENTICATION-PLAN.md). The database architecture, staging rollout, founder bootstrap process, and production acceptance criteria are in [docs/DATABASE-AND-STAGING-PLAN.md](docs/DATABASE-AND-STAGING-PLAN.md). Do not add a front-end-only password prompt and describe it as secure login.
 
 ## Seller marketplace roadmap
 
