@@ -1011,6 +1011,38 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
   roleMatrix.append(table);
  };
  roleSelect?.addEventListener('change',renderRole);renderRole();
+
+ /* Complaints and appeals pilot: local-only synthetic workflow, not a real reporting channel. */
+ const complaintForm=$('#fundComplaintForm'),complaintList=$('#fundComplaintRecords');
+ const complaintKey='afghanai-fund-complaints-demo-v1';
+ const readComplaints=()=>safeStorageJSON(complaintKey,[]);
+ const writeComplaints=items=>safeStorageSet(complaintKey,JSON.stringify(items));
+ const renderComplaints=()=>{
+  if(!complaintList)return;const items=readComplaints();complaintList.replaceChildren();
+  if(!items.length){complaintList.append(node('p','','هنوز شکایت آزمایشی ثبت نشده است.'));return;}
+  items.forEach((item,index)=>{
+   const card=node('article','fund-demo-row');card.append(node('b','','پروندهٔ آزمایشی '+item.id+' — '+item.type));
+   card.append(node('p','',item.channel+' | ثبت: '+item.date));card.append(node('p','',item.description));
+   const status=node('select','');
+   ['دریافت آزمایشی','در انتظار بررسی مستقل','نیازمند معلومات غیرحساس بیشتر','ارجاع‌شده برای بازبینی','رسیدگی آزمایشی تکمیل شد','بسته‌شده در آزمایش'].forEach(value=>{const option=node('option','',value);option.value=value;if(value===item.status)option.selected=true;status.append(option);});
+   status.setAttribute('aria-label','تغییر وضعیت آزمایشی شکایت');
+   status.addEventListener('change',()=>{const current=readComplaints();current[index].status=status.value;current[index].updated=new Date().toISOString().slice(0,10);writeComplaints(current);renderComplaints();});
+   card.append(status);card.append(node('small','', 'وضعیت: '+item.status));complaintList.append(card);
+  });
+ };
+ complaintForm?.addEventListener('submit',event=>{
+  event.preventDefault();if(!complaintForm.reportValidity())return;
+  const items=readComplaints(),id='G-'+String(Date.now()).slice(-7);
+  items.push({id,type:$('#fundComplaintType').value,channel:$('#fundComplaintChannel').value,description:$('#fundComplaintText').value.trim(),date:new Date().toISOString().slice(0,10),status:'دریافت آزمایشی'});
+  writeComplaints(items);complaintForm.reset();$('#fundComplaintStatus').textContent='شکایت آزمایشی '+id+' فقط در همین مرورگر ثبت شد و به مرجع واقعی نرسیده است.';renderComplaints();
+ });
+ $('#fundComplaintExport')?.addEventListener('click',()=>{
+  const rows=[['شناسه','موضوع','درخواست رسیدگی','شرح عمومی','تاریخ','وضعیت'],...readComplaints().map(x=>[x.id,x.type,x.channel,x.description,x.date,x.status])];
+  const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='afghan-ai-complaints-demo.csv';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);
+ });
+ $('#fundComplaintClear')?.addEventListener('click',()=>{if(!window.confirm('تمام شکایات آزمایشی ذخیره‌شده در همین مرورگر پاک شود؟'))return;safeStorageRemove(complaintKey);renderComplaints();$('#fundComplaintStatus').textContent='داده‌های آزمایشی شکایات پاک شد.';});
+ renderComplaints();
  render();
 })();
  /* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
