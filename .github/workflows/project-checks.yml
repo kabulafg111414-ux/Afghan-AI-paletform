@@ -30,6 +30,9 @@ jobs:
       - name: Check Dari, Pashto and English localization
         run: node scripts/check-localization.mjs
 
+      - name: Check offline app-shell assets and local references
+        run: node scripts/check-app-shell.mjs
+
       - name: Validate web app manifest
         run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json', 'utf8')); console.log('manifest.json is valid JSON')"
 
