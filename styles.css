@@ -2493,6 +2493,6 @@ body.dark .travel-destination-icon{background:#203b34}
 .travel-photo-credits{margin:5px 2px 22px;color:var(--muted,#667085);font-size:11px;line-height:1.9}
 .travel-photo-credits a{color:#087f77;text-decoration:underline;text-underline-offset:2px}
 body.dark .travel-photo-credits a{color:#7ed8c9}
-.travel-hero{background-image:linear-gradient(105deg,#06283eee 0%,#0b5960d9 55%,#167d70a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Band-e-Amir,_Afghanistan.jpg?width=1800");background-size:cover;background-position:center 48%}
+.travel-hero{background-image:linear-gradient(105deg,#06283eee 0%,#0b5960d9 55%,#167d70a8 100%),url("https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Band_Amir.jpg/1920px-Band_Amir.jpg");background-size:cover;background-position:center 48%}
 @media(max-width:760px){.travel-photo-strip{grid-template-columns:1fr 1fr;grid-template-rows:210px 150px 150px;gap:9px}.travel-photo-strip figure:first-child{grid-column:1/-1;grid-row:auto}.travel-photo-strip figcaption{padding:24px 11px 11px}.travel-photo-strip figcaption strong{font-size:16px}}
 @media(max-width:390px){.travel-photo-strip{grid-template-rows:190px 135px 135px}.travel-photo-strip figure{border-radius:13px}}
