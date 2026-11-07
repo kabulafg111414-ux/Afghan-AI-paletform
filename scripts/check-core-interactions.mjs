@@ -119,7 +119,8 @@ const provinceMapChecks = [
  ["map failure keeps province directory available", app.includes("فهرست ولایت‌ها همچنان قابل استفاده است")],
  ["province map is resized when its page opens", app.includes("afghanLeafletMap.invalidateSize()")],
  ["map province names normalize spelling variants", app.includes("function normalizeAfghanProvinceName(name)") && app.includes("jowzjan:'Jawzjan'") && app.includes("bamian:'Bamyan'") && app.includes("saripul:'Sar-e Pol'")],
- ["map clicks select the matching province directory option", app.includes("function findAfghanProvinceOption(name)") && app.includes("const option=findAfghanProvinceOption(province)") && app.includes("normalizeAfghanProvinceName(name)===select.value")]
+ ["map clicks select the matching province directory option", app.includes("function findAfghanProvinceOption(name)") && app.includes("const option=findAfghanProvinceOption(province)") && app.includes("normalizeAfghanProvinceName(name)===select.value")],
+ ["sourced attraction coverage indicator exists", html.includes('id="afgProvinceCoverage"') && app.includes("new Set(afghanProvinceAttractions.map(item=>item.province)).size") && app.includes("نبودن مدخل به معنای نبود جاذبه نیست")]
 ];
 for (const [label, passed] of provinceMapChecks) { if (!passed) errors.push(`Province map check failed: ${label}.`); }
 
