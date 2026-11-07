@@ -117,7 +117,9 @@ const provinceMapChecks = [
  ["province map initializes and displays OpenStreetMap attribution", app.includes("function initAfghanInteractiveMap()") && app.includes("© OpenStreetMap contributors")],
  ["province map loads GeoJSON boundaries from a declared source", app.includes("Admin1_Afghanistan/FeatureServer/1/query") && app.includes("returnGeometry=true&outSR=4326&f=geojson")],
  ["map failure keeps province directory available", app.includes("فهرست ولایت‌ها همچنان قابل استفاده است")],
- ["province map is resized when its page opens", app.includes("afghanLeafletMap.invalidateSize()")]
+ ["province map is resized when its page opens", app.includes("afghanLeafletMap.invalidateSize()")],
+ ["map province names normalize spelling variants", app.includes("function normalizeAfghanProvinceName(name)") && app.includes("jowzjan:'Jawzjan'") && app.includes("bamian:'Bamyan'") && app.includes("saripul:'Sar-e Pol'")],
+ ["map clicks select the matching province directory option", app.includes("function findAfghanProvinceOption(name)") && app.includes("const option=findAfghanProvinceOption(province)") && app.includes("normalizeAfghanProvinceName(name)===select.value")]
 ];
 for (const [label, passed] of provinceMapChecks) { if (!passed) errors.push(`Province map check failed: ${label}.`); }
 
