@@ -632,6 +632,41 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <p class="publication-hint" id="fundDashboardUpdated">برای دیدن آمار، دکمهٔ تازه‌سازی را بزنید.</p>
   <button type="button" class="outline" id="fundDashboardRefresh">تازه‌سازی آمار</button>
  </article>
+
+ <article class="fund-card fund-ledger" id="fundLedger">
+  <span class="eyebrow">FINANCIAL CONTROL • LOCAL DEMO</span>
+  <h2>دفتر آزمایشی بودجه، تخصیص و حسابرسی</h2>
+  <div class="notice"><span>⚖️</span><div><b>تفکیک مراحل مالی</b><p>بودجهٔ برنامه‌ریزی‌شده، تعهد کمک، پول دریافت‌شده، تخصیص، پرداخت و تطبیق حساب مراحل جداگانه‌اند. تعهد به معنی دریافت پول نیست؛ تخصیص به معنی پرداخت نیست؛ پرداخت تا زمان بررسی اسناد، تطبیق‌شده محسوب نمی‌شود. این دفتر فقط در همین مرورگر و برای آزمایش است.</p></div></div>
+  <div class="fund-ledger-grid" aria-live="polite">
+   <div class="fund-kpi"><span>بودجهٔ برنامه‌ریزی‌شده (AFN)</span><strong id="ledgerPlanned">۰</strong></div>
+   <div class="fund-kpi"><span>پول دریافت‌شدهٔ آزمایشی (AFN)</span><strong id="ledgerReceived">۰</strong></div>
+   <div class="fund-kpi"><span>تخصیص‌یافته (AFN)</span><strong id="ledgerAllocated">۰</strong></div>
+   <div class="fund-kpi"><span>پرداخت‌شده (AFN)</span><strong id="ledgerDisbursed">۰</strong></div>
+   <div class="fund-kpi"><span>تطبیق‌شده (AFN)</span><strong id="ledgerReconciled">۰</strong></div>
+   <div class="fund-kpi"><span>وجه نقد باقی‌مانده (AFN)</span><strong id="ledgerCash">۰</strong></div>
+   <div class="fund-kpi"><span>وجه تخصیص‌نیافته (AFN)</span><strong id="ledgerUnallocated">۰</strong></div>
+   <div class="fund-kpi"><span>تخصیص پرداخت‌نشده (AFN)</span><strong id="ledgerUnpaid">۰</strong></div>
+   <div class="fund-kpi"><span>پرداخت در انتظار تطبیق (AFN)</span><strong id="ledgerPending">۰</strong></div>
+  </div>
+  <div class="fund-ledger-entry">
+   <h3>ثبت رویداد مالی آزمایشی</h3>
+   <form id="fundLedgerForm">
+    <label for="ledgerType">نوع رویداد</label>
+    <select id="ledgerType" required><option value="planned">بودجهٔ برنامه‌ریزی‌شده</option><option value="received">دریافت وجه (صرفاً آزمایشی)</option><option value="allocated">تخصیص بودجه</option><option value="disbursed">پرداخت / مصرف وجه</option><option value="reconciled">تطبیق و تأیید سند پرداخت</option></select>
+    <label for="ledgerCategory">بخش برنامه</label>
+    <select id="ledgerCategory" required><option>خانواده‌های نیازمند</option><option>اطفال و آموزش</option><option>افراد دارای معلولیت</option><option>مهارت‌آموزی جوانان</option><option>بازسازی و احیای جامعه</option><option>پاسخ اضطراری</option><option>توسعهٔ پلتفرم Afghan AI</option></select>
+    <label for="ledgerAmount">مبلغ (افغانی)</label><input id="ledgerAmount" type="number" min="1" step="1" inputmode="numeric" required placeholder="مبلغ مثبت و کامل">
+    <label for="ledgerDate">تاریخ رویداد</label><input id="ledgerDate" type="date" required>
+    <label for="ledgerReference">کُد مرجع غیرحساس (اختیاری)</label><input id="ledgerReference" maxlength="60" placeholder="بدون نام، شماره حساب یا معلومات شخصی">
+    <label for="ledgerNote">یادداشت کوتاه (اختیاری)</label><input id="ledgerNote" maxlength="160" placeholder="بدون معلومات هویتی یا حساس">
+    <button class="primary" type="submit">ثبت رویداد آزمایشی</button>
+   </form>
+   <p class="publication-hint" id="ledgerStatus" aria-live="polite">ثبت‌ها فقط در مرورگر همین دستگاه ذخیره می‌شوند؛ هیچ پولی انتقال یا تصدیق نمی‌شود.</p>
+  </div>
+  <div class="fund-admin-actions"><button type="button" class="outline" id="ledgerExport">دریافت دفتر مالی آزمایشی (CSV)</button><button type="button" class="outline" id="ledgerClear">پاک‌کردن دفتر آزمایشی</button></div>
+  <div id="ledgerRecords" class="fund-demo-records" aria-live="polite"><p>هنوز رویداد مالی آزمایشی ثبت نشده است.</p></div>
+ </article>
+
 <article class="fund-card fund-role-panel" id="fundRolePanel">
   <span class="eyebrow">ROLE DESIGN • PREVIEW ONLY</span>
   <h2>۴. پیش‌نمایش نقش‌ها و سطح صلاحیت</h2>
