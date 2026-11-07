@@ -942,6 +942,58 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
  const money=amount===null?'مبلغ هنوز تعیین نشده است.':new Intl.NumberFormat('fa-AF').format(amount)+' افغانی';
  summary.textContent='مقصد کمک: '+labels[purpose]+'. مبلغ پیشنهادی: '+money+' این خلاصه فقط راهنما است؛ پرداخت یا ثبت تراکنش انجام نمی‌شود.';
 });
+
+/* Support fund pilot workflow: local-only demonstration; never represents real payments or approvals. */
+(function(){
+ const appForm=$('#fundApplicationForm'),conForm=$('#fundContributionForm'),list=$('#fundDemoRecords');
+ if(!appForm||!conForm||!list||appForm.dataset.ready==='true')return;
+ appForm.dataset.ready='true';
+ const key='afghanai-fund-pilot-demo-v1';
+ const read=()=>safeStorageJSON(key,{applications:[],contributions:[]});
+ const write=data=>safeStorageSet(key,JSON.stringify(data));
+ const node=(tag,cls,txt)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(txt!==undefined)el.textContent=String(txt);return el;};
+ const render=()=>{
+  const data=read();list.replaceChildren();
+  if(!data.applications.length&&!data.contributions.length){list.append(node('p','', 'هنوز دادهٔ آزمایشی ثبت نشده است.'));return;}
+  data.applications.forEach((item,index)=>{
+   const card=node('article','fund-demo-row');card.append(node('b','','درخواست '+item.id+' — '+item.province));
+   card.append(node('p','',item.category+' | وضعیت: '+item.status));
+   card.append(node('p','',item.need));
+   const select=node('select','');['در انتظار بررسی','نیازمند معلومات بیشتر','واجد شرایط در بررسی آزمایشی','ردشده در آزمایش','بسته‌شده'].forEach(s=>{const o=node('option','',s);o.value=s;if(s===item.status)o.selected=true;select.append(o);});
+   select.setAttribute('aria-label','تغییر وضعیت آزمایشی درخواست');
+   select.addEventListener('change',()=>{const d=read();d.applications[index].status=select.value;write(d);render();});
+   card.append(select);list.append(card);
+  });
+  data.contributions.forEach((item,index)=>{
+   const card=node('article','fund-demo-row');card.append(node('b','','تعهد آزمایشی '+item.id+' — '+item.purpose));
+   card.append(node('p','',new Intl.NumberFormat('fa-AF').format(item.amount)+' افغانی | وضعیت: '+item.status));
+   const select=node('select','');['تعهد ثبت‌شده (آزمایشی)','مدرک دریافت ارائه نشده','برای بررسی مستقل علامت‌گذاری شد','لغوشده'].forEach(s=>{const o=node('option','',s);o.value=s;if(s===item.status)o.selected=true;select.append(o);});
+   select.setAttribute('aria-label','تغییر وضعیت آزمایشی تعهد');
+   select.addEventListener('change',()=>{const d=read();d.contributions[index].status=select.value;write(d);render();});
+   card.append(select);list.append(card);
+  });
+ };
+ appForm.addEventListener('submit',event=>{
+  event.preventDefault();if(!appForm.reportValidity())return;
+  const d=read();const id='A-'+String(Date.now()).slice(-7);
+  d.applications.push({id,alias:$('#fundApplicantAlias').value.trim(),province:$('#fundApplicantProvince').value,category:$('#fundApplicantCategory').value,need:$('#fundApplicantNeed').value.trim(),status:'در انتظار بررسی'});
+  write(d);appForm.reset();$('#fundApplicationStatus').textContent='درخواست آزمایشی '+id+' در همین مرورگر ثبت شد؛ کمک تأیید نشده است.';render();
+ });
+ conForm.addEventListener('submit',event=>{
+  event.preventDefault();if(!conForm.reportValidity())return;
+  const amount=Number($('#fundContributionAmount').value);if(!Number.isSafeInteger(amount)||amount<=0){$('#fundContributionStatus').textContent='مبلغ معتبر و مثبت وارد کنید.';return;}
+  const d=read();const id='C-'+String(Date.now()).slice(-7);
+  d.contributions.push({id,purpose:$('#fundContributionPurpose').value,amount,reference:$('#fundContributionRef').value.trim(),status:'تعهد ثبت‌شده (آزمایشی)'});
+  write(d);conForm.reset();$('#fundContributionStatus').textContent='تعهد آزمایشی '+id+' ثبت شد؛ این ثبت، دریافت پول یا رسید پرداخت نیست.';render();
+ });
+ $('#fundClearDemo')?.addEventListener('click',()=>{if(!window.confirm('تمام داده‌های آزمایشی این صندوق از همین مرورگر پاک شود؟'))return;safeStorageRemove(key);render();$('#fundApplicationStatus').textContent='داده‌های آزمایشی محلی پاک شد.';$('#fundContributionStatus').textContent='داده‌های آزمایشی محلی پاک شد.';});
+ $('#fundExportDemo')?.addEventListener('click',()=>{
+  const d=read(),rows=[['نوع','شناسه','ولایت/مقصد','شرح/مبلغ','وضعیت'],...d.applications.map(x=>['درخواست',x.id,x.province,x.category+' — '+x.need,x.status]),...d.contributions.map(x=>['تعهد آزمایشی',x.id,x.purpose,String(x.amount)+' AFN',x.status])];
+  const csv='\\ufeff'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\\r\\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=node('a');a.href=url;a.download='afghan-ai-fund-pilot-demo.csv';document.body.append(a);a.click();a.remove();URL.revokeObjectURL(url);
+ });
+ render();
+})();
 /* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
 window.__afghanAiAppReady=true;
 
