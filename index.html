@@ -564,23 +564,15 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
  </div>
  <div class="fund-payment-layout">
   <article class="fund-card fund-payment">
-   <span class="eyebrow">HESABPAY • PAYMENT INFORMATION</span><h2>روش ارسال کمک از طریق حساب‌پی</h2>
-   <div class="hesabpay-profile-card" role="group" aria-label="کارت حساب‌پی صاحب حساب">
-    <div class="hesabpay-card-top">
-     <div class="hesabpay-avatar" aria-hidden="true"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="58" fill="#e6e6e6"/><path d="M18 110c5-24 22-35 42-35s37 11 42 35" fill="#202a30"/><path d="M37 44c0-24 10-34 25-34 17 0 26 13 25 36l-5 24H43z" fill="#38221d"/><ellipse cx="62" cy="47" rx="23" ry="28" fill="#d99a68"/><path d="M38 39c2-23 15-30 30-27 10 2 17 9 19 22-12-4-25-9-48 5" fill="#38221d"/><circle cx="53" cy="48" r="3" fill="#171717"/><circle cx="72" cy="48" r="3" fill="#171717"/><path d="M50 65q12 9 25-1l-3 13q-11 9-20 0z" fill="#3b211d"/><path d="M47 63q14-12 30 0l-2 13q-14 8-27-1z" fill="#3b211d"/></svg></div>
-     <div class="hesabpay-card-qr"><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&format=png&data=1%3A01*2%3Ap*3%3A93.787111414*4%3Ageneral*5%3ASaid%20Mohabullah%20Hashmi*6%3A971*7%3A1307100" alt="QR حساب‌پی" loading="lazy"></div>
+   <span class="eyebrow">DONATION SAFETY • TRANSPARENCY</span>
+   <h2>دریافت کمک مالی فعلاً غیرفعال است</h2>
+   <div class="notice" role="status">
+    <span>🔒</span>
+    <div><b>حفاظت از کمک‌کنندگان و خانواده‌های نیازمند</b>
+     <p>تا زمان تکمیل بررسی حقوقی، تثبیت شخصیت و صلاحیت دریافت‌کننده، تأیید مستقل مالکیت حساب و ایجاد روند حسابرسی و گزارش‌دهی، هیچ شماره حساب، بارکود پرداخت یا دستور انتقال پول در این صفحه منتشر نمی‌شود.</p>
     </div>
-    <div class="hesabpay-card-name">SAID MOHABULLAH HASHMI</div>
-    <div class="hesabpay-card-phone" dir="ltr">0787111414 <span>• KYC</span></div>
-    <div class="hesabpay-verified"><span aria-hidden="true">✿</span> Verified</div>
-    <p class="hesabpay-card-caption">کارت حساب‌پی • مشخصات صاحب حساب</p>
    </div>
-
-   <div class="fund-account"><span>شماره تماس / حساب‌پی</span><strong dir="ltr">0787111414</strong><button type="button" class="outline" id="fundCopyNumber">کاپی شماره</button></div>
-   <div class="fund-qr-placeholder fund-qr-live"><img src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&format=png&data=1%3A01*2%3Ap*3%3A93.787111414*4%3Ageneral*5%3ASaid%20Mohabullah%20Hashmi*6%3A971*7%3A1307100" alt="بارکود رسمی حساب‌پی برای کمک به Afghan AI" loading="lazy" width="300" height="300"><b>بارکود حساب‌پی</b><small>بارکود از اطلاعات رمزگشایی‌شدهٔ تصویر ارسالی بازسازی شده است. پیش از پرداخت، نام صاحب حساب و شماره را در حساب‌پی بررسی کنید.</small></div>
-   <p class="publication-hint">نام صاحب حساب و شماره را پیش از تأیید پرداخت در اپلیکیشن حساب‌پی با دقت بررسی کنید.</p>
-   <div class="fund-howto"><h3>چگونه کمک ارسال کنید؟</h3><ol><li>اپلیکیشن حساب‌پی را باز کنید یا از لینک رسمی نصب نمایید.</li><li>گزینهٔ اسکن QR را انتخاب کرده و بارکود بالا را اسکن کنید.</li><li>نام صاحب حساب و شماره را بررسی کنید، مبلغ را وارد کرده و پرداخت را در خود حساب‌پی تأیید نمایید.</li></ol></div>
-   <a class="fund-app-link fund-open-app" href="https://hesab.com/download-app" target="_blank" rel="noopener noreferrer">باز کردن / دریافت اپلیکیشن حساب‌پی ↗</a>
+   <p class="publication-hint">این بخش فقط چارچوب پیشنهادی صندوق را معرفی می‌کند. هیچ کمک مالی، درخواست حمایت یا تعهد مالی از طریق این نسخهٔ آزمایشی دریافت یا تأیید نمی‌شود.</p>
   </article>
   <article class="fund-card fund-choice">
    <span class="eyebrow">CHOOSE YOUR PURPOSE</span><h2>مقصد کمک خود را انتخاب کنید</h2>
@@ -913,26 +905,6 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   render();
  });
  render();
-})();
-</script>
-<script id="fund-payment-guide">
-(function(){
- const copy=document.getElementById('fundCopyNumber');
- if(copy&&!copy.dataset.ready){
-  copy.dataset.ready='1';
-  copy.addEventListener('click',async function(){
-   const number='0787111414';
-   try{
-    if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(number);}
-    else{
-     const field=document.createElement('textarea');field.value=number;field.setAttribute('readonly','');
-     field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();
-     const copied=document.execCommand('copy');field.remove();if(!copied)throw new Error('Copy unavailable');
-    }
-    copy.textContent='شماره کاپی شد ✓';
-   }catch(e){copy.textContent='شماره: '+number;}
-  });
- }
 })();
 </script>
 </body></html>
