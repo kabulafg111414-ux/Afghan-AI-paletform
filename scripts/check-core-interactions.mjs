@@ -90,6 +90,16 @@ for (const [label, passed] of brandIdentityChecks) {
   if (!passed) errors.push(`Brand identity check failed: ${label}.`);
 }
 
+const opportunityChecks = [
+ ["career opportunities navigation", html.includes('data-page="opportunities"')],
+ ["career opportunities page", html.includes('id="opportunitiesPage"')],
+ ["career pathway form", html.includes('id="careerForm"')],
+ ["no job guarantee disclosure", html.includes("هیچ شغلی را تضمین نمی‌نماید")],
+ ["career pathway renderer", app.includes("const plans=")],
+ ["career scam safety advice", app.includes("اعتبار نهاد و شرایط رسمی")]
+];
+for (const [label, passed] of opportunityChecks) { if (!passed) errors.push(`Career center check failed: ${label}.`); }
+
 const innovationChecks = [
  ["innovation navigation item", html.includes('data-page="innovation"')],
  ["innovation page section", html.includes('id="innovationPage"')],
