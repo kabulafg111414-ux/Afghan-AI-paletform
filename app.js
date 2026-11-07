@@ -502,6 +502,13 @@ function initAfghanInteractiveMap(){
  });
  }
 }
+$('#afgProvinceMapReset')?.addEventListener('click',()=>{
+ if(select){select.value='';select.dispatchEvent(new Event('change',{bubbles:true}));}
+ if(afghanProvinceLayer&&afghanLeafletMap){
+  afghanProvinceLayer.eachLayer(layer=>layer.setStyle({color:'#2c9da5',weight:1.5,fillColor:'#4e9da2',fillOpacity:.18}));
+  afghanLeafletMap.fitBounds(afghanProvinceLayer.getBounds(),{padding:[8,8]});
+ }
+});
 $('#afgProvinceMapRetry')?.addEventListener('click',()=>{
  if(afghanLeafletMap){afghanLeafletMap.remove();afghanLeafletMap=null;}
  afghanProvinceLayer=null;
