@@ -118,6 +118,7 @@ const provinceMapChecks = [
  ["province map loads GeoJSON boundaries from a declared source", app.includes("Admin1_Afghanistan/FeatureServer/1/query") && app.includes("returnGeometry=true&outSR=4326&f=geojson")],
  ["map failure keeps province directory available", app.includes("فهرست ولایت‌ها همچنان قابل استفاده است")],
  ["province map is resized when its page opens", app.includes("afghanLeafletMap.invalidateSize()")],
+ ["province map exposes a retry control after external data failure", html.includes('id="afgProvinceMapRetry"') && html.includes('id="afgProvinceMapStatus"') && app.includes("afgProvinceMapRetry") && app.includes("showError(messages.data)") && app.includes("afghanLeafletMap.remove()")],
  ["map province names normalize spelling variants", app.includes("function normalizeAfghanProvinceName(name)") && app.includes("jowzjan:'Jawzjan'") && app.includes("bamian:'Bamyan'") && app.includes("saripul:'Sar-e Pol'")],
  ["map clicks select the matching province directory option", app.includes("function findAfghanProvinceOption(name)") && app.includes("const option=findAfghanProvinceOption(province)") && app.includes("normalizeAfghanProvinceName(name)===select.value")],
  ["sourced attraction coverage indicator exists", html.includes('id="afgProvinceCoverage"') && app.includes("new Set(afghanProvinceAttractions.map(item=>item.province)).size") && app.includes("نبودن مدخل به معنای نبود جاذبه نیست")],
