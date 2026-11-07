@@ -5,7 +5,7 @@ function safeStorageGet(key){try{const value=window.localStorage.getItem(key);re
 function safeStorageSet(key,value){const text=String(value);safeMemoryStorage.set(key,text);try{window.localStorage.setItem(key,text);return true}catch(error){return false}}
 function safeStorageRemove(key){safeMemoryStorage.delete(key);try{window.localStorage.removeItem(key);return true}catch(error){return false}}
 function safeStorageJSON(key,fallback){try{const raw=safeStorageGet(key);return raw===null?fallback:JSON.parse(raw)}catch(error){return fallback}}
-const pages=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','reconstruction','socialsupport','supportfund','featureideas','innovation','opportunities','publications','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','reconstruction','socialsupport','supportfund','featureideas','innovation','opportunities','travel','publications','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -474,7 +474,7 @@ function showPage(name){
   language:()=>renderLanguageCenter(),digital:()=>renderDigitalCenter(),health:()=>renderHealthCenter(),
   business:()=>renderBusinessCenter(),law:()=>renderLawCenter(),agriculture:()=>renderAgricultureCenter(),
   engineering:()=>renderEngineeringCenter(),historyculture:()=>renderHistoryCultureCenter(),
-  lessons:()=>renderLessons(),library:()=>renderLibrary(),progress:()=>renderProgress()
+  lessons:()=>renderLessons(),library:()=>renderLibrary(),progress:()=>renderProgress(),travel:()=>renderTravelGuide()
  };
  try{if(renderers[name])renderers[name]();}catch(error){console.error('Afghan AI section renderer failed:',name,error);}
  if(name==='historyculture'&&afghanLeafletMap){try{setTimeout(()=>afghanLeafletMap.invalidateSize(),120);}catch(error){}}
@@ -1229,4 +1229,43 @@ window.__afghanAiAppReady=true;
   if(attention)attention.textContent=String(needs);
   if(status)status.textContent='بررسی تکمیل شد: '+good+' موفق؛ '+needs+' مورد نیازمند توجه. بررسی مرورگر جایگزین آزمون امنیت سرور نیست.';
  });
+})();
+
+
+/* Afghan AI Travel Guide: curated static destination notes and planning prompts; no live safety or booking data. */
+(function(){
+ const destinations=[
+  {name:'بند امیر',province:'بامیان',category:'nature',icon:'🏞️',summary:'مجموعه‌ای از دریاچه‌های طبیعی و چشم‌اندازهای کوهستانی در پارک ملی بند امیر.',season:'فصل و شرایط دسترسی را پیش از حرکت بررسی کنید.',note:'حفاظت از آب و محیط طبیعی و رعایت مقررات پارک مهم است.'},
+  {name:'درهٔ بامیان',province:'بامیان',category:'history',icon:'🏛️',summary:'منطقه‌ای با میراث باستانی، چشم‌اندازهای تاریخی و آثار فرهنگی شناخته‌شده.',season:'بازدید از محوطه‌ها تابع مقررات و وضعیت محلی است.',note:'به آثار تاریخی دست نزنید و از مقررات میراث فرهنگی پیروی کنید.'},
+  {name:'شهر کهنه و ارگ هرات',province:'هرات',category:'history',icon:'🕌',summary:'بافت تاریخی هرات و ارگ آن از نمادهای مهم معماری و تاریخ منطقه‌اند.',season:'ساعت بازدید و امکان ورود را از مرجع محلی تأیید کنید.',note:'برای عکاسی در اماکن مذهبی یا خصوصی اجازه بگیرید.'},
+  {name:'مسجد جامع هرات',province:'هرات',category:'history',icon:'🕌',summary:'بنای شاخص معماری اسلامی با کاشی‌کاری و پیشینهٔ تاریخی ارزشمند.',season:'مقررات و زمان مناسب بازدید را پیشاپیش بپرسید.',note:'پوشش و رفتار محترمانه و رعایت زمان عبادت ضروری است.'},
+  {name:'مزارشریف و روضهٔ مبارک',province:'بلخ',category:'history',icon:'✨',summary:'یکی از شناخته‌شده‌ترین مجموعه‌های مذهبی و معماری افغانستان.',season:'شرایط ورود و مقررات محلی ممکن است تغییر کند.',note:'به فضای مذهبی، زائران و مقررات محل احترام بگذارید.'},
+  {name:'کابل و باغ بابر',province:'کابل',category:'city',icon:'🌳',summary:'پایتخت افغانستان با لایه‌های تاریخی، بازارها و باغ تاریخی بابر.',season:'وضعیت دسترسی و ساعت بازدید را محلی بررسی کنید.',note:'برای جابه‌جایی شهری از مسیرها و خدمات معتبر استفاده کنید.'},
+  {name:'درهٔ پنجشیر',province:'پنجشیر',category:'nature',icon:'⛰️',summary:'دره‌ای کوهستانی با رودخانه و چشم‌اندازهای طبیعی چشمگیر.',season:'شرایط آب‌وهوا، سیلاب و وضعیت سرک را پیش از حرکت بررسی کنید.',note:'برای مسیرهای کوهستانی آمادگی، راهنمای محلی و برنامهٔ اضطراری داشته باشید.'},
+  {name:'دهلیز واخان',province:'بدخشان',category:'nature',icon:'🏔️',summary:'منطقه‌ای دوردست با مناظر بلندکوهستانی و تنوع طبیعی ویژه.',season:'سفر دشوار و وابسته به فصل، مجوزها و شرایط مسیر است.',note:'بدون بررسی مجوز، وضعیت امنیتی، تجهیزات و راهنمای مجرب سفر نکنید.'},
+  {name:'منار جام',province:'غور',category:'history',icon:'🗼',summary:'اثر معماری تاریخی برجسته در درهٔ رود هریرود و میراث جهانی.',season:'دسترسی دورافتاده است؛ مسیر و شرایط محلی را حتماً تأیید کنید.',note:'از آسیب‌رساندن به بنا و محیط اطراف خودداری کنید.'},
+  {name:'درهٔ ارغنداب',province:'قندهار',category:'nature',icon:'🌿',summary:'چشم‌اندازهای رودخانه‌ای و باغداری در پیرامون حوزهٔ ارغنداب.',season:'شرایط مسیر و دسترسی محلی ممکن است متغیر باشد.',note:'پیش از ورود به زمین‌های خصوصی از مالک اجازه بگیرید.'}
+ ];
+ const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ window.renderTravelGuide=function(){
+  const grid=$('#travelDestinationGrid');if(!grid)return;
+  const q=($('#travelSearch')?.value||'').trim().toLocaleLowerCase();
+  const province=$('#travelProvince')?.value||'all';
+  const category=$('#travelCategory')?.value||'all';
+  const items=destinations.filter(x=>(province==='all'||x.province===province)&&(category==='all'||x.category===category)&&[x.name,x.province,x.summary].some(v=>v.toLocaleLowerCase().includes(q)));
+  grid.innerHTML=items.length?items.map(x=>'<article class="travel-destination"><span class="travel-destination-icon">'+x.icon+'</span><div class="travel-destination-meta">'+esc(x.province)+' • '+(x.category==='nature'?'طبیعت':x.category==='history'?'تاریخی و فرهنگی':'شهری')+'</div><h3>'+esc(x.name)+'</h3><p>'+esc(x.summary)+'</p><div class="travel-destination-note"><b>یادداشت سفر:</b> '+esc(x.season)+' '+esc(x.note)+'</div></article>').join(''):'<div class="empty-state">مقصدی با این مشخصات پیدا نشد؛ جستجو یا فیلتر را تغییر دهید.</div>';
+ };
+ const form=$('#travelPlanForm');
+ if(form&&!form.dataset.ready){
+  form.dataset.ready='true';
+  form.addEventListener('submit',event=>{
+   event.preventDefault();
+   const destination=$('#travelPlanDestination').value,days=Number($('#travelPlanDays').value),style=$('#travelPlanStyle').value;
+   const output=$('#travelPlanOutput');if(!output)return;
+   const schedule=days===1?['پیش از حرکت: تأیید وضعیت مسیر و رفت‌وآمد','در طول روز: بازدید محدود از مقصد اصلی','پایان روز: بازگشت امن و بررسی وضعیت راه']:Array.from({length:days},(_,i)=>'روز '+(i+1)+': '+(i===0?'رسیدن، هماهنگی محل اقامت و آشنایی با محیط':i===days-1?'بازدید کوتاه، جمع‌بندی و بازگشت برنامه‌ریزی‌شده':'بازدید با زمان کافی، استراحت و بررسی شرایط روز'));
+   output.innerHTML='<h3>'+esc(destination)+'</h3><p><b>مدت:</b> '+days+' روز • <b>سبک:</b> '+esc(style)+'</p><ol>'+schedule.map(esc).map(x=>'<li>'+x+'</li>').join('')+'</ol><p><b>هزینه:</b> قیمت زنده در دسترس نیست؛ ترانسپورت، اقامت، غذا، مجوزها و هزینهٔ اضطراری را پیش از سفر جداگانه استعلام کنید.</p><p><b>یادآوری:</b> این برنامه نمونه است، نه تأیید امنیت یا بازبودن مسیر. پیش از حرکت وضعیت روز را بررسی کنید.</p>';
+  });
+ }
+ ['#travelSearch','#travelProvince','#travelCategory'].forEach(selector=>$(selector)?.addEventListener(selector==='#travelSearch'?'input':'change',window.renderTravelGuide));
+ window.renderTravelGuide();
 })();
