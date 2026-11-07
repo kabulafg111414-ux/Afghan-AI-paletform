@@ -4,11 +4,22 @@ Keep provider credentials in environment variables; never expose them to the bro
 """
 import os
 from flask import Flask, jsonify, request, send_from_directory
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from openai import OpenAI
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, static_folder=None)
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024  # 16 KiB request limit
+
+# Memory storage is a development fallback only. Production must use shared Redis.
+app.config["RATELIMIT_STORAGE_URI"] = os.getenv("RATELIMIT_STORAGE_URI", "memory://")
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=[],
+    headers_enabled=True,
+)
 
 # Only publish files the website actually needs. Never expose the project directory.
 PUBLIC_ROOT_FILES = {
@@ -68,6 +79,7 @@ def health():
 
 
 @app.post("/api/chat")
+@limiter.limit("10 per minute")
 def chat():
     if not request.is_json:
         return jsonify({"error": "Content-Type must be application/json"}), 415
@@ -123,6 +135,7 @@ def chat():
 
 
 @app.post("/api/translate")
+@limiter.limit("10 per minute")
 def translate():
     if not request.is_json:
         return jsonify({"error": "Content-Type must be application/json"}), 415
@@ -177,6 +190,11 @@ def translate():
     except Exception:
         app.logger.exception("Translation request failed")
         return jsonify({"error": "Translation request failed"}), 502
+
+
+@app.errorhandler(429)
+def rate_limit_exceeded(_error):
+    return jsonify({"error": "Too many requests. Please try again later."}), 429
 
 
 @app.errorhandler(413)
