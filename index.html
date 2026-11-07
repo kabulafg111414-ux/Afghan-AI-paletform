@@ -62,6 +62,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   <button class="nav" data-page="lessons"><span class="nav-icon">▤</span><span data-i18n="navLessons">درس‌ها</span></button>
   <button class="nav" data-page="library"><span class="nav-icon">📚</span><span>کتابخانهٔ دیجیتال</span></button>
 <button class="nav" data-page="featureideas"><span class="nav-icon">💡</span><span>پیشنهاد قابلیت‌های جدید</span></button>
+  <button class="nav" data-page="socialsupport"><span class="nav-icon">❤️</span><span>مرکز حمایت اجتماعی و خانواده‌ها</span></button>
   <button class="nav" data-page="supportfund"><span class="nav-icon">🤝</span><span>صندوق حمایت و توسعه Afghan AI</span></button>
   <button class="nav" data-page="publications"><span class="nav-icon">📰</span><span>انتشارات و کمیسیون</span></button>
   <button class="nav" data-page="quiz"><span class="nav-icon">☑</span><span data-i18n="navQuiz">امتحان آزمایشی</span></button>
@@ -397,6 +398,13 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 </section>
 
 
+<section id="socialsupportPage" class="page hidden">
+ <div class="page-title"><span class="eyebrow">AFGHAN AI • SOCIAL SUPPORT</span><h1>❤️ مرکز حمایت اجتماعی و خانواده‌ها</h1><p>همراه خانواده‌ها، حامی آموزش، سلامت و آیندهٔ روشن اطفال افغانستان.</p></div>
+ <div class="social-support-frame-wrap">
+  <iframe class="social-support-frame" src="./social-support-center.html" title="مرکز حمایت اجتماعی Afghan AI" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+ </div>
+</section>
+
 <section id="supportfundPage" class="page hidden">
  <div class="page-title"><span class="eyebrow">AFGHAN AI • COMMUNITY SUPPORT</span><h1>🤝 صندوق حمایت و توسعه Afghan AI</h1><p>حمایت شفاف از رشد پلتفرم و رسیدگی به نیازهای خانواده‌های آسیب‌پذیر.</p></div>
  <div class="notice"><span>ℹ️</span><div><b>اطلاعیهٔ شفافیت</b><p>این صفحه فعلاً معرفی و راهنمای کمک است؛ پرداخت آنلاین، دریافت خودکار پول و صدور رسید در پلتفرم فعال نیست. پیش از ارسال کمک، مشخصات حساب را در اپلیکیشن حساب‌پی بررسی کنید.</p></div></div>
@@ -541,7 +549,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 (function(){
   if(window.__afghanAiNavigationFallback)return;
   window.__afghanAiNavigationFallback=true;
-  var pageNames=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','supportfund','publications','quiz','progress','family','admin','tools','guide','featureideas','sources'];
+  var pageNames=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','socialsupport','supportfund','publications','quiz','progress','family','admin','tools','guide','featureideas','sources'];
   function navigate(name){
     if(pageNames.indexOf(name)===-1)return false;
     var target=document.getElementById(name+'Page');
