@@ -14,7 +14,7 @@ function extractObject(source, marker) {
     const char = source[i];
     if (quote) {
       if (escaped) escaped = false;
-      else if (char === "\\\\") escaped = true;
+      else if (char === "\\") escaped = true;
       else if (char === quote) quote = null;
       continue;
     }
@@ -32,7 +32,7 @@ function extractObject(source, marker) {
 }
 
 function keysFromObjectBody(body) {
-  return [...body.matchAll(/(?:^|,)\\s*([A-Za-z_$][\\w$]*)\\s*:/g)].map((match) => match[1]);
+  return [...body.matchAll(/(?:^|,)\s*([A-Za-z_$][\w$]*)\s*:/g)].map((match) => match[1]);
 }
 
 const uiBody = extractObject(app, "const uiStrings=");
@@ -57,7 +57,7 @@ for (const language of ["fa", "ps", "en"]) {
   }
 }
 
-const ids = [...html.matchAll(/\\bid=["']([^"']+)["']/g)].map((match) => match[1]);
+const ids = [...html.matchAll(/\bid=["']([^"']+)["']/g)].map((match) => match[1]);
 const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
 for (const id of [...new Set(duplicateIds)]) errors.push(`HTML id "${id}" is duplicated.`);
 
