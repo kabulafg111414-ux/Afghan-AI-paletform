@@ -1605,6 +1605,29 @@ window.__afghanAiAppReady=true;
     list.append(make('li',w.day+' '+(i+1)+': '+activity));
    });
    output.append(list,make('p',w.cost),make('p',w.warning));
+   const itineraryText=output.innerText;
+   const actions=document.createElement('div');actions.className='travel-itinerary-actions';
+   const copyButton=make('button',lang==='en'?'Copy itinerary':lang==='ps'?'د سفر پلان کاپي':'کاپی برنامه');
+   copyButton.type='button';copyButton.className='travel-itinerary-action';
+   const shareButton=make('button',lang==='en'?'Share itinerary':lang==='ps'?'د سفر پلان شریکول':'اشتراک‌گذاری برنامه');
+   shareButton.type='button';shareButton.className='travel-itinerary-action';
+   const status=make('span','');status.className='travel-itinerary-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+   const copyText=async()=>{
+    try{
+     if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(itineraryText);
+     else{
+      const area=document.createElement('textarea');area.value=itineraryText;area.setAttribute('readonly','');area.style.position='absolute';area.style.left='-9999px';document.body.append(area);area.select();
+      const copied=document.execCommand('copy');area.remove();if(!copied)throw new Error('copy unavailable');
+     }
+     status.textContent=lang==='en'?'Copied':lang==='ps'?'کاپي شو':'کاپی شد';
+    }catch(error){status.textContent=lang==='en'?'Copy is unavailable in this browser':lang==='ps'?'په دې براوزر کې کاپي نه کېږي':'کاپی در این مرورگر فعال نیست';}
+   };
+   copyButton.addEventListener('click',copyText);
+   shareButton.addEventListener('click',async()=>{
+    if(navigator.share){try{await navigator.share({title:'Afghan AI — '+destination,text:itineraryText});status.textContent=lang==='en'?'Share sheet opened':lang==='ps'?'د شریکولو کړکۍ پرانیستل شوه':'پنجرهٔ اشتراک‌گذاری باز شد';}catch(error){if(error?.name!=='AbortError')await copyText();}}
+    else await copyText();
+   });
+   actions.append(copyButton,shareButton,status);output.append(actions);
   });
  }
  ['#travelSearch','#travelProvince','#travelCategory'].forEach(selector=>$(selector)?.addEventListener(selector==='#travelSearch'?'input':'change',window.renderTravelGuide));
