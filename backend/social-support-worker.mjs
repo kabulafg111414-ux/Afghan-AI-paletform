@@ -49,7 +49,8 @@ function cleanText(value,max) {
   return typeof value==="string" ? value.trim().replace(/[<>]/g,"").slice(0,max) : "";
 }
 async function rateLimit(request, env) {
-  if (!env.RATE_LIMIT) return false;
+  // Fail closed: do not accept public requests if the abuse-control KV binding is missing.
+  if (!env.RATE_LIMIT) throw new Error("Rate limiting is not configured");
   const ip=request.headers.get("CF-Connecting-IP") || "unknown";
   const key="support:"+await sha256(ip);
   const existing=await env.RATE_LIMIT.get(key);
@@ -60,7 +61,12 @@ async function rateLimit(request, env) {
 async function createRequest(request, env, headers) {
   if (await rateLimit(request,env)) return json({error:"لطفاً پنج دقیقه بعد دوباره تلاش کنید."},429,headers);
   let body;
-  try { body=await request.json(); } catch { return json({error:"درخواست نامعتبر است."},400,headers); }
+  try {
+    const raw=await request.text();
+    if (new TextEncoder().encode(raw).byteLength > 8192) return json({error:"حجم درخواست بیش از حد مجاز است."},413,headers);
+    body=JSON.parse(raw);
+  } catch { return json({error:"درخواست نامعتبر است."},400,headers); }
+  if (!body || typeof body !== "object" || Array.isArray(body)) return json({error:"درخواست نامعتبر است."},400,headers);
   const category=cleanText(body.category,24);
   const district=cleanText(body.district,32);
   const summary=cleanText(body.summary,1200);
@@ -104,7 +110,7 @@ export default {
       return json({error:"Not found"},404,headers);
     } catch (error) {
       // Never log submitted content or secrets.
-      console.error("Support API error:",error instanceof Error?error.message:"unknown");
+      console.error("Support API error: request processing failed");
       return json({error:"سیستم موقتاً در دسترس نیست. لطفاً بعداً تلاش کنید."},503,headers);
     }
   }
