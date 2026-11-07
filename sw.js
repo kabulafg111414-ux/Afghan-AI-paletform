@@ -1,4 +1,4 @@
-const CACHE_NAME='afghan-ai-v16';
+const CACHE_NAME='afghan-ai-v17';
 const APP_SHELL=[
  './',
  './index.html',
@@ -6,6 +6,7 @@ const APP_SHELL=[
  './app.js',
  './manifest.json',
  './icon.svg',
+ './assets/afghan-ai-logo.svg',
  './social-support-center.html',
  './assets/afghan-ai-social-hero.svg'
 ];
@@ -37,6 +38,7 @@ self.addEventListener('fetch',event=>{
   url.pathname.endsWith('/manifest.json')||
   url.pathname.endsWith('/sw.js')||
   url.pathname.endsWith('/icon.svg')||
+  url.pathname.endsWith('/assets/afghan-ai-logo.svg')||
   url.pathname.endsWith('/social-support-center.html')||
   url.pathname.endsWith('/assets/afghan-ai-social-hero.svg')||
   request.mode==='navigate';
