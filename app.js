@@ -476,6 +476,12 @@ const afghanProvincePhotoGallery={
  ],
  Nangarhar:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Landscape_between_Jalalabad_and_Dari_Noor_3.jpg?width=1600',name:{fa:'چشم‌انداز درهٔ دری نور، ننگرهار',ps:'د ننګرهار د دري نور درې منظره',en:'Dari Noor valley landscape, Nangarhar'},credit:'Todd Huffman',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Landscape_between_Jalalabad_and_Dari_Noor_3.jpg'}
+ ],
+ Takhar:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Hillside_view_in_Khawajah_Bahawuddin,_Takhar_Province,_Afghanistan.jpg?width=1600',name:{fa:'چشم‌انداز تپه‌ها در خواجه‌بهاوالدین، تخار',ps:'د تخار خواجه بهاوالدین د غونډیو منظره',en:'Hillside view in Khawajah Bahawuddin, Takhar'},credit:'Sgt. Kimberly Lamb / U.S. Army',license:'U.S. Government work, public domain',url:'https://commons.wikimedia.org/wiki/File:Hillside_view_in_Khawajah_Bahawuddin,_Takhar_Province,_Afghanistan.jpg'}
+ ],
+ Kunduz:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Kunduz_River_valley.jpg?width=1600',name:{fa:'درهٔ رودخانهٔ قندوز',ps:'د کندز سیند درې',en:'Kunduz River valley'},credit:'Dirk Haas / Afghanistan Matters',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Kunduz_River_valley.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
