@@ -62,7 +62,8 @@ function renderLibrary(){
  grid.innerHTML=items.length?items.map((x,i)=>'<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><span class="library-subject-tag">مضمون: '+librarySubjectFor(x)+'</span><details class="library-resource-details"><summary>جزئیات و راهنمای استفاده</summary><p><b>نوع منبع:</b> '+x.type+'</p><p><b>کاربرد:</b> '+librarySubjectFor(x)+'؛ برای جستجو و مطالعهٔ بیشتر در وب‌سایت منبع.</p><p><b>یادآوری:</b> موجودیت کتاب مشخص، زبان، سطح درسی، سال نشر و اجازهٔ دانلود را در سایت اصلی بررسی کنید.</p></details><a href="'+x.url+'" target="_blank" rel="noopener noreferrer" aria-label="بازکردن منبع: '+x.title+' (در زبانهٔ جدید)">رفتن به وب‌سایت منبع ↗</a></article>').join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
 }
 $('#librarySearch')?.addEventListener('input',renderLibrary);
-$('#libraryCategory')?.addEventListener('change',renderLibrary);\n$('#librarySubject')?.addEventListener('change',renderLibrary);
+$('#libraryCategory')?.addEventListener('change',renderLibrary);
+$('#librarySubject')?.addEventListener('change',renderLibrary);
 
 
 const languagePhrases=[
