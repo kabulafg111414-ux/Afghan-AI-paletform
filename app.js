@@ -437,6 +437,12 @@ const afghanProvincePhotoGallery={
  'Sar-e-Pol':[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Balkhab_District.JPG?width=1200',name:{fa:'چشم‌انداز ولسوالی بلخاب، سرپل',ps:'د سرپل د بلخاب ولسوالۍ منظره',en:'Landscape in Balkhab District, Sar-e Pol'},credit:'Ahmad imami',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Balkhab_District.JPG'}
  ],
+ Paktia:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Landscape_in_Paktia_Province.jpg?width=1200',name:{fa:'کوه‌های پوشیده از برف در ولایت پکتیا',ps:'د پکتیا ولایت واورین غرونه',en:'Snow-covered mountains in Paktia Province'},credit:'Fred W. Baker III / U.S. Department of Defense',license:'U.S. public domain',url:'https://commons.wikimedia.org/wiki/File:Landscape_in_Paktia_Province.jpg'}
+ ],
+ Paktika:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Paktika_zerok_village.jpg?width=1200',name:{fa:'کشتزارهای قریهٔ زیرک، پکتیکا',ps:'د پکتیکا د زېړوک کلي کروندې',en:'Fields in Zerok village, Paktika'},credit:'Akbarzadran',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Paktika_zerok_village.jpg'}
+ ],
  Logar:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Black_Mountain_in_Logar_Province.jpg?width=1200',name:{fa:'کوه سیاه در ولایت لوگر، نزدیک مس عینک',ps:'د لوګر ولایت تور غر، د مس عینک شاوخوا',en:'Black Mountain near Mes Aynak, Logar'},credit:'S. K. Vemmer / U.S. Embassy Kabul',license:'U.S. Department of State public domain',url:'https://commons.wikimedia.org/wiki/File:Black_Mountain_in_Logar_Province.jpg'}
  ],
