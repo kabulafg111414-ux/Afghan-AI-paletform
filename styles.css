@@ -2424,3 +2424,22 @@ body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .secur
 .fund-ledger-entry label{font-size:13px;font-weight:650}.fund-ledger-entry input,.fund-ledger-entry select{width:100%;min-width:0;padding:11px;border:1px solid var(--border-color,#dce6e1);border-radius:10px;background:var(--card-bg,#fff);color:inherit}
 .fund-ledger-entry form button{grid-column:1/-1}.fund-ledger .fund-demo-row{overflow-wrap:anywhere}
 @media(max-width:560px){.fund-ledger-entry form{grid-template-columns:1fr}.fund-ledger-entry form button{grid-column:auto}}
+
+
+/* Mobile width containment: prevent horizontal page overflow on narrow screens. */
+html,body{max-width:100%;overflow-x:clip}
+img,video,canvas,iframe{max-width:100%}
+@media(max-width:820px){
+  .layout,.main,.page{min-width:0;max-width:100%;width:100%}
+  .page :where(.card,.feature,.info-card,.tool-card,.subject-card,.publication-card,.fund-card,.recon-project-card,.security-check){min-width:0;max-width:100%}
+  .page :where(h1,h2,h3,h4,p,li,label,strong,b,a,small){overflow-wrap:anywhere}
+  .page :where(input,select,textarea,button){max-width:100%}
+  .page :where(.grid,.feature-grid,.subject-grid,.admin-grid,.two){grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:390px){
+  .topbar{min-width:0}
+  .brand{min-width:0;flex:1}
+  .brand strong{white-space:nowrap}
+  .top-actions{min-width:0}
+  .lang-select{max-width:82px}
+}
