@@ -2479,3 +2479,20 @@ body.dark .travel-filters input,body.dark .travel-filters select,body.dark .trav
 body.dark .travel-destination-icon{background:#203b34}
 @media(max-width:900px){.travel-destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.travel-info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.travel-filters{grid-template-columns:1fr}.travel-destination-grid,.travel-info-grid{grid-template-columns:1fr}.travel-hero{border-radius:15px}.travel-destination{padding:15px}}
+
+
+/* HD Afghanistan landscape showcase — layered editorial photo wall. */
+.travel-photo-strip{display:grid;grid-template-columns:1.35fr 1fr 1fr;grid-template-rows:190px 190px;gap:12px;margin:18px 0 10px}
+.travel-photo-strip figure{position:relative;overflow:hidden;min-width:0;margin:0;border-radius:17px;background:#102b35;box-shadow:0 12px 28px #0b283426}
+.travel-photo-strip figure:first-child{grid-row:span 2}
+.travel-photo-strip img{display:block;width:100%;height:100%;min-height:0;object-fit:cover;transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .4s;filter:saturate(1.08) contrast(1.03)}
+.travel-photo-strip figure:hover img{transform:scale(1.055);filter:saturate(1.2) contrast(1.06)}
+.travel-photo-strip figcaption{position:absolute;inset:auto 0 0;padding:30px 15px 14px;color:#fff;background:linear-gradient(transparent,#071c24e8);display:grid;gap:3px}
+.travel-photo-strip figcaption strong{font-size:18px;text-shadow:0 2px 10px #0008}
+.travel-photo-strip figcaption span{font-size:11px;color:#e3f3f1}
+.travel-photo-credits{margin:5px 2px 22px;color:var(--muted,#667085);font-size:11px;line-height:1.9}
+.travel-photo-credits a{color:#087f77;text-decoration:underline;text-underline-offset:2px}
+body.dark .travel-photo-credits a{color:#7ed8c9}
+.travel-hero{background-image:linear-gradient(105deg,#06283eee 0%,#0b5960d9 55%,#167d70a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Band-e-Amir,_Afghanistan.jpg?width=1800");background-size:cover;background-position:center 48%}
+@media(max-width:760px){.travel-photo-strip{grid-template-columns:1fr 1fr;grid-template-rows:210px 150px 150px;gap:9px}.travel-photo-strip figure:first-child{grid-column:1/-1;grid-row:auto}.travel-photo-strip figcaption{padding:24px 11px 11px}.travel-photo-strip figcaption strong{font-size:16px}}
+@media(max-width:390px){.travel-photo-strip{grid-template-rows:190px 135px 135px}.travel-photo-strip figure{border-radius:13px}}
