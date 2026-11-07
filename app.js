@@ -1575,8 +1575,25 @@ window.__afghanAiAppReady=true;
    event.preventDefault();
    const destination=$('#travelPlanDestination').value,days=Number($('#travelPlanDays').value),style=$('#travelPlanStyle').value;
    const output=$('#travelPlanOutput');if(!output)return;
-   const schedule=days===1?['پیش از حرکت: تأیید وضعیت مسیر و رفت‌وآمد','در طول روز: بازدید محدود از مقصد اصلی','پایان روز: بازگشت امن و بررسی وضعیت راه']:Array.from({length:days},(_,i)=>'روز '+(i+1)+': '+(i===0?'رسیدن، هماهنگی محل اقامت و آشنایی با محیط':i===days-1?'بازدید کوتاه، جمع‌بندی و بازگشت برنامه‌ریزی‌شده':'بازدید با زمان کافی، استراحت و بررسی شرایط روز'));
-   output.innerHTML='<h3>'+esc(destination)+'</h3><p><b>مدت:</b> '+days+' روز • <b>سبک:</b> '+esc(style)+'</p><ol>'+schedule.map(esc).map(x=>'<li>'+x+'</li>').join('')+'</ol><p><b>هزینه:</b> قیمت زنده در دسترس نیست؛ ترانسپورت، اقامت، غذا، مجوزها و هزینهٔ اضطراری را پیش از سفر جداگانه استعلام کنید.</p><p><b>یادآوری:</b> این برنامه نمونه است، نه تأیید امنیت یا بازبودن مسیر. پیش از حرکت وضعیت روز را بررسی کنید.</p>';
+   const lang=$('#uiLanguage')?.value||'fa';
+   const words={
+    fa:{duration:'مدت',days:'روز',style:'سبک سفر',day:'روز',arrival:'رسیدن به مقصد، بررسی مسیر و هماهنگی محل اقامت',main:'بازدید برنامه‌ریزی‌شده با زمان کافی برای استراحت و بررسی شرایط روز',return:'بازدید کوتاه، جمع‌بندی و بازگشت برنامه‌ریزی‌شده',oneA:'پیش از حرکت: وضعیت مسیر و رفت‌وآمد را تأیید کنید',oneB:'در طول روز: بازدید محدود از مقصد اصلی و رعایت مقررات محل',oneC:'پایان روز: بازگشت برنامه‌ریزی‌شده و بررسی وضعیت راه',cost:'هزینهٔ زنده در دسترس نیست؛ ترانسپورت، اقامت، غذا، مجوزها و هزینهٔ اضطراری را پیش از سفر استعلام کنید.',warning:'این برنامه نمونه است، نه تأیید امنیت یا بازبودن مسیر. پیش از حرکت وضعیت روز را بررسی کنید.'},
+    ps:{duration:'موده',days:'ورځې',style:'د سفر ډول',day:'ورځ',arrival:'موخې ته رسېدل، د لارې حالت کتل او د استوګنې همغږي',main:'له کافي استراحت او د ورځې د حالاتو له بیاکتنې سره پلان شوی لیدنه',return:'لنډه لیدنه، د سفر لنډیز او د بېرته ستنېدو پلان',oneA:'تر حرکت مخکې: د لارې او ترانسپورټ حالت تایید کړئ',oneB:'د ورځې په اوږدو کې: له اصلي ځای څخه لیدنه او د ځای مقررات مراعات کړئ',oneC:'د ورځې په پای کې: د بېرته ستنېدو پلان او د لارې بیاکتنه',cost:'ژوندۍ بیې نشته؛ د ترانسپورټ، استوګنې، خوړو، جوازونو او بېړنیو لګښتونو بیې تر سفر مخکې واخلئ.',warning:'دا یوازې نمونه‌ییز پلان دی، د امنیت یا لارې د خلاصون تایید نه دی. تر حرکت مخکې تازه حالت وګورئ.'},
+    en:{duration:'Duration',days:'days',style:'Travel style',day:'Day',arrival:'Arrive, check route conditions and confirm accommodation',main:'Planned sightseeing with time to rest and recheck local conditions',return:'Short visit, review the trip and plan the return',oneA:'Before departure: confirm route and transport conditions',oneB:'During the day: visit the main destination and follow local rules',oneC:'End of day: plan the return and recheck road conditions',cost:'Live prices are unavailable. Request current quotes for transport, lodging, food, permits and emergency costs before travel.',warning:'This is a sample itinerary, not a safety or road-access confirmation. Check current conditions before departure.'}
+   }[lang]||null;
+   const w=words||({
+    duration:'مدت',days:'روز',style:'سبک سفر',day:'روز',arrival:'رسیدن به مقصد، بررسی مسیر و هماهنگی محل اقامت',main:'بازدید برنامه‌ریزی‌شده با زمان کافی برای استراحت و بررسی شرایط روز',return:'بازدید کوتاه، جمع‌بندی و بازگشت برنامه‌ریزی‌شده',oneA:'پیش از حرکت: وضعیت مسیر و رفت‌وآمد را تأیید کنید',oneB:'در طول روز: بازدید محدود از مقصد اصلی و رعایت مقررات محل',oneC:'پایان روز: بازگشت برنامه‌ریزی‌شده و بررسی وضعیت راه',cost:'هزینهٔ زنده در دسترس نیست؛ هزینه‌ها را پیش از سفر استعلام کنید.',warning:'این برنامه نمونه است، نه تأیید امنیت یا بازبودن مسیر.'});
+   const make=(tag,txt)=>{const el=document.createElement(tag);el.textContent=txt;return el};
+   output.replaceChildren();
+   output.append(make('h3',destination));
+   output.append(make('p',w.duration+': '+days+' '+w.days+' • '+w.style+': '+style));
+   const list=document.createElement('ol');
+   if(days===1){[w.oneA,w.oneB,w.oneC].forEach(item=>list.append(make('li',item)));}
+   else Array.from({length:days},(_,i)=>{
+    const activity=i===0?w.arrival:i===days-1?w.return:w.main;
+    list.append(make('li',w.day+' '+(i+1)+': '+activity));
+   });
+   output.append(list,make('p',w.cost),make('p',w.warning));
   });
  }
  ['#travelSearch','#travelProvince','#travelCategory'].forEach(selector=>$(selector)?.addEventListener(selector==='#travelSearch'?'input':'change',window.renderTravelGuide));
