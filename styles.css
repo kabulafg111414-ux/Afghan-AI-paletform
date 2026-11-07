@@ -2384,3 +2384,12 @@ body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .secur
  .recon-project-card{padding:14px;gap:10px}
  .recon-risk-list>div{grid-template-columns:1fr;gap:4px}
 }
+
+/* National support fund pilot workflow — responsive local demo */
+.fund-operations{margin-top:24px}.fund-operations-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+.fund-operations form{display:grid;gap:9px}.fund-operations form>label:not(.fund-consent){font-weight:650;margin-top:5px}
+.fund-operations input:not([type=checkbox]),.fund-operations select,.fund-operations textarea,.fund-demo-row select{width:100%;padding:11px 12px;border:1px solid var(--border-color,#dce6e1);border-radius:10px;background:var(--card-bg,#fff);color:inherit;min-width:0}
+.fund-consent{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.7}.fund-consent input{margin-top:6px;flex:0 0 auto}
+.fund-admin-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.fund-demo-records{display:grid;gap:10px;margin-top:12px}
+.fund-demo-row{border:1px solid var(--border-color,#dce6e1);border-radius:12px;padding:13px;display:grid;gap:6px}.fund-demo-row p{margin:0;font-size:13px}
+@media(max-width:760px){.fund-operations-grid{grid-template-columns:1fr}.fund-admin-actions>*{width:100%}}
