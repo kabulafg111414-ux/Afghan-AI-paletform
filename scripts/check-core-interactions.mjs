@@ -33,10 +33,33 @@ for (const [label, snippet] of requiredBindings) {
   if (!app.includes(snippet)) errors.push(`Expected JavaScript binding or validation for ${label} was not found.`);
 }
 
+
+const mobileMarkupChecks = [
+  ["responsive viewport", /<meta[^>]*name=["']viewport["'][^>]*width=device-width/i.test(html)],
+  ["mobile menu accessibility controls", /id="mobileMenu"[^>]*aria-controls="sidebar"[^>]*aria-expanded="false"/.test(html)],
+  ["visible mobile drawer close button", /class="sidebar-mobile-head"[^>]*>[\\s\\S]*?id="closeSidebar"[^>]*aria-label=/.test(html)],
+  ["mobile drawer backdrop", /id="sidebarBackdrop"/.test(html)]
+];
+for (const [label, passed] of mobileMarkupChecks) {
+  if (!passed) errors.push(`Mobile markup check failed: ${label}.`);
+}
+
+const mobileBehaviorChecks = [
+  ["mobile drawer breakpoint and open state", /@media\\s*\\(max-width:\\s*820px\\)[\\s\\S]*?\\.sidebar\\.open\\s*\\{[^}]*display:\\s*flex/i.test((await import("node:fs")).readFileSync("styles.css", "utf8"))],
+  ["mobile drawer safe-area padding", /safe-area-inset-bottom/.test((await import("node:fs")).readFileSync("styles.css", "utf8"))],
+  ["mobile drawer Escape close", /e\\.key===['"]Escape['"][^}]*closeMobileMenu\\(\\)/.test(app)],
+  ["mobile drawer updates expanded state", /setAttribute\\(['"]aria-expanded['"],String\\(open\\)\\)/.test(app)],
+  ["mobile drawer restores collapsed state", /setAttribute\\(['"]aria-expanded['"],['"]false['"]\\)/.test(app)],
+  ["mobile drawer locks background scroll", /sidebar-menu-open/.test((await import("node:fs")).readFileSync("styles.css", "utf8"))]
+];
+for (const [label, passed] of mobileBehaviorChecks) {
+  if (!passed) errors.push(`Mobile behavior check failed: ${label}.`);
+}
+
 if (errors.length) {
   console.error("Core interaction smoke check failed:");
   for (const error of errors) console.error(`- ${error}`);
   process.exit(1);
 }
 
-console.log(`Core interaction smoke check passed: ${requiredControls.length} required controls and ${requiredBindings.length} event/validation checks verified.`);
+console.log(`Core interaction smoke check passed: ${requiredControls.length} required controls, ${requiredBindings.length} event/validation checks, and 10 mobile accessibility/responsive checks verified.`);
