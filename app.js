@@ -445,9 +445,22 @@ $('#afgAttractionFilter')?.addEventListener('change',()=>renderAfghanProvinceAtt
 let afghanLeafletMap=null,afghanProvinceLayer=null;
 function initAfghanInteractiveMap(){
  const host=$('#afgProvinceMap'),details=$('#afgProvinceDetails'),select=$('#afgProvinceSelect');
+ const status=$('#afgProvinceMapStatus'),retry=$('#afgProvinceMapRetry');
  if(!host||host.dataset.started==='true')return;
+ const lang=document.documentElement.lang||'fa';
+ const messages={
+  library:lang==='en'?'The map library did not load. Check your connection and try again. The province list remains available.':lang==='ps'?'د نقشې کتابتون پورته نه شو. اړیکه وګورئ او بیا هڅه وکړئ؛ د ولایتونو نوملړ فعال دی.':'کتابخانهٔ نقشه بارگذاری نشد. اتصال را بررسی کنید و دوباره تلاش کنید؛ فهرست ولایت‌ها فعال است.',
+  data:lang==='en'?'Province boundaries could not be loaded. Check your connection and try again. The province list remains available.':lang==='ps'?'د ولایتونو پولې پورته نه شوې. اړیکه وګورئ او بیا هڅه وکړئ؛ د ولایتونو نوملړ فعال دی.':'مرزهای ولایت‌ها بارگذاری نشد. اتصال را بررسی کنید و دوباره تلاش کنید؛ فهرست ولایت‌ها فعال است.',
+  retry:lang==='en'?'Retry map loading':lang==='ps'?'د نقشې بیا پورته کول':'تلاش دوباره برای بارگذاری نقشه'
+ };
+ const showError=message=>{
+  if(status){status.textContent=message;status.hidden=false;}
+  if(retry){retry.textContent=messages.retry;retry.hidden=false;}
+ };
+ if(!window.L){showError(messages.library);return;}
  host.dataset.started='true';
- if(!window.L){host.textContent='کتابخانهٔ نقشه بارگذاری نشد؛ لطفاً اتصال اینترنت را بررسی کنید. فهرست ولایت‌ها همچنان قابل استفاده است.';return;}
+ if(status)status.hidden=true;
+ if(retry)retry.hidden=true;
  afghanLeafletMap=L.map(host,{scrollWheelZoom:false}).setView([33.9,66.2],5);
  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap contributors',maxZoom:12}).addTo(afghanLeafletMap);
  const geoJsonUrl='https://services5.arcgis.com/sjP4Ugu5s0dZWLjd/ArcGIS/rest/services/Admin1_Afghanistan/FeatureServer/1/query?where=1%3D1&outFields=PROV_34_NA&returnGeometry=true&outSR=4326&f=geojson';
@@ -470,9 +483,11 @@ function initAfghanInteractiveMap(){
   }}).addTo(afghanLeafletMap);
   afghanLeafletMap.fitBounds(afghanProvinceLayer.getBounds(),{padding:[8,8]});
   host.dataset.loaded='true';
+  if(status)status.hidden=true;
+  if(retry)retry.hidden=true;
  }).catch(error=>{
-  host.textContent='دادهٔ مرزهای ولایت‌ها فعلاً بارگذاری نشد. اتصال اینترنت را بررسی کنید؛ فهرست انتخاب ولایت‌ها همچنان فعال است.';
   host.dataset.error='true';
+  showError(messages.data);
  }).finally(()=>host.removeAttribute('aria-busy'));
  select?.addEventListener('change',()=>{
   if(!afghanProvinceLayer||!select.value)return;
@@ -484,6 +499,13 @@ function initAfghanInteractiveMap(){
   });
  });
 }
+$('#afgProvinceMapRetry')?.addEventListener('click',()=>{
+ if(afghanLeafletMap){afghanLeafletMap.remove();afghanLeafletMap=null;}
+ afghanProvinceLayer=null;
+ const host=$('#afgProvinceMap');
+ if(host){host.dataset.started='';host.dataset.loaded='';host.dataset.error='';host.innerHTML='<p>نقشه پس از بارگذاری داده‌های جغرافیایی نمایش داده می‌شود.</p>';}
+ initAfghanInteractiveMap();
+});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAfghanInteractiveMap,{once:true});else initAfghanInteractiveMap();
 
 
