@@ -116,7 +116,7 @@ const provinceMapChecks = [
  ["Leaflet stylesheet and script are loaded before app code", html.includes("leaflet@1.9.4/dist/leaflet.css") && html.indexOf("leaflet@1.9.4/dist/leaflet.js") < html.indexOf("./app.js?")],
  ["province map initializes and displays OpenStreetMap attribution", app.includes("function initAfghanInteractiveMap()") && app.includes("© OpenStreetMap contributors")],
  ["province map loads GeoJSON boundaries from a declared source", app.includes("Admin1_Afghanistan/FeatureServer/1/query") && app.includes("returnGeometry=true&outSR=4326&f=geojson")],
- ["map failure keeps province directory available", app.includes("فهرست ولایت‌ها همچنان قابل استفاده است")],
+ ["map failure keeps province directory available", app.includes("province list remains available") && app.includes("فهرست ولایت‌ها فعال است")],
  ["province map is resized when its page opens", app.includes("afghanLeafletMap.invalidateSize()")],
  ["province map exposes a retry control after external data failure", html.includes('id="afgProvinceMapRetry"') && html.includes('id="afgProvinceMapStatus"') && app.includes("afgProvinceMapRetry") && app.includes("showError(messages.data)") && app.includes("afghanLeafletMap.remove()")],
  ["map province names normalize spelling variants", app.includes("function normalizeAfghanProvinceName(name)") && app.includes("jowzjan:'Jawzjan'") && app.includes("bamian:'Bamyan'") && app.includes("saripul:'Sar-e Pol'")],
