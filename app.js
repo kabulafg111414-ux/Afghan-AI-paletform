@@ -402,6 +402,12 @@ const afghanProvincePhotoGallery={
  ],
  Kandahar:[
   {src:'https://upload.wikimedia.org/wikipedia/commons/6/6a/A_view_over_the_Argandhab_valley_in_Kandahar.jpg',name:{fa:'درهٔ ارغنداب',ps:'د ارغنداب دره',en:'Arghandab Valley'},credit:'BihnX',license:'CC BY-SA 3.0',url:'https://commons.wikimedia.org/wiki/File:A_view_over_the_Argandhab_valley_in_Kandahar.jpg'}
+ ],
+ Balkh:[
+  {src:'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Blue_Mosque_in_Mazar-e-Sharif.jpg/960px-Blue_Mosque_in_Mazar-e-Sharif.jpg',name:{fa:'مسجد کبود مزارشریف',ps:'د مزارشریف شین جومات',en:'Blue Mosque of Mazar-i-Sharif'},credit:'ISAF Headquarters Public Affairs Office',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Blue_Mosque_in_Mazar-e-Sharif.jpg'}
+ ],
+ Herat:[
+  {src:'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Herat_Citadel%2C_Afghanistan.jpg/960px-Herat_Citadel%2C_Afghanistan.jpg',name:{fa:'قلعهٔ اختیارالدین هرات',ps:'د هرات اختیارالدین کلا',en:'Herat Citadel'},credit:'Marius Arnesen',license:'CC BY-SA 2.0',url:'https://commons.wikimedia.org/wiki/File:Herat_Citadel,_Afghanistan.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
