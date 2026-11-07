@@ -125,3 +125,41 @@ Acceptance: security review is signed off; unresolved critical/high vulnerabilit
 The existing site has a visual founder control center but no real login, role enforcement, PostgreSQL account store, central student records, seller verification, or protected admin API. Local browser progress is not a cloud account. The current health endpoint is diagnostic only, not an authentication or readiness guarantee.
 
 **Do not deploy a front-end-only password prompt and call it secure admin login.** A password check in JavaScript can be bypassed by anyone who downloads the public files.
+
+
+## 8. Founder bootstrap invitation — one-time consumption
+
+The `bootstrap_invites` table stores only a SHA-256 token hash, never the raw invitation token. The raw token must be generated with a cryptographically secure random generator, shown once to the authorized founder through a trusted delivery channel, and never written to application logs, analytics, URLs, or audit metadata.
+
+The redemption endpoint must hash the presented token and consume it atomically. A read-then-update sequence is unsafe because two concurrent requests could both observe an unused invitation. Use a single conditional update inside the same database transaction that creates the account and grants the role:
+
+```sql
+BEGIN;
+
+UPDATE bootstrap_invites
+SET used_at = NOW()
+WHERE token_hash = :presented_token_sha256
+  AND used_at IS NULL
+  AND expires_at > NOW()
+RETURNING id, role, issued_by;
+
+-- Continue only if exactly one row was returned.
+-- Create the founder/security-admin account and role assignment
+-- in this same transaction. Roll back if any step fails.
+
+COMMIT;
+```
+
+Implementation requirements:
+
+- Bind `:presented_token_sha256` as a query parameter; never concatenate SQL.
+- If zero rows are returned, reject the invitation with a generic invalid-or-expired response.
+- If account creation or role assignment fails, roll back so the invitation is not consumed without completing the bootstrap.
+- Enforce a short expiry (for example, 15 minutes) in the issuing service and keep the database expiry check authoritative.
+- Require MFA enrollment before privileged access is granted; do not treat possession of the invitation as MFA.
+- Permit bootstrap only when no active founder administrator exists, enforced server-side within a transaction/lock to prevent two simultaneous first-founder creations.
+- Record a safe audit event after successful completion. Do not include the raw token, its hash, passwords, recovery codes, or MFA secrets in audit metadata.
+- Rate-limit redemption attempts and alert on repeated failures.
+- Do not create or send a real invitation until the production identity provider, HTTPS delivery channel, database, and founder verification process are configured.
+
+This is an implementation contract, not a live invitation system. The current repository contains the schema and design only; no invitation can currently be redeemed.
