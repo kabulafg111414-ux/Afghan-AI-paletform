@@ -5,7 +5,7 @@ function safeStorageGet(key){try{const value=window.localStorage.getItem(key);re
 function safeStorageSet(key,value){const text=String(value);safeMemoryStorage.set(key,text);try{window.localStorage.setItem(key,text);return true}catch(error){return false}}
 function safeStorageRemove(key){safeMemoryStorage.delete(key);try{window.localStorage.removeItem(key);return true}catch(error){return false}}
 function safeStorageJSON(key,fallback){try{const raw=safeStorageGet(key);return raw===null?fallback:JSON.parse(raw)}catch(error){return fallback}}
-const pages=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','reconstruction','socialsupport','supportfund','featureideas','publications','quiz','progress','family','admin','tools','guide','sources'];
+const pages=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','reconstruction','socialsupport','supportfund','featureideas','innovation','publications','quiz','progress','family','admin','tools','guide','sources'];
 
 const libraryResources=[
  {title:'وزارت معارف افغانستان',category:'school',type:'منبع رسمی',desc:'درگاه رسمی اطلاعیه‌ها، نصاب و منابع آموزشی وزارت معارف؛ موجودی فایل‌ها را در وب‌سایت بررسی کنید.',url:'https://moe.gov.af/'},
@@ -1132,6 +1132,25 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
  /* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
 window.__afghanAiAppReady=true;
 
+/* Innovation lab: local project framework only; no remote AI or submission. */
+(function(){
+ const form=$('#innovationForm'),plan=$('#innovationPlan'),list=$('#innovationSavedList'),status=$('#innovationStatus');
+ if(!form||form.dataset.ready==='true')return;form.dataset.ready='true';
+ const key='afghanai-innovation-projects-v1';
+ const read=()=>{const items=safeStorageJSON(key,[]);return Array.isArray(items)?items.filter(x=>x&&typeof x==='object'&&typeof x.title==='string'&&typeof x.problem==='string'&&typeof x.solution==='string').slice(-30):[]};
+ const esc=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ const render=()=>{if(!list)return;const items=read();list.innerHTML=items.length?items.slice().reverse().map(item=>'<article class="info-card" style="margin-top:10px"><b>'+esc(item.title)+'</b><p>'+esc(item.category)+' • '+esc(item.date)+'</p><p>'+esc(item.problem)+'</p></article>').join(''):'<p class="publication-hint">هنوز طرحی ذخیره نشده است.</p>';};
+ form.addEventListener('submit',event=>{
+  event.preventDefault();
+  const item={category:$('#innovationCategory').value,title:$('#innovationTitle').value.trim(),problem:$('#innovationProblem').value.trim(),solution:$('#innovationSolution').value.trim(),beneficiaries:$('#innovationBeneficiaries').value.trim(),resources:$('#innovationResources').value.trim(),date:new Intl.DateTimeFormat('fa-AF').format(new Date())};
+  if(!item.title||!item.problem||!item.solution){if(status)status.textContent='لطفاً نام طرح، مشکل و راه‌حل را تکمیل کنید.';return;}
+  const items=read();items.push(item);
+  if(!safeStorageSet(key,JSON.stringify(items))){if(status)status.textContent='ذخیره‌سازی ممکن نشد؛ فضای مرورگر را بررسی کنید.';return;}
+  if(plan)plan.innerHTML='<h3>'+esc(item.title)+'</h3><p><b>حوزه:</b> '+esc(item.category)+'</p><p><b>مشکل:</b> '+esc(item.problem)+'</p><p><b>راه‌حل:</b> '+esc(item.solution)+'</p><p><b>بهره‌مندان:</b> '+esc(item.beneficiaries||'در مرحلهٔ طراحی مشخص شود')+'</p><h3>مراحل پیشنهادی</h3><ol><li>بررسی میدانی مشکل و گفت‌وگو با بهره‌مندان</li><li>ساخت نمونهٔ ابتدایی و آزمایش محدود</li><li>ارزیابی هزینه، دسترسی و اثرگذاری</li><li>اصلاح طرح و گسترش تدریجی در صورت موفقیت</li></ol><h3>شاخص‌های سنجش</h3><ul><li>تعداد افراد بهره‌مند</li><li>هزینه به ازای هر بهره‌مند</li><li>میزان بهبود مشکل در دورهٔ آزمایشی</li></ul><h3>خطرهای قابل بررسی</h3><p>کمبود بودجه، دسترسی محدود، نگهداری، امنیت و حفظ حریم خصوصی؛ پیش از اجرا برای هر مورد راهکار مشخص کنید.</p><p><b>منابع مورد نیاز:</b> '+esc(item.resources||'پس از ارزیابی میدانی تعیین شود')+'</p>';
+  form.reset();if(status)status.textContent='طرح در همین دستگاه ذخیره شد. این چارچوب یک پیش‌نویس است و نیاز به بررسی میدانی و مالی دارد.';render();
+ });
+ render();
+})();
 /* Feature ideas: saved locally only; no remote submission is implied. */
 (function(){
  const form=$('#featureIdeaForm'),list=$('#featureIdeaList'),status=$('#featureIdeaStatus');
