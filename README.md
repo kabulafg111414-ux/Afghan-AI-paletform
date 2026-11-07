@@ -39,9 +39,10 @@ GitHub Pages is static hosting and cannot execute server.py. The Render Blueprin
 ### Backend security notes
 
 - The Flask app serves only an explicit allowlist of website files; it does not expose the whole repository directory.
-- API requests have a size limit, input validation, bounded provider timeouts, and no-store response headers.
+- API requests have a size limit, input validation, bounded provider timeouts, no-store response headers, and per-IP limits of 10 requests/minute on the AI tutor and translation endpoints.
+- The default rate-limit store is in-memory for development only. Production must set `RATELIMIT_STORAGE_URI` to a private shared Redis/Valkey service (TLS where supported); in-memory limits are not shared across workers or instances and reset on restart.
 - Keep secrets in the hosting provider's environment settings. Rotate any key that has ever been committed or shared.
-- This is still a prototype backend. Before public launch, add persistent rate limiting/abuse protection, user authentication or another access-control strategy, monitoring, and a privacy/data-retention policy. Do not collect children's personal information until appropriate safeguards and legal review are in place.
+- This is still a prototype backend. Before public launch, configure shared Redis/Valkey rate-limit storage, add user authentication or another access-control strategy, monitoring, and a privacy/data-retention policy. The current API limits reduce basic bursts but are not a substitute for distributed abuse protection. Do not collect children's personal information until appropriate safeguards and legal review are in place.
 - Health endpoint only reports whether the key is configured; it does not prove that provider billing, network access, or model requests are working.
 
 ## Secure admin and user access roadmap
