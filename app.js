@@ -1000,7 +1000,7 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
  const allowedLedgerTypes=new Set(['planned','received','allocated','disbursed','reconciled']);
  const cleanLedgerText=(value,max)=>typeof value==='string'?value.slice(0,max):'';
  const isValidLedgerDate=value=>{
-  if(typeof value!=='string'||!/^\\d{4}-\\d{2}-\\d{2}$/.test(value))return false;
+  if(typeof value!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;
   const [year,month,day]=value.split('-').map(Number);
   if(year<1900||month<1||month>12||day<1)return false;
   const date=new Date(Date.UTC(year,month-1,day));
@@ -1009,7 +1009,7 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
  // Treat browser storage as untrusted: ignore malformed or tampered demo records.
  const readLedger=()=>{
   const value=safeStorageJSON(ledgerKey,[]);if(!Array.isArray(value))return [];
-  return value.filter(item=>item&&typeof item==='object'&&!Array.isArray(item)&&allowedLedgerTypes.has(item.type)&&typeof item.id==='string'&&item.id.length<=40&&Number.isSafeInteger(item.amount)&&item.amount>0&&typeof item.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(item.date))
+  return value.filter(item=>item&&typeof item==='object'&&!Array.isArray(item)&&allowedLedgerTypes.has(item.type)&&typeof item.id==='string'&&item.id.length<=40&&Number.isSafeInteger(item.amount)&&item.amount>0&&isValidLedgerDate(item.date))
    .map(item=>({id:item.id,type:item.type,label:cleanLedgerText(item.label,100),category:cleanLedgerText(item.category,100),amount:item.amount,date:item.date,reference:cleanLedgerText(item.reference,120),note:cleanLedgerText(item.note,500),createdAt:cleanLedgerText(item.createdAt,40)}));
  };
  const moneyAFN=value=>new Intl.NumberFormat('fa-AF',{maximumFractionDigits:0}).format(Math.max(0,Number(value)||0));
