@@ -616,7 +616,23 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
   </article>
  </div>
 
- <article class="fund-card fund-role-panel" id="fundRolePanel">
+ 
+ <article class="fund-card fund-dashboard" id="fundDashboard">
+  <span class="eyebrow">FUND OVERSIGHT • AGGREGATE VIEW</span>
+  <h2>۳. داشبورد نظارت و شفافیت صندوق</h2>
+  <div class="notice"><span>📊</span><div><b>نمای کلان، بدون نمایش هویت افراد</b><p>آمار زیر از داده‌های آزمایشی ذخیره‌شده در همین مرورگر محاسبه می‌شود. مبلغ تعهدات، پول دریافت‌شده یا موجودی بانکی نیست؛ هیچ آمار آزمایشی را گزارش واقعی صندوق تلقی نکنید.</p></div></div>
+  <div class="fund-kpi-grid" aria-live="polite">
+   <div class="fund-kpi"><span>درخواست‌های آزمایشی</span><strong id="fundKpiApplications">۰</strong></div>
+   <div class="fund-kpi"><span>تعهدات آزمایشی</span><strong id="fundKpiPledges">۰</strong></div>
+   <div class="fund-kpi"><span>مجموع مبالغ تعهدشده (AFN)</span><strong id="fundKpiAmount">۰</strong></div>
+   <div class="fund-kpi"><span>شکایات آزمایشی</span><strong id="fundKpiComplaints">۰</strong></div>
+   <div class="fund-kpi"><span>پرونده‌های باز شکایت</span><strong id="fundKpiOpen">۰</strong></div>
+  </div>
+  <div class="fund-dashboard-bottom"><div><h3>وضعیت درخواست‌ها</h3><div id="fundKpiApplicationStates"></div></div><div><h3>وضعیت شکایات</h3><div id="fundKpiComplaintStates"></div></div></div>
+  <p class="publication-hint" id="fundDashboardUpdated">برای دیدن آمار، دکمهٔ تازه‌سازی را بزنید.</p>
+  <button type="button" class="outline" id="fundDashboardRefresh">تازه‌سازی آمار</button>
+ </article>
+<article class="fund-card fund-role-panel" id="fundRolePanel">
   <span class="eyebrow">ROLE DESIGN • PREVIEW ONLY</span>
   <h2>۴. پیش‌نمایش نقش‌ها و سطح صلاحیت</h2>
   <div class="notice"><span>🔐</span><div><b>این انتخاب نقش، ورود امن نیست</b><p>فقط نمایش نمونهٔ دسترسی‌ها است. چون Afghan AI فعلاً backend و احراز هویت سروری ندارد، هیچ دادهٔ واقعی را با این بخش مدیریت نکنید و آن را کنترول امنیتی واقعی ندانید.</p></div></div>
