@@ -45,7 +45,8 @@ self.addEventListener('fetch',event=>{
 
  event.respondWith((async()=>{
   const cache=await caches.open(CACHE_NAME);
-  const cacheKey=request.mode==='navigate'?'./index.html':request;
+  const isSocialPage=url.pathname.endsWith('/social-support-center.html');
+  const cacheKey=isSocialPage?'./social-support-center.html':(request.mode==='navigate'?'./index.html':request);
   try{
    const fresh=await fetch(request,{cache:'no-cache'});
    if(fresh.ok)await cache.put(cacheKey,fresh.clone());
