@@ -424,6 +424,12 @@ const afghanProvincePhotoGallery={
  ],
  Nuristan:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Kashtun_da_waygale_Nuristan_-_panoramio.jpg?width=1200',name:{fa:'چشم‌انداز وادی ویگل نورستان',ps:'د نورستان د ویګل درې منظره',en:'Waygal Valley landscape, Nuristan'},credit:'Abdul Qahar Nuristan',license:'CC BY-SA 3.0',url:'https://commons.wikimedia.org/wiki/File:Kashtun_da_waygale_Nuristan_-_panoramio.jpg'}
+ ],
+ Badghis:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Badghis_Province,_Afghanistan_by_Planet_Labs.jpg?width=1200',name:{fa:'چشم‌انداز ماهواره‌ای ولایت بادغیس',ps:'د بادغیس ولایت سپوږمکۍ منظره',en:'Satellite view of Badghis Province'},credit:'Planet Labs, Inc.',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Badghis_Province,_Afghanistan_by_Planet_Labs.jpg'}
+ ],
+ Faryab:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Outside_Faryab_in_Afghanistan_01.jpg?width=1200',name:{fa:'چشم‌انداز بیرون فاریاب',ps:'د فاریاب بهرنی منظره',en:'Landscape outside Faryab'},credit:'PRT Meymaneh',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Outside_Faryab_in_Afghanistan_01.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
