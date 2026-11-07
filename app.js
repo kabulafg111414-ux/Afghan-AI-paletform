@@ -59,8 +59,33 @@ function renderLibrary(){
  const subject=$('#librarySubject')?.value||'all';
  const items=libraryResources.filter(x=>(cat==='all'||cat==='school'&&['school','primary','secondary'].includes(x.category)||x.category===cat)&&(subject==='all'||librarySubjectFor(x)===subject)&&(!q||(x.title+' '+x.desc+' '+x.type+' '+librarySubjectFor(x)).toLocaleLowerCase().includes(q)));
  const count=$('#libraryResultCount');if(count)count.textContent=String(items.length);
- grid.innerHTML=items.length?items.map((x,i)=>'<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><span class="library-subject-tag">مضمون: '+librarySubjectFor(x)+'</span><details class="library-resource-details"><summary>جزئیات و راهنمای استفاده</summary><p><b>نوع منبع:</b> '+x.type+'</p><p><b>کاربرد:</b> '+librarySubjectFor(x)+'؛ برای جستجو و مطالعهٔ بیشتر در وب‌سایت منبع.</p><p><b>یادآوری:</b> موجودیت کتاب مشخص، زبان، سطح درسی، سال نشر و اجازهٔ دانلود را در سایت اصلی بررسی کنید.</p></details><a href="'+x.url+'" target="_blank" rel="noopener noreferrer" aria-label="بازکردن منبع: '+x.title+' (در زبانهٔ جدید)">رفتن به وب‌سایت منبع ↗</a></article>').join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
+ const saved=readLibraryBookmarks();
+ grid.innerHTML=items.length?items.map(x=>{const id=libraryResources.indexOf(x);const marked=saved.includes(id);return '<article class="library-card"><span class="library-type">'+x.type+'</span><h3>'+x.title+'</h3><p>'+x.desc+'</p><span class="library-subject-tag">مضمون: '+librarySubjectFor(x)+'</span><details class="library-resource-details"><summary>جزئیات و راهنمای استفاده</summary><p><b>نوع منبع:</b> '+x.type+'</p><p><b>کاربرد:</b> '+librarySubjectFor(x)+'؛ برای جستجو و مطالعهٔ بیشتر در وب‌سایت منبع.</p><p><b>یادآوری:</b> موجودیت کتاب مشخص، زبان، سطح درسی، سال نشر و اجازهٔ دانلود را در سایت اصلی بررسی کنید.</p></details><div class="library-card-actions"><button type="button" class="library-save-button" data-library-save="'+id+'" aria-pressed="'+(marked?'true':'false')+'">'+(marked?'★ ذخیره‌شده':'☆ ذخیره در علاقه‌مندی‌ها')+'</button><a href="'+x.url+'" target="_blank" rel="noopener noreferrer" aria-label="بازکردن منبع: '+x.title+' (در زبانهٔ جدید)">مطالعه و بازکردن منبع ↗</a></div></article>';}).join(''):'<div class="empty-state">منبعی با این جستجو پیدا نشد؛ عبارت یا دسته‌بندی دیگری را امتحان کنید.</div>';
+ renderLibraryBookmarks();
 }
+const LIBRARY_BOOKMARK_KEY='afghanai-library-bookmarks-v1';
+function readLibraryBookmarks(){
+ try{const raw=JSON.parse(localStorage.getItem(LIBRARY_BOOKMARK_KEY)||'[]');return Array.isArray(raw)?[...new Set(raw.filter(x=>Number.isInteger(x)&&x>=0&&x<libraryResources.length))]:[];}catch(_){return [];}
+}
+function renderLibraryBookmarks(){
+ const panel=$('#libraryBookmarks');if(!panel)return;
+ const saved=readLibraryBookmarks();
+ panel.innerHTML=saved.length?'<div class="library-bookmark-list">'+saved.map(id=>{const x=libraryResources[id];return '<article class="library-bookmark-item"><div><strong>'+x.title+'</strong><small>'+librarySubjectFor(x)+'</small></div><div class="library-bookmark-actions"><a href="'+x.url+'" target="_blank" rel="noopener noreferrer">بازکردن ↗</a><button type="button" data-library-remove="'+id+'" aria-label="حذف '+x.title+' از علاقه‌مندی‌ها">حذف</button></div></article>';}).join('')+'</div>':'<p class="library-bookmark-empty">هنوز منبعی ذخیره نکرده‌اید. با گزینهٔ «ذخیره در علاقه‌مندی‌ها» منابع دلخواه خود را اینجا نگه دارید.</p>';
+ const total=$('#libraryBookmarkCount');if(total)total.textContent=String(saved.length);
+}
+$('#libraryGrid')?.addEventListener('click',event=>{
+ const button=event.target.closest('[data-library-save]');if(!button)return;
+ const id=Number(button.dataset.librarySave);if(!Number.isInteger(id)||!libraryResources[id])return;
+ const saved=readLibraryBookmarks();const next=saved.includes(id)?saved.filter(x=>x!==id):[...saved,id];
+ try{localStorage.setItem(LIBRARY_BOOKMARK_KEY,JSON.stringify(next));}catch(_){}
+ renderLibrary();
+});
+$('#libraryBookmarks')?.addEventListener('click',event=>{
+ const button=event.target.closest('[data-library-remove]');if(!button)return;
+ const id=Number(button.dataset.libraryRemove);
+ try{localStorage.setItem(LIBRARY_BOOKMARK_KEY,JSON.stringify(readLibraryBookmarks().filter(x=>x!==id)));}catch(_){}
+ renderLibrary(); 
+});
 $('#librarySearch')?.addEventListener('input',renderLibrary);
 $('#libraryCategory')?.addEventListener('change',renderLibrary);
 $('#librarySubject')?.addEventListener('change',renderLibrary);
