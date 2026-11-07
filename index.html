@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#08664f"><meta name="description" content="Afghan AI — معلم هوشمند برای دانش‌آموزان افغانستان">
-<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261108-local-market-39">
+<link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./styles.css?v=20261108-vendor-intake-40">
 <title>Afghan AI | معلم هوشمند افغانستان</title>
 <style id="afghan-ai-visual-fallback">
 /* Critical visual layer: stays visible even if the external stylesheet is delayed */
@@ -875,6 +875,37 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
  function apply(){const l=w[lang&&lang.value]||w.fa;document.getElementById('travelMarketIntro').textContent=l.intro;document.getElementById('travelMarketSearchLabel').textContent=l.search;document.getElementById('travelMarketTypeLabel').textContent=l.type;document.getElementById('travelMarketNote').textContent=l.note;[...t.options].forEach((o,i)=>o.textContent=[l.all,l.textile,l.food,l.craft][i]);g.querySelectorAll('[data-fa]').forEach(e=>e.textContent=e.dataset[lang&&lang.value]||e.dataset.fa);filter()}
  function filter(){const q=s.value.trim().toLocaleLowerCase(),v=t.value;let n=0;g.querySelectorAll('.travel-market-card').forEach(e=>{const ok=(v==='all'||e.dataset.type===v)&&(!q||(e.dataset.search+' '+e.textContent).toLocaleLowerCase().includes(q));e.hidden=!ok;if(ok)n++});const l=w[lang&&lang.value]||w.fa;c.textContent=n?n+' '+l.items:l.none}
  s.addEventListener('input',filter);t.addEventListener('change',filter);if(lang)lang.addEventListener('change',apply);apply()})();
+ </script>
+
+ <section class="travel-vendor-section" aria-labelledby="travelVendorTitle">
+  <div class="travel-section-head"><div><span class="eyebrow">LOCAL MAKERS • AFGHAN AI</span><h2 id="travelVendorTitle">درخواست معرفی تولیدکننده و فروشنده</h2><p id="travelVendorIntro">اگر تولیدکننده، هنرمند یا فروشندهٔ محصولات محلی هستید، مشخصات ابتدایی را برای بررسی به تیم Afghan AI بفرستید.</p></div></div>
+  <form id="travelVendorForm" class="travel-vendor-form">
+   <div class="travel-vendor-fields">
+    <label><span id="vendorNameLabel">نام شخص یا کارگاه</span><input name="vendor" type="text" maxlength="100" required autocomplete="organization"></label>
+    <label><span id="vendorProvinceLabel">ولایت</span><select name="province" required><option value="">انتخاب ولایت</option><option>کابل</option><option>هرات</option><option>بلخ</option><option>قندهار</option><option>ننگرهار</option><option>بامیان</option><option>بدخشان</option><option>غزنی</option><option>هلمند</option><option>فاریاب</option><option>بغلان</option><option>دایکندی</option><option>فراه</option><option>سمنگان</option><option>ولایت دیگر</option></select></label>
+    <label><span id="vendorProductLabel">محصول یا مهارت</span><input name="product" type="text" maxlength="140" required placeholder="مثلاً قالین، زعفران یا سفال"></label>
+    <label><span id="vendorContactLabel">راه تماس (اختیاری)</span><input name="contact" type="text" maxlength="100" autocomplete="tel"></label>
+   </div>
+   <label class="travel-vendor-notes-label"><span id="vendorNotesLabel">توضیحات کوتاه (اختیاری)</span><textarea name="notes" rows="3" maxlength="700"></textarea></label>
+   <label class="travel-vendor-consent"><input type="checkbox" name="consent" required><span id="vendorConsentText">موافق هستم که این معلومات برای بررسی درخواست معرفی من در ایمیل آماده شود. معلومات حساس یا اسناد هویتی نفرستید.</span></label>
+   <button type="submit" class="primary" id="vendorSubmit">آماده‌سازی درخواست معرفی</button>
+   <p class="travel-vendor-privacy" id="vendorPrivacy">این فرم اطلاعات را در سایت ذخیره نمی‌کند؛ برنامهٔ ایمیل دستگاه شما باز می‌شود و ارسال نهایی با تأیید شما انجام می‌گیرد. ثبت درخواست به معنی تأیید فروشنده یا تضمین فروش نیست.</p>
+   <p class="travel-vendor-status" id="vendorStatus" aria-live="polite"></p>
+  </form>
+ </section>
+ <script id="afghan-ai-vendor-request">
+ (function(){
+  const form=document.getElementById('travelVendorForm'),lang=document.getElementById('uiLanguage'),status=document.getElementById('vendorStatus');
+  if(!form||form.dataset.ready)return;form.dataset.ready='1';
+  const words={
+   fa:{intro:'اگر تولیدکننده، هنرمند یا فروشندهٔ محصولات محلی هستید، مشخصات ابتدایی را برای بررسی به تیم Afghan AI بفرستید.',name:'نام شخص یا کارگاه',province:'ولایت',product:'محصول یا مهارت',contact:'راه تماس (اختیاری)',notes:'توضیحات کوتاه (اختیاری)',consent:'موافق هستم که این معلومات برای بررسی درخواست معرفی من در ایمیل آماده شود. معلومات حساس یا اسناد هویتی نفرستید.',submit:'آماده‌سازی درخواست معرفی',privacy:'این فرم اطلاعات را در سایت ذخیره نمی‌کند؛ برنامهٔ ایمیل دستگاه شما باز می‌شود و ارسال نهایی با تأیید شما انجام می‌گیرد. ثبت درخواست به معنی تأیید فروشنده یا تضمین فروش نیست.',subject:'درخواست معرفی تولیدکننده یا فروشنده در Afghan AI',labels:['نام شخص یا کارگاه','ولایت','محصول یا مهارت','راه تماس','توضیحات'],status:'برنامهٔ ایمیل باز می‌شود؛ لطفاً پیش از ارسال، معلومات را بررسی کنید.'},
+   ps:{intro:'که تاسو تولیدوونکی، هنرمند یا د سیمه‌ییزو محصولاتو پلورونکی یاست، لومړني معلومات د Afghan AI ډلې ته د ارزونې لپاره واستوئ.',name:'د شخص یا کارځای نوم',province:'ولایت',product:'محصول یا مهارت',contact:'د اړیکې لاره (اختیاري)',notes:'لنډ معلومات (اختیاري)',consent:'زه موافق یم چې دا معلومات د ارزونې لپاره په برېښنالیک کې چمتو شي. حساس معلومات یا د هویت اسناد مه لېږئ.',submit:'د پېژندنې غوښتنه چمتو کړئ',privacy:'دا فورمه معلومات په وېبپاڼه کې نه ساتي؛ ستاسو د وسیلې برېښنالیک پرانیستل کېږي او وروستی لېږل ستاسو تایید ته اړتیا لري. غوښتنه د پلورونکي تایید یا د پلور ضمانت نه دی.',subject:'په Afghan AI کې د تولیدوونکي یا پلورونکي د پېژندنې غوښتنه',labels:['د شخص یا کارځای نوم','ولایت','محصول یا مهارت','د اړیکې لاره','تشریحات'],status:'برېښنالیک پرانیستل کېږي؛ تر لېږلو مخکې معلومات وګورئ.'},
+   en:{intro:'If you are a maker, artist or local-products seller, send a short profile request to the Afghan AI team for review.',name:'Person or workshop name',province:'Province',product:'Product or skill',contact:'Contact method (optional)',notes:'Short notes (optional)',consent:'I agree that these details may be prepared in an email for review. Do not send sensitive information or identity documents.',submit:'Prepare profile request',privacy:'This form does not store information on the website. It opens your email app; you review and send the message yourself. A request does not mean seller verification or guaranteed sales.',subject:'Afghan AI maker or seller profile request',labels:['Name or workshop','Province','Product or skill','Contact','Notes'],status:'Your email app should open. Review the details before sending.'}
+  };
+  function apply(){const l=words[lang&&lang.value]||words.fa;document.getElementById('travelVendorIntro').textContent=l.intro;document.getElementById('vendorNameLabel').textContent=l.name;document.getElementById('vendorProvinceLabel').textContent=l.province;document.getElementById('vendorProductLabel').textContent=l.product;document.getElementById('vendorContactLabel').textContent=l.contact;document.getElementById('vendorNotesLabel').textContent=l.notes;document.getElementById('vendorConsentText').textContent=l.consent;document.getElementById('vendorSubmit').textContent=l.submit;document.getElementById('vendorPrivacy').textContent=l.privacy}
+  form.addEventListener('submit',function(e){e.preventDefault();if(!form.reportValidity())return;const l=words[lang&&lang.value]||words.fa,d=new FormData(form),v=[d.get('vendor'),d.get('province'),d.get('product'),d.get('contact')||'—',d.get('notes')||'—'];const body=l.labels.map((label,i)=>label+': '+v[i]).join('\n')+'\n\nFor review only; seller identity and product claims require independent verification.';status.textContent=l.status;window.location.href='mailto:moheb42029@gmail.com?subject='+encodeURIComponent(l.subject)+'&body='+encodeURIComponent(body)});
+  if(lang)lang.addEventListener('change',apply);apply();
+ })();
  </script>
  <div class="travel-section-head"><div><span class="eyebrow">PLAN YOUR VISIT</span><h2 id="travelPlannerTitle">برنامه‌ریز ابتدایی سفر</h2><p id="travelPlannerHint">یک برنامهٔ نمونه برای بررسی و تنظیم شخصی بسازید.</p></div></div>
  <div class="feature-grid two travel-planner">
