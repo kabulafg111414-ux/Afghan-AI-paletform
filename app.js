@@ -1303,6 +1303,22 @@ window.__afghanAiAppReady=true;
   if(province)[...province.options].slice(1).forEach(option=>{const names=provinceNames[option.value];if(names)option.textContent=lang==='en'?names[0]:lang==='ps'?names[1]:option.value});
   const coverage=document.getElementById('travelCoverageNote');if(coverage)coverage.textContent=lang==='en'?'All 34 provinces are available in the filter. Destination listings will be expanded gradually using verifiable sources. A missing listing does not mean a province has no attractions.':lang==='ps'?'ټول ۳۴ ولایتونه په فلټر کې شته. د ځایونو نوملړ به په تدریجي ډول د باوري سرچینو له مخې بشپړ شي. د یوه ځای نشتوالی دا معنا نه لري چې په هغه ولایت کې د لیدو وړ ځایونه نشته.':'فهرست ولایت‌ها برای جستجو فعال است؛ فهرست جاذبه‌ها به‌تدریج با منابع قابل بررسی تکمیل می‌شود. نبودن یک مقصد در این نسخه به معنی نبود جاذبه در آن ولایت نیست.';
   const category=document.getElementById('travelCategory');if(category){const labels={nature:d.nature,history:d.history,city:d.city};[...category.options].forEach(o=>{if(o.value==='all')o.textContent=d.allCategories;else if(labels[o.value])o.textContent=labels[o.value]})}
+  const planDestination=document.getElementById('travelPlanDestination');
+  const destinationLabels=[
+   ['Bamyan & Band-e Amir','بامیان او بند امیر'],
+   ['Herat','هرات'],
+   ['Kabul','کابل'],
+   ['Balkh & Mazar-i-Sharif','بلخ او مزارشریف'],
+   ['Panjshir','پنجشېر'],
+   ['Badakhshan & Wakhan','بدخشان او واخان'],
+   ['Kandahar','کندهار']
+  ];
+  if(planDestination)[...planDestination.options].forEach((option,index)=>{const labels=destinationLabels[index];if(labels)option.textContent=lang==='en'?labels[0]:lang==='ps'?labels[1]:['بامیان و بند امیر','هرات','کابل','بلخ و مزارشریف','پنجشیر','بدخشان و واخان','قندهار'][index]});
+  const planDays=document.getElementById('travelPlanDays');
+  if(planDays)[...planDays.options].forEach(option=>{const count=Number(option.value);option.textContent=lang==='en'?count+' day'+(count===1?'':'s'):lang==='ps'?count+' ورځې':count+' روز'});
+  const planStyle=document.getElementById('travelPlanStyle');
+  const styles=[['Budget','اقتصادي','اقتصادي'],['Moderate','منځنۍ','متوسط'],['Family','کورنۍ','خانوادگی'],['Nature & outdoors','طبیعت‌ګرځېدنه','طبیعت‌گردی'],['Historical & cultural','تاریخي او کلتوري','تاریخی و فرهنگی']];
+  if(planStyle)[...planStyle.options].forEach((option,index)=>{const labels=styles[index];if(labels)option.textContent=labels[lang==='en'?0:lang==='ps'?1:2]});
   const output=document.getElementById('travelPlanOutput');if(output&&!output.dataset.generated)output.textContent=d.planPrompt;
   if(window.renderTravelGuide)window.renderTravelGuide();
  };
