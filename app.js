@@ -408,6 +408,12 @@ const afghanProvincePhotoGallery={
  ],
  Herat:[
   {src:'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Herat_Citadel%2C_Afghanistan.jpg/960px-Herat_Citadel%2C_Afghanistan.jpg',name:{fa:'قلعهٔ اختیارالدین هرات',ps:'د هرات اختیارالدین کلا',en:'Herat Citadel'},credit:'Marius Arnesen',license:'CC BY-SA 2.0',url:'https://commons.wikimedia.org/wiki/File:Herat_Citadel,_Afghanistan.jpg'}
+ ],
+ Kabul:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Bagh-e_Babur_garden_in_Kabul_01.jpg?width=1200',name:{fa:'باغ بابر کابل',ps:'د کابل بابر بڼ',en:'Bagh-e Babur, Kabul'},credit:'Ninaras',license:'CC BY 4.0',url:'https://commons.wikimedia.org/wiki/File:Bagh-e_Babur_garden_in_Kabul_01.jpg'}
+ ],
+ Ghor:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Jam_(Afghanistan)_banner.jpg',name:{fa:'منار جام',ps:'د جام منار',en:'Minaret of Jam'},credit:'David Adamec',license:'CC0',url:'https://commons.wikimedia.org/wiki/File:Jam_(Afghanistan)_banner.jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
