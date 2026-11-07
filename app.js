@@ -1043,6 +1043,35 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
  });
  $('#fundComplaintClear')?.addEventListener('click',()=>{if(!window.confirm('تمام شکایات آزمایشی ذخیره‌شده در همین مرورگر پاک شود؟'))return;safeStorageRemove(complaintKey);renderComplaints();$('#fundComplaintStatus').textContent='داده‌های آزمایشی شکایات پاک شد.';});
  renderComplaints();
+
+ const fundDashboardRead=key=>safeStorageJSON(key,null);
+ const paintStates=(target,items)=>{
+  const box=$(target);if(!box)return;box.replaceChildren();
+  const counts={};items.forEach(item=>{const state=String(item.status||'نامشخص');counts[state]=(counts[state]||0)+1;});
+  if(!Object.keys(counts).length){box.append(node('p','','هنوز داده‌ای ثبت نشده است.'));return;}
+  Object.entries(counts).forEach(([state,count])=>{const row=node('p','fund-state-row');row.append(node('span','',state),node('b','',new Intl.NumberFormat('fa-AF').format(count)));box.append(row);});
+ };
+ const refreshFundDashboard=()=>{
+  const pilot=fundDashboardRead('afghanai-fund-pilot-demo-v1')||{applications:[],contributions:[]};
+  const complaints=fundDashboardRead(complaintKey)||[];
+  const applications=Array.isArray(pilot.applications)?pilot.applications:[];
+  const contributions=Array.isArray(pilot.contributions)?pilot.contributions:[];
+  const safeComplaints=Array.isArray(complaints)?complaints:[];
+  const pledged=contributions.reduce((sum,item)=>sum+(Number.isFinite(Number(item.amount))?Number(item.amount):0),0);
+  const closed=new Set(['رسیدگی آزمایشی تکمیل شد','بسته‌شده در آزمایش']);
+  const values={
+   fundKpiApplications:applications.length,fundKpiPledges:contributions.length,
+   fundKpiAmount:new Intl.NumberFormat('fa-AF',{maximumFractionDigits:0}).format(pledged),
+   fundKpiComplaints:safeComplaints.length,
+   fundKpiOpen:safeComplaints.filter(item=>!closed.has(item.status)).length
+  };
+  Object.entries(values).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=new Intl.NumberFormat('fa-AF').format(value);});
+  paintStates('#fundKpiApplicationStates',applications);
+  paintStates('#fundKpiComplaintStates',safeComplaints);
+  const updated=$('#fundDashboardUpdated');if(updated)updated.textContent='آخرین تازه‌سازی: '+new Date().toLocaleString('fa-AF')+' | فقط داده‌های محلی آزمایشی';
+ };
+ $('#fundDashboardRefresh')?.addEventListener('click',refreshFundDashboard);
+ refreshFundDashboard();
  render();
 })();
  /* Mark the main app ready so the emergency navigation fallback never blocks normal renderers. */
