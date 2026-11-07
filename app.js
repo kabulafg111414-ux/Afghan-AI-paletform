@@ -65,7 +65,7 @@ function renderLibrary(){
 }
 const LIBRARY_BOOKMARK_KEY='afghanai-library-bookmarks-v1';
 function readLibraryBookmarks(){
- try{const raw=JSON.parse(localStorage.getItem(LIBRARY_BOOKMARK_KEY)||'[]');return Array.isArray(raw)?[...new Set(raw.filter(x=>Number.isInteger(x)&&x>=0&&x<libraryResources.length))]:[];}catch(_){return [];}
+ const raw=safeStorageJSON(LIBRARY_BOOKMARK_KEY,[]);return Array.isArray(raw)?[...new Set(raw.filter(x=>Number.isInteger(x)&&x>=0&&x<libraryResources.length))]:[];
 }
 function renderLibraryBookmarks(){
  const panel=$('#libraryBookmarks');if(!panel)return;
@@ -77,13 +77,13 @@ $('#libraryGrid')?.addEventListener('click',event=>{
  const button=event.target.closest('[data-library-save]');if(!button)return;
  const id=Number(button.dataset.librarySave);if(!Number.isInteger(id)||!libraryResources[id])return;
  const saved=readLibraryBookmarks();const next=saved.includes(id)?saved.filter(x=>x!==id):[...saved,id];
- try{localStorage.setItem(LIBRARY_BOOKMARK_KEY,JSON.stringify(next));}catch(_){}
+ safeStorageSet(LIBRARY_BOOKMARK_KEY,JSON.stringify(next));
  renderLibrary();
 });
 $('#libraryBookmarks')?.addEventListener('click',event=>{
  const button=event.target.closest('[data-library-remove]');if(!button)return;
  const id=Number(button.dataset.libraryRemove);
- try{localStorage.setItem(LIBRARY_BOOKMARK_KEY,JSON.stringify(readLibraryBookmarks().filter(x=>x!==id)));}catch(_){}
+ safeStorageSet(LIBRARY_BOOKMARK_KEY,JSON.stringify(readLibraryBookmarks().filter(x=>x!==id)));
  renderLibrary(); 
 });
 renderLibraryBookmarks();
