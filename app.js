@@ -389,6 +389,21 @@ function findAfghanProvinceOption(name){
  const canonical=normalizeAfghanProvinceName(name);
  return [...($('#afgProvinceSelect')?.options||[])].find(option=>option.value===canonical)||null;
 }
+const afghanProvincePhotoGallery={
+ Bamyan:[
+  {src:'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Band_Amir.jpg/960px-Band_Amir.jpg',name:{fa:'بند امیر',ps:'بند امیر',en:'Band-e Amir'},credit:'Nasim Fekrat / AfghanistanMatters',license:'CC BY 2.0',url:'https://commons.wikimedia.org/wiki/File:Band_Amir.jpg'},
+  {src:'https://upload.wikimedia.org/wikipedia/commons/e/e6/Cultural_Landscape_and_Archaeological_Remains_of_the_Bamiyan_Valley-130348.jpg',name:{fa:'درهٔ بامیان',ps:'د بامیان دره',en:'Bamiyan Valley'},credit:'Roland Lin / UNESCO',license:'CC BY-SA 3.0 IGO',url:'https://commons.wikimedia.org/wiki/File:Cultural_Landscape_and_Archaeological_Remains_of_the_Bamiyan_Valley-130348.jpg'}
+ ],
+ Panjshir:[
+  {src:'https://upload.wikimedia.org/wikipedia/commons/6/6d/A_view_of_Panjshir.jpg',name:{fa:'چشم‌انداز پنجشیر',ps:'د پنجشېر منظره',en:'Panjshir landscape'},credit:'Daniel Wilkinson / U.S. Department of State',license:'Public domain',url:'https://commons.wikimedia.org/wiki/File:A_view_of_Panjshir.jpg'}
+ ],
+ Badakhshan:[
+  {src:'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Sahrad.jpg/960px-Sahrad.jpg',name:{fa:'چشم‌انداز واخان',ps:'د واخان منظره',en:'Wakhan landscape'},credit:'Benoît Vicart',license:'CC0',url:'https://commons.wikimedia.org/wiki/File:Sahrad.jpg'}
+ ],
+ Kandahar:[
+  {src:'https://upload.wikimedia.org/wikipedia/commons/6/6a/A_view_over_the_Argandhab_valley_in_Kandahar.jpg',name:{fa:'درهٔ ارغنداب',ps:'د ارغنداب دره',en:'Arghandab Valley'},credit:'BihnX',license:'CC BY-SA 3.0',url:'https://commons.wikimedia.org/wiki/File:A_view_over_the_Argandhab_valley_in_Kandahar.jpg'}
+ ]
+};
 function renderAfghanProvinceAttractions(province){
  const panel=$('#afgProvinceSites');if(!panel)return;
  const provinceKey=normalizeAfghanProvinceName(province);
@@ -406,7 +421,10 @@ function renderAfghanProvinceAttractions(province){
  const filtered=items.filter(item=>(kind==='all'||item.type===kind)&&(!term||[item.name,item.type,item.description,item.status,item.source].some(value=>(value||'').toLocaleLowerCase().includes(term))));
  const title=lang==='en'?'Heritage and nature':lang==='ps'?'د دې ولایت میراث او طبیعت':'میراث و طبیعت این ولایت';
  const empty=lang==='en'?'No sourced attractions match this search.':lang==='ps'?'د دې لټون لپاره د باوري سرچینې لرونکي ځایونه ونه موندل شول.':'برای این جستجو جاذبهٔ دارای منبع معتبر پیدا نشد.';
- panel.innerHTML='<h3>'+title+'</h3>'+(filtered.length?filtered.map(item=>'<article class="afg-attraction-card"><span class="afg-attraction-type">'+afghanAttractionText(item,lang,'type')+'</span><h4>'+afghanAttractionText(item,lang,'name')+'</h4><p>'+afghanAttractionText(item,lang,'description')+'</p><p class="afg-attraction-status">'+afghanAttractionText(item,lang,'status')+'</p><a href="'+item.url+'" target="_blank" rel="noopener noreferrer">'+(lang==='en'?'Source: ':lang==='ps'?'سرچینه: ':'منبع: ')+item.source+'</a></article>').join(''):'<p>'+empty+'</p>');
+ const photos=afghanProvincePhotoGallery[provinceKey]||[];
+ const photoTitle=lang==='en'?'Photo highlights':lang==='ps'?'انځوریزې منظرې':'مناظر تصویری';
+ const photoGallery=photos.length?'<div class="afg-province-photo-gallery"><h4>'+photoTitle+'</h4><div class="afg-province-photo-grid">'+photos.map(photo=>'<figure><img src="'+photo.src+'" alt="'+photo.name[lang]+'" loading="lazy" decoding="async"><figcaption><b>'+photo.name[lang]+'</b><small>'+photo.credit+' · '+photo.license+' · <a href="'+photo.url+'" target="_blank" rel="noopener noreferrer">'+(lang==='en'?'License & details':lang==='ps'?'جواز او معلومات':'جواز و جزئیات')+'</a></small></figcaption></figure>').join('')+'</div></div>':'';
+ panel.innerHTML='<h3>'+title+'</h3>'+photoGallery+(filtered.length?filtered.map(item=>'<article class="afg-attraction-card"><span class="afg-attraction-type">'+afghanAttractionText(item,lang,'type')+'</span><h4>'+afghanAttractionText(item,lang,'name')+'</h4><p>'+afghanAttractionText(item,lang,'description')+'</p><p class="afg-attraction-status">'+afghanAttractionText(item,lang,'status')+'</p><a href="'+item.url+'" target="_blank" rel="noopener noreferrer">'+(lang==='en'?'Source: ':lang==='ps'?'سرچینه: ':'منبع: ')+item.source+'</a></article>').join(''):'<p>'+empty+'</p>');
 }
 
 function initAfghanProvinceExplorer(){
