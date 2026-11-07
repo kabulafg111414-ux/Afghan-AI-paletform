@@ -124,7 +124,7 @@ const travelGuideChecks = [
  ["travel route registered in router", app.includes("'opportunities','travel','publications'")],
  ["travel responsive styling", css.includes(".travel-destination-grid") && css.includes("@media(max-width:650px){.travel-filters{grid-template-columns:1fr}") ],
  ["travel guide Dari Pashto English translations", app.includes("Afghanistan Travel Guide") && app.includes("د افغانستان د سفر لارښود") && app.includes("Travel Guide localization layer")],
- ["HD Afghanistan landscape gallery has five attributed photos", (html.match(/<figure\\b/g)||[]).length>=5 && html.includes("Band-e-Amir,_Afghanistan.jpg") && html.includes("Bamyan_Valley_in_2012.jpg") && html.includes("A_view_of_Panjshir.jpg") && html.includes("2_chevaux_wakhan_Sahrad-e-Broghil.jpg") && html.includes("A_view_over_the_Argandhab_valley_in_Kandahar.jpg")],
+ ["HD Afghanistan landscape gallery has five attributed photos", html.includes('<figure class="travel-photo-feature"') && (html.match(/<figure>/g)||[]).length>=4 && html.includes("Band-e-Amir,_Afghanistan.jpg") && html.includes("Bamyan_Valley_in_2012.jpg") && html.includes("A_view_of_Panjshir.jpg") && html.includes("2_chevaux_wakhan_Sahrad-e-Broghil.jpg") && html.includes("A_view_over_the_Argandhab_valley_in_Kandahar.jpg")],
  ["photo credits and licenses are displayed", html.includes("travel-photo-credits") && html.includes("CC BY-SA 3.0") && html.includes("CC0")],
  ["landscape gallery responsive premium styling", css.includes(".travel-photo-strip") && css.includes("object-fit:cover") && css.includes("@media(max-width:760px)")],
  ["photo gallery captions localized", app.includes("photoCaptions") && app.includes("فیروزه‌يي جهیلونه") && app.includes("turquoise lakes")],
