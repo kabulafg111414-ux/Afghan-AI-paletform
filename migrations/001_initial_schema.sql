@@ -44,8 +44,10 @@ CREATE TABLE role_assignments (
 CREATE TABLE sessions (
     id UUID PRIMARY KEY,
     account_id UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
-    token_hash CHAR(64) NOT NULL UNIQUE,
-    csrf_token_hash CHAR(64),
+    token_hash CHAR(64) NOT NULL UNIQUE
+        CHECK (token_hash ~ '^[0-9a-f]{64}$'),
+    csrf_token_hash CHAR(64)
+        CHECK (csrf_token_hash IS NULL OR csrf_token_hash ~ '^[0-9a-f]{64}$'),
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     expires_at TIMESTAMPTZ NOT NULL,
     revoked_at TIMESTAMPTZ,
@@ -54,7 +56,8 @@ CREATE TABLE sessions (
 
 CREATE TABLE bootstrap_invites (
     id UUID PRIMARY KEY,
-    token_hash CHAR(64) NOT NULL UNIQUE,
+    token_hash CHAR(64) NOT NULL UNIQUE
+        CHECK (token_hash ~ '^[0-9a-f]{64}$'),
     role TEXT NOT NULL CHECK (role IN ('founder_admin', 'security_admin')),
     issued_by UUID REFERENCES accounts(id) ON DELETE SET NULL,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
