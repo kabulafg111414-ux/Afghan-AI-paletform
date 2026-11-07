@@ -486,6 +486,9 @@ const afghanProvincePhotoGallery={
  Baghlan:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Baghlan%2C_Afghanistan_-_panoramio.jpg',name:{fa:'چشم‌انداز بغلان',ps:'د بغلان منظره',en:'Baghlan landscape'},credit:'seair21',license:'CC BY 3.0',url:'https://commons.wikimedia.org/wiki/File:Baghlan,_Afghanistan_-_panoramio.jpg'}
  ],
+ Zabul:[
+  {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Almond_trees_in_Zabul_Province_of_Afghanistan.jpg?width=1600',name:{fa:'درختان بادام در شکوفه، دایچوپان زابل',ps:'د زابل د دایچوپان ولسوالۍ د بادامو ګل‌کړي ونې',en:'Almond trees in bloom, Daychopan, Zabul'},credit:'Staff Sgt. Brian Ferguson / U.S. Air Force',license:'U.S. Government work, public domain',url:'https://commons.wikimedia.org/wiki/File:Almond_trees_in_Zabul_Province_of_Afghanistan.jpg'}
+ ],
  Khost:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/View_of_Khost,_Afghanistan.jpg?width=1600',name:{fa:'چشم‌انداز شهر خوست',ps:'د خوست ښار منظره',en:'View of Khost'},credit:'Laura Goodgame / U.S. Air Force',license:'U.S. Government work, public domain',url:'https://commons.wikimedia.org/wiki/File:View_of_Khost,_Afghanistan.jpg'}
  ],
