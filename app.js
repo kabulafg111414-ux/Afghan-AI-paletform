@@ -439,6 +439,7 @@ const afghanProvincePhotoGallery={
  ],
  Samangan:[
   {src:'https://commons.wikimedia.org/wiki/Special:FilePath/Takht-E_rostum_samangan_province_Afghanistan.jpg?width=1200',name:{fa:'تخت رستم سمنگان',ps:'د سمنګان تخت رستم',en:'Takht-e Rostam, Samangan'},credit:'AhmadElhan',license:'CC BY-SA 4.0',url:'https://commons.wikimedia.org/wiki/File:Takht-E_rostum_samangan_province_Afghanistan.jpg'}
+  ,{src:'https://commons.wikimedia.org/wiki/Special:FilePath/Samangan_Province_panorama_(cropped).jpg?width=1200',name:{fa:'چشم‌انداز پانورامای سمنگان',ps:'د سمنګان پراخه منظره',en:'Samangan Province panorama'},credit:'U.S. Army',license:'CC BY 2.0 / U.S. public domain',url:'https://commons.wikimedia.org/wiki/File:Samangan_Province_panorama_(cropped).jpg'}
  ]
 };
 function renderAfghanProvinceAttractions(province){
