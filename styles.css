@@ -2400,3 +2400,8 @@ body.dark .security-check strong[data-state="ok"]{color:#7ce0b1}body.dark .secur
 .fund-role-panel>select{width:100%;max-width:420px;padding:11px;border:1px solid var(--border-color,#dce6e1);border-radius:10px;background:var(--card-bg,#fff);color:inherit}
 .fund-role-table{width:100%;border-collapse:collapse;margin-top:12px}.fund-role-table th,.fund-role-table td{text-align:start;padding:11px;border-bottom:1px solid var(--border-color,#dce6e1);font-size:13px}
 .fund-role-table td:last-child{font-weight:700}.fund-role-table td[data-access="غیرمجاز"]{color:#a33}.fund-role-table td[data-access="مجاز"]{color:#18764e}
+
+/* Complaints and appeals pilot interface */
+.fund-complaints{margin-top:16px}.fund-complaints h3{font-size:16px;margin:12px 0}
+.fund-complaint-principles{padding-inline-start:22px;line-height:1.9;font-size:13px}
+.fund-complaint-principles li{margin:5px 0}.fund-complaints textarea{resize:vertical}
