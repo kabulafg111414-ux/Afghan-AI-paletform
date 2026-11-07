@@ -116,3 +116,31 @@ def test_security_headers_are_present():
     assert response.headers["X-Content-Type-Options"] == "nosniff"
     assert response.headers["X-Frame-Options"] == "DENY"
     assert response.headers["Referrer-Policy"] == "strict-origin-when-cross-origin"
+
+
+def test_initial_schema_requires_verified_contact_for_active_accounts():
+    from pathlib import Path
+
+    schema = (
+        Path(__file__).resolve().parents[1]
+        / "migrations"
+        / "001_initial_schema.sql"
+    ).read_text(encoding="utf-8")
+    assert "email_verified_at TIMESTAMPTZ" in schema
+    assert "phone_verified_at TIMESTAMPTZ" in schema
+    assert "status <> 'active'" in schema
+    assert "OR email_verified_at IS NOT NULL" in schema
+    assert "OR phone_verified_at IS NOT NULL" in schema
+
+
+def test_initial_schema_stores_only_hashed_session_and_invitation_tokens():
+    from pathlib import Path
+
+    schema = (
+        Path(__file__).resolve().parents[1]
+        / "migrations"
+        / "001_initial_schema.sql"
+    ).read_text(encoding="utf-8")
+    assert "token_hash CHAR(64) NOT NULL UNIQUE" in schema
+    assert "CREATE TABLE sessions" in schema
+    assert "CREATE TABLE bootstrap_invites" in schema
