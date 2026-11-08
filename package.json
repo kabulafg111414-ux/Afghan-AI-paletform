@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "Afghan AI static education platform",
   "scripts": {
-    "build": "node -e \"console.log('Afghan AI static assets are ready for deployment.')\"",
-    "deploy": "wrangler deploy"
+    "build": "node scripts/build-static.mjs",
+    "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
