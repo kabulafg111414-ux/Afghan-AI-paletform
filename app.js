@@ -790,12 +790,12 @@ async function askAI(q){
   if(!r.ok){
    const knownErrors={
     'AI service is not configured':'سرور در دسترس است، اما کلید API هنوز به‌صورت امن تنظیم نشده است.',
-    'AI request failed':'سرور درخواست را دریافت کرد، اما پاسخ هوش مصنوعی ناموفق بود. گزارش خطای سرور باید بررسی شود.',
+    'AI request failed':'سرور درخواست را دریافت کرد، اما پاسخ هوش مصنوعی ناموفق بود. گزارش سرور را بررسی کنید.',
     'Message is too long':'متن پرسش بیش از حد طولانی است؛ لطفاً آن را کوتاه‌تر کنید.',
     'Message is required':'لطفاً پرسش خود را بنویسید.',
     'Too many requests. Please try again later.':'درخواست‌ها زیاد شده‌اند؛ یک دقیقه صبر کنید و دوباره بفرستید.'
    };
-   throw Error(knownErrors[data.error]||('خطای سرور (کد '+r.status+'). لطفاً بعداً دوباره تلاش کنید.'));
+   throw Error((typeof data.message==='string'&&data.message.trim())||knownErrors[data.error]||('خطای سرور (کد '+r.status+'). گزارش سرور را بررسی کنید.'));
   }
   if(typeof data.answer!=='string'||!data.answer.trim())throw Error('پاسخی از سرور دریافت نشد؛ لطفاً دوباره تلاش کنید.');
   pending.textContent=data.answer.trim();
