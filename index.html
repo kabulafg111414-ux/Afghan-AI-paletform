@@ -153,7 +153,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 <section id="tutorPage" class="page hidden">
  <div class="page-title"><span class="eyebrow" data-i18n="alwaysReady">همیشه آمادهٔ کمک</span><h1 data-i18n="tutorTitle">✦ معلم هوشمند</h1><p data-i18n="tutorDesc">سوال درسی‌ات را به دری، پشتو یا انگلیسی بنویس.</p></div>
  <div class="chat-card"><div class="chat-head"><div class="bot-avatar">✦</div><div><b>Afghan AI Tutor</b><small><i></i><span data-i18n="ready">آمادهٔ گفتگو</span></small></div><select id="answerLanguage" aria-label="زبان پاسخ"><option value="fa">پاسخ به دری</option><option value="ps">ځواب په پښتو</option><option value="en">Answer in English</option></select></div>
- <div id="messages" class="messages"><div class="bubble bot" data-i18n="greeting">سلام دانش‌آموز عزیز! 🌟\nامروز در کدام درس کمکت کنم؟ سوالت را بنویس تا ساده و مرحله‌به‌مرحله توضیح بدهم.</div></div>
+ <div id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions text" aria-label="گفتگوی معلم هوشمند"><div class="bubble bot" data-i18n="greeting">سلام دانش‌آموز عزیز! 🌟\nامروز در کدام درس کمکت کنم؟ سوالت را بنویس تا ساده و مرحله‌به‌مرحله توضیح بدهم.</div></div>
  <div class="quick-prompts"><button>کسر چیست؟</button><button>فتوسنتز را تشریح کن</button><button>در ریاضی کمکم کن</button><button>Explain gravity</button></div>
  <form id="chatForm" class="chat-input"><textarea id="question" rows="1" placeholder="سوالت را اینجا بنویس..." required></textarea><button type="submit" aria-label="ارسال">➤</button></form><p class="disclaimer" data-i18n="aiDisclaimer">پاسخ‌های هوش مصنوعی ممکن است اشتباه باشند؛ مطالب مهم را با کتاب درسی و استاد بررسی کن.</p></div>
 </section>
