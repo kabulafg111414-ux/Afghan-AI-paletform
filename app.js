@@ -775,25 +775,36 @@ async function askAI(q){
  const timeout=setTimeout(()=>controller.abort(),45000);
  try{
   const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q,language:lang}),signal:controller.signal});
+  const contentType=r.headers.get('content-type')||'';
   let data={};
-  try{data=await r.json()}catch(parseError){throw Error('پاسخ سرور قابل خواندن نیست.')}
+  if(contentType.toLowerCase().includes('application/json')){
+   try{data=await r.json()}catch(parseError){throw Error('پاسخ JSON سرور معتبر نیست؛ لطفاً دوباره تلاش کنید.')}
+  }else if(!r.ok){
+   if(r.status===404||r.status===405){
+    throw Error('مسیر معلم هوشمند در این میزبان پیدا نشد. لطفاً مطمئن شوید نسخهٔ سروری Afghan AI در Render را باز کرده‌اید؛ GitHub Pages به‌تنهایی API اجرا نمی‌کند.');
+   }
+   throw Error('سرور پاسخ قابل‌خواندن نداد (کد '+r.status+'). گزارش سرور باید بررسی شود.');
+  }else{
+   throw Error('سرور به‌جای پاسخ JSON، محتوای غیرمنتظره فرستاد. تنظیمات مسیر API را بررسی کنید.');
+  }
   if(!r.ok){
    const knownErrors={
     'AI service is not configured':'سرور در دسترس است، اما کلید API هنوز به‌صورت امن تنظیم نشده است.',
     'AI request failed':'سرور درخواست را دریافت کرد، اما پاسخ هوش مصنوعی ناموفق بود. گزارش خطای سرور باید بررسی شود.',
     'Message is too long':'متن پرسش بیش از حد طولانی است؛ لطفاً آن را کوتاه‌تر کنید.',
-    'Message is required':'لطفاً پرسش خود را بنویسید.'
+    'Message is required':'لطفاً پرسش خود را بنویسید.',
+    'Too many requests. Please try again later.':'درخواست‌ها زیاد شده‌اند؛ یک دقیقه صبر کنید و دوباره بفرستید.'
    };
    throw Error(knownErrors[data.error]||('خطای سرور (کد '+r.status+'). لطفاً بعداً دوباره تلاش کنید.'));
   }
-  if(!data.answer)throw Error('پاسخی از سرور دریافت نشد؛ لطفاً دوباره تلاش کنید.');
-  pending.textContent=data.answer;
+  if(typeof data.answer!=='string'||!data.answer.trim())throw Error('پاسخی از سرور دریافت نشد؛ لطفاً دوباره تلاش کنید.');
+  pending.textContent=data.answer.trim();
   recordActivity('پاسخ معلم هوشمند دریافت شد');
  }catch(e){
   if(e.name==='AbortError'){
    pending.textContent='زمان پاسخ‌گویی سرور به پایان رسید. لطفاً اتصال اینترنت را بررسی کرده و دوباره تلاش کنید.';
   }else if(e instanceof TypeError){
-   pending.textContent='به سرور معلم هوشمند وصل نشدیم. اگر سایت روی GitHub Pages است، باید بک‌اند جداگانه مستقر شود.';
+   pending.textContent='به سرور معلم هوشمند وصل نشدیم. اتصال اینترنت و دسترسی به سرور Render را بررسی کنید.';
   }else{
    pending.textContent=e.message||'در ارتباط با سرویس هوش مصنوعی خطایی رخ داد.';
   }
@@ -802,7 +813,32 @@ async function askAI(q){
   clearTimeout(timeout);
  }
 }
-$('#chatForm').addEventListener('submit',async e=>{e.preventDefault();let q=$('#question').value.trim();if(!q)return;$('#question').value='';addBubble(q,'user');state.questions++;saveState();recordActivity('پرسش از معلم هوشمند');await askAI(q)});
+let tutorRequestActive=false;
+const tutorForm=$('#chatForm');
+tutorForm.addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(tutorRequestActive)return;
+ const question=$('#question');
+ const q=question.value.trim();
+ if(!q){question.focus();return;}
+ tutorRequestActive=true;
+ const submitButton=tutorForm.querySelector('button[type="submit"]');
+ const previousLabel=submitButton?submitButton.textContent:'';
+ if(submitButton){submitButton.disabled=true;submitButton.setAttribute('aria-label','در حال ارسال');}
+ tutorForm.setAttribute('aria-busy','true');
+ question.value='';
+ addBubble(q,'user');
+ state.questions++;
+ saveState();
+ recordActivity('پرسش از معلم هوشمند');
+ try{await askAI(q);}
+ finally{
+  tutorRequestActive=false;
+  tutorForm.removeAttribute('aria-busy');
+  if(submitButton){submitButton.disabled=false;submitButton.textContent=previousLabel;submitButton.setAttribute('aria-label','ارسال');}
+  question.focus();
+ }
+});
 $('.quick-prompts button').forEach(b=>b.onclick=()=>{$('#question').value=b.textContent;$('#question').focus()});
 const lessons=[
  {name:'ریاضی',icon:'➗',desc:'اعداد، محاسبات و حل مسئله',body:'ریاضی به ما کمک می‌کند مقدارها را بشماریم، مقایسه کنیم و مسئله‌ها را حل کنیم.',example:'مثال: اگر ۳ بسته داشته باشیم و در هر بسته ۴ قلم باشد، ۳ × ۴ = ۱۲ قلم داریم.',topic:'ضرب و تقسیم'},
