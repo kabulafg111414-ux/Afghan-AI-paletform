@@ -40,7 +40,6 @@ const requiredBindings = [
   ["tutor form submission", "tutorForm.addEventListener('submit'"],
   ["tutor duplicate submission guard", "if(tutorRequestActive)return"],
   ["tutor submit button disabled while waiting", "submitButton.disabled=true"],
-  ["tutor live chat accessibility", 'role="log" aria-live="polite"'],
   ["lesson search input", "$('#lessonSearch').addEventListener('input',renderLessons)"],
   ["fund ledger submission", "ledgerForm?.addEventListener('submit'"],
   ["fund ledger CSV export", "$('#ledgerExport')?.addEventListener('click'"],
@@ -82,6 +81,9 @@ const mobileChecks = [
 ];
 for (const [label, passed] of mobileChecks) {
   if (!passed) errors.push(`Mobile accessibility/responsive check failed: ${label}.`);
+}
+if (!html.includes('role="log" aria-live="polite" aria-relevant="additions text"')) {
+  errors.push("Tutor chat must expose a polite accessible live log.");
 }
 
 
