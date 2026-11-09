@@ -57,6 +57,21 @@ for (const language of ["fa", "ps", "en"]) {
   }
 }
 
+const navBody = extractObject(app, "const navPageLabels=");
+const navLanguageKeys = {};
+for (const language of ["fa", "ps", "en"]) {
+  const body = extractObject(navBody, `${language}:`);
+  navLanguageKeys[language] = new Set(keysFromObjectBody(body));
+}
+const navButtons = [...html.matchAll(/<button\\b[^>]*class=["'][^"']*\\bnav\\b[^"']*["'][^>]*>/g)].map(([tag]) => tag);
+const navPages = navButtons.map((tag) => tag.match(/\\bdata-page=["']([^"']+)["']/)?.[1]).filter(Boolean);
+for (const page of navPages) {
+  for (const language of ["fa", "ps", "en"]) {
+    if (!navLanguageKeys[language].has(page)) errors.push(`Missing ${language} navigation translation for page "${page}".`);
+  }
+}
+if (!app.includes("navPageLabels[lang]?.[button.dataset.page]")) errors.push("Sidebar navigation translation application is missing.");
+
 const ids = [...html.matchAll(/\bid=["']([^"']+)["']/g)].map((match) => match[1]);
 const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
 for (const id of [...new Set(duplicateIds)]) errors.push(`HTML id "${id}" is duplicated.`);
@@ -73,4 +88,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Localization smoke check passed: ${htmlKeys.size} HTML translation keys, ${allKeys.size} dictionary keys in fa/ps/en, and ${ids.length} unique HTML ids.`);
+console.log(`Localization smoke check passed: ${htmlKeys.size} HTML translation keys, ${allKeys.size} dictionary keys, ${navPages.length} sidebar navigation labels in fa/ps/en, and ${ids.length} unique HTML ids.`);
