@@ -1,9 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "afghan-ai-paletform",
+  "main": "worker.js",
   "compatibility_date": "2026-11-05",
   "assets": {
-    "directory": "./",
-    "binding": "ASSETS"
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*"
+    ]
   }
 }
