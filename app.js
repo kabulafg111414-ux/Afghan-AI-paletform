@@ -1814,3 +1814,56 @@ window.__afghanAiAppReady=true;
  const planner=document.getElementById('travelPlanForm');
  if(planner)planner.addEventListener('submit',()=>{const out=document.getElementById('travelPlanOutput');if(out)out.dataset.generated='true';});
 })();
+
+
+// Publication commission calculator (local-only; no payment or API integration).
+(()=>{
+ const publicationCalculatorButton=document.getElementById('pubCalculate');
+ if(!publicationCalculatorButton)return;
+ const revenueInput=document.getElementById('pubRevenue');
+ const authorRateInput=document.getElementById('pubAuthorRate');
+ const platformRateInput=document.getElementById('pubPlatformRate');
+ const status=document.getElementById('pubCalcStatus');
+ const results=document.getElementById('pubResults');
+ const authorOutput=document.getElementById('pubAuthorAmount');
+ const platformOutput=document.getElementById('pubPlatformAmount');
+ const totalOutput=document.getElementById('pubTotalAmount');
+ const formatAFN=value=>new Intl.NumberFormat('fa-AF',{minimumFractionDigits:2,maximumFractionDigits:2}).format(value)+' AFN';
+ const showError=message=>{
+  status.textContent=message;
+  status.setAttribute('role','alert');
+  results.hidden=true;
+ };
+ publicationCalculatorButton.addEventListener('click',()=>{
+  const rawRevenue=revenueInput.value.trim();
+  const revenue=Number(rawRevenue);
+  const authorRate=Number(authorRateInput.value);
+  const platformRate=Number(platformRateInput.value);
+  if(rawRevenue===''||!Number.isFinite(revenue)||revenue<0){
+   showError('لطفاً درآمد ناخالص معتبر و صفر یا بیشتر وارد کنید.');
+   revenueInput.focus();
+   return;
+  }
+  if(authorRateInput.value.trim()===''||platformRateInput.value.trim()===''||
+     !Number.isFinite(authorRate)||!Number.isFinite(platformRate)||
+     authorRate<0||authorRate>100||platformRate<0||platformRate>100){
+   showError('هر دو درصد سهم باید عددی بین صفر تا ۱۰۰ باشند.');
+   (!Number.isFinite(authorRate)||authorRate<0||authorRate>100||authorRateInput.value.trim()===''?authorRateInput:platformRateInput).focus();
+   return;
+  }
+  if(Math.abs(authorRate+platformRate-100)>0.001){
+   showError('مجموع سهم نویسنده و Afghan AI باید دقیقاً ۱۰۰٪ باشد.');
+   platformRateInput.focus();
+   return;
+  }
+  const roundMoney=value=>Math.round((value+Number.EPSILON)*100)/100;
+  const authorShare=roundMoney(revenue*authorRate/100);
+  const platformShare=roundMoney(revenue*platformRate/100);
+  authorOutput.textContent=formatAFN(authorShare);
+  platformOutput.textContent=formatAFN(platformShare);
+  totalOutput.textContent=formatAFN(roundMoney(revenue));
+  results.hidden=false;
+  status.removeAttribute('role');
+  status.textContent='محاسبه با موفقیت انجام شد. این نتیجه صرفاً برآورد محلی است و ثبت یا پرداخت مالی انجام نمی‌دهد.';
+ });
+})();
