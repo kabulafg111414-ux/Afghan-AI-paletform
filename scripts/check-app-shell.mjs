@@ -39,4 +39,21 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`App-shell integrity check passed: ${shell.length} cached assets, ${htmlRefs.length} local HTML references, manifest icon verified.`);
+// A missing static resource must never receive index.html as an offline fallback.
+if (!sw.includes("if(request.mode==='navigate')")) {
+  errors.push("Offline fallback must be restricted to navigation requests.");
+}
+if (!sw.includes("status:503") || !sw.includes("Afghan AI is offline")) {
+  errors.push("Uncached offline assets must return an explicit 503 response.");
+}
+if (sw.includes("await cache.match('./index.html');")) {
+  errors.push("Service worker must not use index.html as a fallback for every failed asset request.");
+}
+
+if (errors.length) {
+  console.error("App-shell integrity check failed:");
+  for (const error of errors) console.error(`- ${error}`);
+  process.exit(1);
+}
+
+console.log(`App-shell integrity check passed: ${shell.length} cached assets, ${htmlRefs.length} local HTML references, manifest icon verified, navigation-only offline fallback verified.`);

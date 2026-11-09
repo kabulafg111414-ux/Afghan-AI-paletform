@@ -36,6 +36,11 @@ jobs:
       - name: Check core interface interactions and financial validations
         run: node scripts/check-core-interactions.mjs
 
+      - name: Build and verify Cloudflare static deployment bundle
+        run: |
+          npm run build
+          node -e "const c=JSON.parse(require('node:fs').readFileSync('wrangler.jsonc','utf8')); if(c.assets?.directory!=='./dist') throw new Error('Wrangler assets directory must be ./dist'); if(c.main) throw new Error('Static-only worker must not expose an unintended script entry point'); console.log('Wrangler static-assets configuration is valid')"
+
       - name: Validate web app manifest
         run: node -e "JSON.parse(require('node:fs').readFileSync('manifest.json', 'utf8')); console.log('manifest.json is valid JSON')"
 
@@ -49,3 +54,15 @@ jobs:
           test -s icon.svg
           test -s social-support-center.html
           test -s assets/afghan-ai-social-hero.svg
+          test -s dist/index.html
+          test -s dist/app.js
+          test -s dist/styles.css
+          test -s dist/sw.js
+          test -s dist/manifest.json
+          test -s dist/icon.svg
+          test -s dist/social-support-center.html
+          test -s dist/assets/afghan-ai-logo.svg
+          test -s dist/assets/afghan-ai-social-hero.svg
+          test ! -e dist/backend
+          test ! -e dist/docs
+          test ! -e dist/server.py

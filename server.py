@@ -6,7 +6,16 @@ import os
 from flask import Flask, jsonify, request, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from openai import OpenAI
+from openai import (
+    OpenAI,
+    APIConnectionError,
+    APITimeoutError,
+    AuthenticationError,
+    BadRequestError,
+    NotFoundError,
+    PermissionDeniedError,
+    RateLimitError,
+)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, static_folder=None)
@@ -127,9 +136,30 @@ def chat():
             input=message,
         )
         return jsonify({"answer": response.output_text})
+    except AuthenticationError:
+        app.logger.exception("OpenAI authentication failed")
+        return jsonify({"error": "AI authentication failed", "message": "کلید API پذیرفته نشد؛ کلید را در Render بررسی و در صورت نیاز تعویض کنید."}), 502
+    except PermissionDeniedError:
+        app.logger.exception("OpenAI permission denied")
+        return jsonify({"error": "AI permission denied", "message": "حساب یا پروژهٔ API اجازهٔ استفاده از این مدل را ندارد؛ دسترسی مدل را بررسی کنید."}), 502
+    except RateLimitError:
+        app.logger.exception("OpenAI rate or quota limit reached")
+        return jsonify({"error": "AI quota or rate limit", "message": "محدودیت درخواست یا اعتبار حساب API رسیده است؛ بخش Billing و Limits را بررسی کنید."}), 502
+    except NotFoundError:
+        app.logger.exception("OpenAI model or resource not found")
+        return jsonify({"error": "AI model unavailable", "message": "مدل تنظیم‌شده در دسترس این حساب نیست؛ مقدار OPENAI_MODEL را بررسی کنید."}), 502
+    except BadRequestError:
+        app.logger.exception("OpenAI rejected the request")
+        return jsonify({"error": "AI request rejected", "message": "سرویس هوش مصنوعی درخواست را نپذیرفت؛ جزئیات خطا در گزارش Render ثبت شده است."}), 502
+    except APITimeoutError:
+        app.logger.exception("OpenAI request timed out")
+        return jsonify({"error": "AI timeout", "message": "پاسخ‌دهی هوش مصنوعی بیش از حد طول کشید؛ دوباره تلاش کنید."}), 504
+    except APIConnectionError:
+        app.logger.exception("Could not connect to OpenAI")
+        return jsonify({"error": "AI connection failed", "message": "سرور Render نتوانست به سرویس هوش مصنوعی وصل شود؛ اتصال شبکه را بررسی کنید."}), 503
     except Exception:
         app.logger.exception("AI request failed")
-        return jsonify({"error": "AI request failed"}), 502
+        return jsonify({"error": "AI request failed", "message": "خطای پیش‌بینی‌نشده در سرویس هوش مصنوعی رخ داد؛ گزارش Render را بررسی کنید."}), 502
 
 
 

@@ -37,7 +37,9 @@ const requiredBindings = [
   ["mobile menu backdrop close", "$('#sidebarBackdrop').onclick=closeMobileMenu"],
   ["theme toggle", "$('#themeBtn').onclick="],
   ["language selector", "$('#uiLanguage').addEventListener('change'"],
-  ["tutor form submission", "$('#chatForm').addEventListener('submit'"],
+  ["tutor form submission", "tutorForm.addEventListener('submit'"],
+  ["tutor duplicate submission guard", "if(tutorRequestActive)return"],
+  ["tutor submit button disabled while waiting", "submitButton.disabled=true"],
   ["lesson search input", "$('#lessonSearch').addEventListener('input',renderLessons)"],
   ["fund ledger submission", "ledgerForm?.addEventListener('submit'"],
   ["fund ledger CSV export", "$('#ledgerExport')?.addEventListener('click'"],
@@ -79,6 +81,9 @@ const mobileChecks = [
 ];
 for (const [label, passed] of mobileChecks) {
   if (!passed) errors.push(`Mobile accessibility/responsive check failed: ${label}.`);
+}
+if (!html.includes('role="log" aria-live="polite" aria-relevant="additions text"')) {
+  errors.push("Tutor chat must expose a polite accessible live log.");
 }
 
 
@@ -183,6 +188,21 @@ for (const [label, snippet] of [
   ["server security limitation notice", "فایروال سرور"]
 ]) {
   if (!(app + html).includes(snippet)) errors.push(`Security diagnostic check failed: ${label}.`);
+}
+
+const publicationCalculatorChecks = [
+  ["publication calculator button exists", html.includes('id="pubCalculate"')],
+  ["publication revenue and percentage inputs exist", html.includes('id="pubRevenue"') && html.includes('id="pubAuthorRate"') && html.includes('id="pubPlatformRate"')],
+  ["publication result fields exist", html.includes('id="pubResults"') && html.includes('id="pubAuthorAmount"') && html.includes('id="pubPlatformAmount"') && html.includes('id="pubTotalAmount"')],
+  ["publication calculator click handler is connected", app.includes("publicationCalculatorButton.addEventListener('click'")],
+  ["publication calculator rejects invalid negative revenue", app.includes("!Number.isFinite(revenue)||revenue<0")],
+  ["publication calculator validates both percentage bounds", app.includes("authorRate<0||authorRate>100||platformRate<0||platformRate>100")],
+  ["publication calculator requires a 100 percent split", app.includes("Math.abs(authorRate+platformRate-100)>0.001")],
+  ["publication calculator displays rounded amounts", app.includes("const authorShare=roundMoney(revenue*authorRate/100)") && app.includes("const platformShare=roundMoney(revenue*platformRate/100)")],
+  ["publication calculator discloses local-only estimate", app.includes("این نتیجه صرفاً برآورد محلی است و ثبت یا پرداخت مالی انجام نمی‌دهد.")]
+];
+for (const [label, passed] of publicationCalculatorChecks) {
+  if (!passed) errors.push(`Publication calculator check failed: ${label}.`);
 }
 
 if (errors.length) {

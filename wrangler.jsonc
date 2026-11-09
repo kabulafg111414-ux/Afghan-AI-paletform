@@ -1,9 +1,8 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
+  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "afghan-ai-paletform",
-  "compatibility_date": "2026-11-05",
+  "compatibility_date": "2026-11-08",
   "assets": {
-    "directory": "./",
-    "binding": "ASSETS"
+    "directory": "./dist"
   }
 }
