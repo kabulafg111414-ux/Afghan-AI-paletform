@@ -63,8 +63,8 @@ for (const language of ["fa", "ps", "en"]) {
   const body = extractObject(navBody, `${language}:`);
   navLanguageKeys[language] = new Set(keysFromObjectBody(body));
 }
-const navButtons = [...html.matchAll(/<button\\b[^>]*class=["'][^"']*\\bnav\\b[^"']*["'][^>]*>/g)].map(([tag]) => tag);
-const navPages = navButtons.map((tag) => tag.match(/\\bdata-page=["']([^"']+)["']/)?.[1]).filter(Boolean);
+const navButtons = [...html.matchAll(/<button\b[^>]*class=["'][^"']*\bnav\b[^"']*["'][^>]*>/g)].map(([tag]) => tag);
+const navPages = navButtons.map((tag) => tag.match(/\bdata-page=["']([^"']+)["']/)?.[1]).filter(Boolean);
 for (const page of navPages) {
   for (const language of ["fa", "ps", "en"]) {
     if (!navLanguageKeys[language].has(page)) errors.push(`Missing ${language} navigation translation for page "${page}".`);
