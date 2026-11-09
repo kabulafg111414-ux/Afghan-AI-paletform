@@ -65,6 +65,7 @@ for (const language of ["fa", "ps", "en"]) {
 }
 const navButtons = [...html.matchAll(/<button\b[^>]*class=["'][^"']*\bnav\b[^"']*["'][^>]*>/g)].map(([tag]) => tag);
 const navPages = navButtons.map((tag) => tag.match(/\bdata-page=["']([^"']+)["']/)?.[1]).filter(Boolean);
+if (!navPages.length) errors.push("No sidebar navigation pages were found to verify.");
 for (const page of navPages) {
   for (const language of ["fa", "ps", "en"]) {
     if (!navLanguageKeys[language].has(page)) errors.push(`Missing ${language} navigation translation for page "${page}".`);
