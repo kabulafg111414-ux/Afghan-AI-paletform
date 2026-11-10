@@ -794,7 +794,7 @@ async function askAI(q){
   if(e.name==='AbortError'){
    pending.textContent='زمان پاسخ‌گویی سرور به پایان رسید. لطفاً اتصال اینترنت را بررسی کرده و دوباره تلاش کنید.';
   }else if(e instanceof TypeError){
-   pending.textContent='به سرور معلم هوشمند وصل نشدیم. اگر سایت روی GitHub Pages است، باید بک‌اند جداگانه مستقر شود.';
+   pending.textContent='به سرور معلم هوشمند وصل نشدیم. آدرس پلتفرم و فعال‌بودن سرویس Backend را بررسی کنید.';
   }else{
    pending.textContent=e.message||'در ارتباط با سرویس هوش مصنوعی خطایی رخ داد.';
   }
@@ -956,7 +956,7 @@ $('#translatorRun')?.addEventListener('click',async()=>{
   trResult.textContent=data.translation;
   trState.textContent='ترجمه تکمیل شد';
  }catch(error){
-  trResult.textContent=error.name==='AbortError'?'زمان انتظار ترجمه پایان یافت؛ دوباره تلاش کنید.':error.message==='Failed to fetch'?'سرور ترجمه در دسترس نیست. پس از راه‌اندازی بک‌اند، نشانی نسخهٔ سروری را باز کنید.':error.message;
+  trResult.textContent=error.name==='AbortError'?'زمان انتظار ترجمه پایان یافت؛ دوباره تلاش کنید.':error.message==='Failed to fetch'?'به سرویس ترجمه وصل نشدیم. آدرس پلتفرم و فعال‌بودن سرویس Backend را بررسی کنید.':error.message;
   trState.textContent='ترجمه ناموفق بود';
  }finally{
   clearTimeout(timeout);
