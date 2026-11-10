@@ -1074,7 +1074,7 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
 })();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./app.js?v=20261108-security-scan-42"></script>
+<script src="./app.js?v=20261110-chat-guard-1"></script>
 <script id="afghan-ai-security-checks">
 (function(){
  const button=document.getElementById('securityRunScan');
@@ -1142,4 +1142,70 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
  render();
 })();
 </script>
+
+<script id="afghan-ai-chat-submit-guard">
+/* Mobile-safe tutor submit guard: prevent native form navigation and keep the conversation visible. */
+(function(){
+  if(window.__afghanAiChatSubmitGuard)return;
+  window.__afghanAiChatSubmitGuard=true;
+  document.addEventListener('submit',async function(event){
+    var form=event.target;
+    if(!form||form.id!=='chatForm')return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    var input=document.getElementById('question');
+    var messages=document.getElementById('messages');
+    var language=document.getElementById('answerLanguage');
+    var send=form.querySelector('button[type="submit"]');
+    var question=(input&&input.value||'').trim();
+    if(!question||!messages)return;
+    var bubble=function(text,kind){
+      var node=document.createElement('div');
+      node.className='bubble '+kind;
+      node.textContent=text;
+      messages.appendChild(node);
+      messages.scrollTop=messages.scrollHeight;
+      return node;
+    };
+    input.value='';
+    if(send)send.disabled=true;
+    bubble(question,'user');
+    var pending=bubble('در حال آماده‌سازی پاسخ…','bot');
+    var controller=new AbortController();
+    var timeout=setTimeout(function(){controller.abort();},45000);
+    try{
+      var response=await fetch('/api/chat',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({message:question,language:language&&language.value||'fa'}),
+        signal:controller.signal,
+        cache:'no-store'
+      });
+      var data={};
+      try{data=await response.json();}catch(_parseError){throw new Error('پاسخ سرور قابل خواندن نیست.');}
+      if(!response.ok){
+        var messagesByError={
+          'AI service is not configured':'سرور فعال است، اما کلید هوش مصنوعی در تنظیمات سرور موجود نیست.',
+          'AI request failed':'سرور سؤال را دریافت کرد، اما سرویس هوش مصنوعی پاسخ نداد. لاگ‌های Render باید بررسی شود.',
+          'Message is too long':'لطفاً سؤال را کوتاه‌تر بنویسید.',
+          'Message is required':'لطفاً سؤال خود را بنویسید.',
+          'Too many requests. Please try again later.':'درخواست‌ها زیاد شده است؛ یک دقیقه بعد دوباره تلاش کنید.'
+        };
+        throw new Error(messagesByError[data.error]||('خطای سرور: '+response.status));
+      }
+      if(!data.answer)throw new Error('پاسخ خالی از سرور دریافت شد.');
+      pending.textContent=data.answer;
+    }catch(error){
+      pending.textContent=error&&error.name==='AbortError'
+        ?'زمان پاسخ‌گویی تمام شد. اتصال اینترنت را بررسی و دوباره تلاش کنید.'
+        :(error&&error.message||'در ارسال سؤال خطایی رخ داد.');
+    }finally{
+      clearTimeout(timeout);
+      if(send)send.disabled=false;
+      if(input)input.focus();
+    }
+  },true);
+})();
+</script>
+
 </body></html>
