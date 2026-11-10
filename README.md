@@ -55,8 +55,6 @@ The seller onboarding form currently prepares an email draft only; it does not s
 
 ## Founder
 Sayed Moheb Ullah Hashimi
-phone :+93787111414   +93782111414
-
 ## Intellectual property and licensing
 - The repository's `LICENSE` file contains the Afghan AI proprietary licence and intellectual-property notice as a **draft for legal review**, not a final signed agreement.
 - No open-source reuse, redistribution, modification, or commercial-use permission is granted by that draft.
