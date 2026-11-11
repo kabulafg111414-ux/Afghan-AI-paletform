@@ -803,7 +803,31 @@ async function askAI(q){
   clearTimeout(timeout);
  }
 }
-$('#chatForm').addEventListener('submit',async e=>{e.preventDefault();let q=$('#question').value.trim();if(!q)return;$('#question').value='';addBubble(q,'user');state.questions++;saveState();recordActivity('پرسش از معلم هوشمند');await askAI(q)});
+let tutorRequestActive=false;
+const tutorForm=$('#chatForm');
+tutorForm.addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(tutorRequestActive)return;
+ const question=$('#question');
+ const q=question.value.trim();
+ if(!q){question.focus();return;}
+ tutorRequestActive=true;
+ const submitButton=tutorForm.querySelector('button[type="submit"]');
+ if(submitButton){submitButton.disabled=true;submitButton.setAttribute('aria-label','در حال ارسال');}
+ tutorForm.setAttribute('aria-busy','true');
+ question.value='';
+ addBubble(q,'user');
+ state.questions++;
+ saveState();
+ recordActivity('پرسش از معلم هوشمند');
+ try{await askAI(q);}
+ finally{
+  tutorRequestActive=false;
+  tutorForm.removeAttribute('aria-busy');
+  if(submitButton){submitButton.disabled=false;submitButton.setAttribute('aria-label','ارسال');}
+  question.focus();
+ }
+});
 $('.quick-prompts button').forEach(b=>b.onclick=()=>{$('#question').value=b.textContent;$('#question').focus()});
 const lessons=[
  {name:'ریاضی',icon:'➗',desc:'اعداد، محاسبات و حل مسئله',body:'ریاضی به ما کمک می‌کند مقدارها را بشماریم، مقایسه کنیم و مسئله‌ها را حل کنیم.',example:'مثال: اگر ۳ بسته داشته باشیم و در هر بسته ۴ قلم باشد، ۳ × ۴ = ۱۲ قلم داریم.',topic:'ضرب و تقسیم'},
