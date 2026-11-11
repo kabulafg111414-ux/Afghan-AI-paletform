@@ -6,6 +6,7 @@ Notable project changes are recorded here. Entries should describe verified chan
 - Replaced the duplicate inline tutor submit interceptor with one guarded application handler.
 - Preserved learning-question counts and activity logging; prevented duplicate requests while waiting and restored the send control after completion.
 - Added regression checks and refreshed the app script and service-worker cache versions.
+- Restricted offline HTML fallback to navigation requests and added regression checks so missing scripts or stylesheets cannot be served as index.html.
 
 ## 2026-11-06
 - Added a browser-side Security and Protection Center with limited diagnostic checks.
