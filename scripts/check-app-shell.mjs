@@ -39,4 +39,15 @@ if (errors.length) {
   process.exit(1);
 }
 
+// A missing static resource must never receive index.html as its offline fallback.
+if (!sw.includes("const pageFallback=isSocialPage?'./social-support-center.html':'./index.html';")) {
+  errors.push("Offline HTML fallback must select the cached page only for navigation requests.");
+}
+if (!sw.includes("status:503") || !sw.includes("Afghan AI is offline")) {
+  errors.push("Uncached offline assets must return an explicit 503 response.");
+}
+if (sw.includes("await cache.match('./index.html');")) {
+  errors.push("Service worker must not use index.html as a fallback for every failed asset request.");
+}
+
 console.log(`App-shell integrity check passed: ${shell.length} cached assets, ${htmlRefs.length} local HTML references, manifest icon verified.`);
