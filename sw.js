@@ -1,4 +1,4 @@
-const CACHE_NAME='afghan-ai-v20';
+const CACHE_NAME='afghan-ai-v21';
 const APP_SHELL=[
  './',
  './index.html',
@@ -54,12 +54,22 @@ self.addEventListener('fetch',event=>{
    if(fresh.ok)await cache.put(cacheKey,fresh.clone());
    return fresh;
   }catch(error){
-   const cached=await cache.match(request,{ignoreSearch:true})||
-    (url.pathname.endsWith('/social-support-center.html')?await cache.match('./social-support-center.html'):null)||
-    (url.pathname.endsWith('/assets/afghan-ai-social-hero.svg')?await cache.match('./assets/afghan-ai-social-hero.svg'):null)||
-    await cache.match('./index.html');
+   const cached=await cache.match(request,{ignoreSearch:true});
    if(cached)return cached;
-   throw error;
+
+   // Only navigation requests may fall back to an HTML page. Returning index.html
+   // for a missing script, stylesheet, or manifest causes MIME/type errors.
+   if(request.mode==='navigate'){
+    const pageFallback=isSocialPage?'./social-support-center.html':'./index.html';
+    const cachedPage=await cache.match(pageFallback);
+    if(cachedPage)return cachedPage;
+   }
+
+   return new Response('Afghan AI is offline and this resource is not cached.',{
+    status:503,
+    statusText:'Offline',
+    headers:{'Content-Type':'text/plain; charset=utf-8','Cache-Control':'no-store'}
+   });
   }
  })());
 });
