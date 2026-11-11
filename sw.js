@@ -1,4 +1,4 @@
-const CACHE_NAME='afghan-ai-v19';
+const CACHE_NAME='afghan-ai-v20';
 const APP_SHELL=[
  './',
  './index.html',
