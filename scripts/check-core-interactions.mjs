@@ -37,7 +37,11 @@ const requiredBindings = [
   ["mobile menu backdrop close", "$('#sidebarBackdrop').onclick=closeMobileMenu"],
   ["theme toggle", "$('#themeBtn').onclick="],
   ["language selector", "$('#uiLanguage').addEventListener('change'"],
-  ["tutor form submission", "$('#chatForm').addEventListener('submit'"],
+  ["tutor form submission", "tutorForm.addEventListener('submit'"],
+  ["tutor duplicate submission guard", "if(tutorRequestActive)return"],
+  ["tutor submit button disabled while waiting", "submitButton.disabled=true"],
+  ["tutor busy state restored", "tutorForm.removeAttribute('aria-busy')"],
+  ["tutor learning activity recorded", "recordActivity('پرسش از معلم هوشمند')"],
   ["lesson search input", "$('#lessonSearch').addEventListener('input',renderLessons)"],
   ["fund ledger submission", "ledgerForm?.addEventListener('submit'"],
   ["fund ledger CSV export", "$('#ledgerExport')?.addEventListener('click'"],
@@ -52,6 +56,10 @@ const requiredBindings = [
   ["ledger validates real calendar dates", "isValidLedgerDate(item.date)"],
   ["ledger rejects impossible calendar dates", "date.getUTCDate()===day"]
 ];
+if (html.includes('afghan-ai-chat-submit-guard') || html.includes('stopImmediatePropagation')) {
+  errors.push("Duplicate inline tutor submit interception must not bypass the application handler.");
+}
+
 for (const [label, snippet] of requiredBindings) {
   if (!app.includes(snippet)) errors.push(`Expected JavaScript binding or validation for ${label} was not found.`);
 }
