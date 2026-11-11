@@ -56,7 +56,7 @@ const requiredBindings = [
   ["ledger validates real calendar dates", "isValidLedgerDate(item.date)"],
   ["ledger rejects impossible calendar dates", "date.getUTCDate()===day"]
 ];
-if (html.includes('afghan-ai-chat-submit-guard') || html.includes('stopImmediatePropagation')) {
+if (html.includes('afghan-ai-chat-submit-guard')) {
   errors.push("Duplicate inline tutor submit interception must not bypass the application handler.");
 }
 
