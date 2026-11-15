@@ -64,7 +64,7 @@ for (const [label, snippet] of requiredBindings) {
   if (!app.includes(snippet)) errors.push(`Expected JavaScript binding or validation for ${label} was not found.`);
 }
 
-const fallbackMatch = html.match(/var pageNames=\\[([^\\]]+)\\]/);
+const fallbackMatch = html.match(/var pageNames=\[([^\]]+)\]/);
 if (!fallbackMatch) {
   errors.push("Independent navigation fallback page list is missing.");
 } else {
