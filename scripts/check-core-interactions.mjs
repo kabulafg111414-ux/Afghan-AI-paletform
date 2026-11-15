@@ -64,6 +64,55 @@ for (const [label, snippet] of requiredBindings) {
   if (!app.includes(snippet)) errors.push(`Expected JavaScript binding or validation for ${label} was not found.`);
 }
 
+const fallbackMatch = html.match(/var pageNames=\[([^\]]+)\]/);
+if (!fallbackMatch) {
+  errors.push("Independent navigation fallback page list is missing.");
+} else {
+  const fallbackPages = [...fallbackMatch[1].matchAll(/'([^']+)'/g)].map(match => match[1]);
+  const sidebarPages = [...html.matchAll(/class="nav(?: active)?" data-page="([^"]+)"/g)].map(match => match[1]);
+  const uniqueSidebarPages = [...new Set(sidebarPages)];
+  const missingFallbackPages = uniqueSidebarPages.filter(name => !fallbackPages.includes(name));
+  const unknownFallbackPages = fallbackPages.filter(name => !uniqueSidebarPages.includes(name));
+  if (new Set(fallbackPages).size !== fallbackPages.length) errors.push("Independent navigation fallback contains duplicate page names.");
+  if (missingFallbackPages.length) errors.push(`Independent navigation fallback is missing: ${missingFallbackPages.join(", ")}.`);
+  if (unknownFallbackPages.length) errors.push(`Independent navigation fallback contains unknown pages: ${unknownFallbackPages.join(", ")}.`);
+  for (const name of uniqueSidebarPages) {
+    if (!html.includes(`id="${name}Page"`)) errors.push(`Sidebar route "${name}" has no matching page section.`);
+  }
+}
+
+const publicationCalculatorChecks = [
+  ["commission calculator button", html.includes('id="pubCalculate"')],
+  ["revenue input is required", /id="pubRevenue"[^>]*required/.test(html)],
+  ["author percentage input is required", /id="pubAuthorRate"[^>]*required/.test(html)],
+  ["platform percentage input is required", /id="pubPlatformRate"[^>]*required/.test(html)],
+  ["calculator reads trimmed revenue", html.includes("var revenueRaw=revenueInput.value.trim();")],
+  ["calculator rejects empty revenue before numeric conversion", html.includes("if(!revenueRaw||!Number.isFinite(revenue)||revenue<0)")],
+  ["calculator rejects empty percentage fields", html.includes("if(!authorRateRaw||!platformRateRaw||!Number.isFinite(authorRate)")],
+  ["calculator rejects invalid percentage totals", html.includes("Math.abs(authorRate+platformRate-100)>0.0001")],
+  ["calculator hides stale results after invalid input", html.includes("results.hidden=true;")],
+  ["calculator labels results as demonstration only", html.includes("این نتیجه نمونه‌ای است و پرداخت واقعی انجام نمی‌دهد")]
+];
+for (const [label, passed] of publicationCalculatorChecks) {
+  if (!passed) errors.push(`Publication calculator check failed: ${label}.`);
+}
+
+
+const aiToolsAndSeoChecks = [
+  ["AI tools navigation item", html.includes('data-page="aiTools"')],
+  ["AI tools page section", html.includes('id="aiToolsPage"')],
+  ["AI tools route in fallback navigation", /var pageNames=\[[^\]]*'aiTools'/.test(html)],
+  ["five official AI tool entries", ["chatgpt.com", "gemini.google.com", "claude.ai", "copilot.microsoft.com", "perplexity.ai"].every(domain => html.includes(domain))],
+  ["external AI links use safe target attributes", (html.match(/target="_blank" rel="noopener noreferrer"/g) || []).length >= 5],
+  ["SEO meta description", /<meta name="description" content="[^"]+"/.test(html)],
+  ["SEO robots directive", html.includes('name="robots" content="index,follow')],
+  ["Open Graph metadata", html.includes('property="og:title"') && html.includes('property="og:description"')],
+  ["Twitter card metadata", html.includes('name="twitter:card"')],
+  ["JSON-LD website structured data", html.includes('"@type": "WebSite"') && html.includes('"inLanguage": ["fa-AF", "ps-AF", "en"]')]
+];
+for (const [label, passed] of aiToolsAndSeoChecks) {
+  if (!passed) errors.push(`AI tools / SEO check failed: ${label}.`);
+}
 
 const css = readFileSync("styles.css", "utf8");
 const mobileChecks = [
