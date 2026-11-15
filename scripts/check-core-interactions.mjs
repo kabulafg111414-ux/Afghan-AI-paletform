@@ -64,6 +64,38 @@ for (const [label, snippet] of requiredBindings) {
   if (!app.includes(snippet)) errors.push(`Expected JavaScript binding or validation for ${label} was not found.`);
 }
 
+const fallbackMatch = html.match(/var pageNames=\\[([^\\]]+)\\]/);
+if (!fallbackMatch) {
+  errors.push("Independent navigation fallback page list is missing.");
+} else {
+  const fallbackPages = [...fallbackMatch[1].matchAll(/'([^']+)'/g)].map(match => match[1]);
+  const sidebarPages = [...html.matchAll(/class="nav" data-page="([^"]+)"/g)].map(match => match[1]);
+  const uniqueSidebarPages = [...new Set(sidebarPages)];
+  const missingFallbackPages = uniqueSidebarPages.filter(name => !fallbackPages.includes(name));
+  const unknownFallbackPages = fallbackPages.filter(name => !uniqueSidebarPages.includes(name));
+  if (new Set(fallbackPages).size !== fallbackPages.length) errors.push("Independent navigation fallback contains duplicate page names.");
+  if (missingFallbackPages.length) errors.push(`Independent navigation fallback is missing: ${missingFallbackPages.join(", ")}.`);
+  if (unknownFallbackPages.length) errors.push(`Independent navigation fallback contains unknown pages: ${unknownFallbackPages.join(", ")}.`);
+  for (const name of uniqueSidebarPages) {
+    if (!html.includes(`id="${name}Page"`)) errors.push(`Sidebar route "${name}" has no matching page section.`);
+  }
+}
+
+const publicationCalculatorChecks = [
+  ["commission calculator button", html.includes('id="pubCalculate"')],
+  ["revenue input is required", /id="pubRevenue"[^>]*required/.test(html)],
+  ["author percentage input is required", /id="pubAuthorRate"[^>]*required/.test(html)],
+  ["platform percentage input is required", /id="pubPlatformRate"[^>]*required/.test(html)],
+  ["calculator reads trimmed revenue", html.includes("var revenueRaw=revenueInput.value.trim();")],
+  ["calculator rejects empty revenue before numeric conversion", html.includes("if(!revenueRaw||!Number.isFinite(revenue)||revenue<0)")],
+  ["calculator rejects empty percentage fields", html.includes("if(!authorRateRaw||!platformRateRaw||!Number.isFinite(authorRate)")],
+  ["calculator rejects invalid percentage totals", html.includes("Math.abs(authorRate+platformRate-100)>0.0001")],
+  ["calculator hides stale results after invalid input", html.includes("results.hidden=true;")],
+  ["calculator labels results as demonstration only", html.includes("این نتیجه نمونه‌ای است و پرداخت واقعی انجام نمی‌دهد")]
+];
+for (const [label, passed] of publicationCalculatorChecks) {
+  if (!passed) errors.push(`Publication calculator check failed: ${label}.`);
+}
 
 const css = readFileSync("styles.css", "utf8");
 const mobileChecks = [
