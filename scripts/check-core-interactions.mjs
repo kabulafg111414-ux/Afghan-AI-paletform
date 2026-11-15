@@ -69,7 +69,7 @@ if (!fallbackMatch) {
   errors.push("Independent navigation fallback page list is missing.");
 } else {
   const fallbackPages = [...fallbackMatch[1].matchAll(/'([^']+)'/g)].map(match => match[1]);
-  const sidebarPages = [...html.matchAll(/class="nav" data-page="([^"]+)"/g)].map(match => match[1]);
+  const sidebarPages = [...html.matchAll(/class="nav(?: active)?" data-page="([^"]+)"/g)].map(match => match[1]);
   const uniqueSidebarPages = [...new Set(sidebarPages)];
   const missingFallbackPages = uniqueSidebarPages.filter(name => !fallbackPages.includes(name));
   const unknownFallbackPages = fallbackPages.filter(name => !uniqueSidebarPages.includes(name));
