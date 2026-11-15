@@ -97,6 +97,23 @@ for (const [label, passed] of publicationCalculatorChecks) {
   if (!passed) errors.push(`Publication calculator check failed: ${label}.`);
 }
 
+
+const aiToolsAndSeoChecks = [
+  ["AI tools navigation item", html.includes('data-page="aiTools"')],
+  ["AI tools page section", html.includes('id="aiToolsPage"')],
+  ["AI tools route in fallback navigation", /var pageNames=\\[[^\\]]*'aiTools'/.test(html)],
+  ["five official AI tool entries", ["chatgpt.com", "gemini.google.com", "claude.ai", "copilot.microsoft.com", "perplexity.ai"].every(domain => html.includes(domain))],
+  ["external AI links use safe target attributes", (html.match(/target="_blank" rel="noopener noreferrer"/g) || []).length >= 5],
+  ["SEO meta description", /<meta name="description" content="[^"]+"/.test(html)],
+  ["SEO robots directive", html.includes('name="robots" content="index,follow')],
+  ["Open Graph metadata", html.includes('property="og:title"') && html.includes('property="og:description"')],
+  ["Twitter card metadata", html.includes('name="twitter:card"')],
+  ["JSON-LD website structured data", html.includes('"@type": "WebSite"') && html.includes('"inLanguage": ["fa-AF", "ps-AF", "en"]')]
+];
+for (const [label, passed] of aiToolsAndSeoChecks) {
+  if (!passed) errors.push(`AI tools / SEO check failed: ${label}.`);
+}
+
 const css = readFileSync("styles.css", "utf8");
 const mobileChecks = [
   ["responsive viewport", /<meta[^>]*name=["']viewport["'][^>]*width=device-width/i.test(html)],
