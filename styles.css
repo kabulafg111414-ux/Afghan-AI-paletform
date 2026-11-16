@@ -2754,3 +2754,8 @@ body.dark .admin-control-summary article,body.dark .admin-control-grid .admin-ca
 .ai-directory-card a{display:inline-flex;align-items:center;margin-top:auto;padding:9px 12px;border-radius:10px;background:#eaf5f1;color:#075b49;font-weight:700;text-decoration:none}
 .ai-directory-card a:hover,.ai-directory-card a:focus-visible{text-decoration:underline;outline:2px solid currentColor;outline-offset:2px}
 .ai-tools-note{margin-top:16px;line-height:1.9}
+
+/* Dedicated homepage shortcut for the seven-tool AI directory */
+.service-cyan{background:linear-gradient(145deg,#075985,#087fbd 55%,#063b66)}
+.service-cyan .service-symbol{background:#ffffff24}
+.home-service:focus-visible,.home-view-link:focus-visible,.home-side-card button:focus-visible,.footer-link:focus-visible{outline:3px solid #f2bd55;outline-offset:3px}
