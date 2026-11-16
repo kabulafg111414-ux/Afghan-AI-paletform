@@ -28,7 +28,7 @@ Afghan AI is a mobile-first learning platform prototype for students in Afghanis
 The repository includes a Flask backend and a Render Blueprint (render.yaml).
 
 1. In Render, choose **New → Blueprint** and connect this GitHub repository.
-2. Review the proposed web service named afghan-ai.
+2. Review the web service named afghan-ai-paletform. If this service already exists in your Render account, update that service instead of creating a duplicate.
 3. Add your provider key as the secret environment variable OPENAI_API_KEY in the hosting dashboard. Do not paste it into GitHub, source files, screenshots, or browser settings.
 4. Keep OPENAI_MODEL as gpt-4.1-mini unless you intentionally choose another model.
 5. Deploy, then check /api/health. The response reports whether a key is configured; it never returns the key.
