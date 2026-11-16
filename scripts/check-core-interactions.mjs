@@ -99,10 +99,10 @@ for (const [label, passed] of publicationCalculatorChecks) {
 
 
 const aiToolsAndSeoChecks = [
-  ["AI tools navigation item", html.includes('data-page="aiTools"')],
+  ["AI tools navigation item", html.includes('data-page="aiTools"') && html.includes("۷ ابزار برتر هوش مصنوعی")],
   ["AI tools page section", html.includes('id="aiToolsPage"')],
   ["AI tools route in fallback navigation", /var pageNames=\[[^\]]*'aiTools'/.test(html)],
-  ["five official AI tool entries", ["chatgpt.com", "gemini.google.com", "claude.ai", "copilot.microsoft.com", "perplexity.ai"].every(domain => html.includes(domain))],
+  ["seven official AI tool entries", ["chatgpt.com", "gemini.google.com", "claude.ai", "copilot.microsoft.com", "perplexity.ai", "bing.com", "meta.ai"].every(domain => html.includes(domain))],
   ["external AI links use safe target attributes", (html.match(/target="_blank" rel="noopener noreferrer"/g) || []).length >= 5],
   ["SEO meta description", /<meta name="description" content="[^"]+"/.test(html)],
   ["SEO robots directive", html.includes('name="robots" content="index,follow')],
