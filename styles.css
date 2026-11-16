@@ -2759,3 +2759,45 @@ body.dark .admin-control-summary article,body.dark .admin-control-grid .admin-ca
 .service-cyan{background:linear-gradient(145deg,#075985,#087fbd 55%,#063b66)}
 .service-cyan .service-symbol{background:#ffffff24}
 .home-service:focus-visible,.home-view-link:focus-visible,.home-side-card button:focus-visible,.footer-link:focus-visible{outline:3px solid #f2bd55;outline-offset:3px}
+
+/* Afghan AI — Global Edition: responsive, accessible finishing layer */
+:root{scroll-behavior:smooth}
+button,a,input,select,textarea{ -webkit-tap-highlight-color:transparent }
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{
+ outline:3px solid #f0b94b;outline-offset:3px
+}
+button:disabled{opacity:.58;cursor:not-allowed}
+@media(min-width:1021px){
+ .home-feature-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .home-service{min-height:205px}
+}
+@media(max-width:760px){
+ .topbar{position:sticky;top:0;z-index:100}
+ .top-actions{gap:6px}
+ .brand-logo-img{width:42px;height:42px}
+ .nav{min-height:44px}
+ .home-hero{border-radius:18px}
+ .home-service{min-height:180px}
+ .home-side-card{min-width:0}
+}
+@media(max-width:420px){
+ .home-feature-grid{grid-template-columns:1fr}
+ .home-service{min-height:0}
+ .home-hero h1{font-size:clamp(28px,9vw,36px)}
+ .topbar{padding-inline:10px}
+ .brand{gap:7px}
+ .brand-logo-img{width:36px;height:36px}
+ .lang-select{max-width:82px}
+}
+@media(hover:hover){
+ .home-service,.home-side-card,.ai-directory-card,.travel-culture-card,.travel-food-card,.travel-market-card{
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease
+ }
+ .home-service:hover,.ai-directory-card:hover,.travel-culture-card:hover,.travel-food-card:hover,.travel-market-card:hover{
+  transform:translateY(-3px);box-shadow:0 14px 30px #0b31521a
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html:focus-within{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
