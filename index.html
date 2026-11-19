@@ -1129,10 +1129,58 @@ body{background:linear-gradient(135deg,#edf5fa,#f5f8fb 55%,#e8f5f3)!important}
     event.stopImmediatePropagation();
     navigate(name);
   },true);
+  // Prevent native form navigation if the main application script fails to initialize.
+  document.addEventListener('submit',async function(event){
+    var form=event.target;
+    if(!form||form.id!=='chatForm'||window.__afghanAiAppReady)return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    var input=document.getElementById('question');
+    var button=form.querySelector('button[type="submit"]');
+    var messages=document.getElementById('messages');
+    var question=input&&input.value?input.value.trim():'';
+    if(!question){if(input)input.focus();return;}
+    if(button)button.disabled=true;
+    if(input)input.value='';
+    function addFallbackBubble(text,kind){
+      if(!messages)return null;
+      var item=document.createElement('div');
+      item.className='bubble '+kind;
+      item.textContent=text;
+      messages.appendChild(item);
+      messages.scrollTop=messages.scrollHeight;
+      return item;
+    }
+    addFallbackBubble(question,'user');
+    var pending=addFallbackBubble('در حال اتصال به معلم هوشمند…','bot');
+    try{
+      var response=await fetch(new URL('api/chat',document.baseURI).toString(),{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({message:question,language:(document.getElementById('answerLanguage')||{}).value||'fa'})
+      });
+      var data=await response.json();
+      if(!response.ok){
+        var messagesByError={
+          'AI service is not configured':'سرور در دسترس است، اما کلید API هنوز به‌صورت امن تنظیم نشده است.',
+          'AI request failed':'سرور درخواست را دریافت کرد، اما پاسخ هوش مصنوعی ناموفق بود.',
+          'Too many requests. Please try again later.':'درخواست‌های زیادی فرستاده شده است؛ کمی بعد دوباره تلاش کنید.'
+        };
+        throw new Error(messagesByError[data.error]||data.error||('خطای سرور: '+response.status));
+      }
+      if(!data.answer)throw new Error('پاسخی از سرور دریافت نشد.');
+      if(pending)pending.textContent=data.answer;
+    }catch(error){
+      if(pending)pending.textContent=error instanceof TypeError?'ارتباط با سرور معلم هوشمند برقرار نشد. لطفاً وضعیت Backend را بررسی کنید.':(error.message||'در ارسال پرسش خطایی رخ داد.');
+    }finally{
+      if(button)button.disabled=false;
+      if(input)input.focus();
+    }
+  },true);
 })();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-<script src="./app.js?v=20261111-chat-submit-state-1"></script>
+<script src="./app.js?v=20261119-tutor-submit-fallback-1"></script>
 <script id="afghan-ai-security-checks">
 (function(){
  const button=document.getElementById('securityRunScan');
