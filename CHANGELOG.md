@@ -2,6 +2,12 @@
 
 Notable project changes are recorded here. Entries should describe verified changes only.
 
+## 2026-11-19
+- Reviewed the main-branch navigation, core interaction and financial-ledger regression checks, localization checks, app-shell checks, and project documentation.
+- Confirmed that the repository documentation describes the AI tutor backend, local-only learning progress, prototype authentication/admin limitations, and draft intellectual-property notice; these are not production services.
+- Recorded the remaining manual QA and governance items: real-device iPhone/offline testing, review of repository visibility and main-branch protection, and keeping the changelog current.
+- No AI provider API, external service, payment integration, or production account feature was enabled or changed.
+
 ## 2026-11-11
 - Replaced the duplicate inline tutor submit interceptor with one guarded application handler.
 - Preserved learning-question counts and activity logging; prevented duplicate requests while waiting and restored the send control after completion.
