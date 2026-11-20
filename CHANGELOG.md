@@ -2,6 +2,11 @@
 
 Notable project changes are recorded here. Entries should describe verified changes only.
 
+## 2026-11-20
+- Documented the tutor-form fallback added in the preceding `index.html` change. If the main application script does not initialize, the fallback prevents native page navigation and presents the backend response in the tutor interface.
+- Recorded the user's reported result: submitting a question now reaches the backend and displays the explicit missing-API-key message. This is not evidence that the AI provider is configured or that AI answers are available.
+- No AI API key, external provider connection, payment integration, or production account feature was enabled. GitHub Actions and Pages deployment results were not verified in this review.
+
 ## 2026-11-19
 - Reviewed the main-branch navigation, core interaction and financial-ledger regression checks, localization checks, app-shell checks, and project documentation.
 - Confirmed that the repository documentation describes the AI tutor backend, local-only learning progress, prototype authentication/admin limitations, and draft intellectual-property notice; these are not production services.
