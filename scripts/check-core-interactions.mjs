@@ -54,7 +54,9 @@ const requiredBindings = [
   ["ledger validates positive safe-integer amounts", "Number.isSafeInteger(item.amount)&&item.amount>0"],
   ["ledger bounds user-controlled stored text", "cleanLedgerText(item.note,500)"],
   ["ledger validates real calendar dates", "isValidLedgerDate(item.date)"],
-  ["ledger rejects impossible calendar dates", "date.getUTCDate()===day"]
+  ["ledger rejects impossible calendar dates", "date.getUTCDate()===day"],
+  ["browser-local calendar date helper", "const localDateInputValue=()=>"],
+  ["browser-local date helper uses local year, month and day", "now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')"]
 ];
 if (html.includes('afghan-ai-chat-submit-guard')) {
   errors.push("Duplicate inline tutor submit interception must not bypass the application handler.");
@@ -63,6 +65,9 @@ if (html.includes('afghan-ai-chat-submit-guard')) {
 for (const [label, snippet] of requiredBindings) {
   if (!app.includes(snippet)) errors.push(`Expected JavaScript binding or validation for ${label} was not found.`);
 }
+const localDateCallCount = (app.match(/localDateInputValue\(\)/g) || []).length;
+if (localDateCallCount !== 4) errors.push("Expected 4 browser-local date helper calls for ledger and complaint dates; found " + localDateCallCount + ".");
+
 
 const fallbackMatch = html.match(/var pageNames=\[([^\]]+)\]/);
 if (!fallbackMatch) {
