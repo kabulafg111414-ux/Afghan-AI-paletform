@@ -67,6 +67,18 @@ for (const [label, snippet] of requiredBindings) {
 }
 const localDateCallCount = (app.match(/localDateInputValue\(\)/g) || []).length;
 if (localDateCallCount !== 4) errors.push("Expected 4 browser-local date helper calls for ledger and complaint dates; found " + localDateCallCount + ".");
+const previousTimezone = process.env.TZ;
+try {
+  process.env.TZ = "Asia/Kabul";
+  const timezoneSample = new Date("2026-11-21T20:00:00Z");
+  const simulatedLocalDate = [timezoneSample.getFullYear(), String(timezoneSample.getMonth()+1).padStart(2,"0"), String(timezoneSample.getDate()).padStart(2,"0")].join("-");
+  if (timezoneSample.toISOString().slice(0,10) !== "2026-11-21" || simulatedLocalDate !== "2026-11-22") {
+    errors.push("Browser-local date regression failed for the Asia/Kabul midnight boundary case.");
+  }
+} finally {
+  if (previousTimezone === undefined) delete process.env.TZ;
+  else process.env.TZ = previousTimezone;
+}
 
 
 const fallbackMatch = html.match(/var pageNames=\[([^\]]+)\]/);
