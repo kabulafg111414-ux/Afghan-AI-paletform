@@ -5,6 +5,8 @@ function safeStorageGet(key){try{const value=window.localStorage.getItem(key);re
 function safeStorageSet(key,value){const text=String(value);safeMemoryStorage.set(key,text);try{window.localStorage.setItem(key,text);return true}catch(error){return false}}
 function safeStorageRemove(key){safeMemoryStorage.delete(key);try{window.localStorage.removeItem(key);return true}catch(error){return false}}
 function safeStorageJSON(key,fallback){try{const raw=safeStorageGet(key);return raw===null?fallback:JSON.parse(raw)}catch(error){return fallback}}
+// Date inputs and demo records must use the browser's local calendar day, not UTC.
+const localDateInputValue=()=>{const now=new Date();return [now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-')};
 const pages=['security','dashboard','tutor','translator','vocational','language','digital','health','business','law','agriculture','engineering','historyculture','lab','space','airobotics','lessons','library','reconstruction','socialsupport','supportfund','featureideas','innovation','opportunities','travel','publications','quiz','progress','family','admin','tools','aiTools','guide','sources'];
 
 const libraryResources=[
@@ -1375,7 +1377,7 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
   const items=readLedger(),id='L-'+String(Date.now()).slice(-8);
   items.push({id,type,label:ledgerLabels[type],category:$('#ledgerCategory').value,amount,date:$('#ledgerDate').value,reference:$('#ledgerReference').value.trim(),note:$('#ledgerNote').value.trim(),createdAt:new Date().toISOString()});
   if(!safeStorageSet(ledgerKey,JSON.stringify(items))){$('#ledgerStatus').textContent='ذخیره‌سازی ممکن نشد؛ فضای مرورگر را بررسی کنید.';return;}
-  ledgerForm.reset();$('#ledgerDate').value=new Date().toISOString().slice(0,10);$('#ledgerStatus').textContent='رویداد آزمایشی '+id+' در همین مرورگر ثبت شد؛ سند یا تراکنش واقعی ایجاد نشده است.';refreshLedger();refreshFundDashboard();
+  ledgerForm.reset();$('#ledgerDate').value=localDateInputValue();$('#ledgerStatus').textContent='رویداد آزمایشی '+id+' در همین مرورگر ثبت شد؛ سند یا تراکنش واقعی ایجاد نشده است.';refreshLedger();refreshFundDashboard();
  });
  $('#ledgerClear')?.addEventListener('click',()=>{if(!window.confirm('تمام رویدادهای دفتر مالی آزمایشی از همین مرورگر پاک شود؟'))return;safeStorageRemove(ledgerKey);$('#ledgerStatus').textContent='دفتر مالی آزمایشی محلی پاک شد.';refreshLedger();refreshFundDashboard();});
  $('#ledgerExport')?.addEventListener('click',()=>{
@@ -1383,7 +1385,7 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
   const csv='\ufeff'+rows.map(row=>row.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='afghan-ai-fund-ledger-demo.csv';document.body.append(link);link.click();link.remove();URL.revokeObjectURL(url);
  });
- const ledgerDateInput=$('#ledgerDate');if(ledgerDateInput&&!ledgerDateInput.value)ledgerDateInput.value=new Date().toISOString().slice(0,10);
+ const ledgerDateInput=$('#ledgerDate');if(ledgerDateInput&&!ledgerDateInput.value)ledgerDateInput.value=localDateInputValue();
  refreshLedger();
 
  const roleSelect=$('#fundRolePreview'),roleDescription=$('#fundRoleDescription'),roleMatrix=$('#fundRoleMatrix');
@@ -1419,14 +1421,14 @@ if(fundPrepareButton)fundPrepareButton.addEventListener('click',()=>{
    const status=node('select','');
    ['دریافت آزمایشی','در انتظار بررسی مستقل','نیازمند معلومات غیرحساس بیشتر','ارجاع‌شده برای بازبینی','رسیدگی آزمایشی تکمیل شد','بسته‌شده در آزمایش'].forEach(value=>{const option=node('option','',value);option.value=value;if(value===item.status)option.selected=true;status.append(option);});
    status.setAttribute('aria-label','تغییر وضعیت آزمایشی شکایت');
-   status.addEventListener('change',()=>{const current=readComplaints();current[index].status=status.value;current[index].updated=new Date().toISOString().slice(0,10);writeComplaints(current);renderComplaints();});
+   status.addEventListener('change',()=>{const current=readComplaints();current[index].status=status.value;current[index].updated=localDateInputValue();writeComplaints(current);renderComplaints();});
    card.append(status);card.append(node('small','', 'وضعیت: '+item.status));complaintList.append(card);
   });
  };
  complaintForm?.addEventListener('submit',event=>{
   event.preventDefault();if(!complaintForm.reportValidity())return;
   const items=readComplaints(),id='G-'+String(Date.now()).slice(-7);
-  items.push({id,type:$('#fundComplaintType').value,channel:$('#fundComplaintChannel').value,description:$('#fundComplaintText').value.trim(),date:new Date().toISOString().slice(0,10),status:'دریافت آزمایشی'});
+  items.push({id,type:$('#fundComplaintType').value,channel:$('#fundComplaintChannel').value,description:$('#fundComplaintText').value.trim(),date:localDateInputValue(),status:'دریافت آزمایشی'});
   writeComplaints(items);complaintForm.reset();$('#fundComplaintStatus').textContent='شکایت آزمایشی '+id+' فقط در همین مرورگر ثبت شد و به مرجع واقعی نرسیده است.';renderComplaints();
  });
  $('#fundComplaintExport')?.addEventListener('click',()=>{
