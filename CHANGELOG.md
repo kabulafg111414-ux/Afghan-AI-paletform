@@ -4,7 +4,7 @@ Notable project changes are recorded here. Entries should describe verified chan
 
 ## 2026-11-22
 - Corrected the financial-ledger and demonstration-complaint date defaults/stamps to use the browser's local calendar date rather than the UTC date, preventing a previous-day value during early local hours in positive UTC offsets.
-- Added regression assertions to Project checks for the local-date helper and its four date call sites, plus a deterministic Asia/Kabul midnight-boundary case; refreshed the app.js cache query.
+- Added regression assertions to Project checks for the local-date helper and its four date call sites, plus a deterministic Asia/Kabul midnight-boundary case; refreshed the app.js cache query and bumped the Service Worker cache from v21 to v22 so the updated app shell is precached.
 - Reproduced the edge case with Node: at 2026-11-22 00:30 in Asia/Kabul, the UTC date is 2026-11-21 while the browser-local helper returns 2026-11-22. The targeted local test passed; the GitHub Actions run for this commit remains unverified.
 
 
