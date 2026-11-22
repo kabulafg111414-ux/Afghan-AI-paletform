@@ -2,6 +2,12 @@
 
 Notable project changes are recorded here. Entries should describe verified changes only.
 
+## 2026-11-22
+- Corrected the financial-ledger and demonstration-complaint date defaults/stamps to use the browser's local calendar date rather than the UTC date, preventing a previous-day value during early local hours in positive UTC offsets.
+- Added regression assertions to Project checks for the local-date helper and its four date call sites, and refreshed the app.js cache query.
+- Reproduced the timezone edge case with Node in Asia/Kabul: 2026-11-22 00:30 local previously mapped to UTC date 2026-11-21; the browser-local calendar method returns 2026-11-22. This was a targeted local test, not a GitHub Actions or device test.
+
+
 ## 2026-11-20
 - Documented the tutor-form fallback added in the preceding `index.html` change. If the main application script does not initialize, the fallback prevents native page navigation and presents the backend response in the tutor interface.
 - Recorded the user's reported result: submitting a question now reaches the backend and displays the explicit missing-API-key message. This is not evidence that the AI provider is configured or that AI answers are available.
