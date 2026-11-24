@@ -1805,3 +1805,44 @@ window.__afghanAiAppReady=true;
  const planner=document.getElementById('travelPlanForm');
  if(planner)planner.addEventListener('submit',()=>{const out=document.getElementById('travelPlanOutput');if(out)out.dataset.generated='true';});
 })();
+
+
+/* Publications commission calculator: local demonstration only; no payments or records are created. */
+const publicationCalculateButton = $('#pubCalculate');
+if (publicationCalculateButton) publicationCalculateButton.addEventListener('click', () => {
+  const revenueInput = $('#pubRevenue');
+  const authorRateInput = $('#pubAuthorRate');
+  const platformRateInput = $('#pubPlatformRate');
+  const status = $('#pubCalcStatus');
+  const results = $('#pubResults');
+  const authorAmount = $('#pubAuthorAmount');
+  const platformAmount = $('#pubPlatformAmount');
+  const totalAmount = $('#pubTotalAmount');
+  if (!revenueInput || !authorRateInput || !platformRateInput || !status || !results || !authorAmount || !platformAmount || !totalAmount) return;
+  const revenueRaw = revenueInput.value.trim();
+  const authorRateRaw = authorRateInput.value.trim();
+  const platformRateRaw = platformRateInput.value.trim();
+  const revenue = Number(revenueRaw);
+  const authorRate = Number(authorRateRaw);
+  const platformRate = Number(platformRateRaw);
+  results.hidden = true;
+  if (!revenueRaw || !Number.isFinite(revenue) || revenue < 0) {
+    status.textContent = 'لطفاً درآمد ناخالص معتبر و صفر یا بیشتر وارد کنید.';
+    revenueInput.focus();
+    return;
+  }
+  if (!authorRateRaw || !platformRateRaw || !Number.isFinite(authorRate) || !Number.isFinite(platformRate) || authorRate < 0 || authorRate > 100 || platformRate < 0 || platformRate > 100) {
+    status.textContent = 'درصد هر سهم باید عددی بین صفر تا ۱۰۰ باشد.';
+    return;
+  }
+  if (Math.abs(authorRate + platformRate - 100) > 0.0001) {
+    status.textContent = 'مجموع سهم نویسنده و Afghan AI باید دقیقاً ۱۰۰٪ باشد.';
+    return;
+  }
+  const formatAmount = value => new Intl.NumberFormat('fa-AF', {minimumFractionDigits:0, maximumFractionDigits:2}).format(value) + ' AFN';
+  authorAmount.textContent = formatAmount(revenue * authorRate / 100);
+  platformAmount.textContent = formatAmount(revenue * platformRate / 100);
+  totalAmount.textContent = formatAmount(revenue);
+  results.hidden = false;
+  status.textContent = 'محاسبهٔ نمونه موفق بود. این نتیجه فقط نمایشی است و هیچ پرداخت یا تراکنش واقعی انجام نمی‌دهد.';
+});
