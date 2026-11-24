@@ -2,7 +2,12 @@ import { existsSync, readFileSync } from "node:fs";
 
 const html = readFileSync("index.html", "utf8");
 const app = readFileSync("app.js", "utf8");
+const renderConfig = readFileSync("render.yaml", "utf8");
 const errors = [];
+
+if (!/--workers 1 --threads 4 --timeout 60/.test(renderConfig)) {
+  errors.push("Render should use one Gunicorn worker and four threads on the free instance; configure shared Redis/Valkey before scaling workers or instances.");
+}
 
 const reconstructionDocuments = [
   ["afghanistan-reconstruction-investment-proposal-2026-2031.md", "docs/afghanistan-reconstruction-investment-proposal-2026-2031.md"],
