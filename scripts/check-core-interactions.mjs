@@ -108,7 +108,11 @@ const publicationCalculatorChecks = [
   ["calculator rejects empty percentage fields", html.includes("if(!authorRateRaw||!platformRateRaw||!Number.isFinite(authorRate)")],
   ["calculator rejects invalid percentage totals", html.includes("Math.abs(authorRate+platformRate-100)>0.0001")],
   ["calculator hides stale results after invalid input", html.includes("results.hidden=true;")],
-  ["calculator labels results as demonstration only", html.includes("این نتیجه نمونه‌ای است و پرداخت واقعی انجام نمی‌دهد")]
+  ["calculator labels results as demonstration only", html.includes("این نتیجه نمونه‌ای است و پرداخت واقعی انجام نمی‌دهد")],
+  ["calculator click handler exists", app.includes("publicationCalculateButton.addEventListener")],
+  ["calculator updates author amount", app.includes("authorAmount.textContent = formatAmount")],
+  ["calculator updates platform amount", app.includes("platformAmount.textContent = formatAmount")],
+  ["calculator updates total amount", app.includes("totalAmount.textContent = formatAmount")]
 ];
 for (const [label, passed] of publicationCalculatorChecks) {
   if (!passed) errors.push(`Publication calculator check failed: ${label}.`);
