@@ -4,7 +4,9 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn server:app --bind 0.0.0.0:$PORT --workers 2 --timeout 60
+    # One worker avoids duplicating the in-memory rate-limit store and reduces RAM use on the free instance.
+    # Threads preserve limited concurrency; use shared Redis/Valkey before scaling to multiple workers/instances.
+    startCommand: gunicorn server:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 60
     healthCheckPath: /api/health
     envVars:
       - key: OPENAI_API_KEY
