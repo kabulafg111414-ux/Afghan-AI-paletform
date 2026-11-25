@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-24
+- Added the publications commission calculator click handler in `app.js`; it validates non-negative gross revenue, percentage values from 0 to 100, and a combined author/platform allocation of exactly 100%. The displayed amounts are explicitly marked as a local demonstration; this does not create a payment or financial transaction.
+- Extended the core interaction smoke checks to verify the calculator handler and its three displayed amounts.
+- Verified on commit `3ad845cc7e46f31c00fc91c43ebceeff9aac3a09`: Project checks run #386 succeeded (34 navigation/page mappings, Dari/Pashto/English localization checks, 9 app-shell assets, 24 core interaction/validation checks and 17 responsive/accessibility checks); Backend tests run #89 succeeded (13 tests); GitHub Pages build/deployment run #672 succeeded.
+- CI emitted Node.js 20 deprecation warnings for `actions/checkout@v4` and `actions/setup-python@v5` while running under Node.js 24. Review action-version upgrades as separate maintenance work.
+
 Notable project changes are recorded here. Entries should describe verified changes only.
 
 ## 2026-11-22
