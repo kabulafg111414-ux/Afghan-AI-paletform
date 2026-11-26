@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-26
+- Added `.github/workflows/ci.yml` in commit `e21978e521a796bd3cb24fadd1cbc4266a589fa8` to run backend pytest checks, build the static website with `npm run build`, and verify the required production files in `dist/`.
+- Verified on commit `e21978e521a796bd3cb24fadd1cbc4266a589fa8`: Project checks run #389 succeeded (34 navigation entries and registered pages matched; 53 HTML translation keys and 67 dictionary keys checked across fa/ps/en; 9 app-shell assets; 24 interaction/validation checks and 17 mobile accessibility/responsive checks); Backend tests run #92 succeeded (13 tests); GitHub Pages build/deployment run #674 succeeded.
+- The GitHub Actions jobs above verify repository checks and GitHub Pages only. They do not verify a Cloudflare Worker deployment, live iPhone behavior, production server security, real accounts/payments, or AI provider/API availability. No AI API was enabled.
+
 ## 2026-11-24
 - Added the publications commission calculator click handler in `app.js`; it validates non-negative gross revenue, percentage values from 0 to 100, and a combined author/platform allocation of exactly 100%. The displayed amounts are explicitly marked as a local demonstration; this does not create a payment or financial transaction.
 - Extended the core interaction smoke checks to verify the calculator handler and its three displayed amounts.
